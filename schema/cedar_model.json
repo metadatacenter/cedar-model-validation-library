@@ -2,7 +2,6 @@
     "$schema": "http://json-schema.org/draft-04/schema#",
     "title": "CEDAR Template Validation Schema",
     "description": "A JSON Schema document that fully describes the schema of CEDAR templates, elements, and fields",
-    "type": "object",
     "oneOf": [
         { "$ref": "#/definitions/templateElement" },
         { "$ref": "#/definitions/template" },
@@ -456,7 +455,6 @@
         },
         "jsonLDTypeFieldContent": {
             "description": "Schema that describes the schema of a '@type' field in a 'properties' field in a template, element or field",
-            "type": "object",
             "properties": {
                 "oneOf": { "$ref": "#/definitions/jsonLDTypeFieldOneOfFieldContent" }
             },
@@ -605,7 +603,6 @@
         },
         "templateFieldOneOf": {
             "description": "Schema that describes the `oneOf` constraint for a template field",
-            "type": "object",
             "oneOf": [
                 { "$ref": "#/definitions/templateFieldValueContent" },
                 { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/templateFieldValueContent" }, "uniqueItems": true }
@@ -673,7 +670,6 @@
         },
         "templateFieldOrElement": {
             "description": "Schema that describes a template field, element, or a field or element array",
-            "type": "object",
             "oneOf": [
                 { "$ref": "#/definitions/templateField" },
                 { "$ref": "#/definitions/templateElement" },

@@ -1,11 +1,13 @@
-Examples of CEDAR templates, elementsm, and fields and instances thereof.
+Examples of CEDAR templates, elements, and fields and instances thereof.
 
 To validate all example templates, elements and fields:
 
 for i in ./template_*.json; do jsvalid.py -s ../schema/cedar_model.json -i $i; done
 
-To validate all instances against their associated template, element or field:
+To validate instances against their associated template, element or field:
 
+jsvalid.py -s template_field_with_single_value.json -i instance_of_template_field_with_single_value.json
+jsvalid.py -s template_field_with_single_value.json -i instance_of_template_field_with_single_value_with_type.json 
 
 
 This validator and associated examples works with:
