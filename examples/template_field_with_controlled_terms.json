@@ -92,7 +92,6 @@
                 "prefLabel": "Finger",
                 "type": "OntologyClass",
                 "label": "Finger",
-                "default": false,
                 "source": "Logical Observation Identifier Names and Codes (LOINC)"
             }
         ],

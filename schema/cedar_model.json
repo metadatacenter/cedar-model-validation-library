@@ -168,6 +168,7 @@
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
+                "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean" }
             },
@@ -187,7 +188,8 @@
                 "acronym": { "type": "string", "minLength": 1 },
                 "name": { "type": "string", "minLength": 1 },
                 "numChildren": { "type": "integer", "minimum": 1 },
-                "exclusions": { "$ref": "#/definitions/valueConstraintsOntologiesExclusionsFieldContent" }
+                "exclusions": { "$ref": "#/definitions/valueConstraintsOntologiesExclusionsFieldContent" },
+                "selectedByDefault": { "type": "boolean" }
             },
             "required": [ "uri" ],
             "additionalProperties": false
@@ -209,7 +211,8 @@
                 "uri": { "type": "string", "format": "uri" },
                 "name": { "type": "string", "minLength": 1 },
                 "vsCollection": { "type": "string", "format": "uri" },
-                "exclusions": { "$ref": "#/definitions/valueConstraintsValueSetsExclusionsFieldContent" }
+                "exclusions": { "$ref": "#/definitions/valueConstraintsValueSetsExclusionsFieldContent" },
+                "selectedByDefault": { "type": "boolean" }
             },
             "required": [ "uri" ],
             "additionalProperties": false
@@ -232,10 +235,10 @@
                 "prefLabel": { "type": "string", "minLength": 1 },
                 "type": { "type": "string", "minLength": 1 },
                 "label": { "type": "string", "minLength": 1 },
-                "default": { "type": "boolean" },
-                "source": { "type": "string", "minLength": 1 }
+                "source": { "type": "string", "minLength": 1 },
+                "selectedByDefault": { "type": "boolean" }
             },
-            "required": [ "uri", "prefLabel", "type", "label", "default", "source" ],
+            "required": [ "uri", "prefLabel", "type", "label", "source" ],
             "additionalProperties": false
         },
         "valueConstraintsBranchesFieldContent": {
@@ -251,9 +254,25 @@
                 "acronym": { "type": "string", "minLength": 1 },
                 "name": { "type": "string", "minLength": 1 },
                 "uri": { "type": "string", "format": "uri" },
-                "maxDepth": { "type": "integer", "minimum": 1 }
+                "maxDepth": { "type": "integer", "minimum": 1 },
+                "selectedByDefault": { "type": "boolean" }
             },
             "required": [ "source", "acronym", "name", "uri", "maxDepth" ],
+            "additionalProperties": false
+        },
+        "valueConstraintsLiteralsFieldContent": {
+            "description": "Schema that describes the schema of the 'literals' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": { "$ref": "#/definitions/valueConstraintsLiteralsFieldItemContent"}            
+        },
+        "valueConstraintsLiteralsFieldItemContent": {
+            "description": "Schema that describes the schema of each entry in the 'literals' field array in a '_valueConstraints' field",
+            "type": "object",
+            "properties": {
+                "label": { "type": "string", "format": "uri" },
+                "selectedByDefault": { "type": "boolean" }
+            },
+            "required": [ "label" ],
             "additionalProperties": false
         },
         "templateJSONLDContextField" : {

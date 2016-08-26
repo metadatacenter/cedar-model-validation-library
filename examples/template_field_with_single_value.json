@@ -44,7 +44,49 @@
         "inputType": "textfield"
     },
     "_valueConstraints": {
-        "requiredValue": false
+        "requiredValue": false,
+        "ontologies": [
+            {
+                "numChildren": 209,
+                "acronym": "AO",
+                "name": "Asthma Ontology",
+                "uri": "http://data.bioontology.org/ontologies/AO"
+            }
+        ],
+        "valueSets": [
+            {
+                "name": "Abdominal Aortic Aneurysm",
+                "vsCollection": "http://data.bioontology.org/ontologies/NLMVS",
+                "uri": "http://purl.bioontology.org/ontology/NLMVS/2.16.840.1.113762.1.4.1047.17"
+            }
+        ],
+        "classes": [
+            {
+                "uri": "http://purl.bioontology.org/ontology/LNC/LP29978-1",
+                "prefLabel": "Finger",
+                "type": "OntologyClass",
+                "label": "Finger",
+                "source": "Logical Observation Identifier Names and Codes (LOINC)"
+            }
+        ],
+        "branches": [
+            {
+                "source": "National Cancer Institute Thesaurus (NCIT)",
+                "acronym": "NCIT",
+                "uri": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C32608",
+                "name": "Finger",
+                "maxDepth": 1
+            }
+        ],
+        "literals": [
+            {
+                "label": "label1"
+            },
+            {
+                "label": "label2"
+            }
+        ],
+        "multipleChoice": false
     },
     "pav:createdOn": "2016-06-29T12:47:12-0700",
     "pav:createdBy": "https://repo.metadatacenter.net/users/6d21a887-b704-49a9-922a-aa71632f3232",
