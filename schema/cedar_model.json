@@ -23,8 +23,7 @@
                 },
                 "title": {
                     "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
-                    "type": "string",
-                    "minLength": 1
+                    "type": "string", "minLength": 1
                 },
                 "description": {
                     "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
@@ -35,7 +34,7 @@
                     "type": "boolean", "enum": [ false ]
                 }
             },
-            "required": [ "$schema", "type", "title", "description", "properties", "additionalProperties" ]
+            "required": [ "$schema", "type", "title", "description" ]
         },
         "templateRequiredField": {
             "description": "Schema describing the 'required' field in a template",
@@ -72,25 +71,11 @@
                 { "$ref": "#/definitions/coreJSONSchemaFields" }
             ]
         },
-        "templateFieldRequiredField": {
-            "description": "Schema describing the 'required' field in a template field",
-            "type": "object",
-            "properties": {
-                "required": { "$ref": "#/definitions/templateFieldRequiredFieldContent" }
-            },
-            "required": [ "required" ]
-        },        
-        "templateFieldRequiredFieldContent": {
-            "description": "Schema describing the schema of the 'required' field in a template field TODO - allow array",
-            "type": "array", "minItems": 1, "maxItems": 1, "uniqueItems": true,
-            "items": [ { "type": "string", "enum": [ "@value" ] } ]
-        },
         "coreJSONSchemaTemplateFieldFields": {
             "description": "A schema that describes the core JSON Schema fields in a template field",
             "type": "object",
             "allOf": [
-                { "$ref": "#/definitions/coreJSONSchemaFields" },
-                { "$ref": "#/definitions/templateFieldRequiredField" }
+                { "$ref": "#/definitions/coreJSONSchemaFields" }
             ]
         },
         "provenanceFields": {
@@ -601,20 +586,41 @@
             "required": [ "@type", "@id", "@context", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ],
             "additionalProperties": false
         },
-        "templateFieldOneOf": {
+        "templateFieldItemsOrProperties": {
             "description": "Schema that describes the `oneOf` constraint for a template field",
             "oneOf": [
-                { "$ref": "#/definitions/templateFieldValueContent" },
-                { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/templateFieldValueContent" }, "uniqueItems": true }
+                { "$ref": "#/definitions/templateFieldSingleValueContent" },
+                { "$ref": "#/definitions/templateFieldMultipleValueContent" }
             ]
         },
-        "templateFieldValueContent": {
-            "description": "Schema that describes the schema of a value of a template field",
+        "templateFieldSingleValueContent": {
+            "description": "Schema that describes the schema of a single value in a template field",
             "type": "object",
             "properties": {             
-                "properties": { "$ref": "#/definitions/templateFieldValuePropertiesContent" }
+                "properties": { "$ref": "#/definitions/templateFieldValuePropertiesContent" },
+                "required": { "$ref": "#/definitions/nonEmptyStringArray" },
+                "additionalProperties": { "type": "boolean", "enum": [ false ] }
             },
-            "required": [ "properties" ]
+            "required": [ "properties", "required", "additionalProperties" ]
+        },
+        "templateFieldMultipleValueContent": {
+            "description": "Schema that describes the schema of a multi-value template field",
+            "type": "object",
+            "properties": {
+                "items": {             
+                    "properties": {
+                        "type": { "type": "string", "enum": [ "object" ] },
+                        "properties": { "$ref": "#/definitions/templateFieldValuePropertiesContent" },
+                        "required": { "$ref": "#/definitions/nonEmptyStringArray" },
+                        "additionalProperties": { "type": "boolean", "enum": [ false ] }
+                    },
+                    "required": [ "type", "properties", "required", "additionalProperties" ],
+                    "additionalProperties": false
+                },
+                "minItems": { "type": "integer", "minimum": 0 },
+                "maxItems": { "type": "integer", "minimum": 1 }
+            },
+            "required": [ "items" ]
         },
         "templateFieldValuePropertiesContent": {
             "description": "Schema that describes the schema of 'properties' field of a value of a template field",
@@ -629,7 +635,7 @@
                 "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
                 "cedar:lastUpdatedBy": { "$ref": "#/definitions/cedarLastUpdatedByFieldContent" }
             },
-            "required": [ "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ],
+            "required": [ "@context", "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ],
             "additionalProperties": false
         },        
         "jsonLDValueFieldContent": {
@@ -651,7 +657,7 @@
                 { "$ref": "#/definitions/jsonLDIDField" },
                 { "$ref": "#/definitions/templateFieldUIField" },
                 { "$ref": "#/definitions/valueConstraintsField" },
-                { "$ref": "#/definitions/templateFieldOneOf" },
+                { "$ref": "#/definitions/templateFieldItemsOrProperties" },
                 { "$ref": "#/definitions/provenanceFields" }
             ]
         },
