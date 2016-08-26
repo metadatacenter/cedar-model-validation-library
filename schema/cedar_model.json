@@ -436,7 +436,7 @@
             "properties": {
                 "^[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "#/definitions/uriEnumContent" }
             },
-            "requiredProperties": [ "^[a-zA-Z][a-zA-Z0-9]*$" ],
+            "required": [ "^[a-zA-Z][a-zA-Z0-9]*$" ],
             "additionalProperties": false
         },
         "jsonLDContextFieldContentEntry": {
