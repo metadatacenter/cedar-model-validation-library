@@ -587,7 +587,7 @@
             "additionalProperties": false
         },
         "templateFieldItemsOrProperties": {
-            "description": "Schema that describes the `oneOf` constraint for a template field",
+            "description": "Schema that describes the single or multiple value schema for a template field",
             "oneOf": [
                 { "$ref": "#/definitions/templateFieldSingleValueContent" },
                 { "$ref": "#/definitions/templateFieldMultipleValueContent" }
