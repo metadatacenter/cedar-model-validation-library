@@ -1,0 +1,19 @@
+{
+    "description": "Schema that describes the schema of a 'properties' field in a template",
+    "type": "object",
+    "properties": {
+        "_templateId": { "$ref": "file:templateIDFieldContent.json" },
+        "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
+        "@id": { "$ref": "file:jsonLDIDFieldContent.json" },
+        "@context": { "$ref": "file:jsonLDContextFieldContent.json" },
+        "pav:createdOn": { "$ref": "file:pavCreatedOnFieldContent.json" },
+        "pav:createdBy": { "$ref": "file:pavCreatedByFieldContent.json" },
+        "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
+        "cedar:lastUpdatedBy": { "$ref": "file:cedarLastUpdatedByFieldContent.json" }
+    },
+    "patternProperties": {
+        "^[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "file:templateFieldOrElement.json" }
+    },
+    "required": [ "@type", "@id", "@context", "_templateId", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ],
+    "additionalProperties": false
+}

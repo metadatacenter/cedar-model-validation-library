@@ -1,0 +1,5 @@
+{
+    "description": "Schema that describes the schema of the 'classes' field in a '_valueConstraints' field",
+    "type": "array", "uniqueItems": true,
+    "items": { "$ref": "file:valueConstraintsClassesFieldItemContent.json"}            
+}

@@ -1,0 +1,13 @@
+{
+    "description": "Schema that describes the schema of each entry in the 'valueSets' field array in a '_valueConstraints' field",
+    "type": "object",
+    "properties": {
+        "uri": { "type": "string", "format": "uri" },
+        "name": { "type": "string", "minLength": 1 },
+        "vsCollection": { "type": "string", "format": "uri" },
+        "exclusions": { "$ref": "file:valueConstraintsValueSetsExclusionsFieldContent.json" },
+        "selectedByDefault": { "type": "boolean" }
+    },
+    "required": [ "uri" ],
+    "additionalProperties": false
+}

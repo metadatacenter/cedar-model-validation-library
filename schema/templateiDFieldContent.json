@@ -1,0 +1,10 @@
+{
+    "description": "Schema that describes the schema for a '_templateId' field in a 'properties' field in a template",
+    "type": "object",
+    "properties": {
+        "type": { "type": "string", "enum": [ "string" ] },
+        "format": { "type": "string", "enum": [ "uri" ] }
+    },
+    "required": [ "type", "format" ],
+    "additionalProperties": false
+}

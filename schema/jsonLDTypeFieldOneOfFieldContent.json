@@ -1,0 +1,8 @@
+{
+    "description": "Schema that describes the schema of a '@type.oneOf' field in a 'properties' field in a template, element or field",
+    "type": "array", "minItems": 2, "maxItems": 2,
+    "items": [
+        { "$ref": "file:uriEnumContent.json" },
+        { "$ref": "file:uriEnumArrayContent.json" }
+    ]
+}

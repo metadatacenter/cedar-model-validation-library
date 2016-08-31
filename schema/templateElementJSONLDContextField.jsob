@@ -1,0 +1,8 @@
+{
+"description": "A schema that describes a JSON-LD '@context' field in a template element",
+"type": "object",
+"properties": {
+"@context": { "$ref": "templateElementJSONLDContextFieldContent.json" }
+},
+"required": [ "@context" ]
+}

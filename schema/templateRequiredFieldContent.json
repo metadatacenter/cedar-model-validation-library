@@ -1,0 +1,12 @@
+{
+    "description": "Schema describing the schema of the 'required' field in a template",
+    "type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true,
+    "items": [
+        { "type": "string", "enum": [ "_templateId" ] },
+        { "type": "string", "enum": [ "@id" ] },
+        { "type": "string", "enum": [ "pav:createdOn" ] },
+        { "type": "string", "enum": [ "pav:createdBy" ] },
+        { "type": "string", "enum": [ "pav:lastUpdatedOn" ] },
+        { "type": "string", "enum": [ "cedar:lastUpdatedBy" ] }
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "description": "Schema that describes the schema of a 'pav:createdOn' field in a 'properties' field in a template",
+    "type": "object",
+    "properties": {
+        "type": { "$ref": "file:stringAndNullTypeContent.json" },
+        "format": { "type": "string", "enum": [ "date-time" ] }
+    },
+    "required": [ "type", "format" ],
+    "additionalProperties": false
+}

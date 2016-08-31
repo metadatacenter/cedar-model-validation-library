@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema that describes a template",
+    "type": "object",
+    "allOf": [
+        { "$ref": "file:coreJSONSchemaTemplateFields.json" },
+        { "$ref": "file:templateJSONLDContextField.json" },
+        { "$ref": "file:templateJSONLDTypeField.json" },
+        { "$ref": "file:jsonLDIDField.json" },
+        { "$ref": "file:templateUIField.json" },
+        { "$ref": "file:templatePropertiesField.json" },
+        { "$ref": "file:provenanceFields.json" }
+    ]
+}

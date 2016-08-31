@@ -1,0 +1,8 @@
+{
+    "description": "A schema that describes a template element's JSON-LD '@type' field",
+    "type": "object",
+    "properties": {
+        "@type": { "type": "string", "format": "uri", "enum": [ "https://schema.metadatacenter.org/core/TemplateElement" ] }
+    },
+    "required": [ "@type" ]
+}

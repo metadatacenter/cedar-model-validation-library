@@ -1,0 +1,8 @@
+{
+    "description": "Schema describing the 'required' field in a template",
+    "type": "object",
+    "properties": {
+        "required": { "$ref": "file:templateRequiredFieldContent.json" }
+    },
+    "required": [ "required" ]            
+}

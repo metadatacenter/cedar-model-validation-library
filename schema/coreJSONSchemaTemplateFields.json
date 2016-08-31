@@ -1,0 +1,9 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "A schema that describes the core JSON Schema fields in a template",
+    "type": "object",
+    "allOf": [
+        { "$ref": "file:coreJSONSchemaFields.json" },
+        { "$ref": "file:templateRequiredField.json" }
+    ]
+}

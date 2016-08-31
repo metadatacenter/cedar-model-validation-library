@@ -1,0 +1,13 @@
+{
+    "description": "Schema describing the schema of the '@context' field in a template",
+    "type": "object",
+    "properties": {
+        "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
+        "cedar": { "type": "string", "format": "uri", "enum": [ "https://schema.metadatacenter.org/core/" ] }
+    },
+    "patternProperties": {
+        "^(?!pav)(?!cedar)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+    },
+    "required": [ "pav", "cedar" ],
+    "additionalProperties": false
+}

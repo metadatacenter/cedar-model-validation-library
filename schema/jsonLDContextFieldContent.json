@@ -1,0 +1,12 @@
+{
+    "description": "Schema that describes the schema of a '@context' field in a 'properties' field in a template or element or field",
+    "type": "object",
+    "properties": {
+        "properties": { "$ref": "file:jsonLDContextFieldContentEntry.json" },
+        "patternProperties": { "$ref": "file:jsonLDContextFieldPatternPropertiesContent.json" },
+        "required": { "$ref": "file:nonEmptyStringArray.json" },
+        "additionalProperties": { "type": "boolean", "enum": [ false ] }
+    },
+    "required": [ "properties", "patternProperties", "required", "additionalProperties" ],
+    "additionalProperties": false
+}

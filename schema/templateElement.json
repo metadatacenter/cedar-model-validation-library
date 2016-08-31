@@ -1,0 +1,13 @@
+{
+    "description": "Schema that describes a template element",
+    "type": "object",
+    "allOf": [
+        { "$ref": "file:coreJSONSchemaTemplateElementFields.json" },
+        { "$ref": "file:templateElementJSONLDContextField.json" },
+        { "$ref": "file:templateElementJSONLDTypeField.json" },
+        { "$ref": "file:jsonLDIDField.json" },
+        { "$ref": "file:templateElementUIField.json" },
+        { "$ref": "file:templateElementPropertiesField.json" },
+        { "$ref": "file:provenanceFields.json" }
+    ]
+}

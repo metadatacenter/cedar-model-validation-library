@@ -1,0 +1,8 @@
+{
+    "description": "A schema that describes a JSON-LD '@context' field in a template",
+    "type": "object",
+    "properties": {
+        "@context": { "$ref": "file:templateJSONLDContextFieldContent.json" }
+    },
+    "required": [ "@context" ]
+}

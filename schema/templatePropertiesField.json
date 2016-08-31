@@ -1,0 +1,8 @@
+{
+    "description": "Schema that describes the schema of a 'properties' field in a template",
+    "type": "object",
+    "properties": {             
+        "properties": { "$ref": "file:templatePropertiesFieldContent.json" }
+    },
+    "required": [ "properties" ]
+}

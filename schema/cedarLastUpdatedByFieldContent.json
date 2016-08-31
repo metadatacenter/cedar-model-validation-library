@@ -1,0 +1,10 @@
+{
+    "description": "Schema that describes the schema of a 'cedar:lastUpdatedBy' field in a 'properties' field in a template",
+    "type": "object",
+    "properties": {
+        "type": { "$ref": "file:stringAndNullTypeContent.json" },
+        "format": { "type": "string", "enum": [ "uri" ] }
+    },
+    "required": [ "type", "format" ],
+    "additionalProperties": false
+}

@@ -1,0 +1,11 @@
+{
+    "description": "A schema that describes CEDAR provenance fields",
+    "type": "object",
+    "properties": {
+        "pav:createdOn": { "type": [ "string", "null" ], "format": "date-time" },
+        "pav:createdBy":  { "type": [ "string", "null" ], "format": "uri" },
+        "pav:lastUpdatedOn":  { "type": [ "string", "null" ], "format": "date-time" },
+        "cedar:lastUpdatedBy": { "type": [ "string", "null" ], "format": "uri" }
+    },
+    "required": [ "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ]
+}

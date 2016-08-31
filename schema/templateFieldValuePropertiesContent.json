@@ -1,0 +1,16 @@
+{
+    "description": "Schema that describes the schema of 'properties' field of a value of a template field",
+    "type": "object",
+    "properties": {
+        "@context": { "$ref": "file:jsonLDContextFieldContent.json" },
+        "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
+        "@id": { "$ref": "file:jsonLDIDFieldContent.json" },
+        "@value": { "$ref": "file:jsonLDValueFieldContent.json" },
+        "pav:createdOn": { "$ref": "file:pavCreatedOnFieldContent.json" },
+        "pav:createdBy": { "$ref": "file:pavCreatedByFieldContent.json" },
+        "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
+        "cedar:lastUpdatedBy": { "$ref": "file:cedarLastUpdatedByFieldContent.json" }
+    },
+    "required": [ "@context", "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ],
+    "additionalProperties": false
+}

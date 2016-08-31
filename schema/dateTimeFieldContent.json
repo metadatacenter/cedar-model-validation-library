@@ -1,0 +1,10 @@
+{
+    "description": "Schema that specifies the schema for a date-time field",
+    "type": "object",
+    "properties": {
+        "type": { "type": "string", "enum": [ "string" ] },
+        "format": { "type": "string", "enum": [ "date-time" ] }
+    },
+    "required": [ "type", "format" ],
+    "additionalProperties": false
+}

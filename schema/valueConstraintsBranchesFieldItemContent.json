@@ -1,0 +1,14 @@
+{
+    "description": "Schema that describes the schema of each entry in the 'branches' field array in a '_valueConstraints' field",
+    "type": "object",
+    "properties": {
+        "source": { "type": "string", "minLength": 1 },
+        "acronym": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "uri": { "type": "string", "format": "uri" },
+        "maxDepth": { "type": "integer", "minimum": 1 },
+        "selectedByDefault": { "type": "boolean" }
+    },
+    "required": [ "source", "acronym", "name", "uri", "maxDepth" ],
+    "additionalProperties": false
+}

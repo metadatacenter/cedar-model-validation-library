@@ -1,0 +1,14 @@
+{
+    "description": "Schema that describes the schema of each entry in the 'ontologies' field array in a '_valueConstraints' field",
+    "type": "object",
+    "properties": {
+        "uri": { "type": "string", "format": "uri" },
+        "acronym": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "numChildren": { "type": "integer", "minimum": 1 },
+        "exclusions": { "$ref": "file:valueConstraintsOntologiesExclusionsFieldContent.json" },
+        "selectedByDefault": { "type": "boolean" }
+    },
+    "required": [ "uri" ],
+    "additionalProperties": false
+}

@@ -1,0 +1,8 @@
+{
+    "description": "Schema describing an 'enum' field with an array value with exactly one URI",
+    "type": "object",
+    "properties": {
+        "enum": { "$ref": "file:singleURIArray.json" }
+    },
+    "required": [ "enum" ]
+}
