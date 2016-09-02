@@ -2,7 +2,7 @@
     "description": "Schema that describes the schema of each entry in the 'literals' field array in a '_valueConstraints' field",
     "type": "object",
     "properties": {
-        "label": { "type": "string", "format": "uri" },
+        "label": { "type": "string" },
         "selectedByDefault": { "type": "boolean" }
     },
     "required": [ "label" ],

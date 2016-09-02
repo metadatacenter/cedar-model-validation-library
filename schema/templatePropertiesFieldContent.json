@@ -1,15 +1,17 @@
 {
-     "description": "Schema that describes the schema of a 'properties' field in a template",
-     "type": "object",
-     "properties": {
-     "_templateId": { "$ref": "#/definitions/templateIDFieldContent" },
-     "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
-     "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-     "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
-     "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
-     "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
-     "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
-     "cedar:lastUpdatedBy": { "$ref": "#/definitions/cedarLastUpdatedByFieldContent" }
-     },
-     "required": [ "@type", "@id", "@context", "_templateId", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ]
+    "description": "Schema that describes the schema of a 'properties' field in a template",
+    "type": "object",
+    "properties": {
+        "schema:isBasedOn": { "$ref": "#/definitions/schemaIsBasedOnFieldContent" },
+        "schema:name": { "$ref": "#/definitions/schemaNameFieldContent" },
+        "schema:description": { "$ref": "#/definitions/schemaDescriptionFieldContent" },
+        "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
+        "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
+        "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
+        "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
+        "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
+        "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
+        "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
+    },
+    "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }

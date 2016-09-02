@@ -9,8 +9,8 @@
         "pav:createdOn": { "$ref": "file:pavCreatedOnFieldContent.json" },
         "pav:createdBy": { "$ref": "file:pavCreatedByFieldContent.json" },
         "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
-        "cedar:lastUpdatedBy": { "$ref": "file:cedarLastUpdatedByFieldContent.json" }
+        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" }
     },
-    "required": [ "@context", "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ],
+    "required": [ "@context", "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
     "additionalProperties": false
 }

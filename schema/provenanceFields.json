@@ -5,7 +5,7 @@
         "pav:createdOn": { "type": [ "string", "null" ], "format": "date-time" },
         "pav:createdBy":  { "type": [ "string", "null" ], "format": "uri" },
         "pav:lastUpdatedOn":  { "type": [ "string", "null" ], "format": "date-time" },
-        "cedar:lastUpdatedBy": { "type": [ "string", "null" ], "format": "uri" }
+        "oslc:modifiedBy": { "type": [ "string", "null" ], "format": "uri" }
     },
-    "required": [ "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "cedar:lastUpdatedBy" ]
+    "required": [ "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }
