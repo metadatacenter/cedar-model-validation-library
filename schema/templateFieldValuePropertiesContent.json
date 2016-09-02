@@ -11,6 +11,6 @@
         "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
         "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" }
     },
-    "required": [ "@context", "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
+    "required": [ "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
     "additionalProperties": false
 }

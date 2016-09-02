@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {
         "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
-        "schema": { "type": "string", "format": "uri", "enum": [ "https://schema.org/" ] },
+        "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
         "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
     },
     "patternProperties": {
