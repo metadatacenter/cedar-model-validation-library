@@ -2,7 +2,7 @@
     "description": "Schema that describes the schema of a 'schema:description' field in a 'properties' field in a template",
     "type": "object",
     "properties": {
-        "type": { "type": "string", "enum": [ "string" ] },
+        "type": { "type": "string", "enum": [ "string" ] }
     },
     "required": [ "type" ],
     "additionalProperties": false
