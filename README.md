@@ -26,3 +26,10 @@ An example of its use is:
 
 The <tt>examples</tt> directory contains example templates, elements, and instances.
 
+NOTES:
+
+cd ./schema
+../scripts/schemawrap.sh /tmp/coreJSONSchemaFields.json coreJSONSchemaFields
+../scripts/schemawrap.sh /tmp/jsonLDIDField.json jsonLDIDField
+../scripts/schemawrap.sh /tmp/provenanceFields.json provenanceFields
+

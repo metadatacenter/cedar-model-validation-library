@@ -91,10 +91,12 @@
         "pav:lastUpdatedOn",
         "cedar:lastUpdatedBy"
     ],
+    "schema:name": "Empty Template",
+    "schema:description": "Template with no elements or fields",
     "pav:createdOn": "2016-06-29T09:51:31-0700",
     "pav:createdBy": "https://repo.metadatacenter.net/users/6d21a887-b704-49a9-922a-aa71632f3232",
     "pav:lastUpdatedOn": "2016-06-29T09:52:05-0700",
-    "cedar:lastUpdatedBy": "https://repo.metadatacenter.net/users/6d21a887-b704-49a9-922a-aa71632f3232",
+    "oslc:modifiedBy": "https://repo.metadatacenter.net/users/6d21a887-b704-49a9-922a-aa71632f3232",
     "additionalProperties": false,
     "$schema": "http://json-schema.org/draft-04/schema#"
 }
