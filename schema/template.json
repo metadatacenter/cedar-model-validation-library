@@ -9,6 +9,7 @@
         { "$ref": "file:jsonLDIDField.json" },
         { "$ref": "file:templateUIField.json" },
         { "$ref": "file:templatePropertiesField.json" },
+        { "$ref": "file:patternPropertiesField.json" },
         { "$ref": "file:provenanceFields.json" }
     ]
 }
