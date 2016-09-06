@@ -4,7 +4,7 @@ and fields, as well as sub-components of the model.
 
 The <tt>schema</tt> directory contains these specifications.
 
-In some cases it may be conventient to assembled these sub-schema in to a single schema.
+In some cases it may be conventient to assembled these sub-schema into a single schema.
 The individual JSON Schema files in the </tt>schema</tt> directory can be assembled into a
 single schema using the <tt>schemawrap.sh</tt> script in the <tt>scripts</tt> directory.
 
@@ -14,10 +14,10 @@ The script can be run as follows:
    ../scripts/schemawrap.sh <output_schema_file> <sub-schema-name>
 
 The output file will contain a standalone schema with a base sub-schema for validation of
-particular model entities. Make sure the output file no is not placed in the <tt>schema</tt>
-directory.
+particular model entities. Make sure the output file is not placed in the <tt>schema</tt>
+directory or it may also be processed by the script.
 
-The <tt>scripts</tt> directory contains a Python JSON Schema validation script called
+The <tt>scripts</tt> directory also contains a Python JSON Schema validation script called
 <tt>jsvalid.py</tt>.
 
 An example of its use is:
