@@ -1,7 +1,0 @@
-{
-    "description": "Schema that describes the single or multiple value schema for a template field",
-    "oneOf": [
-        { "$ref": "file:templateFieldSingleValueContent.json" },
-        { "$ref": "file:templateFieldMultipleValueContent.json" }
-    ]
-}
