@@ -1,0 +1,8 @@
+{
+    "description": "Schema that describes the schema for an array containing strings 'number' and 'null'",
+    "type": "array",  "minItems": 2,  "maxItems": 2, 
+    "items": [ 
+        { "type": "string", "enum": [ "number" ] },
+        { "type": "string", "enum": [ "null" ] }
+    ] 
+}

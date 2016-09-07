@@ -11,38 +11,18 @@
     "_ui" : {
         "title" : "Disease",
         "description" : "",
-        "inputType" : "textfield"
+        "inputType" : "checkbox"
     },
     "_valueConstraints" : {
         "requiredValue" : false,
-        "ontologies" : [ 
+        "literals" : [ 
             {
-                "numTerms" : 22533,
-                "acronym" : "ICD9CM",
-                "name" : "International Classification of Diseases, Version 9 - Clinical Modification",
-                "uri" : "http://data.bioontology.org/ontologies/ICD9CM"
-            }
-        ],
-        "valueSets" : [],
-        "classes" : [ 
+                "label" : "Untitled-0"
+            }, 
             {
-                "uri" : "http://purl.bioontology.org/ontology/MEDDRA/10022000",
-                "prefLabel" : "Influenza",
-                "type" : "OntologyClass",
-                "label" : "Influenza",
-                "source" : "MEDDRA"
+                "label" : "Untitled-1"
             }
-        ],
-        "branches" : [ 
-            {
-                "source" : "Systematized Nomenclature of Medicine - Clinical Terms (SNOMEDCT)",
-                "acronym" : "SNOMEDCT",
-                "uri" : "http://purl.bioontology.org/ontology/SNOMEDCT/64572001",
-                "name" : "Disease",
-                "maxDepth" : 0
-            }
-        ],
-        "multipleChoice" : false
+        ]
     },
     "properties" : {
         "@id" : {
@@ -56,27 +36,24 @@
             "oneOf" : [ 
                 {
                     "type" : "string",
-                    "format" : "uri",
-                    "enum" : [ 
-                        "http://data.bioontology.org/ontologies/LOINC/classes/http%3A%2F%2Fpurl.bioontology.org%2Fontology%2FLNC%2FLP21006-9"
-                    ]
+                    "format" : "uri"
                 }, 
                 {
                     "type" : "array",
                     "minItems" : 1,
                     "items" : {
                         "type" : "string",
-                        "format" : "uri",
-                        "enum" : [ 
-                            "http://data.bioontology.org/ontologies/LOINC/classes/http%3A%2F%2Fpurl.bioontology.org%2Fontology%2FLNC%2FLP21006-9"
-                        ]
+                        "format" : "uri"
                     },
                     "uniqueItems" : true
                 }
             ]
         },
         "@value" : {
-            "type" : [ "string", "null" ]
+            "type" : [ 
+                "array", 
+                "null"
+            ]
         },
         "pav:createdOn" : {
             "type" : [ 
@@ -110,11 +87,11 @@
     "required" : [ 
         "@value"
     ],
-    "pav:createdOn" : "2016-09-07T13:53:23-0700",
+    "pav:createdOn" : "2016-09-07T16:26:35-0700",
     "pav:createdBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
-    "pav:lastUpdatedOn" : "2016-09-07T13:53:23-0700",
+    "pav:lastUpdatedOn" : "2016-09-07T16:26:35-0700",
     "oslc:modifiedBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
     "additionalProperties" : false,
-    "@id" : "https://repo.metadatacenter.orgx/template-fields/4f6fe289-50da-4e16-8730-5af232b1b8dd",
+    "@id" : "https://repo.metadatacenter.orgx/template-fields/90843762-847c-4c23-ae9e-c610a15ecb07",
     "$schema" : "http://json-schema.org/draft-04/schema#"
 }

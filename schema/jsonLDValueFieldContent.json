@@ -2,8 +2,14 @@
     "description": "Schema that describes the schema for a '@value' field",
     "type": "object",
     "properties": {
-        "type": { "$ref": "file:stringAndNullTypeContent.json" }
+        "type": {
+            "oneOf": [
+                { "$ref": "file:stringAndNullTypeContent.json" },
+                { "$ref": "file:numberAndNullTypeContent.json" },
+                { "$ref": "file:arrayAndNullTypeContent.json" }
+            ]
+        }
     },
     "required": [ "type" ],
-    "additionalProperties": false
+    "additionalProperties": false    
 }
