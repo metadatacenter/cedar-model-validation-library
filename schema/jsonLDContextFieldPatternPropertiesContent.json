@@ -2,8 +2,8 @@
     "description": "Schema that describes a 'patternProperties field in a '@context' field in a 'properties' field in template or element or field",
     "type": "object",
     "properties": {
-        "^[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "file:uriEnumContent.json" }
+        "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$": { "type": "object" }
     },
-    "required": [ "^[a-zA-Z][a-zA-Z0-9]*$" ],
+    "required": [ "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$" ],
     "additionalProperties": false
 }

@@ -13,5 +13,8 @@
         "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
         "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
     },
+    "patternProperties": {
+        "^[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "file:templateFieldOrElement.json" }
+    },
     "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }

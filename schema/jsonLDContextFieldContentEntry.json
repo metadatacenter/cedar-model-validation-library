@@ -2,7 +2,7 @@
     "description": "A '@context' field has entries consisting of a name followed by an enum specifying the URI corresponding to that name",
     "type": "object",
     "patternProperties": {
-        "^[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "file:enumSpecifyingOneURI.json" }                
+        "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "file:enumSpecifyingOneURI.json" }                
     },
     "additionalProperties": false
 }

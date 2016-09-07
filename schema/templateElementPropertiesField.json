@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a 'properties' field in a template element",
+    "description": "Schema that describes the schema of 'properties' and 'patternProperties' fields in a template element",
     "type": "object",
     "properties": {             
         "properties": { "$ref": "file:templateElementPropertiesFieldContent.json" }
