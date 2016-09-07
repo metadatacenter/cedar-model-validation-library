@@ -6,7 +6,7 @@
         "acronym": { "type": "string", "minLength": 1 },
         "name": { "type": "string", "minLength": 1 },
         "uri": { "type": "string", "format": "uri" },
-        "maxDepth": { "type": "integer", "minimum": 1 },
+        "maxDepth": { "type": "integer", "minimum": 0 },
         "selectedByDefault": { "type": "boolean" }
     },
     "required": [ "source", "acronym", "name", "uri", "maxDepth" ],

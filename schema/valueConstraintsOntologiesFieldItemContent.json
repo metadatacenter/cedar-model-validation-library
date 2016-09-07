@@ -5,7 +5,7 @@
         "uri": { "type": "string", "format": "uri" },
         "acronym": { "type": "string", "minLength": 1 },
         "name": { "type": "string", "minLength": 1 },
-        "numChildren": { "type": "integer", "minimum": 1 },
+        "numTerms": { "type": "integer", "minimum": 1 },
         "exclusions": { "$ref": "file:valueConstraintsOntologiesExclusionsFieldContent.json" },
         "selectedByDefault": { "type": "boolean" }
     },
