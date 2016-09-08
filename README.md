@@ -24,12 +24,33 @@ An example of its use is:
 
   ../scripts/jsvalid.py -s <json_schema_file> <json_file>
 
-The <tt>examples</tt> directory contains example templates, elements, and instances.
+The <tt>tests</tt> directory contains example templates, elements, and instances.
 
-NOTES:
+NOTES
+
+To generate standalone schemas for particular sub-schemas:
 
 cd ./schema
-../scripts/schemawrap.sh /tmp/coreJSONSchemaFields.json coreJSONSchemaFields
+
 ../scripts/schemawrap.sh /tmp/jsonLDIDField.json jsonLDIDField
 ../scripts/schemawrap.sh /tmp/provenanceFields.json provenanceFields
+
+../scripts/schemawrap.sh /tmp/coreJSONSchemaFields.json coreJSONSchemaFields
+../scripts/schemawrap.sh /tmp/templateFieldJSONLDContextField.json templateFieldJSONLDContextField
+../scripts/schemawrap.sh /tmp/templateFieldJSONLDTypeField.json templateFieldJSONLDTypeField
+../scripts/schemawrap.sh /tmp/templateFieldUIField.json templateFieldUIField
+../scripts/schemawrap.sh /tmp/valueConstraintsField.json valueConstraintsField
+../scripts/schemawrap.sh /tmp/templateFieldSingleValueContent.json templateFieldSingleValueContent
+
+../scripts/schemawrap.sh /tmp/coreJSONSchemaTemplateElementFields.json coreJSONSchemaTemplateElementFields
+../scripts/schemawrap.sh /tmp/templateElementJSONLDContextField.json templateElementJSONLDContextField
+../scripts/schemawrap.sh /tmp/templateElementJSONLDTypeField.json templateElementJSONLDTypeField
+../scripts/schemawrap.sh /tmp/templateElementUIField.json templateElementUIField
+../scripts/schemawrap.sh /tmp/templateElementPropertiesField.json templateElementPropertiesField
+
+../scripts/schemawrap.sh /tmp/coreJSONSchemaTemplateFields.json coreJSONSchemaTemplateFields
+../scripts/schemawrap.sh /tmp/templateJSONLDContextField.json templateJSONLDContextField
+../scripts/schemawrap.sh /tmp/templatePropertiesField.json templatePropertiesField
+
+
 

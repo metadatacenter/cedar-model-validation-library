@@ -7,7 +7,6 @@
         { "$ref": "file:templateJSONLDContextField.json" },
         { "$ref": "file:templateJSONLDTypeField.json" },
         { "$ref": "file:jsonLDIDField.json" },
-        { "$ref": "file:templateUIField.json" },
         { "$ref": "file:templatePropertiesField.json" },
         { "$ref": "file:provenanceFields.json" }
     ]
