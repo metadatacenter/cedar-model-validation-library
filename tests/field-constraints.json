@@ -17,20 +17,20 @@
         "requiredValue" : false,
         "ontologies" : [ 
             {
-                "numTerms" : 22533,
-                "acronym" : "ICD9CM",
-                "name" : "International Classification of Diseases, Version 9 - Clinical Modification",
-                "uri" : "http://data.bioontology.org/ontologies/ICD9CM"
+                "numTerms" : 180284,
+                "acronym" : "LOINC",
+                "name" : "Logical Observation Identifier Names and Codes",
+                "uri" : "http://data.bioontology.org/ontologies/LOINC"
             }
         ],
         "valueSets" : [],
         "classes" : [ 
             {
-                "uri" : "http://purl.bioontology.org/ontology/SNOMEDCT/64572001",
+                "uri" : "http://purl.bioontology.org/ontology/LNC/LP21006-9",
                 "prefLabel" : "Disease",
                 "type" : "OntologyClass",
                 "label" : "Disease",
-                "source" : "SNOMEDCT"
+                "source" : "LOINC"
             }
         ],
         "branches" : [],
@@ -48,14 +48,20 @@
             "oneOf" : [ 
                 {
                     "type" : "string",
-                    "format" : "uri"
+                    "format" : "uri",
+                    "enum" : [ 
+                        "http://data.bioontology.org/ontologies/MESH/classes/http%3A%2F%2Fpurl.bioontology.org%2Fontology%2FMESH%2FD004194"
+                    ]
                 }, 
                 {
                     "type" : "array",
                     "minItems" : 1,
                     "items" : {
                         "type" : "string",
-                        "format" : "uri"
+                        "format" : "uri",
+                        "enum" : [ 
+                            "http://data.bioontology.org/ontologies/MESH/classes/http%3A%2F%2Fpurl.bioontology.org%2Fontology%2FMESH%2FD004194"
+                        ]
                     },
                     "uniqueItems" : true
                 }
@@ -99,11 +105,11 @@
     "required" : [ 
         "@value"
     ],
-    "pav:createdOn" : "2016-09-07T16:21:38-0700",
+    "pav:createdOn" : "2016-09-08T14:18:58-0700",
     "pav:createdBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
-    "pav:lastUpdatedOn" : "2016-09-07T16:21:38-0700",
+    "pav:lastUpdatedOn" : "2016-09-08T14:18:58-0700",
     "oslc:modifiedBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
     "additionalProperties" : false,
-    "@id" : "https://repo.metadatacenter.orgx/template-fields/38ad6d11-680d-40a2-811b-d5d7796fc188",
+    "@id" : "https://repo.metadatacenter.orgx/template-fields/4820347b-bedd-490e-ac62-a4fb65dea085",
     "$schema" : "http://json-schema.org/draft-04/schema#"
 }
