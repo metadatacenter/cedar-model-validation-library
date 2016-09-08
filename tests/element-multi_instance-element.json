@@ -300,9 +300,6 @@
                                     "null"
                                 ],
                                 "format" : "uri"
-                            },
-                            "_tmp" : {
-                                "nested" : true
                             }
                         },
                         "required" : [ 
