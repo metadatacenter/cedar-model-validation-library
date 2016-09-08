@@ -111,10 +111,6 @@
         },
         "name" : {
             "type" : "array",
-            "pav:createdOn" : null,
-            "pav:createdBy" : null,
-            "pav:lastUpdatedOn" : null,
-            "oslc:modifiedBy" : null,
             "minItems" : 1,
             "items" : {
                 "type" : "object",
