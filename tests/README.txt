@@ -21,3 +21,4 @@ jsvalid.py -s /tmp/templateElement.json -i empty-element.json
 jsvalid.py -s /tmp/templateElement.json -i element-with-field.json 
 jsvalid.py -s /tmp/templateElement.json -i element-nested-element.json 
 jsvalid.py -s /tmp/templateElement.json -i element-multiple-fields.json 
+jsvalid.py -s /tmp/templateElement.json -i element-multi_instance-field.json
