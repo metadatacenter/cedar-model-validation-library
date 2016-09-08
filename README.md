@@ -51,6 +51,10 @@ cd ./schema
 ../scripts/schemawrap.sh /tmp/coreJSONSchemaTemplateFields.json coreJSONSchemaTemplateFields
 ../scripts/schemawrap.sh /tmp/templateJSONLDContextField.json templateJSONLDContextField
 ../scripts/schemawrap.sh /tmp/templatePropertiesField.json templatePropertiesField
+../scripts/schemawrap.sh /tmp/templateRequiredField.json templateRequiredField
 
+../scripts/schemawrap.sh /tmp/template.json template
+../scripts/schemawrap.sh /tmp/templateElement.json templateElement
+../scripts/schemawrap.sh /tmp/templateField.json templateField
 
 
