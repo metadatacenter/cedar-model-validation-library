@@ -2,6 +2,12 @@
 
 # Takes all JSON Schema files in the current directory and wraps them into a "definitions" 
 # section of a single schema. Also takes a base schema and puts it at the top level of the schema.
+#
+# e.g., 
+#
+# schemawrap /tmp/templateField.json templateField
+# 
+# NOTE Very basic script at the moment with minimal checking
 
 if [ "$#" -ne 2 ]; then
     echo "Usage: <output_file> <schema_base>"
@@ -46,18 +52,11 @@ echo "  }," >> ${output_file}
 
 schema_base_file=${schema_base}.json
 
-
 # Strip the opening and closing parenthesis lines from the base schema file
 sed -e '1d' -e '$d' ${schema_base_file} | while IFS='' read -r line || [[ -n "${line}" ]]; do
  # Replace "file:" with "#/definitions/" in $ref clause and strip ".json" from names
  echo "    "${line} | sed "s/\"file:/\"#\/definitions\//" | sed "s/\.json\"/\"/" >> ${output_file}
 done 
  
-# start of "allOf"
-#echo "    \"allOf\": [" >> ${output_file}
-#echo "      { \"\$ref\": \"#/definitions/${schema_base}\" }" >> ${output_file}
-#echo "    ]" >> ${output_file}
-#end of "allOf"
-
 echo "}" >> ${output_file}
 
