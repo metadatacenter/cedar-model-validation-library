@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes a 'patternProperties field in a '@context' field in a 'properties' field in template or element or field",
+    "description": "Schema that describes a 'patternProperties field in a '@context' field in a 'properties' field in template or element",
     "type": "object",
     "properties": {
         "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$": { "type": "object" }
