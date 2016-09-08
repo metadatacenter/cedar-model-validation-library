@@ -23,3 +23,10 @@ jsvalid.py -s /tmp/templateElement.json -i element-nested-element.json
 jsvalid.py -s /tmp/templateElement.json -i element-multiple-fields.json 
 jsvalid.py -s /tmp/templateElement.json -i element-multi_instance-field.json
 jsvalid.py -s /tmp/templateElement.json -i element-multi_instance-element.json 
+
+jsvalid.py -s /tmp/template.json -i empty-template.json
+jsvalid.py -s /tmp/template.json -i template-with-field.json
+jsvalid.py -s /tmp/template.json -i template-nested-element.json
+jsvalid.py -s /tmp/template.json -i template-nested-element-nested-element.json 
+jsvalid.py -s /tmp/template.json -i template-multi_instance-field.json
+jsvalid.py -s /tmp/template.json -i template-multi_instance-element.json
