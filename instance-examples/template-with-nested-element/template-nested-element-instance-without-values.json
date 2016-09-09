@@ -1,0 +1,24 @@
+{
+    "@context" : {
+        "pav" : "http://purl.org/pav/",
+        "schema" : "http://schema.org/",
+        "oslc" : "http://open-services.net/ns/core#",
+        "e1" : "https://schema.metadatacenter.orgx/properties/e1"
+    },
+    "e1" : {
+        "@context" : {
+            "pav" : "http://purl.org/pav/",
+            "oslc" : "http://open-services.net/ns/core#",
+            "name" : "https://schema.metadatacenter.orgx/properties/name"
+        },
+        "name" : { "@value": null }
+    },
+    "schema:isBasedOn" : "https://repo.metadatacenter.orgx/templates/cb4ddde4-66a3-437f-86ce-dd7910f3fc40",
+    "schema:name" : "Template with nested element metadata",
+    "schema:description" : "Description metadata",
+    "pav:createdOn" : "2016-09-08T16:54:33-0700",
+    "pav:createdBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
+    "pav:lastUpdatedOn" : "2016-09-08T16:54:33-0700",
+    "oslc:modifiedBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
+    "@id" : "https://repo.metadatacenter.orgx/template-instances/d59eae91-9193-4ad7-bd7a-2d0d3ccb8b5e"
+}

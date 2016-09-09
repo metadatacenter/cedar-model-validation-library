@@ -1,0 +1,19 @@
+{
+    "@context" : {
+        "pav" : "http://purl.org/pav/",
+        "schema" : "http://schema.org/",
+        "oslc" : "http://open-services.net/ns/core#",
+        "name" : "https://schema.metadatacenter.orgx/properties/name"
+    },
+    "name" : {
+        "@value" : "example"
+    },
+    "schema:isBasedOn" : "https://repo.metadatacenter.orgx/templates/073a51e8-c940-4e21-8c1c-7fd8abc8b33b",
+    "schema:name" : "Template with field metadata",
+    "schema:description" : "Description metadata",
+    "pav:createdOn" : "2016-09-08T16:41:50-0700",
+    "pav:createdBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
+    "pav:lastUpdatedOn" : "2016-09-08T16:42:05-0700",
+    "oslc:modifiedBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
+    "@id" : "https://repo.metadatacenter.orgx/template-instances/8a06724f-89fc-4b2b-87e1-23ef1791c4ba"
+}
