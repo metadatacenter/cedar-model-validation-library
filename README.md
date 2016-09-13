@@ -58,4 +58,3 @@ cd ./schema
 ../scripts/schemawrap.sh /tmp/templateElement.json templateElement
 ../scripts/schemawrap.sh /tmp/templateField.json templateField
 
-
