@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Takes all JSON Schema files in the current directory and wraps them into a "definitions" 
-# section of a single schema. Also takes a base schema and puts it at the top level of the schema.
+# section of a single schema. Also takes the specified base schema and puts it at the top level of 
+# the schema. The goal is to produce a self-contained JSON Schema file with the specified
+# base schema as the starting point.
 #
 # e.g., 
 #
@@ -16,12 +18,14 @@ fi
 
 output_file=$1
 schema_base=$2
+schema_base_file=${schema_base}.json
 
 if [ ! -f ${schema_base_file} ]; then
     echo "Schema base file not found!"
     exit 1
 fi
 
+# Put the initial schema object opening and the JSON Schema field
 echo "{" > ${output_file}
 echo " \"\$schema\": \"http://json-schema.org/draft-04/schema#\"," >> ${output_file}
 
@@ -50,7 +54,6 @@ done
 # end of "definitions"
 echo "  }," >> ${output_file}
 
-schema_base_file=${schema_base}.json
 
 # Strip the opening and closing parenthesis lines from the base schema file
 sed -e '1d' -e '$d' ${schema_base_file} | while IFS='' read -r line || [[ -n "${line}" ]]; do
@@ -58,5 +61,6 @@ sed -e '1d' -e '$d' ${schema_base_file} | while IFS='' read -r line || [[ -n "${
  echo "    "${line} | sed "s/\"file:/\"#\/definitions\//" | sed "s/\.json\"/\"/" >> ${output_file}
 done 
  
+#End of overall schema object
 echo "}" >> ${output_file}
 
