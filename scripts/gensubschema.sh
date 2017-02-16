@@ -1,5 +1,6 @@
 #!/bin/bash
 #
+# Generate sub-schemas for CEDAR artifacts
 #
 # e.g.,
 #
