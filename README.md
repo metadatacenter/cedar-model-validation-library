@@ -19,7 +19,8 @@ For example, to run the Java-based validator in this library to validate provena
 This repo contains JSON Schema descriptions of CEDAR model components. 
 The <tt>schema</tt> directory contains these specifications.
 
-These schema can be used to validate CEDAR model artifacts, such as templates, elements and fields.
+These schema can be used to validate CEDAR model artifacts, such as templates, elements, and fields (which are
+themnselves encoded as JSON Schema).
 
 In some cases it may be conventient to assembled these sub-schema into a single schema.
 The individual JSON Schema files in the </tt>schema</tt> directory can be assembled into a
@@ -32,8 +33,8 @@ This script takes two arguments:
 For example to generate a standalone schema for the jsonLDIDField model sub-schema ,
 the script can be run as follows:
 
-    cd ./schema
-    ../scripts/schemawrap.sh ./src/main/resources/jsonLDIDField.json jsonLDIDField
+    cd schema
+    ../schemawrap.sh ./src/main/resources/jsonLDIDField.json jsonLDIDField
 
 The output file will contain a standalone schema for the specified sub-schema with all necessary imports.
 
@@ -58,8 +59,8 @@ NOTES
 
 To generate standalone schemas for all particular sub-schemas:
 
-  cd ./schema
-
+    cd ./schema
+    
     ../scripts/schemawrap.sh ./src/main/resources/jsonLDIDField.json jsonLDIDField
     ../scripts/schemawrap.sh ./src/main/resources/provenanceFields.json provenanceFields
     
