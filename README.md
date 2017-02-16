@@ -30,18 +30,17 @@ This script takes two arguments:
 
    schemawap <output-json-file> <sub-schema-name>
 
-For example to generate a standalone schema for the jsonLDIDField model sub-schema ,
-the script can be run as follows:
-
-    cd schema
-    ../schemawrap.sh ./src/main/resources/jsonLDIDField.json jsonLDIDField
-
 The output file will contain a standalone schema for the specified sub-schema with all necessary imports.
 
 Make sure the output file is not placed in the <tt>schema</tt> directory or it may also be processed by the script.
 
-The <tt>scripts</tt> directory also contains a Python JSON Schema validation script called
-<tt>jsvalid.py</tt>.
+A script called <tt>gensubschema.sh</tt> can be used to generate all needed sub-schema:
+
+    gensubschema.sh ~/workspace/cedar/server/cedar-model-validation-library/scripts \
+      ~/workspace/cedar/server/cedar-model-validation-library/schema \
+      ~/workspace/cedar/server/cedar-model-validation-library/src/main/resources
+
+The <tt>scripts</tt> directory also contains a Python JSON Schema validation script called <tt>jsvalid.py</tt>.
 
 An example of its use is:
 
@@ -61,29 +60,29 @@ To generate standalone schemas for all particular sub-schemas:
 
     cd ./schema
     
-    ../scripts/schemawrap.sh ./src/main/resources/jsonLDIDField.json jsonLDIDField
-    ../scripts/schemawrap.sh ./src/main/resources/provenanceFields.json provenanceFields
+    ../scripts/schemawrap.sh ../src/main/resources/jsonLDIDField.json jsonLDIDField
+    ../scripts/schemawrap.sh ../src/main/resources/provenanceFields.json provenanceFields
     
-    ../scripts/schemawrap.sh ./src/main/resources/coreJSONSchemaFields.json coreJSONSchemaFields
-    ../scripts/schemawrap.sh ./src/main/resources/templateFieldJSONLDContextField.json templateFieldJSONLDContextField
-    ../scripts/schemawrap.sh ./src/main/resources/templateFieldJSONLDTypeField.json templateFieldJSONLDTypeField
-    ../scripts/schemawrap.sh ./src/main/resources/templateFieldUIField.json templateFieldUIField
-    ../scripts/schemawrap.sh ./src/main/resources/valueConstraintsField.json valueConstraintsField
-    ../scripts/schemawrap.sh ./src/main/resources/templateFieldSingleValueContent.json templateFieldSingleValueContent
+    ../scripts/schemawrap.sh ../src/main/resources/coreJSONSchemaFields.json coreJSONSchemaFields
+    ../scripts/schemawrap.sh ../src/main/resources/templateFieldJSONLDContextField.json templateFieldJSONLDContextField
+    ../scripts/schemawrap.sh ../src/main/resources/templateFieldJSONLDTypeField.json templateFieldJSONLDTypeField
+    ../scripts/schemawrap.sh ../src/main/resources/templateFieldUIField.json templateFieldUIField
+    ../scripts/schemawrap.sh ../src/main/resources/valueConstraintsField.json valueConstraintsField
+    ../scripts/schemawrap.sh ../src/main/resources/templateFieldSingleValueContent.json templateFieldSingleValueContent
     
-    ../scripts/schemawrap.sh ./src/main/resources/coreJSONSchemaTemplateElementFields.json coreJSONSchemaTemplateElementFields
-    ../scripts/schemawrap.sh ./src/main/resources/templateElementJSONLDContextField.json templateElementJSONLDContextField
-    ../scripts/schemawrap.sh ./src/main/resources/templateElementJSONLDTypeField.json templateElementJSONLDTypeField
-    ../scripts/schemawrap.sh ./src/main/resources/templateElementUIField.json templateElementUIField
-    ../scripts/schemawrap.sh ./src/main/resources/templateElementPropertiesField.json templateElementPropertiesField
+    ../scripts/schemawrap.sh ../src/main/resources/coreJSONSchemaTemplateElementFields.json coreJSONSchemaTemplateElementFields
+    ../scripts/schemawrap.sh ../src/main/resources/templateElementJSONLDContextField.json templateElementJSONLDContextField
+    ../scripts/schemawrap.sh ../src/main/resources/templateElementJSONLDTypeField.json templateElementJSONLDTypeField
+    ../scripts/schemawrap.sh ../src/main/resources/templateElementUIField.json templateElementUIField
+    ../scripts/schemawrap.sh ../src/main/resources/templateElementPropertiesField.json templateElementPropertiesField
     
-    ../scripts/schemawrap.sh ./src/main/resources/coreJSONSchemaTemplateFields.json coreJSONSchemaTemplateFields
-    ../scripts/schemawrap.sh ./src/main/resources/templateJSONLDContextField.json templateJSONLDContextField
-    ../scripts/schemawrap.sh ./src/main/resources/templateJSONLDTypeField.json templateJSONLDTypeField
-    ../scripts/schemawrap.sh ./src/main/resources/templatePropertiesField.json templatePropertiesField
-    ../scripts/schemawrap.sh ./src/main/resources/templateRequiredField.json templateRequiredField
+    ../scripts/schemawrap.sh ../src/main/resources/coreJSONSchemaTemplateFields.json coreJSONSchemaTemplateFields
+    ../scripts/schemawrap.sh ../src/main/resources/templateJSONLDContextField.json templateJSONLDContextField
+    ../scripts/schemawrap.sh ../src/main/resources/templateJSONLDTypeField.json templateJSONLDTypeField
+    ../scripts/schemawrap.sh ../src/main/resources/templatePropertiesField.json templatePropertiesField
+    ../scripts/schemawrap.sh ../src/main/resources/templateRequiredField.json templateRequiredField
     
-    ../scripts/schemawrap.sh ./src/main/resources/template.json template
-    ../scripts/schemawrap.sh ./src/main/resources/templateElement.json templateElement
-    ../scripts/schemawrap.sh ./src/main/resources/templateField.json templateField
+    ../scripts/schemawrap.sh ../src/main/resources/template.json template
+    ../scripts/schemawrap.sh ../src/main/resources/templateElement.json templateElement
+    ../scripts/schemawrap.sh ../src/main/resources/templateField.json templateField
 

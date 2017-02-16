@@ -20,6 +20,8 @@ output_file=$1
 schema_base=$2
 schema_base_file=${schema_base}.json
 
+echo "Generating standalone schema" ${schema_base} "into file" ${output_file}
+
 if [ ! -f ${schema_base_file} ]; then
     echo "Schema base file not found!"
     exit 1
