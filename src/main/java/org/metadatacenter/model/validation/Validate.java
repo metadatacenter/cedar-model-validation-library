@@ -21,14 +21,14 @@ public class Validate
     if (args.length != 2)
       Usage();
 
-    CEDARValidator cedarValidator = new CEDARValidator();
+    CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
 
     File schemaFile = new File(args[0]);
     File instanceFile = new File(args[1]);
     JsonNode schema = MAPPER.readTree(schemaFile);
     JsonNode instance = MAPPER.readTree(instanceFile);
 
-    ProcessingReport processingReport = cedarValidator.validate(schema, instance);
+    ProcessingReport processingReport = cedarModelValidator.validate(schema, instance);
 
     for (ProcessingMessage processingMessage : processingReport) {
       processingMessage.setLogLevel(LogLevel.DEBUG);

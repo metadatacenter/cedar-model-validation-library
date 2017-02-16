@@ -13,19 +13,29 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class CEDARValidator
+public class CEDARModelValidator
 {
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
   private final JsonValidator jsonSchemaValidator;
 
   private static final String TEMPLATE_SCHEMA_NAME = "template";
 
-  public CEDARValidator()
+  public CEDARModelValidator()
   {
     JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
     this.jsonSchemaValidator = factory.getValidator();
   }
 
+  /**
+   * Take a JSON Schema node and validate a JSON node against it.
+   *
+   * @param schemaNode   A node containing a JSON Schema document
+   * @param instanceNode A node containing a JSON document
+   * @return A processing report
+   * @throws ProcessingException If a processing exception occurs during processing
+   * @throws IOException         If an IO exception occurs during processing
+   * @throws URISyntaxException  If a URI syntax exception occurs during processing
+   */
   public ProcessingReport validate(JsonNode schemaNode, JsonNode instanceNode)
     throws ProcessingException, IOException, URISyntaxException
   {
