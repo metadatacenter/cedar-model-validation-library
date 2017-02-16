@@ -53,36 +53,3 @@ The <tt>examples</tt> directory contains example templates, elements, and instan
 If you have questions about this repository, please subscribe to the [CEDAR Developer Support
 mailing list](https://mailman.stanford.edu/mailman/listinfo/cedar-developers).
 After subscribing, send messages to cedar-developers at lists.stanford.edu.
-
-NOTES
-
-To generate standalone schemas for all particular sub-schemas:
-
-    cd ./schema
-    
-    ../scripts/schemawrap.sh ../src/main/resources/jsonLDIDField.json jsonLDIDField
-    ../scripts/schemawrap.sh ../src/main/resources/provenanceFields.json provenanceFields
-    
-    ../scripts/schemawrap.sh ../src/main/resources/coreJSONSchemaFields.json coreJSONSchemaFields
-    ../scripts/schemawrap.sh ../src/main/resources/templateFieldJSONLDContextField.json templateFieldJSONLDContextField
-    ../scripts/schemawrap.sh ../src/main/resources/templateFieldJSONLDTypeField.json templateFieldJSONLDTypeField
-    ../scripts/schemawrap.sh ../src/main/resources/templateFieldUIField.json templateFieldUIField
-    ../scripts/schemawrap.sh ../src/main/resources/valueConstraintsField.json valueConstraintsField
-    ../scripts/schemawrap.sh ../src/main/resources/templateFieldSingleValueContent.json templateFieldSingleValueContent
-    
-    ../scripts/schemawrap.sh ../src/main/resources/coreJSONSchemaTemplateElementFields.json coreJSONSchemaTemplateElementFields
-    ../scripts/schemawrap.sh ../src/main/resources/templateElementJSONLDContextField.json templateElementJSONLDContextField
-    ../scripts/schemawrap.sh ../src/main/resources/templateElementJSONLDTypeField.json templateElementJSONLDTypeField
-    ../scripts/schemawrap.sh ../src/main/resources/templateElementUIField.json templateElementUIField
-    ../scripts/schemawrap.sh ../src/main/resources/templateElementPropertiesField.json templateElementPropertiesField
-    
-    ../scripts/schemawrap.sh ../src/main/resources/coreJSONSchemaTemplateFields.json coreJSONSchemaTemplateFields
-    ../scripts/schemawrap.sh ../src/main/resources/templateJSONLDContextField.json templateJSONLDContextField
-    ../scripts/schemawrap.sh ../src/main/resources/templateJSONLDTypeField.json templateJSONLDTypeField
-    ../scripts/schemawrap.sh ../src/main/resources/templatePropertiesField.json templatePropertiesField
-    ../scripts/schemawrap.sh ../src/main/resources/templateRequiredField.json templateRequiredField
-    
-    ../scripts/schemawrap.sh ../src/main/resources/template.json template
-    ../scripts/schemawrap.sh ../src/main/resources/templateElement.json templateElement
-    ../scripts/schemawrap.sh ../src/main/resources/templateField.json templateField
-
