@@ -10,7 +10,7 @@ Templates, elements, fields, and other CEDAR model artifacts can be incrementall
 
 For example, to run the Java-based validator in this library to validate provenance fields in an example template:
 
-    java -jar cedar-model-validation-library/target/cedar-model-validation-library-1.0.0-jar-with-dependencies.jar \
+    java -jar ./target/cedar-model-validation-library-1.0.0-jar-with-dependencies.jar \
       ./src/main/resources/provenanceFields.json \
       ./examples/template-element-field-examples/template-with-field.json
 
