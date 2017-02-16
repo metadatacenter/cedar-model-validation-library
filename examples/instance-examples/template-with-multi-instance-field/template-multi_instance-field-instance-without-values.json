@@ -1,0 +1,19 @@
+{
+    "@context" : {
+        "pav" : "http://purl.org/pav/",
+        "schema" : "http://schema.org/",
+        "oslc" : "http://open-services.net/ns/core#",
+        "name" : "https://schema.metadatacenter.orgx/properties/name"
+    },
+    "name" : [ 
+        { "@value": null }
+    ],
+    "schema:isBasedOn" : "https://repo.metadatacenter.orgx/templates/4a818c13-0b65-4f38-9e02-3560bcea22a0",
+    "schema:name" : "Template with multi-instance field metadata",
+    "schema:description" : "Description metadata",
+    "pav:createdOn" : "2016-09-08T16:49:00-0700",
+    "pav:createdBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
+    "pav:lastUpdatedOn" : "2016-09-08T16:49:00-0700",
+    "oslc:modifiedBy" : "https://repo.metadatacenter.orgx/users/8d787b98-33dd-4aff-a88c-440caf452c61",
+    "@id" : "https://repo.metadatacenter.orgx/template-instances/e4aab08f-9ccd-4c88-a661-7e433ed6e0df"
+}
