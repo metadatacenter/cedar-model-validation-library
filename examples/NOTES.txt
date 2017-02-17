@@ -1,0 +1,40 @@
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/templates/empty-template.json
+
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaTemplateFields.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateJSONLDTypeField.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateJSONLDContextField.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateUIField.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateRequiredField.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templatePropertiesField.json examples/templates/empty-template.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/template.json examples/templates/empty-template.json
+
+./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/templates/empty-template.json
+
+./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaTemplateFields.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/templateJSONLDTypeField.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/templateJSONLDContextField.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/templateUIField.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/templateRequiredField.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/templatePropertiesField.json -i examples/templates/empty-template.json
+./scripts/jsvalid.py -s src/main/resources/template.json -i examples/templates/empty-template.json
+
+  
+  coreJSONSchemaTemplateElementFields.json
+  templateElementJSONLDContextField.json
+  templateElementJSONLDTypeField.json
+  templateElementPropertiesField.json
+  templateElementUIField.json
+  templateElement.json
+
+  templateFieldJSONLDContextField.json
+  templateFieldJSONLDTypeField.json
+  templateFieldSingleValueContent.json
+  templateFieldUIField.json
+  valueConstraintsField.json
+  templateField.json

@@ -422,7 +422,8 @@
      { "$ref": "#/definitions/templateJSONLDTypeField" },
      { "$ref": "#/definitions/jsonLDIDField" },
      { "$ref": "#/definitions/templatePropertiesField" },
-     { "$ref": "#/definitions/provenanceFields" }
+     { "$ref": "#/definitions/provenanceFields" },
+     { "$ref": "#/definitions/templateUIField" }
      ]
     }
     ,
@@ -836,7 +837,7 @@
      "order": { "$ref": "#/definitions/stringArray" },
      "pages": { "$ref": "#/definitions/stringArray" }
      },
-     "required": [ "title", "description", "order" ],
+     "required": [ "title", "description", "order", "pages" ],
      "additionalProperties": false
     }
     ,
@@ -1033,6 +1034,7 @@
      { "$ref": "#/definitions/templateJSONLDTypeField" },
      { "$ref": "#/definitions/jsonLDIDField" },
      { "$ref": "#/definitions/templatePropertiesField" },
-     { "$ref": "#/definitions/provenanceFields" }
+     { "$ref": "#/definitions/provenanceFields" },
+     { "$ref": "#/definitions/templateUIField" }
      ]
 }
