@@ -228,6 +228,17 @@
      ]
     }
     ,
+    "oslcModifiedByContextFieldContent": 
+    {
+     "description": "Schema that describes the schema of 'oslc:modifiedBy' field content in a @context",
+     "type": "object",
+     "properties": {
+     "@type": { "type": "string", "enum": [ "@id" ] }
+     },
+     "required": [ "@type" ],
+     "additionalProperties": false
+    }
+    ,
     "oslcModifiedByFieldContent": 
     {
      "description": "Schema that describes the schema of a 'oslc:modifiedBy' field in a 'properties' field in a template",
@@ -249,6 +260,17 @@
      "additionalProperties": false
     }
     ,
+    "pavCreatedByContextFieldContent": 
+    {
+     "description": "Schema that describes the schema of 'pav:createdBy' field content in a @context",
+     "type": "object",
+     "properties": {
+     "@type": { "type": "string", "enum": [ "@id" ] }
+     },
+     "required": [ "@type" ],
+     "additionalProperties": false
+    }
+    ,
     "pavCreatedByFieldContent": 
     {
      "description": "Schema that describes the schema of a 'pav:createdBy' field in a 'properties' field in a template",
@@ -261,6 +283,27 @@
      "additionalProperties": false
     }
     ,
+    "pavCreatedOnContextFieldContent": 
+    {
+     "description": "Schema that describes the schema of 'pav:createdOn' field content in a @context",
+     "type": "object",
+     "properties": {
+     "@type": { "type": "string", "enum": [ "xsd:dateTime" ] }
+     },
+     "required": [ "@type" ],
+     "additionalProperties": false
+    }
+    ,
+    "pavCreatedOnField": 
+    {
+     "description": "A schema that describes a 'pav:createdOn' field content",
+     "type": "object",
+     "properties": {
+     "@id": { "type": [ "string", "null" ], "format": "uri" }
+     },
+     "required": [ "@id" ]
+    }
+    ,
     "pavCreatedOnFieldContent": 
     {
      "description": "Schema that describes the schema of a 'pav:createdOn' field in a 'properties' field in a template",
@@ -270,6 +313,17 @@
      "format": { "type": "string", "enum": [ "date-time" ] }
      },
      "required": [ "type", "format" ],
+     "additionalProperties": false
+    }
+    ,
+    "pavLastUpdatedOnContextFieldContent": 
+    {
+     "description": "Schema that describes the schema of 'oslc:lastUpdatedOn' field content in a @context",
+     "type": "object",
+     "properties": {
+     "@type": { "type": "string", "enum": [ "xsd:dateTime" ] }
+     },
+     "required": [ "@type" ],
      "additionalProperties": false
     }
     ,
@@ -405,10 +459,14 @@
      "xsd": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2001/XMLSchema#" ] },
      "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
      "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
-     "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+     "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+     "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnContextFieldContent" },
+     "pav:createdBy": { "$ref": "#/definitions/pavCreatedByContextFieldContent" },
+     "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnContextFieldContent" },
+     "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
      },
      "patternProperties": {
-     "^(?!pav)(?!schema)(?!oslc)(?!xsd)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+     "^(?!pav)(?!schema)(?!oslc)(?!xsd)(?!pav:createdOn)(?!pav:createdBy)(?!pav:lastUpdatedOn)(?!oslc:modifiedBy)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
      },
      "additionalProperties": false
     }
@@ -509,10 +567,14 @@
      "xsd": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2001/XMLSchema#" ] },
      "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
      "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
-     "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+     "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+     "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnContextFieldContent" },
+     "pav:createdBy": { "$ref": "#/definitions/pavCreatedByContextFieldContent" },
+     "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnContextFieldContent" },
+     "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
      },
      "patternProperties": {
-     "^(?!pav)(?!schema)(?!oslc)(?!xsd)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+     "^(?!pav)(?!schema)(?!oslc)(?!xsd)(?!pav:createdOn)(?!pav:createdBy)(?!pav:lastUpdatedOn)(?!oslc:modifiedBy)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
      },
      "additionalProperties": false
     }
@@ -659,10 +721,14 @@
      "xsd": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2001/XMLSchema#" ] },
      "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
      "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
-     "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+     "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+     "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnContextFieldContent" },
+     "pav:createdBy": { "$ref": "#/definitions/pavCreatedByContextFieldContent" },
+     "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnContextFieldContent" },
+     "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
      },
      "patternProperties": {
-     "^(?!pav)(?!schema)(?!oslc)(?!xsd)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+     "^(?!pav)(?!schema)(?!oslc)(?!xsd)(?!pav:createdOn)(?!pav:createdBy)(?!pav:lastUpdatedOn)(?!oslc:modifiedBy)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
      },
      "additionalProperties": false
     }

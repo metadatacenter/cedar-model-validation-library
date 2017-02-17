@@ -5,10 +5,14 @@
         "xsd": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2001/XMLSchema#" ] },
         "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
         "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
-        "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+        "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+        "pav:createdOn": { "$ref": "file:pavCreatedOnContextFieldContent.json" },
+        "pav:createdBy": { "$ref": "file:pavCreatedByContextFieldContent.json" },
+        "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnContextFieldContent.json" },
+        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByContextFieldContent.json" }
     },
     "patternProperties": {
-        "^(?!pav)(?!schema)(?!oslc)(?!xsd)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+        "^(?!pav)(?!schema)(?!oslc)(?!xsd)(?!pav:createdOn)(?!pav:createdBy)(?!pav:lastUpdatedOn)(?!oslc:modifiedBy)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
     },
     "additionalProperties": false
 }
