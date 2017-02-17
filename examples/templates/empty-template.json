@@ -25,7 +25,8 @@
     "_ui": {
         "title": "Empty Template",
         "description": "An empty template",
-        "pages": []
+        "pages": [],
+        "order": []
     },
     "properties": {
         "@context": {

@@ -7,6 +7,6 @@
         "order": { "$ref": "file:stringArray.json" },
         "pages": { "$ref": "file:stringArray.json" }
     },
-    "required": [ "title", "description", "order" ],
+    "required": [ "title", "description", "order", "pages" ],
     "additionalProperties": false
 }
