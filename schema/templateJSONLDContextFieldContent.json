@@ -1,13 +1,14 @@
 {
-    "description": "Schema describing the schema of the '@context' field in a template element",
+    "description": "Schema describing the schema of the '@context' field in a template",
     "type": "object",
     "properties": {
+        "xsd": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2001/XMLSchema#" ] },
         "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
         "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
         "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
     },
     "patternProperties": {
-        "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+        "^(?!pav)(?!schema)(?!oslc)(?!xsd)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
     },
     "additionalProperties": false
 }
