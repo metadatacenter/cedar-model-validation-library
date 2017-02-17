@@ -3,13 +3,13 @@
 # Takes all JSON Schema files in the current directory and wraps them into a "definitions" 
 # section of a single schema. Also takes the specified base schema and puts it at the top level of 
 # the schema. The goal is to produce a self-contained JSON Schema file with the specified
-# base schema as the starting point.
+# base schema as the starting point and with all necessary referenced schema inlined.
 #
 # e.g., 
 #
-# schemawrap /tmp/templateField.json templateField
+# schemawrap templateField.json templateField
 # 
-# NOTE Very basic script at the moment with minimal checking
+# NOTE This is a very basic script at the moment with minimal checking
 
 if [ "$#" -ne 2 ]; then
     echo "Usage: <output_file> <schema_base>"
@@ -19,6 +19,8 @@ fi
 output_file=$1
 schema_base=$2
 schema_base_file=${schema_base}.json
+
+echo "Generating standalone schema" ${schema_base} "into file" ${output_file}
 
 if [ ! -f ${schema_base_file} ]; then
     echo "Schema base file not found!"
