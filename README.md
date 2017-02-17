@@ -36,7 +36,7 @@ Make sure the output file is not placed in the <tt>schema</tt> directory or it m
 
 A script called <tt>gensubschema.sh</tt> can be used to generate all needed sub-schema:
 
-    gensubschema.sh ~/workspace/cedar/server/cedar-model-validation-library/scripts \
+    ./scripts/gensubschema.sh ~/workspace/cedar/server/cedar-model-validation-library/scripts \
       ~/workspace/cedar/server/cedar-model-validation-library/schema \
       ~/workspace/cedar/server/cedar-model-validation-library/src/main/resources
 

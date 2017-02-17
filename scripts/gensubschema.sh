@@ -20,6 +20,7 @@ output_dir=$3
 echo "Generating sub-schema into directory" ${output_dir} "..."
 
 cd ${schema_dir}
+${scripts_dir}/schemawrap.sh ${output_dir}/jsonLDTypeField.json jsonLDTypeField
 ${scripts_dir}/schemawrap.sh ${output_dir}/jsonLDIDField.json jsonLDIDField
 ${scripts_dir}/schemawrap.sh ${output_dir}/provenanceFields.json provenanceFields
 ${scripts_dir}/schemawrap.sh ${output_dir}/coreJSONSchemaFields.json coreJSONSchemaFields
