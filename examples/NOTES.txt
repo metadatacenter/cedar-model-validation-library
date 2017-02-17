@@ -1,3 +1,5 @@
+Empty Template Validation
+
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/templates/empty-template.json
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/templates/empty-template.json
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/templates/empty-template.json
@@ -24,10 +26,26 @@ java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependen
 ./scripts/jsvalid.py -s src/main/resources/templatePropertiesField.json -i examples/templates/empty-template.json
 ./scripts/jsvalid.py -s src/main/resources/template.json -i examples/templates/empty-template.json
 
-  
-  coreJSONSchemaTemplateElementFields.json
-  templateElementJSONLDContextField.json
-  templateElementJSONLDTypeField.json
+Empty Element Validation
+
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/elements/empty-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/elements/empty-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/elements/empty-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/elements/empty-element.json
+
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaTemplateElementFields.json examples/elements/empty-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementJSONLDTypeField.json examples/elements/empty-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementJSONLDContextField.json examples/elements/empty-element.json
+
+./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/elements/empty-element.json
+./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/elements/empty-element.json
+./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/elements/empty-element.json
+./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/elements/empty-element.json
+
+./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaTemplateElementFields.json  -i examples/elements/empty-element.json
+./scripts/jsvalid.py -s src/main/resources/templateElementJSONLDTypeField.json  -i examples/elements/empty-element.json
+./scripts/jsvalid.py -s src/main/resources/templateElementJSONLDContextField.json  -i examples/elements/empty-element.json
+
   templateElementPropertiesField.json
   templateElementUIField.json
   templateElement.json
