@@ -12,7 +12,7 @@ For example, to run the Java-based validator in this library to validate provena
 
     java -jar ./target/cedar-model-validation-library-1.0.0-jar-with-dependencies.jar \
       ./src/main/resources/provenanceFields.json \
-      ./examples/template-element-field-examples/template-with-field.json
+      ./examples/templates/empty-template.json
 
 # Generating Standalone JSON Schema Files
 
@@ -28,7 +28,7 @@ single schema using the <tt>schemawrap.sh</tt> script in the <tt>scripts</tt> di
 
 This script takes two arguments:
 
-   schemawap <output-json-file> <sub-schema-name>
+   schemawrap.sh output-json-file sub-schema-name
 
 The output file will contain a standalone schema for the specified sub-schema with all necessary imports.
 
