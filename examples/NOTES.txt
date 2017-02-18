@@ -52,9 +52,22 @@ java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependen
 ./scripts/jsvalid.py -s src/main/resources/templateElementUIField.json  -i examples/elements/empty-element.json
 ./scripts/jsvalid.py -s src/main/resources/templateElement.json  -i examples/elements/empty-element.json
 
+Basic Text Field Validation
+
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/fields/basic-text-field.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/fields/basic-text-field.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/fields/basic-text-field.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/fields/basic-text-field.json
+
+
   templateFieldJSONLDContextField.json
   templateFieldJSONLDTypeField.json
   templateFieldSingleValueContent.json
   templateFieldUIField.json
   valueConstraintsField.json
   templateField.json
+
+./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/fields/basic-text-field.json
+./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/fields/basic-text-field.json
+./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/fields/basic-text-field.json
+./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/fields/basic-text-field.json
