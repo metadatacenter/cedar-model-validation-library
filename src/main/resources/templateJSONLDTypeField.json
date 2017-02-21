@@ -760,14 +760,14 @@
      "description": "Schema that describes the schema of a 'properties' field in a template",
      "type": "object",
      "properties": {
-     "schema:isBasedOn": { "$ref": "#/definitions/schemaIsBasedOnFieldContent" },
-     "schema:name": { "$ref": "#/definitions/schemaNameFieldContent" },
-     "schema:description": { "$ref": "#/definitions/schemaDescriptionFieldContent" },
+     "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
      "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
      "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-     "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
+     "schema:name": { "$ref": "#/definitions/schemaNameFieldContent" },
+     "schema:description": { "$ref": "#/definitions/schemaDescriptionFieldContent" },
      "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
      "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
+     "schema:isBasedOn": { "$ref": "#/definitions/schemaIsBasedOnFieldContent" },
      "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
      "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
      },
