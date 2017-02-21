@@ -688,7 +688,7 @@
     ,
     "templateFieldValuePropertiesContent": 
     {
-     "description": "Schema that describes the schema of 'properties' field of a value of a template field",
+     "description": "Schema that describes the schema of 'properties' field value in a template field",
      "type": "object",
      "properties": {
      "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
@@ -698,9 +698,10 @@
      "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
      "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
      "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
-     "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
+     "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
+     "_valueLabel": { "$ref": "#/definitions/valueLabelFieldContent" }
      },
-     "required": [ "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
+     "required": [ "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "_valueLabel" ],
      "additionalProperties": false
     }
     ,
@@ -1022,6 +1023,17 @@
      "selectedByDefault": { "type": "boolean" }
      },
      "required": [ "uri" ],
+     "additionalProperties": false
+    }
+    ,
+    "valueLabelFieldContent": 
+    {
+     "description": "Schema that describes the schema of a '_valueLabel' field in a 'properties' field in a template field",
+     "type": "object",
+     "properties": {
+     "type": { "$ref": "#/definitions/stringAndNullTypeContent" }
+     },
+     "required": [ "type" ],
      "additionalProperties": false
     }
   },

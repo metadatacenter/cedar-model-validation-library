@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of 'properties' field of a value of a template field",
+    "description": "Schema that describes the schema of 'properties' field value in a template field",
     "type": "object",
     "properties": {
         "@context": { "$ref": "file:jsonLDContextFieldContent.json" },
@@ -9,8 +9,9 @@
         "pav:createdOn": { "$ref": "file:pavCreatedOnFieldContent.json" },
         "pav:createdBy": { "$ref": "file:pavCreatedByFieldContent.json" },
         "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
-        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" }
+        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" },
+        "_valueLabel": { "$ref": "file:valueLabelFieldContent.json" }
     },
-    "required": [ "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
+    "required": [ "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "_valueLabel" ],
     "additionalProperties": false
 }
