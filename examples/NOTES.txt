@@ -12,17 +12,7 @@ java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependen
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templatePropertiesField.json examples/templates/empty-template.json
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/template.json examples/templates/empty-template.json
 
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaTemplateFields.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/templateJSONLDTypeField.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/templateJSONLDContextField.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/templateUIField.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/templateRequiredField.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/templatePropertiesField.json -i examples/templates/empty-template.json
-./scripts/jsvalid.py -s src/main/resources/template.json -i examples/templates/empty-template.json
+./scripts/validate-template.sh . examples/templates/empty-template.json
 
 #---------------------Empty Element Validation (NOTE: Manually corrected element to have full @context)
 
@@ -37,16 +27,22 @@ java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependen
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementUIField.json examples/elements/empty-element.json
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElement.json examples/elements/empty-element.json
 
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaTemplateElementFields.json  -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/templateElementJSONLDTypeField.json  -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/templateElementJSONLDContextField.json  -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/templateElementPropertiesField.json  -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/templateElementUIField.json  -i examples/elements/empty-element.json
-./scripts/jsvalid.py -s src/main/resources/templateElement.json  -i examples/elements/empty-element.json
+./scripts/validate-element.sh . examples/templates/empty-element.json
+
+#---------------------Multi-Field Element Validation (NOTE: Manually corrected element to have full @context, removed _tmp fields)
+
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/elements/multi-field-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/elements/multi-field-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/elements/multi-field-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/elements/multi-field-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaTemplateElementFields.json examples/elements/multi-field-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementJSONLDTypeField.json examples/elements/multi-field-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementJSONLDContextField.json examples/elements/multi-field-element.json
+*java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementPropertiesField.json examples/elements/multi-field-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementUIField.json examples/elements/multi-field-element.json
+java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElement.json examples/elements/multi-field-element.json
+
+./scripts/validate-element.sh . examples/templates/multi-field-element.json
 
 #----------------Basic Text Field Validation
 
@@ -61,16 +57,7 @@ java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependen
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldSingleValueContent.json examples/fields/basic-text-field.json
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateField.json examples/fields/basic-text-field.json
 
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/templateFieldJSONLDContextField.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/templateFieldJSONLDTypeField.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/templateFieldUIField.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/valueConstraintsField.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/templateFieldSingleValueContent.json -i examples/fields/basic-text-field.json
-./scripts/jsvalid.py -s src/main/resources/templateField.json -i examples/fields/basic-text-field.json
+./scripts/validate-field.sh examples/fields/basic-text-field.json
 
 #---------------Field with value constraint (NOTE: Manually removed all _tmp fields)
 
@@ -85,16 +72,7 @@ java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependen
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldSingleValueContent.json examples/fields/value-constrained-field.json
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateField.json examples/fields/value-constrained-field.json
 
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/templateFieldJSONLDContextField.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/templateFieldJSONLDTypeField.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/templateFieldUIField.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/valueConstraintsField.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/templateFieldSingleValueContent.json -i examples/fields/value-constrained-field.json
-./scripts/jsvalid.py -s src/main/resources/templateField.json -i examples/fields/value-constrained-field.json
+./scripts/validate-field.sh . value-constrained-field.json
 
 #---------------Single-Field Template (NOTE: Manually removed all _tmp fields)
 
@@ -110,17 +88,7 @@ java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependen
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templatePropertiesField.json examples/templates/single-field-template.json
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/template.json examples/templates/single-field-template.json
 
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaTemplateFields.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templateJSONLDTypeField.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templateJSONLDContextField.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templateUIField.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templateRequiredField.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templatePropertiesField.json -i examples/templates/single-field-template.json
-./scripts/jsvalid.py -s src/main/resources/template.json -i examples/templates/single-field-template.json
+./scripts/validate-field . examples/templates/single-field-template.json
 
 #---------------Multi-Field Template (NOTE: Manually removed all _tmp fields)
 
@@ -136,14 +104,4 @@ java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependen
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templatePropertiesField.json examples/templates/multi-field-template.json
 java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/template.json examples/templates/multi-field-template.json
 
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaFields.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDIDField.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/jsonLDTypeField.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/provenanceFields.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/coreJSONSchemaTemplateFields.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templateJSONLDTypeField.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templateJSONLDContextField.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templateUIField.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templateRequiredField.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/templatePropertiesField.json -i examples/templates/multi-field-template.json
-./scripts/jsvalid.py -s src/main/resources/template.json -i examples/templates/multi-field-template.json
+./scripts/validate-template.sh . examples/templates/multi-field-template.json
