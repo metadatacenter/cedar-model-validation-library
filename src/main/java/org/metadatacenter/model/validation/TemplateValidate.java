@@ -11,34 +11,35 @@ import com.github.fge.jsonschema.core.report.ProcessingReport;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Optional;
 
-public class Validate
+public class TemplateValidate
 {
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
 
   public static void main(String[] args) throws ProcessingException, IOException, URISyntaxException
   {
-    if (args.length != 2)
+    if (args.length != 1)
       Usage();
 
+    File templateFile = new File(args[0]);
+    JsonNode templateNode = MAPPER.readTree(templateFile);
+
     CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
+    Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateNode(templateNode);
 
-    File schemaFile = new File(args[0]);
-    File instanceFile = new File(args[1]);
-    JsonNode schema = MAPPER.readTree(schemaFile);
-    JsonNode instance = MAPPER.readTree(instanceFile);
-
-    ProcessingReport processingReport = cedarModelValidator.validate(schema, instance);
-
-    for (ProcessingMessage processingMessage : processingReport) {
-      processingMessage.setLogLevel(LogLevel.DEBUG);
-      System.out.println("Message: " + processingMessage.getMessage());
-    }
+    if (processingReport.isPresent()) {
+      for (ProcessingMessage processingMessage : processingReport.get()) {
+        processingMessage.setLogLevel(LogLevel.DEBUG);
+        System.out.println("Message: " + processingMessage.getMessage());
+      }
+    } else
+      System.out.println("Template is valid");
   }
 
   private static void Usage()
   {
-    System.err.println("Usage: " + Validate.class.getName() + " <schemaFileName> <instanceFileName>");
+    System.err.println("Usage: " + TemplateValidate.class.getName() + " <templateFileName>");
     System.exit(1);
   }
 }
