@@ -1,5 +1,6 @@
 package org.metadatacenter.model.validation;
 
+import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jackson.JacksonUtils;
@@ -100,7 +101,14 @@ public class CEDARModelValidator
     return Optional.empty();
   }
 
-  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode, String path)
+  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode)
+    throws ProcessingException, IOException, URISyntaxException
+  {
+    JsonPointer path = JsonPointer.compile("/");
+    return validateTemplateElementNode(templateElementNode, path);
+  }
+
+  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode, JsonPointer path)
     throws ProcessingException, IOException, URISyntaxException
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
@@ -127,7 +135,6 @@ public class CEDARModelValidator
       return Optional
         .of(generateProcessingReport("Empty JSON Schema properties field in template element at path " + path));
 
-
     for (int resourceNameIndex = 0;
          resourceNameIndex < TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
@@ -140,7 +147,14 @@ public class CEDARModelValidator
     return Optional.empty();
   }
 
-  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode, String path)
+  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode)
+    throws ProcessingException, IOException, URISyntaxException
+  {
+    JsonPointer path = JsonPointer.compile("/");
+    return validateTemplateFieldNode(templateFieldNode, path);
+  }
+
+  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode, JsonPointer path)
     throws ProcessingException, IOException, URISyntaxException
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {

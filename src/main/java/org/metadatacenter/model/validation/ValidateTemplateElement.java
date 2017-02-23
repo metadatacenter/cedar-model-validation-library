@@ -27,8 +27,7 @@ public class ValidateTemplateElement
 
     CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
 
-    //TODO: add real value for path argument. Maybe args[0]?
-    Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateElementNode(templateElementNode, null);
+    Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateElementNode(templateElementNode);
 
     if (processingReport.isPresent()) {
       for (ProcessingMessage processingMessage : processingReport.get()) {
