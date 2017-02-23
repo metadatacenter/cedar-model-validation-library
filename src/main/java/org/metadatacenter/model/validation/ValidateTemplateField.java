@@ -26,7 +26,8 @@ public class ValidateTemplateField
     JsonNode templateFieldNode = MAPPER.readTree(templateFieldFile);
 
     CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
-    Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateFieldNode(templateFieldNode);
+    //TODO: add real value for path argument. Maybe args[0]?
+    Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateFieldNode(templateFieldNode, null);
 
     if (processingReport.isPresent()) {
       for (ProcessingMessage processingMessage : processingReport.get()) {
