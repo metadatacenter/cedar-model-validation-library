@@ -98,6 +98,56 @@ public class CEDARModelValidator
     return Optional.empty();
   }
 
+  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode)
+    throws ProcessingException, IOException, URISyntaxException
+  {
+    for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
+      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateElementNode);
+
+      if (!report.isSuccess())
+        return Optional.of(report);
+    }
+
+    for (int resourceNameIndex = 0;
+         resourceNameIndex < TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
+      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateElementNode);
+
+      if (!report.isSuccess())
+        return Optional.of(report);
+    }
+
+    return Optional.empty();
+  }
+
+  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode)
+    throws ProcessingException, IOException, URISyntaxException
+  {
+    for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
+      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateFieldNode);
+
+      if (!report.isSuccess())
+        return Optional.of(report);
+    }
+
+    for (int resourceNameIndex = 0;
+         resourceNameIndex < TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
+      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateFieldNode);
+
+      if (!report.isSuccess())
+        return Optional.of(report);
+    }
+
+    return Optional.empty();
+  }
+
   /**
    * Validate a JSON node against a JSON Schema node
    *

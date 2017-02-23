@@ -1,4 +1,32 @@
-A Java-based validator to validate JSON Schema-encoded CEDAR model artifacts.
+
+Provides a Java-based CEDAR artifact validation library to validate JSON Schema-encoded CEDAR model artifacts.
+
+Also provides command line Java- and Python-based validators 
+
+### Example Java-Based Validation
+
+Running from base of this repo:
+
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/empty-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/single-field-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/multi-field-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="examples/elements/empty-element.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="examples/elements/multi-field-element.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="examples/fields/basic-text-field.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="examples/fields/value-constrained-field.json"
+
+### Example Python-Based Validation
+
+Running from base of this repo:
+
+    ./scripts/validate-template.sh . examples/templates/empty-template.json
+    ./scripts/validate-template.sh . examples/templates/multi-field-template.json
+    ./scripts/validate-element.sh . examples/elements/empty-element.json
+    ./scripts/validate-element.sh . examples/elements/multi-field-element.json
+    ./scripts/validate-field.sh . examples/fields/basic-text-field.json
+    ./scripts/validate-field.sh . examples/fields/value-constrained-field.json
+
+### Configuring
 
 The <tt>schema</tt> directory contains a collection of JSON Schema specifications for individual CEDAR model artifacts, 
 which collectively form the CEDAR Template Validation Schema. 
@@ -8,7 +36,7 @@ themselves encoded as JSON Schema).
 Incremental validation is desirable because JSON Schema artifact validation using top level schema can produce imprecise
 validation errors. 
 
-For example, to run the Java-based validator in this library to validate provenance fields in an example template:
+For example, to run the Java-based JSON Schema validator in this library to validate provenance fields in an example template:
 
     java -jar ./target/cedar-model-validation-library-1.0.0-jar-with-dependencies.jar \
       ./src/main/resources/provenanceFields.json \
@@ -30,6 +58,8 @@ A script called <tt>gensubschema.sh</tt> can be used to generate all needed sub-
     ./scripts/gensubschema.sh ~/workspace/cedar/server/cedar-model-validation-library/scripts \
       ~/workspace/cedar/server/cedar-model-validation-library/schema \
       ~/workspace/cedar/server/cedar-model-validation-library/src/main/resources
+
+We can put these generated files into the Java resources directory so that that are packaged with the Java-based validation library.
 
 The <tt>examples</tt> directory contains example templates, elements, and instances.
 

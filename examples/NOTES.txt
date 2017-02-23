@@ -1,107 +1,42 @@
 #---------------Empty Template Validation (NOTE: Manually corrected UI field to have order"
 
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaTemplateFields.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateJSONLDTypeField.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateJSONLDContextField.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateUIField.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateRequiredField.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templatePropertiesField.json examples/templates/empty-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/template.json examples/templates/empty-template.json
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/empty-template.json"
 
 ./scripts/validate-template.sh . examples/templates/empty-template.json
 
 #---------------------Empty Element Validation (NOTE: Manually corrected element to have full @context)
 
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaTemplateElementFields.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementJSONLDTypeField.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementJSONLDContextField.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementPropertiesField.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementUIField.json examples/elements/empty-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElement.json examples/elements/empty-element.json
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="examples/elements/empty-element.json"
 
 ./scripts/validate-element.sh . examples/templates/empty-element.json
 
 #---------------------Multi-Field Element Validation (NOTE: Manually corrected element to have full @context, removed _tmp fields)
 
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/elements/multi-field-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/elements/multi-field-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/elements/multi-field-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/elements/multi-field-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaTemplateElementFields.json examples/elements/multi-field-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementJSONLDTypeField.json examples/elements/multi-field-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementJSONLDContextField.json examples/elements/multi-field-element.json
-*java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementPropertiesField.json examples/elements/multi-field-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElementUIField.json examples/elements/multi-field-element.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateElement.json examples/elements/multi-field-element.json
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="examples/elements/multi-field-element.json"
 
 ./scripts/validate-element.sh . examples/templates/multi-field-element.json
 
 #----------------Basic Text Field Validation
 
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldJSONLDContextField.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldJSONLDTypeField.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldUIField.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/valueConstraintsField.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldSingleValueContent.json examples/fields/basic-text-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateField.json examples/fields/basic-text-field.json
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="examples/fields/basic-text-field.json"
 
 ./scripts/validate-field.sh examples/fields/basic-text-field.json
 
 #---------------Field with value constraint (NOTE: Manually removed all _tmp fields)
 
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldJSONLDContextField.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldJSONLDTypeField.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldUIField.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/valueConstraintsField.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateFieldSingleValueContent.json examples/fields/value-constrained-field.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateField.json examples/fields/value-constrained-field.json
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="examples/fields/value-constrained-field.json"
 
 ./scripts/validate-field.sh . value-constrained-field.json
 
 #---------------Single-Field Template (NOTE: Manually removed all _tmp fields)
 
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaTemplateFields.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateJSONLDTypeField.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateJSONLDContextField.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateUIField.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateRequiredField.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templatePropertiesField.json examples/templates/single-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/template.json examples/templates/single-field-template.json
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/single-field-template.json"
 
 ./scripts/validate-field . examples/templates/single-field-template.json
 
 #---------------Multi-Field Template (NOTE: Manually removed all _tmp fields)
 
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaFields.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDIDField.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/jsonLDTypeField.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/provenanceFields.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/coreJSONSchemaTemplateFields.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateJSONLDTypeField.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateJSONLDContextField.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateUIField.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templateRequiredField.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/templatePropertiesField.json examples/templates/multi-field-template.json
-java -jar target/cedar-model-validation-library-0.9.4-SNAPSHOT-jar-with-dependencies.jar src/main/resources/template.json examples/templates/multi-field-template.json
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/multi-field-template.json"
 
 ./scripts/validate-template.sh . examples/templates/multi-field-template.json
+

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-public class TemplateValidate
+public class ValidateTemplate
 {
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
 
@@ -39,7 +39,7 @@ public class TemplateValidate
 
   private static void Usage()
   {
-    System.err.println("Usage: " + TemplateValidate.class.getName() + " <templateFileName>");
+    System.err.println("Usage: " + ValidateTemplate.class.getName() + " <templateFileName>");
     System.exit(1);
   }
 }
