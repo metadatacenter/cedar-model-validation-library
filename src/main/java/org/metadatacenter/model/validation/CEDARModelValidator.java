@@ -3,6 +3,7 @@ package org.metadatacenter.model.validation;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import com.github.fge.jsonschema.core.report.ConsoleProcessingReport;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.Optional;
 
 public class CEDARModelValidator
@@ -24,6 +26,13 @@ public class CEDARModelValidator
   private final JsonValidator jsonSchemaValidator;
 
   private static final String JSON_SCHEMA_PROPERTIES_FIELD_NAME = "properties";
+
+  private static final String JSON_LD_TYPE_FIELD_NAME = "@type";
+  private static final String JSON_LD_ID_FIELD_NAME = "@id";
+
+  private static final String CEDAR_TEMPLATE_TYPE_URI = "https://schema.metadatacenter.org/core/Template";
+  private static final String CEDAR_TEMPLATE_ELEMENT_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateElement";
+  private static final String CEDAR_TEMPLATE_FIELD_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateField";
 
   private static final String CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaFields.json";
   private static final String JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME = "jsonLDIDField.json";
@@ -108,7 +117,7 @@ public class CEDARModelValidator
     return validateTemplateElementNode(templateElementNode, path);
   }
 
-  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode, JsonPointer path)
+  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode, JsonPointer basePath)
     throws ProcessingException, IOException, URISyntaxException
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
@@ -121,19 +130,59 @@ public class CEDARModelValidator
 
     // TODO Loop through properties.* and find template fields or elements and validate
 
-    JsonNode propertiesNode = templateElementNode.get(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
+    JsonNode jsonSchemaPropertiesNode = templateElementNode.get(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
 
-    if (propertiesNode == null)
-      return Optional
-        .of(generateProcessingReport("No JSON Schema properties field in template element at path " + path));
+    if (jsonSchemaPropertiesNode == null)
+      return Optional.of(generateProcessingReport("No JSON Schema properties field in artifact at path " + basePath));
 
-    if (propertiesNode.isObject())
+    if (jsonSchemaPropertiesNode.isObject())
       return Optional
-        .of(generateProcessingReport("Non-object JSON Schema properties field in template element at path " + path));
+        .of(generateProcessingReport("Non-object JSON Schema properties field in artifact at path " + basePath));
 
-    if (propertiesNode.fieldNames().hasNext())
+    if (jsonSchemaPropertiesNode.fieldNames().hasNext())
       return Optional
-        .of(generateProcessingReport("Empty JSON Schema properties field in template element at path " + path));
+        .of(generateProcessingReport("Empty JSON Schema properties field in artifact at path " + basePath));
+
+    Iterator<String> fieldNames = jsonSchemaPropertiesNode.fieldNames();
+    while (fieldNames.hasNext()) {
+      String fieldName = fieldNames.next();
+      JsonPointer tailPath = JsonPointer.compile(fieldName + "properties/");
+      JsonPointer currentPath = basePath.append(tailPath);
+
+      JsonNode childNode = jsonSchemaPropertiesNode.get(fieldName);
+      if (childNode.isObject()) {
+
+        ObjectNode propertyValueNode = (ObjectNode)childNode;
+        if (propertyValueNode.has(JSON_LD_TYPE_FIELD_NAME)) {
+          JsonNode jsonLDTypeFieldValueNode = propertyValueNode.get(JSON_LD_TYPE_FIELD_NAME);
+          if (jsonLDTypeFieldValueNode == null)
+            return Optional
+              .of(generateProcessingReport("Null value for JSON-LD @type field in artifact at path " + currentPath));
+
+          if (!jsonLDTypeFieldValueNode.isTextual())
+            return Optional.of(
+              generateProcessingReport("Non textual value for JSON-LD @type field in artifact at path " + currentPath));
+
+          String jsonLDArtifactType = jsonLDTypeFieldValueNode.asText();
+
+          if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_TYPE_URI)) {
+            return Optional
+              .of(generateProcessingReport("Not expecting nested template in artifact at path " + currentPath));
+          } else if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_ELEMENT_TYPE_URI)) {
+          } else if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_FIELD_TYPE_URI)) {
+            // TODO
+          } else
+            return Optional.of(generateProcessingReport(
+              "Unexpected nested artifact type " + jsonLDArtifactType + " in artifact at path " + currentPath));
+        }
+      } else if (childNode.isArray()) {
+        // TODO
+        return Optional.of(generateProcessingReport(
+          "Do not yet handle arrays in JSON Schema properties field; artifact at path " + currentPath));
+      } else
+        return Optional.of(generateProcessingReport(
+          "Non object or array value for JSON Schema properties field in artifact at path " + currentPath));
+    }
 
     for (int resourceNameIndex = 0;
          resourceNameIndex < TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
