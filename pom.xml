@@ -4,12 +4,12 @@
  <parent>
     <groupId>org.metadatacenter</groupId>
     <artifactId>cedar-parent</artifactId>
-    <version>0.9.3</version>
+    <version>0.9.4</version>
   </parent>
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>0.9.3</version>
+  <version>0.9.4</version>
   <name>CEDAR Model Validation Library</name>
   <description>Library for validating CEDAR artifacts</description>
 
@@ -17,7 +17,7 @@
     <connection>scm:git:git@github.com:metadatacenter/cedar-model-validation-library.git</connection>
     <developerConnection>scm:git:git@github.com:metadatacenter/cedar-model-validation-library.git</developerConnection>
     <url>https://github.com/metadatacenter/cedar-model-validation-library</url>
-    <tag>release-0.9.3</tag>
+    <tag>release-0.9.4</tag>
   </scm>
 
   <dependencies>
@@ -36,11 +36,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <configuration>
-          <archive>
-            <manifest>
-              <mainClass>org.metadatacenter.model.validation.Validate</mainClass>
-            </manifest>
-          </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
@@ -66,9 +61,6 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <mainClass>org.metadatacenter.model.validation.Validate</mainClass>
-        </configuration>
       </plugin>
 
     </plugins>

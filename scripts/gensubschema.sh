@@ -20,9 +20,18 @@ output_dir=$3
 echo "Generating sub-schema into directory" ${output_dir} "..."
 
 cd ${schema_dir}
+${scripts_dir}/schemawrap.sh ${output_dir}/coreJSONSchemaFields.json coreJSONSchemaFields
+${scripts_dir}/schemawrap.sh ${output_dir}/jsonLDTypeField.json jsonLDTypeField
 ${scripts_dir}/schemawrap.sh ${output_dir}/jsonLDIDField.json jsonLDIDField
 ${scripts_dir}/schemawrap.sh ${output_dir}/provenanceFields.json provenanceFields
-${scripts_dir}/schemawrap.sh ${output_dir}/coreJSONSchemaFields.json coreJSONSchemaFields
+
+${scripts_dir}/schemawrap.sh ${output_dir}/coreJSONSchemaTemplateFields.json coreJSONSchemaTemplateFields
+${scripts_dir}/schemawrap.sh ${output_dir}/templateJSONLDTypeField.json templateJSONLDTypeField
+${scripts_dir}/schemawrap.sh ${output_dir}/templateJSONLDContextField.json templateJSONLDContextField
+${scripts_dir}/schemawrap.sh ${output_dir}/templatePropertiesField.json templatePropertiesField
+${scripts_dir}/schemawrap.sh ${output_dir}/templateRequiredField.json templateRequiredField
+${scripts_dir}/schemawrap.sh ${output_dir}/templateUIField.json templateUIField
+
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldJSONLDContextField.json templateFieldJSONLDContextField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldJSONLDTypeField.json templateFieldJSONLDTypeField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldUIField.json templateFieldUIField
@@ -33,11 +42,6 @@ ${scripts_dir}/schemawrap.sh ${output_dir}/templateElementJSONLDContextField.jso
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateElementJSONLDTypeField.json templateElementJSONLDTypeField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateElementUIField.json templateElementUIField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateElementPropertiesField.json templateElementPropertiesField
-${scripts_dir}/schemawrap.sh ${output_dir}/coreJSONSchemaTemplateFields.json coreJSONSchemaTemplateFields
-${scripts_dir}/schemawrap.sh ${output_dir}/templateJSONLDContextField.json templateJSONLDContextField
-${scripts_dir}/schemawrap.sh ${output_dir}/templateJSONLDTypeField.json templateJSONLDTypeField
-${scripts_dir}/schemawrap.sh ${output_dir}/templatePropertiesField.json templatePropertiesField
-${scripts_dir}/schemawrap.sh ${output_dir}/templateRequiredField.json templateRequiredField
 ${scripts_dir}/schemawrap.sh ${output_dir}/template.json template
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateElement.json templateElement
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateField.json templateField

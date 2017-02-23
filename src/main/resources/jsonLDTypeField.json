@@ -1037,10 +1037,10 @@
      "additionalProperties": false
     }
   },
-     "description": "A schema that describes a '_valueConstraints' field in a template field",
+     "description": "A schema that describes a JSON-LD '@type' field",
      "type": "object",
      "properties": {
-     "_valueConstraints": { "$ref": "#/definitions/valueConstraintsFieldContent" }
+     "@type": { "type": "string", "format": "uri" }
      },
-     "required": [ "_valueConstraints" ]
+     "required": [ "@type" ]
 }

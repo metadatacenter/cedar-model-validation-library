@@ -1037,10 +1037,10 @@
      "additionalProperties": false
     }
   },
-     "description": "A schema that describes a '_valueConstraints' field in a template field",
+     "description": "A schema that describes a '_ui' field in a template",
      "type": "object",
      "properties": {
-     "_valueConstraints": { "$ref": "#/definitions/valueConstraintsFieldContent" }
+     "_ui": { "$ref": "#/definitions/templateUIFieldContent" }
      },
-     "required": [ "_valueConstraints" ]
+     "required": [ "_ui" ]
 }

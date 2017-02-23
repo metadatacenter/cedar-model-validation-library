@@ -7,17 +7,13 @@ branches:
   only:
   - develop
   - master
-cache:
-  directories:
-  - $HOME/.m2
 notifications:
   email:
     recipients:
     - cedar-core-developers@lists.stanford.edu
     on_success: never
     on_failure: always
-install: '[ ${TRAVIS_PULL_REQUEST} = ''false'' ] && mvn -DskipTests=true clean deploy
-  --settings .m2/travis-settings.xml'
+install: '[ ${TRAVIS_PULL_REQUEST} = ''false'' ] && mvn -DskipTests=true clean deploy --settings .m2/travis-settings.xml'
 env:
   global:
   - secure: nhtPy9rrYr9+KWM7ceFhG7ZngpA/KJHL5KSdUugrUVF3aivXsqzpDSNmZENpPcyGh0lxKN6zc5FdnHuissAqjv9GcP86Nl0DY6IG+UcSL88VL4SUFs2WGxctNgpj8Wt1u4OI5Op/8xJ96R3dgEhtnTRgGxc/2i/kdknfOomnpAqec2FKSeCwPOJ1gqW9mNJn/xiy+iavJHkPpxepNr6uen1MvS5mn2vrWKYkkdfLeo4UF9TaoFRKb2xJJBizOxxuVFl1uZtHcICfZQpySF3BE84RUurJxyIaTWlArfhD5vyHGeaipmggTQQpOhCNNzLvNIltcsMKxXvj6GYF+2cT5pfgoSzS9bco7Rz9XcVs++s/DkrAiMHmGQsG9TsrbfYpaQwgV5n9vwhrKsIzQY01Un+3B7/yRTSqkbS3lrzjVFDh6DNvnBtSgBaa+BUG4J7N/qjO50CdGkpXrVkwBq8flHfIQjMH5J8q7Q2xs4WNR411pXVfRf04Lv3E3OnCxcLG2oPvCjUDUn4Hhl3DlsiSZYvHqykMxIl6yDx3mvaz1Yxziml+MxgbKfJRXpCEBF2e8U5x2dRxiUPNT4G4e47RMj1NStEiUgUwJzuJLX76oofZX9l9Va7JiqMilZas5c8QkvGRAH9KIL10mo4rSogyausgBwFcyjE2ahdVr5h/h/s=

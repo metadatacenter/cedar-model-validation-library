@@ -1,0 +1,42 @@
+#---------------Empty Template Validation (NOTE: Manually corrected UI field to have order"
+
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/empty-template.json"
+
+./scripts/validate-template.sh . examples/templates/empty-template.json
+
+#---------------------Empty Element Validation (NOTE: Manually corrected element to have full @context)
+
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="examples/elements/empty-element.json"
+
+./scripts/validate-element.sh . examples/templates/empty-element.json
+
+#---------------------Multi-Field Element Validation (NOTE: Manually corrected element to have full @context, removed _tmp fields)
+
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="examples/elements/multi-field-element.json"
+
+./scripts/validate-element.sh . examples/templates/multi-field-element.json
+
+#----------------Basic Text Field Validation
+
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="examples/fields/basic-text-field.json"
+
+./scripts/validate-field.sh examples/fields/basic-text-field.json
+
+#---------------Field with value constraint (NOTE: Manually removed all _tmp fields)
+
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="examples/fields/value-constrained-field.json"
+
+./scripts/validate-field.sh . value-constrained-field.json
+
+#---------------Single-Field Template (NOTE: Manually removed all _tmp fields)
+
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/single-field-template.json"
+
+./scripts/validate-field . examples/templates/single-field-template.json
+
+#---------------Multi-Field Template (NOTE: Manually removed all _tmp fields)
+
+mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/multi-field-template.json"
+
+./scripts/validate-template.sh . examples/templates/multi-field-template.json
+
