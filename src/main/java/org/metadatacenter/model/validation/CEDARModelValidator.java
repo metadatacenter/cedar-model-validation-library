@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
+import com.github.fge.jsonschema.core.report.ConsoleProcessingReport;
+import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
@@ -19,6 +21,8 @@ public class CEDARModelValidator
 {
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
   private final JsonValidator jsonSchemaValidator;
+
+  private static final String JSON_SCHEMA_PROPERTIES_FIELD_NAME = "properties";
 
   private static final String CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaFields.json";
   private static final String JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME = "jsonLDIDField.json";
@@ -79,8 +83,7 @@ public class CEDARModelValidator
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
-      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateNode);
+      ProcessingReport report = validateArtifact(resourceName, templateNode);
 
       if (!report.isSuccess())
         return Optional.of(report);
@@ -88,8 +91,7 @@ public class CEDARModelValidator
 
     for (int resourceNameIndex = 0; resourceNameIndex < TEMPLATE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
-      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateNode);
+      ProcessingReport report = validateArtifact(resourceName, templateNode);
 
       if (!report.isSuccess())
         return Optional.of(report);
@@ -98,23 +100,38 @@ public class CEDARModelValidator
     return Optional.empty();
   }
 
-  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode)
+  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode, String path)
     throws ProcessingException, IOException, URISyntaxException
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
-      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateElementNode);
+      ProcessingReport report = validateArtifact(resourceName, templateElementNode);
 
       if (!report.isSuccess())
         return Optional.of(report);
     }
+
+    // TODO Loop through properties.* and find template fields or elements and validate
+
+    JsonNode propertiesNode = templateElementNode.get(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
+
+    if (propertiesNode == null)
+      return Optional
+        .of(generateProcessingReport("No JSON Schema properties field in template element at path " + path));
+
+    if (propertiesNode.isObject())
+      return Optional
+        .of(generateProcessingReport("Non-object JSON Schema properties field in template element at path " + path));
+
+    if (propertiesNode.fieldNames().hasNext())
+      return Optional
+        .of(generateProcessingReport("Empty JSON Schema properties field in template element at path " + path));
+
 
     for (int resourceNameIndex = 0;
          resourceNameIndex < TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
-      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateElementNode);
+      ProcessingReport report = validateArtifact(resourceName, templateElementNode);
 
       if (!report.isSuccess())
         return Optional.of(report);
@@ -123,13 +140,12 @@ public class CEDARModelValidator
     return Optional.empty();
   }
 
-  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode)
+  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode, String path)
     throws ProcessingException, IOException, URISyntaxException
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
-      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateFieldNode);
+      ProcessingReport report = validateArtifact(resourceName, templateFieldNode);
 
       if (!report.isSuccess())
         return Optional.of(report);
@@ -138,8 +154,7 @@ public class CEDARModelValidator
     for (int resourceNameIndex = 0;
          resourceNameIndex < TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      JsonNode jsonSchemaNode = loadJsonNodeFromResource(resourceName);
-      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, templateFieldNode);
+      ProcessingReport report = validateArtifact(resourceName, templateFieldNode);
 
       if (!report.isSuccess())
         return Optional.of(report);
@@ -165,6 +180,31 @@ public class CEDARModelValidator
     ProcessingReport processingReport = schema.validate(instanceNode, false);
 
     return processingReport;
+  }
+
+  /**
+   * Validate a JSON node against a JSON Schema specification loaded from a resource
+   *
+   * @param schemaResourceName The name of a resource containing a JSON Schema document
+   * @param instanceNode       The instance to validate against the schema
+   * @return A processing report
+   * @throws ProcessingException If a processing exception occurs during processing
+   * @throws IOException         If an IO exception occurs during processing
+   * @throws URISyntaxException  If a URI syntax exception occurs during processing
+   */
+  private ProcessingReport validateArtifact(String schemaResourceName, JsonNode instanceNode)
+    throws ProcessingException, IOException, URISyntaxException
+  {
+    JsonNode jsonSchemaNode = loadJsonNodeFromResource(schemaResourceName);
+    ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, instanceNode);
+
+    if (!report.isSuccess()) {
+      ProcessingMessage processingMessage = new ProcessingMessage();
+      processingMessage.setMessage("Error validating artifact against CEDAR sub-schema " + schemaResourceName);
+      report.error(processingMessage);
+    }
+
+    return report;
   }
 
   /**
@@ -202,5 +242,18 @@ public class CEDARModelValidator
     URL resource = classLoader.getResource(resourceName);
 
     return MAPPER.readTree(resource);
+  }
+
+  private ProcessingReport generateProcessingReport(String message) throws ProcessingException
+  {
+    ProcessingReport report = new ConsoleProcessingReport();
+
+    if (!report.isSuccess()) {
+      ProcessingMessage processingMessage = new ProcessingMessage();
+      processingMessage.setMessage(message);
+      report.error(processingMessage);
+    }
+
+    return report;
   }
 }
