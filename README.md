@@ -1,30 +1,35 @@
 
-Provides a Java-based CEDAR artifact validation library to validate JSON Schema-encoded CEDAR model artifacts.
+Provides a Java-based CEDAR library to validate JSON Schema-encoded CEDAR model artifacts.
 
 Also provides command line Java- and Python-based validators 
 
+### Java Validation Library
+
+The library provides a class called <tt>org.metadatacenter.model.validation.CEDARModelValidator</tt> that contains
+methods to validate CEDAR templates, elements, and fields. 
+
 ### Example Java-Based Validation
 
-Running from base of this repo:
+Running validation on example artifacts from base of this repo:
 
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/empty-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/single-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="examples/templates/multi-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="examples/elements/empty-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="examples/elements/multi-field-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="examples/fields/basic-text-field.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="examples/fields/value-constrained-field.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="./examples/templates/empty-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="./examples/templates/single-field-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="./examples/templates/multi-field-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="./examples/elements/empty-element.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="./examples/elements/multi-field-element.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="./examples/fields/basic-text-field.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="./examples/fields/value-constrained-field.json"
 
 ### Example Python-Based Validation
 
-Running from base of this repo:
+Running validation on example artifacts from base of this repo:
 
-    ./scripts/validate-template.sh . examples/templates/empty-template.json
-    ./scripts/validate-template.sh . examples/templates/multi-field-template.json
-    ./scripts/validate-element.sh . examples/elements/empty-element.json
-    ./scripts/validate-element.sh . examples/elements/multi-field-element.json
-    ./scripts/validate-field.sh . examples/fields/basic-text-field.json
-    ./scripts/validate-field.sh . examples/fields/value-constrained-field.json
+    ./scripts/validate-template.sh . ./examples/templates/empty-template.json
+    ./scripts/validate-template.sh . ./examples/templates/multi-field-template.json
+    ./scripts/validate-element.sh . ./examples/elements/empty-element.json
+    ./scripts/validate-element.sh . ./examples/elements/multi-field-element.json
+    ./scripts/validate-field.sh . ./examples/fields/basic-text-field.json
+    ./scripts/validate-field.sh . ./examples/fields/value-constrained-field.json
 
 ### Configuring
 
@@ -38,9 +43,8 @@ validation errors.
 
 For example, to run the Java-based JSON Schema validator in this library to validate provenance fields in an example template:
 
-    java -jar ./target/cedar-model-validation-library-1.0.0-jar-with-dependencies.jar \
-      ./src/main/resources/provenanceFields.json \
-      ./examples/templates/empty-template.json
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.JSONSchemaValidate" \
+      -Dexec.args="./src/main/resources/provenanceFields.json ./examples/templates/empty-template.json"
 
 The individual JSON Schema files in the </tt>schema</tt> directory can be assembled into
 standalone self-contained schema files using the <tt>schemawrap.sh</tt> script in the <tt>scripts</tt> directory.
