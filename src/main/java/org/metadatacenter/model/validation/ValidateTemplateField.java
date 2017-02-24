@@ -22,19 +22,29 @@ public class ValidateTemplateField
     if (args.length != 1)
       Usage();
 
-    File templateFieldFile = new File(args[0]);
-    JsonNode templateFieldNode = MAPPER.readTree(templateFieldFile);
+    try {
+      File templateFieldFile = new File(args[0]);
+      JsonNode templateFieldNode = MAPPER.readTree(templateFieldFile);
 
-    CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
-    Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateFieldNode(templateFieldNode);
+      CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
+      Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateFieldNode(templateFieldNode);
 
-    if (processingReport.isPresent()) {
-      for (ProcessingMessage processingMessage : processingReport.get()) {
-        processingMessage.setLogLevel(LogLevel.DEBUG);
-        System.out.println("Message: " + processingMessage.getMessage());
-      }
-    } else
-      System.out.println("Template field is valid");
+      if (processingReport.isPresent()) {
+        for (ProcessingMessage processingMessage : processingReport.get()) {
+          processingMessage.setLogLevel(LogLevel.DEBUG);
+          System.out.println("Message: " + processingMessage.getMessage());
+        }
+      } else
+        System.out.println("Template field is valid");
+    } catch (ProcessingException e) {
+      System.err.println("Processing exception: " + e.getMessage());
+    } catch (IOException e) {
+      System.err.println("IO exception: " + e.getMessage());
+    } catch (URISyntaxException e) {
+      System.err.println("URI syntax exception: " + e.getMessage());
+    } catch (IllegalArgumentException e) {
+      System.err.println("Illegal argument exception: " + e.getMessage());
+    }
   }
 
   private static void Usage()

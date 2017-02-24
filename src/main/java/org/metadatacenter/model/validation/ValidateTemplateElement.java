@@ -17,25 +17,36 @@ public class ValidateTemplateElement
 {
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
 
-  public static void main(String[] args) throws ProcessingException, IOException, URISyntaxException
+  public static void main(String[] args)
   {
     if (args.length != 1)
       Usage();
 
-    File templateElementFile = new File(args[0]);
-    JsonNode templateElementNode = MAPPER.readTree(templateElementFile);
+    try {
+      File templateElementFile = new File(args[0]);
+      JsonNode templateElementNode = MAPPER.readTree(templateElementFile);
 
-    CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
+      CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
 
-    Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateElementNode(templateElementNode);
+      Optional<ProcessingReport> processingReport = cedarModelValidator
+        .validateTemplateElementNode(templateElementNode);
 
-    if (processingReport.isPresent()) {
-      for (ProcessingMessage processingMessage : processingReport.get()) {
-        processingMessage.setLogLevel(LogLevel.DEBUG);
-        System.out.println("Message: " + processingMessage.getMessage());
-      }
-    } else
-      System.out.println("Template element is valid");
+      if (processingReport.isPresent()) {
+        for (ProcessingMessage processingMessage : processingReport.get()) {
+          processingMessage.setLogLevel(LogLevel.DEBUG);
+          System.out.println("Message: " + processingMessage.getMessage());
+        }
+      } else
+        System.out.println("Template element is valid");
+    } catch (ProcessingException e) {
+      System.err.println("Processing exception: " + e.getMessage());
+    } catch (IOException e) {
+      System.err.println("IO exception: " + e.getMessage());
+    } catch (URISyntaxException e) {
+      System.err.println("URI syntax exception: " + e.getMessage());
+    } catch (IllegalArgumentException e) {
+      System.err.println("Illegal argument exception: " + e.getMessage());
+    }
   }
 
   private static void Usage()
