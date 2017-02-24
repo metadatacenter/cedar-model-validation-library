@@ -204,9 +204,25 @@ public class CEDARModelValidator
         if (report.isPresent())
           return report;
       } else if (childNode.isArray()) {
-        // TODO Need to update current path with index of each item in array
-        return Optional.of(generateProcessingReport(
-          "Do not yet handle arrays in JSON Schema properties field; artifact at path " + currentPath));
+        int arrayIndex = 0;
+        for (JsonNode arrayNode : childNode) {
+          JsonPointer arrayPath = currentPath.append(JsonPointer.compile("[" + arrayIndex + "]"));
+          if (!arrayNode.isObject()) {
+            return Optional.of(generateProcessingReport(
+              "Non object value in array for JSON Schema properties field artifact at path " + arrayPath));
+          } else if (arrayNode.isNull()) {
+            return Optional.of(generateProcessingReport(
+              "Null value in array for JSON Schema properties field artifact at path " + arrayPath));
+          } else {
+            ObjectNode jsonSchemaPropertiesValueNode = (ObjectNode)arrayNode;
+            Optional<ProcessingReport> report = validateJSONSchemaPropertiesValueNode(jsonSchemaPropertiesValueNode,
+              arrayPath);
+
+            if (report.isPresent())
+              return report;
+          }
+          arrayIndex++;
+        }
       } else
         return Optional.of(generateProcessingReport(
           "Non object or array value for JSON Schema properties field in artifact at path " + currentPath));
@@ -257,7 +273,6 @@ public class CEDARModelValidator
     return validateTemplateFieldNode(templateFieldNode, path);
   }
 
-
   /**
    * Validate a JSON node against a JSON Schema node
    *
@@ -268,6 +283,7 @@ public class CEDARModelValidator
    * @throws IOException         If an IO exception occurs during processing
    * @throws URISyntaxException  If a URI syntax exception occurs during processing
    */
+
   public ProcessingReport jsonSchemaValidate(JsonNode schemaNode, JsonNode instanceNode)
     throws ProcessingException, IOException, URISyntaxException
   {
