@@ -89,7 +89,6 @@ public class CEDARModelValidator
   }
 
   public Optional<ProcessingReport> validateTemplateNode(JsonNode templateNode)
-    throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
   {
     JsonPointer path = JsonPointer.compile("/");
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
@@ -117,14 +116,12 @@ public class CEDARModelValidator
   }
 
   public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode)
-    throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
   {
     JsonPointer path = JsonPointer.compile("/");
     return validateTemplateElementNode(templateElementNode, path);
   }
 
   public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode, JsonPointer basePath)
-    throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
@@ -151,8 +148,29 @@ public class CEDARModelValidator
     return Optional.empty();
   }
 
+  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode, JsonPointer path)
+  {
+    for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, path);
+
+      if (report.isPresent())
+        return report;
+    }
+
+    for (int resourceNameIndex = 0;
+         resourceNameIndex < TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, path);
+
+      if (report.isPresent())
+        return report;
+    }
+
+    return Optional.empty();
+  }
+
   private Optional<ProcessingReport> validateJSONSchemaPropertiesNode(JsonNode artifactNode, JsonPointer basePath)
-    throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
   {
     JsonNode jsonSchemaPropertiesNode = artifactNode.get(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
 
@@ -186,7 +204,7 @@ public class CEDARModelValidator
         if (report.isPresent())
           return report;
       } else if (childNode.isArray()) {
-        // TODO noon to update current path with index of each item in array
+        // TODO Need to update current path with index of each item in array
         return Optional.of(generateProcessingReport(
           "Do not yet handle arrays in JSON Schema properties field; artifact at path " + currentPath));
       } else
@@ -197,7 +215,7 @@ public class CEDARModelValidator
   }
 
   private Optional<ProcessingReport> validateJSONSchemaPropertiesValueNode(ObjectNode jsonSchemaPropertiesValueNode,
-    JsonPointer currentPath) throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
+    JsonPointer currentPath)
   {
     // JSON Schema validation handles other property fields, such as provenance fields and the like.
     if (jsonSchemaPropertiesValueNode.has(JSON_LD_TYPE_FIELD_NAME)) {
@@ -239,28 +257,6 @@ public class CEDARModelValidator
     return validateTemplateFieldNode(templateFieldNode, path);
   }
 
-  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode, JsonPointer path)
-    throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
-  {
-    for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
-      String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, path);
-
-      if (report.isPresent())
-        return report;
-    }
-
-    for (int resourceNameIndex = 0;
-         resourceNameIndex < TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
-      String resourceName = TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, path);
-
-      if (report.isPresent())
-        return report;
-    }
-
-    return Optional.empty();
-  }
 
   /**
    * Validate a JSON node against a JSON Schema node
@@ -292,19 +288,22 @@ public class CEDARModelValidator
    * @throws URISyntaxException  If a URI syntax exception occurs during processing
    */
   private Optional<ProcessingReport> validateArtifact(String schemaResourceName, JsonNode instanceNode,
-    JsonPointer path) throws ProcessingException, IOException, URISyntaxException
+    JsonPointer path)
   {
-    JsonNode jsonSchemaNode = loadJsonNodeFromResource(schemaResourceName);
-    ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, instanceNode);
+    try {
+      JsonNode jsonSchemaNode = loadJsonNodeFromResource(schemaResourceName);
+      ProcessingReport report = jsonSchemaValidate(jsonSchemaNode, instanceNode);
 
-    if (!report.isSuccess()) {
-      ProcessingMessage processingMessage = new ProcessingMessage();
-      processingMessage.setMessage(
-        "Error validating artifact at path " + path.toString() + " against CEDAR sub-schema " + schemaResourceName);
-      report.error(processingMessage);
-      return Optional.of(report);
-    } else
-      return Optional.empty();
+      if (!report.isSuccess()) {
+        ProcessingMessage processingMessage = createProcessingMessage(
+          "Error validating artifact at path " + path.toString() + " against CEDAR sub-schema " + schemaResourceName);
+        report.error(processingMessage);
+        return Optional.of(report);
+      } else
+        return Optional.empty();
+    } catch (ProcessingException | URISyntaxException | IOException e) {
+      return Optional.of(generateProcessingReport("internal error at path " + path.toString() + ":" + e.getMessage()));
+    }
   }
 
   /**
@@ -316,6 +315,7 @@ public class CEDARModelValidator
    * @throws URISyntaxException
    * @throws ProcessingException
    */
+
   private JsonSchema loadJsonSchemaFromResource(String resourceName)
     throws IOException, URISyntaxException, ProcessingException
   {
@@ -344,16 +344,28 @@ public class CEDARModelValidator
     return MAPPER.readTree(resource);
   }
 
-  private ProcessingReport generateProcessingReport(String message) throws ProcessingException
+  private ProcessingReport generateProcessingReport(String message)
   {
     ProcessingReport report = new ConsoleProcessingReport();
 
     if (!report.isSuccess()) {
       ProcessingMessage processingMessage = new ProcessingMessage();
       processingMessage.setMessage(message);
-      report.error(processingMessage);
+      try {
+        report.error(processingMessage);
+      } catch (ProcessingException e) {
+        // TODO Not sure what to do here.
+      }
     }
 
     return report;
+  }
+
+  private ProcessingMessage createProcessingMessage(String messageText)
+  {
+    ProcessingMessage processingMessage = new ProcessingMessage();
+    processingMessage.setMessage(messageText);
+
+    return processingMessage;
   }
 }
