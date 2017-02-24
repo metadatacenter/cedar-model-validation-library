@@ -3,14 +3,12 @@ package org.metadatacenter.model.validation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jackson.JacksonUtils;
-import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import com.github.fge.jsonschema.core.report.LogLevel;
 import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Optional;
 
 public class ValidateTemplate
@@ -36,12 +34,8 @@ public class ValidateTemplate
         }
       } else
         System.out.println("Template is valid");
-    } catch (ProcessingException e) {
-      System.err.println("Processing exception: " + e.getMessage());
     } catch (IOException e) {
       System.err.println("IO exception: " + e.getMessage());
-    } catch (URISyntaxException e) {
-      System.err.println("URI syntax exception: " + e.getMessage());
     } catch (IllegalArgumentException e) {
       System.err.println("Illegal argument exception: " + e.getMessage());
     }
