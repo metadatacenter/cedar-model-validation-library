@@ -29,7 +29,7 @@ public class JSONTreeTrimmer {
   }
 
   /**
-   * Removes all JSON nodes that has field names specified in the <code>targetFields</code>.
+   * Removes all JSON nodes that have field names specified in the <code>targetFields</code>.
    *
    * @param targetFields an array of field names to prune
    * @return a reference to this object
@@ -41,7 +41,7 @@ public class JSONTreeTrimmer {
   }
 
   /**
-   * Removes all JSON nodes that has field names specified in the <code>targetFields</code>.
+   * Removes all JSON nodes that have field names specified in the <code>targetFields</code>.
    *
    * @param targetFields a set of field names to prune
    * @return a reference to this object
@@ -53,7 +53,7 @@ public class JSONTreeTrimmer {
   }
 
   /**
-   * Compacts all JSON object nodes into a single value or an array of values that has
+   * Compacts all JSON object nodes into a single value or an array of values that have
    * field names specified in the <code>targetFields</code>.
    *
    * @param targetFields an array of field names to collapse
@@ -66,7 +66,7 @@ public class JSONTreeTrimmer {
   }
 
   /**
-   * Compacts all JSON object nodes into a single value or an array of values that has
+   * Compacts all JSON object nodes into a single value or an array of values that have
    * field names specified in the <code>targetFields</code>.
    *
    * @param targetFields an set of field names to collapse
