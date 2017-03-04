@@ -1,7 +1,5 @@
 package org.metadatacenter.model.validation;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
