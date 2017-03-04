@@ -21,28 +21,57 @@ public class JSONTreeTrimmer {
     this.rootNode = rootNode.deepCopy();
   }
 
+  /**
+   * Creates a JSON object instance that is the outcome for applying the trimmer's methods.
+   */
   public ObjectNode trim() {
     return rootNode;
   }
 
+  /**
+   * Removes all JSON nodes that has field names specified in the <code>targetFields</code>.
+   *
+   * @param targetFields an array of field names to prune
+   * @return a reference to this object
+   */
   public JSONTreeTrimmer prune(@Nonnull String... targetFields) {
     checkNotNull(targetFields);
     pruneNode(rootNode, Sets.newHashSet(targetFields));
     return this;
   }
 
+  /**
+   * Removes all JSON nodes that has field names specified in the <code>targetFields</code>.
+   *
+   * @param targetFields a set of field names to prune
+   * @return a reference to this object
+   */
   public JSONTreeTrimmer prune(@Nonnull Set<String> targetFields) {
     checkNotNull(targetFields);
     pruneNode(rootNode, targetFields);
     return this;
   }
 
+  /**
+   * Compacts all JSON object nodes into a single value or an array of values that has
+   * field names specified in the <code>targetFields</code>.
+   *
+   * @param targetFields an array of field names to collapse
+   * @return a reference to this object
+   */
   public JSONTreeTrimmer collapse(@Nonnull String... targetFields) {
     checkNotNull(targetFields);
     scanObjectFields(rootNode, Sets.newHashSet(targetFields)); // ignore return
     return this;
   }
 
+  /**
+   * Compacts all JSON object nodes into a single value or an array of values that has
+   * field names specified in the <code>targetFields</code>.
+   *
+   * @param targetFields an set of field names to collapse
+   * @return a reference to this object
+   */
   public JSONTreeTrimmer collapse(@Nonnull Set<String> targetFields) {
     checkNotNull(targetFields);
     scanObjectFields(rootNode, targetFields); // ignore return
