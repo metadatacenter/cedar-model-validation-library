@@ -31,6 +31,7 @@ public class JSONTreeTrimmerTest {
   private ValueNode v6 = nodeFactory.textNode("v6");
   private ValueNode v7 = nodeFactory.textNode("v7");
   private ValueNode v8 = nodeFactory.textNode("v8");
+  private ValueNode v9 = nodeFactory.textNode("v9");
 
   @Test
   public void shouldPruneNothing() {
@@ -192,114 +193,87 @@ public class JSONTreeTrimmerTest {
   @Test
   public void shouldCollapseObjectNode_UseCase1() {
     // Arrange
-    // {"p1":"v1","p2":{"p3*":{"p5":"v5","p6":"v6"},"p4":"v4"}}
-    root.set("p1", v1);
-    root.set("p2", o1);
-    o1.set("p3", o2); // collapse here
-    o1.set("p4", v4);
-    o2.set("p5", v5);
-    o2.set("p6", v6);
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {                % collapse here
+           "p6":"v6",
+           "p7":"v7"
+         },
+         "p4": {
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
         .collapse("p3")
         .trim();
     // Assert
-    // {"p1":"v1","p2":{"p5":"v5","p6":"v6"}}
+    // {"p1":"v1","p2":{"p6":"v6","p7":"v7"}}
     assertThat(output.get("p2").isObject(), is(true));
-    assertThat(output.get("p2").get("p5").isValueNode(), is(true));
     assertThat(output.get("p2").get("p6").isValueNode(), is(true));
-    assertThat(output.get("p2").get("p5"), is(equalTo(v5)));
+    assertThat(output.get("p2").get("p7").isValueNode(), is(true));
     assertThat(output.get("p2").get("p6"), is(equalTo(v6)));
+    assertThat(output.get("p2").get("p7"), is(equalTo(v7)));
     assertThat(size(output), is(4));
   }
 
   @Test
   public void shouldCollapseObjectNode_UseCase2() {
     // Arrange
-    // {"p1":"v1","p2":{"p3":{"p5":"v5","p6":"v6"},"p4#":"v4"}}
-    root.set("p1", v1);
-    root.set("p2", o1);
-    o1.set("p3", o2);
-    o1.set("p4", v4); // collapse here
-    o2.set("p5", v5);
-    o2.set("p6", v6);
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {
+           "p6":"v6",
+           "p7":"v7"
+         },
+         "p4": {                % collapse here
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
         .collapse("p4")
         .trim();
     // Assert
-    // {"p1":"v1","p2":"v4"}
-    assertThat(output.get("p2").isValueNode(), is(true));
-    assertThat(output.get("p2"), is(equalTo(v4)));
-    assertThat(size(output), is(2));
+    // {"p1":"v1","p2":{"p8":["v8","v9"]}}
+    assertThat(output.get("p2").isObject(), is(true));
+    assertThat(output.get("p2").get("p8").isArray(), is(true));
+    assertThat(output.get("p2").get("p8").get(0), is(equalTo(v8)));
+    assertThat(output.get("p2").get("p8").get(1), is(equalTo(v9)));
+    assertThat(size(output), is(3));
   }
 
   @Test
   public void shouldCollapseObjectNode_UseCase3() {
     // Arrange
-    // {"p1":"v1","p2":{"p3":{"p5#":"v5","p6":"v6"},"p4":"v4"}}
-    root.set("p1", v1);
-    root.set("p2", o1);
-    o1.set("p3", o2);
-    o1.set("p4", v4);
-    o2.set("p5", v5); // collapse here
-    o2.set("p6", v6);
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {
+           "p6":"v6",
+           "p7":"v7"
+         },
+         "p4": {
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"             % collapse here
+       }
+     } */
+    setupTreeExample1();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
         .collapse("p5")
-        .trim();
-    // Assert
-    // {"p1":"v1","p2":"v5"}
-    assertThat(output.get("p2").isObject(), is(true));
-    assertThat(output.get("p2").get("p3").isValueNode(), is(true));
-    assertThat(output.get("p2").get("p4").isValueNode(), is(true));
-    assertThat(output.get("p2").get("p3"), is(equalTo(v5)));
-    assertThat(output.get("p2").get("p4"), is(equalTo(v4)));
-    assertThat(size(output), is(4));
-  }
-
-  @Test
-  public void shouldCollapseObjectNode_UseCase4() {
-    // Arrange
-    // {"p1":"v1","p2":{"p3":{"p5":"v5","p6#":"v6"},"p4":"v4"}}
-    root.set("p1", v1);
-    root.set("p2", o1);
-    o1.set("p3", o2);
-    o1.set("p4", v4);
-    o2.set("p5", v5);
-    o2.set("p6", v6); // collapse here
-    // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
-    JsonNode output = trimmer
-        .collapse("p6")
-        .trim();
-    // Assert
-    // {"p1":"v1","p2":{"p3":"v6","p4":"v4"}}
-    assertThat(output.get("p2").isObject(), is(true));
-    assertThat(output.get("p2").get("p3").isValueNode(), is(true));
-    assertThat(output.get("p2").get("p4").isValueNode(), is(true));
-    assertThat(output.get("p2").get("p3"), is(equalTo(v6)));
-    assertThat(output.get("p2").get("p4"), is(equalTo(v4)));
-    assertThat(size(output), is(4));
-  }
-
-  @Test
-  public void shouldCollapseObjectNode_UseCase5() {
-    // Arrange
-    // {"p1":"v1","p2#":{"p3#":{"p5":"v5","p6":"v6"},"p4":"v4"}}
-    root.set("p1", v1);
-    root.set("p2", o1);
-    o1.set("p3", o2); // collapse here
-    o1.set("p4", v4);
-    o2.set("p5", v5); // collapse here
-    o2.set("p6", v6);
-    // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
-    JsonNode output = trimmer
-        .collapse("p3", "p5")
         .trim();
     // Assert
     // {"p1":"v1","p2":"v5"}
@@ -309,40 +283,214 @@ public class JSONTreeTrimmerTest {
   }
 
   @Test
-  public void shouldCollapseObjectNode_UseCase6() {
+  public void shouldCollapseObjectNode_UseCase4() {
     // Arrange
-    // {"p1":"v1","p2":{"p3":{"p5#":"v5","p6":"v6"},"p4#":"v4"}}
-    root.set("p1", v1);
-    root.set("p2", o1);
-    o1.set("p3", o2);
-    o1.set("p4", v4); // collapse here
-    o2.set("p5", v5); // collapse here
-    o2.set("p6", v6);
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {
+           "p6":"v6",             % collapse here
+           "p7":"v7"
+         },
+         "p4": {
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p4", "p5")
+        .collapse("p6")
         .trim();
     // Assert
-    // {"p1":"v1","p2":"v4"}
+    // {"p1":"v1","p2":{"p3":"v6","p4":{"p8":["v8","v9"]},"p5":"v5"}}
+    assertThat(output.get("p2").isObject(), is(true));
+    assertThat(output.get("p2").get("p3").isValueNode(), is(true));
+    assertThat(output.get("p2").get("p3"), is(equalTo(v6)));
+    assertThat(output.get("p2").get("p4").isObject(), is(true));
+    assertThat(output.get("p2").get("p5").isValueNode(), is(true));
+    assertThat(size(output), is(6));
+  }
+
+  @Test
+  public void shouldCollapseObjectNode_UseCase5() {
+    // Arrange
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {
+           "p6":"v6",
+           "p7":"v7"              % collapse here
+         },
+         "p4": {
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
+    // Act
+    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonNode output = trimmer
+        .collapse("p7")
+        .trim();
+    // Assert
+    // {"p1":"v1","p2":{"p3":"v7","p4":{"p8":["v8","v9"]},"p5":"v5"}}
+    assertThat(output.get("p2").isObject(), is(true));
+    assertThat(output.get("p2").get("p3").isValueNode(), is(true));
+    assertThat(output.get("p2").get("p3"), is(equalTo(v7)));
+    assertThat(output.get("p2").get("p4").isObject(), is(true));
+    assertThat(output.get("p2").get("p5").isValueNode(), is(true));
+    assertThat(size(output), is(6));
+  }
+
+  @Test
+  public void shouldCollapseObjectNode_UseCase6() {
+    // Arrange
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {
+           "p6":"v6",
+           "p7":"v7"
+         },
+         "p4": {
+           "p8": ["v8","v9"]      % collapse here
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
+    // Act
+    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonNode output = trimmer
+        .collapse("p8")
+        .trim();
+    // Assert
+    // {"p1":"v1","p2":{"p3":{"p6":"v6","p7":"v7"},"p4":["v8","v9"],"p5":"v5"}}
+    assertThat(output.get("p2").isObject(), is(true));
+    assertThat(output.get("p2").get("p3").isObject(), is(true));
+    assertThat(output.get("p2").get("p4").isArray(), is(true));
+    assertThat(output.get("p2").get("p4").get(0), is(equalTo(v8)));
+    assertThat(output.get("p2").get("p4").get(1), is(equalTo(v9)));
+    assertThat(output.get("p2").get("p5").isValueNode(), is(true));
+    assertThat(size(output), is(7));
+  }
+
+  @Test
+  public void shouldCollapseObjectNode_UseCase7() {
+    // Arrange
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {                  % collapse here
+           "p6":"v6",             % collapse here
+           "p7":"v7"
+         },
+         "p4": {
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
+    // Act
+    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonNode output = trimmer
+        .collapse("p3", "p6")
+        .trim();
+    // Assert
+    // {"p1":"v1","p2":"v6"}
     assertThat(output.get("p2").isValueNode(), is(true));
-    assertThat(output.get("p2"), is(equalTo(v4)));
+    assertThat(output.get("p2"), is(equalTo(v6)));
     assertThat(size(output), is(2));
+  }
+
+  @Test
+  public void shouldCollapseObjectNode_UseCase8() {
+    // Arrange
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {
+           "p6":"v6",
+           "p7":"v7"
+         },
+         "p4": {                  % collapse here
+           "p8": ["v8","v9"]      % collapse here
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
+    // Act
+    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonNode output = trimmer
+        .collapse("p4", "p8")
+        .trim();
+    // Assert
+    // {"p1":"v1","p2":["v8","v9"]}
+    assertThat(output.get("p2").isArray(), is(true));
+    assertThat(output.get("p2").get(0), is(equalTo(v8)));
+    assertThat(output.get("p2").get(1), is(equalTo(v9)));
+    assertThat(size(output), is(2));
+  }
+
+  @Test
+  public void shouldCollapseObjectNode_UseCase9() {
+    // Arrange
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {                  % collapse here
+           "p6":"v6",
+           "p7":"v7"
+         },
+         "p4": {                  % collapse here
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"                % collapse here
+       }
+     } */
+    setupTreeExample1();
+    // Act
+    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonNode output = trimmer
+        .collapse("p3", "p4", "p5")
+        .trim();
+    // Assert
+    // {"p1":"v1","p2":[{"p6":"v6","p7":"v7"},{"p8":["v8","v9"]},"v5"]}
+    assertThat(output.get("p2").isArray(), is(true));
+    assertThat(output.get("p2").get(0).isObject(), is(true));
+    assertThat(output.get("p2").get(0).get("p6"), is(equalTo(v6)));
+    assertThat(output.get("p2").get(0).get("p7"), is(equalTo(v7)));
+    assertThat(output.get("p2").get(1).isObject(), is(true));
+    assertThat(output.get("p2").get(1).get("p8").isArray(), is(true));
+    assertThat(output.get("p2").get(1).get("p8").get(0), is(equalTo(v8)));
+    assertThat(output.get("p2").get(1).get("p8").get(1), is(equalTo(v9)));
+    assertThat(output.get("p2").get(2).isValueNode(), is(true));
+    assertThat(output.get("p2").get(2), is(equalTo(v5)));
+    assertThat(size(output), is(5));
   }
 
   @Test
   public void shouldCollapseObjectElementInArrayNode_UseCase1() {
     // Arrange
-    // {"p1":"v1","p2":[{"p3#":"v3"},{"p4":["v4","v5"]},{"p5":{"p6":"v6","p7":"v7"}}]}
-    root.set("p1", v1);
-    root.set("p2", a1);
-    a1.add(o1).add(o2).add(o3);
-    o1.set("p3", v3); // collapse here
-    o2.set("p4", a2);
-    a2.add(v4).add(v5);
-    o3.set("p5", o4);
-    o4.set("p6", v6);
-    o4.set("p7", v7);
+    /*
+     { "p1":"v1",
+       "p2": [
+         { "p3":"v3" },           % collapse here
+         { "p4": ["v4","v5"] },
+         { "p5": {
+             "p6":"v6",
+             "p7":"v7"
+           }
+         }
+       ]
+     } */
+    setupTreeExample2();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
@@ -350,6 +498,7 @@ public class JSONTreeTrimmerTest {
         .trim();
     // Assert
     // {"p1":"v1","p2":["v3",{"p4":["v4","v5"]},{"p5":{"p6":"v6","p7":"v7"}}]}
+    assertThat(output.get("p2").isArray(), is(true));
     assertThat(output.get("p2").get(0), is(equalTo(v3)));
     assertThat(size(output), is(6));
   }
@@ -357,16 +506,19 @@ public class JSONTreeTrimmerTest {
   @Test
   public void shouldCollapseObjectElementInArrayNode_UseCase2() {
     // Arrange
-    // {"p1":"v1","p2":[{"p3":"v3"},{"p4#":["v4","v5"]},{"p5":{"p6":"v6","p7":"v7"}}]}
-    root.set("p1", v1);
-    root.set("p2", a1);
-    a1.add(o1).add(o2).add(o3);
-    o1.set("p3", v3);
-    o2.set("p4", a2); // collapse here
-    a2.add(v4).add(v5);
-    o3.set("p5", o4);
-    o4.set("p6", v6);
-    o4.set("p7", v7);
+    /*
+     { "p1":"v1",
+       "p2": [
+         { "p3":"v3" },
+         { "p4": ["v4","v5"] },   % collapse here
+         { "p5": {
+             "p6":"v6",
+             "p7":"v7"
+           }
+         }
+       ]
+     } */
+    setupTreeExample2();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
@@ -374,6 +526,7 @@ public class JSONTreeTrimmerTest {
         .trim();
     // Assert
     // {"p1":"v1","p2":["v3",["v4","v5"],{"p5":{"p6":"v6","p7":"v7"}}]}
+    assertThat(output.get("p2").isArray(), is(true));
     assertThat(output.get("p2").get(1).isArray(), is(true));
     assertThat(output.get("p2").get(1).get(0), is(equalTo(v4)));
     assertThat(output.get("p2").get(1).get(1), is(equalTo(v5)));
@@ -383,16 +536,19 @@ public class JSONTreeTrimmerTest {
   @Test
   public void shouldCollapseObjectElementInArrayNode_UseCase3() {
     // Arrange
-    // {"p1":"v1","p2":[{"p3":"v3"},{"p4":["v4","v5"]},{"p5#":{"p6":"v6","p7":"v7"}}]}
-    root.set("p1", v1);
-    root.set("p2", a1);
-    a1.add(o1).add(o2).add(o3);
-    o1.set("p3", v3);
-    o2.set("p4", a2);
-    a2.add(v4).add(v5);
-    o3.set("p5", o4); // collapse here
-    o4.set("p6", v6);
-    o4.set("p7", v7);
+    /*
+     { "p1":"v1",
+       "p2": [
+         { "p3":"v3" },
+         { "p4": ["v4","v5"] },
+         { "p5": {                % collapse here
+             "p6":"v6",
+             "p7":"v7"
+           }
+         }
+       ]
+     } */
+    setupTreeExample2();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
@@ -400,6 +556,7 @@ public class JSONTreeTrimmerTest {
         .trim();
     // Assert
     // {"p1":"v1","p2":["v3",["v4","v5"],{"p6":"v6","p7":"v7"}]}
+    assertThat(output.get("p2").isArray(), is(true));
     assertThat(output.get("p2").get(2).isObject(), is(true));
     assertThat(output.get("p2").get(2).get("p6"), is(equalTo(v6)));
     assertThat(output.get("p2").get(2).get("p7"), is(equalTo(v7)));
@@ -409,16 +566,19 @@ public class JSONTreeTrimmerTest {
   @Test
   public void shouldCollapseObjectElementInArrayNode_UseCase4() {
     // Arrange
-    // {"p1":"v1","p2":[{"p3":"v3"},{"p4":["v4","v5"]},{"p5":{"p6#":"v6","p7":"v7"}}]}
-    root.set("p1", v1);
-    root.set("p2", a1);
-    a1.add(o1).add(o2).add(o3);
-    o1.set("p3", v3);
-    o2.set("p4", a2);
-    a2.add(v4).add(v5);
-    o3.set("p5", o4);
-    o4.set("p6", v6); // collapse here
-    o4.set("p7", v7);
+    /*
+     { "p1":"v1",
+       "p2": [
+         { "p3":"v3" },
+         { "p4": ["v4","v5"] },
+         { "p5": {
+             "p6":"v6",            % collapse here
+             "p7":"v7"
+           }
+         }
+       ]
+     } */
+    setupTreeExample2();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
@@ -426,6 +586,7 @@ public class JSONTreeTrimmerTest {
         .trim();
     // Assert
     // {"p1":"v1","p2":[{"p3":"v3"},{"p4":["v4","v5"]},{"p5":"v6"}]}
+    assertThat(output.get("p2").isArray(), is(true));
     assertThat(output.get("p2").get(2).isObject(), is(true));
     assertThat(output.get("p2").get(2).get("p5"), is(equalTo(v6)));
     assertThat(size(output), is(5));
@@ -434,16 +595,19 @@ public class JSONTreeTrimmerTest {
   @Test
   public void shouldCollapseObjectElementInArrayNode_UseCase5() {
     // Arrange
-    // {"p1":"v1","p2":[{"p3":"v3"},{"p4":["v4","v5"]},{"p5":{"p6":"v6","p7#":"v7"}}]}
-    root.set("p1", v1);
-    root.set("p2", a1);
-    a1.add(o1).add(o2).add(o3);
-    o1.set("p3", v3);
-    o2.set("p4", a2);
-    a2.add(v4).add(v5);
-    o3.set("p5", o4);
-    o4.set("p6", v6);
-    o4.set("p7", v7); // collapse here
+    /*
+     { "p1":"v1",
+       "p2": [
+         { "p3":"v3" },
+         { "p4": ["v4","v5"] },
+         { "p5": {
+             "p6":"v6",
+             "p7":"v7"            % collapse here
+           }
+         }
+       ]
+     } */
+    setupTreeExample2();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
@@ -451,25 +615,63 @@ public class JSONTreeTrimmerTest {
         .trim();
     // Assert
     // {"p1":"v1","p2":[{"p3":"v3"},{"p4":["v4","v5"]},{"p5":"v7"}]}
+    assertThat(output.get("p2").isArray(), is(true));
     assertThat(output.get("p2").get(2).isObject(), is(true));
     assertThat(output.get("p2").get(2).get("p5"), is(equalTo(v7)));
     assertThat(size(output), is(5));
   }
 
   @Test
+  public void shouldCollapseObjectElementInArrayNode_UseCase6() {
+    // Arrange
+    /*
+     { "p1":"v1",
+       "p2": [
+         { "p3":"v3" },            % collapse here
+         { "p4": ["v4","v5"] },    % collapse here
+         { "p5": {                 % collapse here
+             "p6":"v6",
+             "p7":"v7"
+           }
+         }
+       ]
+     } */
+    setupTreeExample2();
+    // Act
+    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonNode output = trimmer
+        .collapse("p3", "p4", "p5")
+        .trim();
+    // Assert
+    // {"p1":"v1","p2":["v3",["v4","v5"],{"p6":"v6","p7":"v7"}]}
+    assertThat(output.get("p2").isArray(), is(true));
+    assertThat(output.get("p2").get(0).isValueNode(), is(true));
+    assertThat(output.get("p2").get(0), is(equalTo(v3)));
+    assertThat(output.get("p2").get(1).isArray(), is(true));
+    assertThat(output.get("p2").get(1).get(0), is(equalTo(v4)));
+    assertThat(output.get("p2").get(1).get(1), is(equalTo(v5)));
+    assertThat(output.get("p2").get(2).isObject(), is(true));
+    assertThat(output.get("p2").get(2).get("p6"), is(equalTo(v6)));
+    assertThat(output.get("p2").get(2).get("p7"), is(equalTo(v7)));
+    assertThat(size(output), is(4));
+  }
+
+  @Test
   public void shouldPruneAndCollapse_UseCase1() {
     // Arrange
-    // {"p1*":"v1","p2":{"p5#":"v5","p6":"v6"},"p3":["v3","v4"],"p4":[{"p7":"v7"},{"p8":"v8"}]}
-    root.set("p1", v1); // prune here
-    root.set("p2", o1);
-    root.set("p3", a1);
-    a1.add(v3).add(v4);
-    root.set("p4", a2);
-    a2.add(o2).add(o3);
-    o1.set("p5", v5); // collapse here
-    o1.set("p6", v6);
-    o2.set("p7", v7);
-    o3.set("p8", v8);
+    /*
+     { "p1":"v1",           % prune here
+       "p2":{
+         "p5":"v5",         % collapse here
+         "p6":"v6"
+       },
+       "p3":["v3","v4"],
+       "p4":[
+         {"p7":"v7"},
+         {"p8":"v8"}
+       ]
+     } */
+    setupTreeExample3();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
@@ -486,17 +688,19 @@ public class JSONTreeTrimmerTest {
   @Test
   public void shouldPruneAndCollapse_UseCase2() {
     // Arrange
-    // {"p1":"v1","p2*":{"p5":"v5","p6":"v6"},"p3":["v3","v4"],"p4":[{"p7#":"v7"},{"p8":"v8"}]}
-    root.set("p1", v1);
-    root.set("p2", o1); // prune here
-    root.set("p3", a1);
-    a1.add(v3).add(v4);
-    root.set("p4", a2);
-    a2.add(o2).add(o3);
-    o1.set("p5", v5);
-    o1.set("p6", v6);
-    o2.set("p7", v7); // collapse here
-    o3.set("p8", v8);
+    /*
+     { "p1":"v1",
+       "p2":{               % prune here
+         "p5":"v5",
+         "p6":"v6"
+       },
+       "p3":["v3","v4"],
+       "p4":[
+         {"p7":"v7"},       % collapse here
+         {"p8":"v8"}
+       ]
+     } */
+    setupTreeExample3();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
@@ -505,7 +709,6 @@ public class JSONTreeTrimmerTest {
         .trim();
     // Assert
     // {"p1":"v1","p3":["v3","v4"],"p4":["v7",{"p8":"v8"}]}
-    System.out.println(output);
     assertThat(output.get("p2"), is(nullValue()));
     assertThat(output.get("p4").get(0), is(equalTo(v7)));
     assertThat(size(output), is(4));
@@ -514,17 +717,19 @@ public class JSONTreeTrimmerTest {
   @Test
   public void shouldPruneAndCollapse_UseCase3() {
     // Arrange
-    // {"p1":"v1","p2":{"p5#":"v5","p6":"v6"},"p3":["v3","v4"],"p4*":[{"p7":"v7"},{"p8":"v8"}]}
-    root.set("p1", v1);
-    root.set("p2", o1);
-    root.set("p3", a1);
-    a1.add(v3).add(v4);
-    root.set("p4", a2); // prune here
-    a2.add(o2).add(o3);
-    o1.set("p5", v5); // collapse here
-    o1.set("p6", v6);
-    o2.set("p7", v7);
-    o3.set("p8", v8);
+    /*
+     { "p1":"v1",
+       "p2":{
+         "p5":"v5",         % collapse here
+         "p6":"v6"
+       },
+       "p3":["v3","v4"],
+       "p4":[               % prune here
+         {"p7":"v7"},
+         {"p8":"v8"}
+       ]
+     } */
+    setupTreeExample3();
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
@@ -533,10 +738,48 @@ public class JSONTreeTrimmerTest {
         .trim();
     // Assert
     // {"p1":"v1","p2":"v5","p3":["v3","v4"]}
-    System.out.println(output);
     assertThat(output.get("p4"), is(nullValue()));
     assertThat(output.get("p2"), is(equalTo(v5)));
     assertThat(size(output), is(3));
+  }
+
+  // Private methods to construct some tree examples
+
+  private void setupTreeExample1() {
+    root.set("p1", v1);
+    root.set("p2", o1);
+    o1.set("p3", o2);
+    o1.set("p4", o3);
+    o1.set("p5", v5);
+    o2.set("p6", v6);
+    o2.set("p7", v7);
+    o3.set("p8", a1);
+    a1.add(v8).add(v9);
+  }
+
+  private void setupTreeExample2() {
+    root.set("p1", v1);
+    root.set("p2", a1);
+    a1.add(o1).add(o2).add(o3);
+    o1.set("p3", v3);
+    o2.set("p4", a2);
+    a2.add(v4).add(v5);
+    o3.set("p5", o4);
+    o4.set("p6", v6);
+    o4.set("p7", v7);
+  }
+
+  private void setupTreeExample3() {
+    root.set("p1", v1);
+    root.set("p2", o1);
+    root.set("p3", a1);
+    a1.add(v3).add(v4);
+    root.set("p4", a2);
+    a2.add(o2).add(o3);
+    o1.set("p5", v5);
+    o1.set("p6", v6);
+    o2.set("p7", v7);
+    o3.set("p8", v8);
   }
 
   // Private utility methods
