@@ -14,7 +14,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class JSONTreeTrimmer {
 
+  private static final String PRUNE_OPERATION = "PRUNE";
+  private static final String COLLAPSE_OPERATION = "COLLAPSE";
+
   private final ObjectNode rootNode;
+
+  private List<AbstractMap.SimpleEntry<String, Set<String>>> operationQueue = new LinkedList<>();
 
   public JSONTreeTrimmer(@Nonnull JsonNode rootNode) {
     checkNotNull(rootNode);
@@ -25,6 +30,14 @@ public class JSONTreeTrimmer {
    * Creates a JSON object instance that is the outcome for applying the trimmer's methods.
    */
   public ObjectNode trim() {
+    for (AbstractMap.SimpleEntry<String, Set<String>> operationDetails : operationQueue) {
+      String operationName = operationDetails.getKey();
+      if (operationName.equals(PRUNE_OPERATION)) {
+        pruneNode(rootNode, operationDetails.getValue());
+      } else if (operationName.equals(COLLAPSE_OPERATION)) {
+        scanObjectFields(rootNode, operationDetails.getValue());
+      }
+    }
     return rootNode;
   }
 
@@ -36,7 +49,7 @@ public class JSONTreeTrimmer {
    */
   public JSONTreeTrimmer prune(@Nonnull String... targetFields) {
     checkNotNull(targetFields);
-    pruneNode(rootNode, Sets.newHashSet(targetFields));
+    operationQueue.add(newOperationDetails(PRUNE_OPERATION, Sets.newHashSet(targetFields)));
     return this;
   }
 
@@ -48,7 +61,7 @@ public class JSONTreeTrimmer {
    */
   public JSONTreeTrimmer prune(@Nonnull Set<String> targetFields) {
     checkNotNull(targetFields);
-    pruneNode(rootNode, targetFields);
+    operationQueue.add(newOperationDetails(PRUNE_OPERATION, targetFields));
     return this;
   }
 
@@ -61,7 +74,7 @@ public class JSONTreeTrimmer {
    */
   public JSONTreeTrimmer collapse(@Nonnull String... targetFields) {
     checkNotNull(targetFields);
-    scanObjectFields(rootNode, Sets.newHashSet(targetFields)); // ignore return
+    operationQueue.add(newOperationDetails(COLLAPSE_OPERATION, Sets.newHashSet(targetFields)));
     return this;
   }
 
@@ -74,7 +87,7 @@ public class JSONTreeTrimmer {
    */
   public JSONTreeTrimmer collapse(@Nonnull Set<String> targetFields) {
     checkNotNull(targetFields);
-    scanObjectFields(rootNode, targetFields); // ignore return
+    operationQueue.add(newOperationDetails(COLLAPSE_OPERATION, targetFields));
     return this;
   }
 
@@ -158,12 +171,16 @@ public class JSONTreeTrimmer {
     return parentNode;
   }
 
+  // Private utility methods
+
+  private AbstractMap.SimpleEntry<String, Set<String>> newOperationDetails(String operationName, Set<String> targetFields) {
+    return new AbstractMap.SimpleEntry<>(operationName, targetFields);
+  }
+
   private Set<String> matchFieldNames(ObjectNode objectNode, Set<String> targetFields) {
     Set<String> fieldNames = getFieldNames(objectNode);
     return Sets.intersection(fieldNames, targetFields);
   }
-
-  // Private utility methods
 
   private static Set<String> getFieldNames(ObjectNode objectNode) {
     return Sets.newHashSet(objectNode.fieldNames());
