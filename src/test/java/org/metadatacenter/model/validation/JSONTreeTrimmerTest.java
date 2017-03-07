@@ -2,6 +2,7 @@ package org.metadatacenter.model.validation;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.at;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
 import org.junit.Test;
+import org.metadatacenter.model.trimmer.JSONTreeTrimmer;
 
 public class JSONTreeTrimmerTest {
 
@@ -41,7 +43,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .prune("p3")
+        .prune(at("p3"))
         .trim();
     // Assert
     assertThat(output, is(equalTo(root)));
@@ -56,7 +58,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     ObjectNode output = trimmer
-        .prune("p2")
+        .prune(at("p2"))
         .trim();
     // Assert
     assertThat(output.get("p2"), is(nullValue()));
@@ -72,7 +74,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     ObjectNode output = trimmer
-        .prune("p2")
+        .prune(at("p2"))
         .trim();
     // Assert
     assertThat(output.get("p2"), is(nullValue()));
@@ -89,7 +91,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     ObjectNode output = trimmer
-        .prune("p2")
+        .prune(at("p2"))
         .trim();
     // Assert
     assertThat(output.get("p2"), is(nullValue()));
@@ -107,7 +109,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     ObjectNode output = trimmer
-        .prune("p3")
+        .prune(at("p3"))
         .trim();
     // Assert
     assertThat(output.get("p2").get(0).get("p3"), is(nullValue()));
@@ -128,7 +130,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     ObjectNode output = trimmer
-        .prune("p1")
+        .prune(at("p1"))
         .trim();
     // Assert
     assertThat(output.get("p1"), is(nullValue()));
@@ -150,7 +152,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     ObjectNode output = trimmer
-        .prune("p4", "p5")
+        .prune(at("p4", "p5"))
         .trim();
     // Assert
     assertThat(output.get("p2").get("p4"), is(nullValue()));
@@ -168,7 +170,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p3")
+        .collapse(at("p3"))
         .trim();
     // Assert
     assertThat(output, is(equalTo(root)));
@@ -183,7 +185,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p2")
+        .collapse(at("p2"))
         .trim();
     // Assert
     assertThat(output, is(equalTo(root)));
@@ -210,7 +212,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p3")
+        .collapse(at("p3"))
         .trim();
     // Assert
     // {"p1":"v1","p2":{"p6":"v6","p7":"v7"}}
@@ -242,7 +244,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p4")
+        .collapse(at("p4"))
         .trim();
     // Assert
     // {"p1":"v1","p2":{"p8":["v8","v9"]}}
@@ -273,7 +275,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p5")
+        .collapse(at("p5"))
         .trim();
     // Assert
     // {"p1":"v1","p2":"v5"}
@@ -302,7 +304,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p6")
+        .collapse(at("p6"))
         .trim();
     // Assert
     // {"p1":"v1","p2":{"p3":"v6","p4":{"p8":["v8","v9"]},"p5":"v5"}}
@@ -334,7 +336,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p7")
+        .collapse(at("p7"))
         .trim();
     // Assert
     // {"p1":"v1","p2":{"p3":"v7","p4":{"p8":["v8","v9"]},"p5":"v5"}}
@@ -366,7 +368,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p8")
+        .collapse(at("p8"))
         .trim();
     // Assert
     // {"p1":"v1","p2":{"p3":{"p6":"v6","p7":"v7"},"p4":["v8","v9"],"p5":"v5"}}
@@ -399,7 +401,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p3", "p6")
+        .collapse(at("p3", "p6"))
         .trim();
     // Assert
     // {"p1":"v1","p2":"v6"}
@@ -428,7 +430,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p4", "p8")
+        .collapse(at("p4", "p8"))
         .trim();
     // Assert
     // {"p1":"v1","p2":["v8","v9"]}
@@ -458,7 +460,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p3", "p4", "p5")
+        .collapse(at("p3", "p4", "p5"))
         .trim();
     // Assert
     // {"p1":"v1","p2":[{"p6":"v6","p7":"v7"},{"p8":["v8","v9"]},"v5"]}
@@ -494,7 +496,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p3")
+        .collapse(at("p3"))
         .trim();
     // Assert
     // {"p1":"v1","p2":["v3",{"p4":["v4","v5"]},{"p5":{"p6":"v6","p7":"v7"}}]}
@@ -522,7 +524,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p4")
+        .collapse(at("p4"))
         .trim();
     // Assert
     // {"p1":"v1","p2":["v3",["v4","v5"],{"p5":{"p6":"v6","p7":"v7"}}]}
@@ -552,7 +554,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p5")
+        .collapse(at("p5"))
         .trim();
     // Assert
     // {"p1":"v1","p2":["v3",["v4","v5"],{"p6":"v6","p7":"v7"}]}
@@ -582,7 +584,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p6")
+        .collapse(at("p6"))
         .trim();
     // Assert
     // {"p1":"v1","p2":[{"p3":"v3"},{"p4":["v4","v5"]},{"p5":"v6"}]}
@@ -611,7 +613,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p7")
+        .collapse(at("p7"))
         .trim();
     // Assert
     // {"p1":"v1","p2":[{"p3":"v3"},{"p4":["v4","v5"]},{"p5":"v7"}]}
@@ -640,7 +642,7 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .collapse("p3", "p4", "p5")
+        .collapse(at("p3", "p4", "p5"))
         .trim();
     // Assert
     // {"p1":"v1","p2":["v3",["v4","v5"],{"p6":"v6","p7":"v7"}]}
@@ -675,8 +677,8 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .prune("p1")
-        .collapse("p5")
+        .prune(at("p1"))
+        .collapse(at("p5"))
         .trim();
     // Assert
     // {"p2":"v5","p3":["v3","v4"],"p4":[{"p7":"v7"},{"p8":"v8"}]}
@@ -704,8 +706,8 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .prune("p2")
-        .collapse("p7")
+        .prune(at("p2"))
+        .collapse(at("p7"))
         .trim();
     // Assert
     // {"p1":"v1","p3":["v3","v4"],"p4":["v7",{"p8":"v8"}]}
@@ -733,8 +735,8 @@ public class JSONTreeTrimmerTest {
     // Act
     JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
     JsonNode output = trimmer
-        .prune("p4")
-        .collapse("p5")
+        .prune(at("p4"))
+        .collapse(at("p5"))
         .trim();
     // Assert
     // {"p1":"v1","p2":"v5","p3":["v3","v4"]}

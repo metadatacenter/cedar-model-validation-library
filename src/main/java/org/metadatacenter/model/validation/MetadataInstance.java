@@ -1,6 +1,7 @@
 package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.metadatacenter.model.trimmer.JSONTreeTrimmer;
 
 import javax.annotation.Nonnull;
 
@@ -8,12 +9,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.at;
 
 public class MetadataInstance {
 
   private final JsonNode metadataInstance;
 
-  public MetadataInstance(@Nonnull JsonNode metadataInstance) {
+  public MetadataInstance(@Nonnull JsonNode metadataInstance) { // TemplateInstance
     this.metadataInstance = checkNotNull(metadataInstance);
   }
 
@@ -23,8 +25,8 @@ public class MetadataInstance {
 
   public JsonNode asJson() {
     return new JSONTreeTrimmer(metadataInstance)
-        .prune(PRUNING_SET)
-        .collapse(JSONLDToken.VALUE)
+        .prune(at(PRUNING_SET))
+        .collapse(at(JSONLDToken.VALUE))
         .trim();
   }
 
