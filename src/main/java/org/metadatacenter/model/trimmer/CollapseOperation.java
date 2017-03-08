@@ -10,19 +10,25 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 
 import javax.annotation.Nonnull;
+import java.util.Optional;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.sun.tools.doclets.formats.html.markup.HtmlStyle.description;
 
 public class CollapseOperation implements Operation {
 
   private final ObjectNode objectNode;
   private final TargetFields targetFields;
 
+  private Optional<MatchingPattern> condition = Optional.empty();
+
   public CollapseOperation(@Nonnull ObjectNode objectNode, @Nonnull TargetFields targetFields) {
     this.objectNode = checkNotNull(objectNode);
     this.targetFields = checkNotNull(targetFields);
+  }
+
+  public void setCondition(MatchingPattern condition) {
+    this.condition = Optional.of(condition);
   }
 
   @Override
@@ -43,7 +49,24 @@ public class CollapseOperation implements Operation {
   }
 
   private JsonNode collapseObjectNode(ObjectNode objectNode, TargetFields targetFields) {
-    Set<String> fieldNames = getFieldNames(objectNode);
+    if (condition.isPresent()) {
+      return collapseObjectNodeWithCondition(objectNode, targetFields, condition.get());
+    } else {
+      return collapseObjectNodeWithoutCondition(objectNode, targetFields);
+    }
+  }
+
+  private JsonNode collapseObjectNodeWithCondition(ObjectNode objectNode, TargetFields targetFields,
+                                                   MatchingPattern matchingPattern) {
+    if (targetFields.within(objectNode)) {
+      if (matchingPattern.foundMatch(objectNode)) {
+        return doCollapsing(objectNode, targetFields);
+      }
+    }
+    return scanObjectFields(objectNode, targetFields);
+  }
+
+  private JsonNode collapseObjectNodeWithoutCondition(ObjectNode objectNode, TargetFields targetFields) {
     if (targetFields.within(objectNode)) {
       return doCollapsing(objectNode, targetFields);
     } else {
@@ -59,6 +82,7 @@ public class CollapseOperation implements Operation {
     }
     return collapsedNodes;
   }
+
 
   private JsonNode doCollapsing(ObjectNode parentNode, TargetFields targetFields) {
     ArrayNode collapsedNodes = JsonNodeFactory.instance.arrayNode();

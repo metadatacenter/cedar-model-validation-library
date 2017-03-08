@@ -30,6 +30,11 @@ public class JSONTreeTrimmer {
     return new TargetFields(fieldNames);
   }
 
+  public static MatchingPattern whenFound(@Nonnull ObjectNode matchingPattern) {
+    checkNotNull(matchingPattern);
+    return new MatchingPattern(matchingPattern);
+  }
+
   /**
    * Removes all JSON nodes that have field names specified in the
    * <code>targetFields</code>.
@@ -53,6 +58,25 @@ public class JSONTreeTrimmer {
   public JSONTreeTrimmer collapse(@Nonnull TargetFields targetFields) {
     checkNotNull(targetFields);
     operationQueue.add(new CollapseOperation(rootNode, targetFields));
+    return this;
+  }
+
+  /**
+   * Compacts all JSON object nodes into a single value or an array of values that have
+   * field names specified in the <code>targetFields</code> and the object structure
+   * contains the node specified in the <code>matchingPattern</code>.
+   *
+   * @param targetFields      a set of field names to collapse
+   * @param matchingPattern   a matching pattern for the target fields to collapse
+   * @return a reference to this object
+   */
+  public JSONTreeTrimmer collapse(@Nonnull TargetFields targetFields,
+                                  @Nonnull MatchingPattern matchingPattern) {
+    checkNotNull(targetFields);
+    checkNotNull(matchingPattern);
+    CollapseOperation collapseOperation = new CollapseOperation(rootNode, targetFields);
+    collapseOperation.setCondition(matchingPattern);
+    operationQueue.add(collapseOperation);
     return this;
   }
 

@@ -3,6 +3,7 @@ package org.metadatacenter.model.validation;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.at;
+import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.whenFound;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -475,6 +476,69 @@ public class JSONTreeTrimmerTest {
     assertThat(output.get("p2").get(2).isValueNode(), is(true));
     assertThat(output.get("p2").get(2), is(equalTo(v5)));
     assertThat(size(output), is(5));
+  }
+
+  @Test
+  public void shouldCollapseObjectNodeWithCondition() {
+    // Arrange
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {
+           "p6":"v6",             % collapse here
+           "p7":"v7"              % with condition
+         },
+         "p4": {
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
+    ObjectNode pattern = nodeFactory.objectNode();
+    pattern.set("p7", v7);
+    // Act
+    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonNode output = trimmer
+        .collapse(at("p6"), whenFound(pattern))
+        .trim();
+    // Assert
+    // {"p1":"v1","p2":{"p3":"v6","p4":{"p8":["v8","v9"]},"p5":"v5"}}
+    assertThat(output.get("p2").isObject(), is(true));
+    assertThat(output.get("p2").get("p3").isValueNode(), is(true));
+    assertThat(output.get("p2").get("p3"), is(equalTo(v6)));
+    assertThat(output.get("p2").get("p4").isObject(), is(true));
+    assertThat(output.get("p2").get("p5").isValueNode(), is(true));
+    assertThat(size(output), is(6));
+  }
+
+  @Test
+  public void shouldNotCollapseObjectNodeWithCondition() {
+    // Arrange
+    /*
+     { "p1":"v1",
+       "p2": {
+         "p3": {
+           "p6":"v6",             % collapse here
+           "p7":"v7"              % with wrong condition
+         },
+         "p4": {
+           "p8": ["v8","v9"]
+         },
+         "p5":"v5"
+       }
+     } */
+    setupTreeExample1();
+    ObjectNode pattern = nodeFactory.objectNode();
+    pattern.set("p5", v5);
+    // Act
+    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonNode output = trimmer
+        .collapse(at("p6"), whenFound(pattern))
+        .trim();
+    // Assert
+    assertThat(output, is(equalTo(root)));
+    assertThat(size(output), is(8));
   }
 
   @Test
