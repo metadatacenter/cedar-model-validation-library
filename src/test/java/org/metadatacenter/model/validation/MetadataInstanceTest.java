@@ -12,12 +12,14 @@ public class MetadataInstanceTest {
 
     InputStream in = MetadataInstanceTest.class.getClassLoader().getResourceAsStream(filename);
 
-    ObjectMapper mapper = new ObjectMapper();
-    JsonNode input = mapper.readTree(in);
+    JsonNode input = new ObjectMapper().readTree(in);
 
-    JsonNode output = new MetadataInstance(input).asJson();
-    String prettyPrint = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(output);
+    String jsonPrint = new MetadataInstance(input).asJson();
 
-    System.out.println(prettyPrint);
+    System.out.println(jsonPrint);
+
+    String rdfPrint = new MetadataInstance(input).asRdf();
+
+    System.out.println(rdfPrint);
   }
 }
