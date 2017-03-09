@@ -59,7 +59,7 @@ public class CollapseOperation implements Operation {
   private JsonNode collapseObjectNodeWithCondition(ObjectNode objectNode, TargetFields targetFields,
                                                    MatchingPattern matchingPattern) {
     if (targetFields.within(objectNode)) {
-      if (matchingPattern.foundMatch(objectNode)) {
+      if (matchingPattern.matches(objectNode)) {
         return doCollapsing(objectNode, targetFields);
       }
     }

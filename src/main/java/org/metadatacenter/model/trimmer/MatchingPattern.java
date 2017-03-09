@@ -22,7 +22,7 @@ public class MatchingPattern {
     return new MatchingPattern(matchingPattern);
   }
 
-  public boolean foundMatch(ObjectNode targetNode) {
+  public boolean matches(ObjectNode targetNode) {
     Set<String> patternNodeFields = getFieldNames(patternNode);
     Set<String> targetNodeFields = getFieldNames(targetNode);
     if (!targetNodeFields.containsAll(patternNodeFields)) {
