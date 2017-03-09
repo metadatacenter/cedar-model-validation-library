@@ -8,6 +8,11 @@ import java.io.InputStream;
 
 public class MetadataInstanceTest {
 
+  /*
+   * Example use:
+   *    $ java MetadataInstanceTest -json example.jsonld
+   *    $ java MetadataInstanceTest -rdf example.jsonld
+   */
   public static void main(String[] args) throws Exception {
     String option = args[0];
     String filename = args[1];
