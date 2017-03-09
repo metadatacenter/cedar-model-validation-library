@@ -20,13 +20,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.at;
 import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.whenFound;
 
-public class MetadataInstance {
+public class TemplateInstance {
 
   private static final ObjectNode IDENTIFIER_PATTERN = createTypeIdNode();
 
   private final String jsonldString;
 
-  public MetadataInstance(@Nonnull String jsonldString) {
+  public TemplateInstance(@Nonnull String jsonldString) {
     this.jsonldString = checkNotNull(jsonldString);
   }
 
