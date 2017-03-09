@@ -2,8 +2,8 @@ package org.metadatacenter.model.validation;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.at;
-import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.whenFound;
+import static org.metadatacenter.model.trimmer.MatchingPattern.whenFound;
+import static org.metadatacenter.model.trimmer.TargetFields.at;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;

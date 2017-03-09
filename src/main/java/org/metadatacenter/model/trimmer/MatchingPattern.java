@@ -4,7 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Sets;
 
+import javax.annotation.Nonnull;
 import java.util.Set;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MatchingPattern {
 
@@ -12,6 +15,11 @@ public class MatchingPattern {
 
   public MatchingPattern(ObjectNode patternNode) {
     this.patternNode = patternNode;
+  }
+
+  public static MatchingPattern whenFound(@Nonnull ObjectNode matchingPattern) {
+    checkNotNull(matchingPattern);
+    return new MatchingPattern(matchingPattern);
   }
 
   public boolean foundMatch(ObjectNode targetNode) {

@@ -20,21 +20,6 @@ public class JSONTreeTrimmer {
     this.rootNode = rootNode.deepCopy();
   }
 
-  public static TargetFields at(@Nonnull String... fieldNames) {
-    checkNotNull(fieldNames);
-    return new TargetFields(Sets.newHashSet(fieldNames));
-  }
-
-  public static TargetFields at(@Nonnull Set<String> fieldNames) {
-    checkNotNull(fieldNames);
-    return new TargetFields(fieldNames);
-  }
-
-  public static MatchingPattern whenFound(@Nonnull ObjectNode matchingPattern) {
-    checkNotNull(matchingPattern);
-    return new MatchingPattern(matchingPattern);
-  }
-
   /**
    * Removes all JSON nodes that have field names specified in the
    * <code>targetFields</code>.

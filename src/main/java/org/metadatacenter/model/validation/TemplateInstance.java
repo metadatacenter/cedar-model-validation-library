@@ -1,6 +1,5 @@
 package org.metadatacenter.model.validation;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,8 +16,8 @@ import java.io.IOException;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.at;
-import static org.metadatacenter.model.trimmer.JSONTreeTrimmer.whenFound;
+import static org.metadatacenter.model.trimmer.MatchingPattern.whenFound;
+import static org.metadatacenter.model.trimmer.TargetFields.at;
 
 public class TemplateInstance {
 

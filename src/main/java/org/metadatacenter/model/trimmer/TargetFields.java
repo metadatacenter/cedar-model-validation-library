@@ -20,6 +20,16 @@ public class TargetFields implements Iterable<String> {
     this.fieldSet = checkNotNull(fieldSet);
   }
 
+  public static TargetFields at(@Nonnull String... fieldNames) {
+    checkNotNull(fieldNames);
+    return new TargetFields(Sets.newHashSet(fieldNames));
+  }
+
+  public static TargetFields at(@Nonnull Set<String> fieldNames) {
+    checkNotNull(fieldNames);
+    return new TargetFields(fieldNames);
+  }
+
   public boolean within(@Nonnull ObjectNode objectNode) {
     checkNotNull(objectNode);
     Set<String> fieldsAtObjectNode = getFieldNames(objectNode);
