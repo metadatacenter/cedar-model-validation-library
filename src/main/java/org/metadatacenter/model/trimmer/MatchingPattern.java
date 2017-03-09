@@ -26,11 +26,21 @@ public class MatchingPattern {
 
   public boolean matches(@Nonnull ObjectNode targetNode) {
     checkNotNull(targetNode);
+    return allMatchingFieldsArePresent(targetNode)
+        && allValueNodesAreTheSame(targetNode);
+  }
+
+  private boolean allMatchingFieldsArePresent(ObjectNode targetNode) {
     Set<String> patternNodeFields = getFieldNames(patternNode);
     Set<String> targetNodeFields = getFieldNames(targetNode);
     if (!targetNodeFields.containsAll(patternNodeFields)) {
       return false;
     }
+    return true;
+  }
+
+  private boolean allValueNodesAreTheSame(@Nonnull ObjectNode targetNode) {
+    Set<String> patternNodeFields = getFieldNames(patternNode);
     for (String fieldName : patternNodeFields) {
       JsonNode valueNodeInPatternNode = patternNode.get(fieldName);
       JsonNode valueNodeInTargetNode = targetNode.get(fieldName);
