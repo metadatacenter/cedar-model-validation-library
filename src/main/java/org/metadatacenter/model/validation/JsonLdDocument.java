@@ -19,13 +19,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static org.metadatacenter.model.trimmer.MatchingPattern.whenFound;
 import static org.metadatacenter.model.trimmer.TargetFields.at;
 
-public class TemplateInstance {
+public class JsonLdDocument {
 
   private static final ObjectNode IDENTIFIER_PATTERN = createTypeIdNode();
 
   private final String jsonldString;
 
-  public TemplateInstance(@Nonnull String jsonldString) {
+  public JsonLdDocument(@Nonnull String jsonldString) {
     this.jsonldString = checkNotNull(jsonldString);
   }
 

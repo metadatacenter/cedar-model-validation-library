@@ -28,12 +28,12 @@ public class MetadataInstanceTest {
   }
 
   private static void printRdf(String input) throws JsonLdError, IOException {
-    String rdfPrint = new TemplateInstance(input).asRdf();
+    String rdfPrint = new JsonLdDocument(input).asRdf();
     System.out.println(rdfPrint);
   }
 
   private static void printJson(String input) throws IOException {
-    String jsonPrint = new TemplateInstance(input).asJson();
+    String jsonPrint = new JsonLdDocument(input).asJson();
     System.out.println(jsonPrint);
   }
 }
