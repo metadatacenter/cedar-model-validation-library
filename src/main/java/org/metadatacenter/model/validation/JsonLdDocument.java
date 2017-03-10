@@ -23,34 +23,32 @@ public class JsonLdDocument {
 
   private static final ObjectNode IDENTIFIER_PATTERN = createTypeIdNode();
 
-  private final String jsonldString;
+  private final JsonNode rootNode;
 
-  public JsonLdDocument(@Nonnull String jsonldString) {
-    this.jsonldString = checkNotNull(jsonldString);
+  public JsonLdDocument(@Nonnull JsonNode rootNode) {
+    this.rootNode = checkNotNull(rootNode);
   }
 
-  public String asOriginal() {
-    return jsonldString;
+  public JsonNode asJsonLd() {
+    return rootNode;
   }
 
-  public String asJson() throws IOException {
-    final JsonNode rootNode = createJsonNode(jsonldString);
+  public JsonNode asJson() throws IOException {
     JsonNode jsonDocument = new JSONTreeTrimmer(rootNode)
         .collapse(at(JSONLDToken.ID), whenFound(IDENTIFIER_PATTERN))
         .collapse(at(JSONLDToken.VALUE))
         .prune(at(JSONLDToken.AllTokensSpec10))
         .trim();
-    return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(jsonDocument);
+    return jsonDocument;
   }
 
   public String asRdf() throws JsonLdError, IOException {
-    Map<String, Object> result = new ObjectMapper().readValue(
-        jsonldString, new TypeReference<Map<String, Object>>() {});
-    return JsonLdProcessor.toRDF(result, new NQuadTripleCallback()).toString();
+    Map<String, Object> jsonMap = createJsonMap(rootNode);
+    return JsonLdProcessor.toRDF(jsonMap, new NQuadTripleCallback()).toString();
   }
 
-  private JsonNode createJsonNode(String inputString) throws IOException {
-    return new ObjectMapper().readTree(inputString);
+  private Map createJsonMap(JsonNode jsonNode) {
+    return new ObjectMapper().convertValue(jsonNode, Map.class);
   }
 
   private static ObjectNode createTypeIdNode() {
