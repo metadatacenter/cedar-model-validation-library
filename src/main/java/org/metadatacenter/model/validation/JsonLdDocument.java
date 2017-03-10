@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
-import org.metadatacenter.model.trimmer.JSONTreeTrimmer;
+import org.metadatacenter.model.trimmer.JsonTrimmer;
 
 import javax.annotation.Nonnull;
 
@@ -33,7 +33,7 @@ public class JsonLdDocument {
   }
 
   public JsonNode asJson() throws IOException {
-    JsonNode jsonDocument = new JSONTreeTrimmer(rootNode)
+    JsonNode jsonDocument = new JsonTrimmer(rootNode)
         .collapse(at(JsonLdToken.ID), whenFound(IDENTIFIER_PATTERN))
         .collapse(at(JsonLdToken.VALUE))
         .prune(at(JsonLdToken.AllTokensSpec10))

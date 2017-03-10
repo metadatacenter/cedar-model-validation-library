@@ -2,20 +2,19 @@ package org.metadatacenter.model.trimmer;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.collect.Sets;
 
 import javax.annotation.Nonnull;
 import java.util.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class JSONTreeTrimmer {
+public class JsonTrimmer {
 
   private final ObjectNode rootNode;
 
   private List<Operation> operationQueue = new ArrayList<>();
 
-  public JSONTreeTrimmer(@Nonnull JsonNode rootNode) {
+  public JsonTrimmer(@Nonnull JsonNode rootNode) {
     checkNotNull(rootNode);
     this.rootNode = rootNode.deepCopy();
   }
@@ -27,7 +26,7 @@ public class JSONTreeTrimmer {
    * @param targetFields a set of field names to prune
    * @return a reference to this object
    */
-  public JSONTreeTrimmer prune(@Nonnull TargetFields targetFields) {
+  public JsonTrimmer prune(@Nonnull TargetFields targetFields) {
     checkNotNull(targetFields);
     operationQueue.add(new PruneOperation(rootNode, targetFields));
     return this;
@@ -40,7 +39,7 @@ public class JSONTreeTrimmer {
    * @param targetFields a set of field names to collapse
    * @return a reference to this object
    */
-  public JSONTreeTrimmer collapse(@Nonnull TargetFields targetFields) {
+  public JsonTrimmer collapse(@Nonnull TargetFields targetFields) {
     checkNotNull(targetFields);
     operationQueue.add(new CollapseOperation(rootNode, targetFields));
     return this;
@@ -55,8 +54,8 @@ public class JSONTreeTrimmer {
    * @param matchingPattern   a matching pattern for the target fields to collapse
    * @return a reference to this object
    */
-  public JSONTreeTrimmer collapse(@Nonnull TargetFields targetFields,
-                                  @Nonnull MatchingPattern matchingPattern) {
+  public JsonTrimmer collapse(@Nonnull TargetFields targetFields,
+                              @Nonnull MatchingPattern matchingPattern) {
     checkNotNull(targetFields);
     checkNotNull(matchingPattern);
     CollapseOperation collapseOperation = new CollapseOperation(rootNode, targetFields);

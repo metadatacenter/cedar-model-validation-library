@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
 import org.junit.Test;
-import org.metadatacenter.model.trimmer.JSONTreeTrimmer;
+import org.metadatacenter.model.trimmer.JsonTrimmer;
 
 public class JSONTreeTrimmerTest {
 
@@ -42,7 +42,7 @@ public class JSONTreeTrimmerTest {
     root.set("p1", v1);
     root.set("p2", v2);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .prune(at("p3"))
         .trim();
@@ -57,7 +57,7 @@ public class JSONTreeTrimmerTest {
     root.set("p1", v1);
     root.set("p2", v2); // prune here
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     ObjectNode output = trimmer
         .prune(at("p2"))
         .trim();
@@ -73,7 +73,7 @@ public class JSONTreeTrimmerTest {
     root.set("p2", a1); // prune here
     a1.add(v2).add(v3);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     ObjectNode output = trimmer
         .prune(at("p2"))
         .trim();
@@ -90,7 +90,7 @@ public class JSONTreeTrimmerTest {
     o1.set("p3", v3);
     o1.set("p4", v4);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     ObjectNode output = trimmer
         .prune(at("p2"))
         .trim();
@@ -108,7 +108,7 @@ public class JSONTreeTrimmerTest {
     o1.set("p3", v3); // prune here
     o1.set("p4", v4);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     ObjectNode output = trimmer
         .prune(at("p3"))
         .trim();
@@ -129,7 +129,7 @@ public class JSONTreeTrimmerTest {
     o2.set("p1", v1); // prune here
     o2.set("p5", v5);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     ObjectNode output = trimmer
         .prune(at("p1"))
         .trim();
@@ -151,7 +151,7 @@ public class JSONTreeTrimmerTest {
     o2.set("p4", v4); // prune here
     o2.set("p5", v5); // prune here
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     ObjectNode output = trimmer
         .prune(at("p4", "p5"))
         .trim();
@@ -169,7 +169,7 @@ public class JSONTreeTrimmerTest {
     root.set("p1", v1);
     root.set("p2", v2);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p3"))
         .trim();
@@ -184,7 +184,7 @@ public class JSONTreeTrimmerTest {
     root.set("p1", v1);
     root.set("p2", v2);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p2"))
         .trim();
@@ -211,7 +211,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p3"))
         .trim();
@@ -243,7 +243,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p4"))
         .trim();
@@ -274,7 +274,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p5"))
         .trim();
@@ -303,7 +303,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p6"))
         .trim();
@@ -335,7 +335,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p7"))
         .trim();
@@ -367,7 +367,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p8"))
         .trim();
@@ -400,7 +400,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p3", "p6"))
         .trim();
@@ -429,7 +429,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p4", "p8"))
         .trim();
@@ -459,7 +459,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample1();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p3", "p4", "p5"))
         .trim();
@@ -498,7 +498,7 @@ public class JSONTreeTrimmerTest {
     ObjectNode pattern = nodeFactory.objectNode();
     pattern.set("p7", v7);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p6"), whenFound(pattern))
         .trim();
@@ -532,7 +532,7 @@ public class JSONTreeTrimmerTest {
     ObjectNode pattern = nodeFactory.objectNode();
     pattern.set("p5", v5);
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p6"), whenFound(pattern))
         .trim();
@@ -558,7 +558,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample2();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p3"))
         .trim();
@@ -586,7 +586,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample2();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p4"))
         .trim();
@@ -616,7 +616,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample2();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p5"))
         .trim();
@@ -646,7 +646,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample2();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p6"))
         .trim();
@@ -675,7 +675,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample2();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p7"))
         .trim();
@@ -704,7 +704,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample2();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .collapse(at("p3", "p4", "p5"))
         .trim();
@@ -739,7 +739,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample3();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .prune(at("p1"))
         .collapse(at("p5"))
@@ -768,7 +768,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample3();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .prune(at("p2"))
         .collapse(at("p7"))
@@ -797,7 +797,7 @@ public class JSONTreeTrimmerTest {
      } */
     setupTreeExample3();
     // Act
-    JSONTreeTrimmer trimmer = new JSONTreeTrimmer(root);
+    JsonTrimmer trimmer = new JsonTrimmer(root);
     JsonNode output = trimmer
         .prune(at("p4"))
         .collapse(at("p5"))
