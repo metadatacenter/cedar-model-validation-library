@@ -8,20 +8,20 @@ import org.apache.commons.io.IOUtils;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class MetadataInstanceTest {
+public class JsonLdDocumentMain {
 
   private static final ObjectMapper mapper = new ObjectMapper();
 
   /*
    * Example use:
-   *    $ java MetadataInstanceTest -json example.jsonld
-   *    $ java MetadataInstanceTest -rdf example.jsonld
+   *    $ java JsonLdDocumentMain -json example.jsonld
+   *    $ java JsonLdDocumentMain -rdf example.jsonld
    */
   public static void main(String[] args) throws Exception {
     String option = args[0];
     String filename = args[1];
 
-    InputStream in = MetadataInstanceTest.class.getClassLoader().getResourceAsStream(filename);
+    InputStream in = JsonLdDocumentMain.class.getClassLoader().getResourceAsStream(filename);
     JsonNode rootNode = mapper.readTree(in);
 
     if ("-json".equals(option)) {
