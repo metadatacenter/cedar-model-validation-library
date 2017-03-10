@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class JSONLDToken {
+public class JsonLdToken {
 
   /**
    * Based on JSON 1.0 specification document:

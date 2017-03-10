@@ -1,6 +1,5 @@
 package org.metadatacenter.model.validation;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -35,9 +34,9 @@ public class JsonLdDocument {
 
   public JsonNode asJson() throws IOException {
     JsonNode jsonDocument = new JSONTreeTrimmer(rootNode)
-        .collapse(at(JSONLDToken.ID), whenFound(IDENTIFIER_PATTERN))
-        .collapse(at(JSONLDToken.VALUE))
-        .prune(at(JSONLDToken.AllTokensSpec10))
+        .collapse(at(JsonLdToken.ID), whenFound(IDENTIFIER_PATTERN))
+        .collapse(at(JsonLdToken.VALUE))
+        .prune(at(JsonLdToken.AllTokensSpec10))
         .trim();
     return jsonDocument;
   }
