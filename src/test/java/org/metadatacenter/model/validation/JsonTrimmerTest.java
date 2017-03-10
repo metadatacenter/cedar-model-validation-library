@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.node.ValueNode;
 import org.junit.Test;
 import org.metadatacenter.model.trimmer.JsonTrimmer;
 
-public class JSONTreeTrimmerTest {
+public class JsonTrimmerTest {
 
   private final JsonNodeFactory nodeFactory = JsonNodeFactory.instance;
 
