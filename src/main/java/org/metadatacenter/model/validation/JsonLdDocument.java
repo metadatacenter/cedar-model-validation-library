@@ -32,7 +32,7 @@ public class JsonLdDocument {
     return rootNode;
   }
 
-  public JsonNode asJson() throws IOException {
+  public JsonNode asJson() {
     JsonNode jsonDocument = new JsonTrimmer(rootNode)
         .collapse(at(JsonLdToken.ID), whenFound(IDENTIFIER_PATTERN))
         .collapse(at(JsonLdToken.VALUE))
@@ -41,13 +41,13 @@ public class JsonLdDocument {
     return jsonDocument;
   }
 
-  public String asRdf() throws JsonLdError, IOException {
+  public String asRdf() throws JsonLdError {
     Map<String, Object> jsonMap = createJsonMap(rootNode);
     return JsonLdProcessor.toRDF(jsonMap, new NQuadTripleCallback()).toString();
   }
 
   private Map createJsonMap(JsonNode jsonNode) {
-    return new ObjectMapper().convertValue(jsonNode, Map.class);
+    return JsonLdMapper.MAPPER.convertValue(jsonNode, Map.class);
   }
 
   private static ObjectNode createTypeIdNode() {
