@@ -673,7 +673,8 @@
      "title": { "type": "string", "minLength": 1 },
      "description": { "type": "string" },
      "inputType": { "$ref": "#/definitions/templateFieldUIInputTypeFieldContent" },
-     "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] }
+     "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
+     "valueRecommendationEnabled": { "type": "boolean" }
      },
      "required": [ "description", "title", "inputType" ],
      "additionalProperties": false
