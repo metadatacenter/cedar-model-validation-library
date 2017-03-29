@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import com.github.fge.jsonschema.core.report.ConsoleProcessingReport;
+import com.github.fge.jsonschema.core.report.ListProcessingReport;
 import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
@@ -174,15 +175,15 @@ public class CEDARModelValidator
     JsonNode jsonSchemaPropertiesNode = artifactNode.get(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
 
     if (jsonSchemaPropertiesNode == null)
-      return Optional.of(generateProcessingReport("No JSON Schema properties field in artifact at path " + basePath));
+      return Optional.of(generateErrorProcessingReport("No JSON Schema properties field in artifact at path " + basePath));
 
     if (!jsonSchemaPropertiesNode.isObject())
       return Optional
-        .of(generateProcessingReport("Non-object JSON Schema properties field in artifact at path " + basePath));
+        .of(generateErrorProcessingReport("Non-object JSON Schema properties field in artifact at path " + basePath));
 
     if (!jsonSchemaPropertiesNode.fieldNames().hasNext())
       return Optional
-        .of(generateProcessingReport("Empty JSON Schema properties field in artifact at path " + basePath));
+        .of(generateErrorProcessingReport("Empty JSON Schema properties field in artifact at path " + basePath));
 
     Iterator<String> fieldNames = jsonSchemaPropertiesNode.fieldNames();
     while (fieldNames.hasNext()) {
@@ -193,7 +194,7 @@ public class CEDARModelValidator
       JsonNode childNode = jsonSchemaPropertiesNode.get(fieldName);
       if (childNode.isNull()) {
         return Optional
-          .of(generateProcessingReport("Null value for JSON Schema properties field artifact at path " + currentPath));
+          .of(generateErrorProcessingReport("Null value for JSON Schema properties field artifact at path " + currentPath));
       } else if (childNode.isObject()) {
 
         ObjectNode jsonSchemaPropertiesValueNode = (ObjectNode)childNode;
@@ -207,10 +208,10 @@ public class CEDARModelValidator
         for (JsonNode arrayNode : childNode) {
           JsonPointer arrayPath = currentPath.append(JsonPointer.compile("[" + arrayIndex + "]"));
           if (!arrayNode.isObject()) {
-            return Optional.of(generateProcessingReport(
+            return Optional.of(generateErrorProcessingReport(
               "Non object value in array for JSON Schema properties field artifact at path " + arrayPath));
           } else if (arrayNode.isNull()) {
-            return Optional.of(generateProcessingReport(
+            return Optional.of(generateErrorProcessingReport(
               "Null value in array for JSON Schema properties field artifact at path " + arrayPath));
           } else {
             ObjectNode jsonSchemaPropertiesValueNode = (ObjectNode)arrayNode;
@@ -223,7 +224,7 @@ public class CEDARModelValidator
           arrayIndex++;
         }
       } else
-        return Optional.of(generateProcessingReport(
+        return Optional.of(generateErrorProcessingReport(
           "Non object or array value for JSON Schema properties field in artifact at path " + currentPath));
     }
     return Optional.empty();
@@ -237,17 +238,17 @@ public class CEDARModelValidator
       JsonNode jsonLDTypeFieldValueNode = jsonSchemaPropertiesValueNode.get(JSON_LD_TYPE_FIELD_NAME);
       if (jsonLDTypeFieldValueNode == null)
         return Optional
-          .of(generateProcessingReport("Null value for JSON-LD @type field in artifact at path " + currentPath));
+          .of(generateErrorProcessingReport("Null value for JSON-LD @type field in artifact at path " + currentPath));
 
       if (!jsonLDTypeFieldValueNode.isTextual())
         return Optional
-          .of(generateProcessingReport("Non textual value for JSON-LD @type field in artifact at path " + currentPath));
+          .of(generateErrorProcessingReport("Non textual value for JSON-LD @type field in artifact at path " + currentPath));
 
       String jsonLDArtifactType = jsonLDTypeFieldValueNode.asText();
 
       if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_TYPE_URI)) {
         return Optional
-          .of(generateProcessingReport("Not expecting nested template in artifact at path " + currentPath));
+          .of(generateErrorProcessingReport("Not expecting nested template in artifact at path " + currentPath));
       } else if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_ELEMENT_TYPE_URI)) {
         Optional<ProcessingReport> report = validateTemplateElementNode(jsonSchemaPropertiesValueNode, currentPath);
 
@@ -259,7 +260,7 @@ public class CEDARModelValidator
         if (report.isPresent())
           return report;
       } else
-        return Optional.of(generateProcessingReport(
+        return Optional.of(generateErrorProcessingReport(
           "Unexpected nested artifact type " + jsonLDArtifactType + " in artifact at path " + currentPath));
     }
     return Optional.empty();
@@ -317,7 +318,7 @@ public class CEDARModelValidator
       } else
         return Optional.empty();
     } catch (ProcessingException | URISyntaxException | IOException e) {
-      return Optional.of(generateProcessingReport("internal error at path " + path.toString() + ":" + e.getMessage()));
+      return Optional.of(generateErrorProcessingReport("internal error at path " + path.toString() + ":" + e.getMessage()));
     }
   }
 
@@ -359,20 +360,16 @@ public class CEDARModelValidator
     return MAPPER.readTree(resource);
   }
 
-  private ProcessingReport generateProcessingReport(String message)
+  private ProcessingReport generateErrorProcessingReport(String message)
   {
-    ProcessingReport report = new ConsoleProcessingReport();
-
-    if (!report.isSuccess()) {
-      ProcessingMessage processingMessage = new ProcessingMessage();
-      processingMessage.setMessage(message);
-      try {
-        report.error(processingMessage);
-      } catch (ProcessingException e) {
-        // TODO Not sure what to do here.
-      }
+    ProcessingReport report = new ListProcessingReport();
+    ProcessingMessage processingMessage = new ProcessingMessage();
+    processingMessage.setMessage(message);
+    try {
+      report.error(processingMessage);
+    } catch (ProcessingException e) {
+      // TODO Not sure what to do here.
     }
-
     return report;
   }
 
