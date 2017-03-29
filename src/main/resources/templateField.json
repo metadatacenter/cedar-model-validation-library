@@ -542,7 +542,7 @@
      { "$ref": "#/definitions/coreJSONSchemaTemplateFieldFields" },
      { "$ref": "#/definitions/templateFieldJSONLDContextField" },
      { "$ref": "#/definitions/templateFieldJSONLDTypeField" },
-     { "$ref": "#/definitions/jsonLDIDField" },
+     { "$ref": "#/definitions/templateFieldJSONLDIDField" },
      { "$ref": "#/definitions/templateFieldUIField" },
      { "$ref": "#/definitions/valueConstraintsField" },
      { "$ref": "#/definitions/templateFieldSingleValueContent" },
@@ -578,6 +578,15 @@
      "^(?!pav)(?!schema)(?!oslc)(?!xsd)(?!pav:createdOn)(?!pav:createdBy)(?!pav:lastUpdatedOn)(?!oslc:modifiedBy)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
      },
      "additionalProperties": false
+    }
+    ,
+    "templateFieldJSONLDIDField": 
+    {
+     "description": "A schema that describes a JSON-LD '@id' field in a template field",
+     "type": "object",
+     "properties": {
+     "@id": { "type": [ "string", "null" ], "format": "uri" }
+     }
     }
     ,
     "templateFieldJSONLDTypeField": 
@@ -1044,7 +1053,7 @@
      { "$ref": "#/definitions/coreJSONSchemaTemplateFieldFields" },
      { "$ref": "#/definitions/templateFieldJSONLDContextField" },
      { "$ref": "#/definitions/templateFieldJSONLDTypeField" },
-     { "$ref": "#/definitions/jsonLDIDField" },
+     { "$ref": "#/definitions/templateFieldJSONLDIDField" },
      { "$ref": "#/definitions/templateFieldUIField" },
      { "$ref": "#/definitions/valueConstraintsField" },
      { "$ref": "#/definitions/templateFieldSingleValueContent" },
