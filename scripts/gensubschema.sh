@@ -34,6 +34,7 @@ ${scripts_dir}/schemawrap.sh ${output_dir}/templateUIField.json templateUIField
 
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldJSONLDContextField.json templateFieldJSONLDContextField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldJSONLDTypeField.json templateFieldJSONLDTypeField
+${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldJSONLDIDField.json templateFieldJSONLDIDField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldUIField.json templateFieldUIField
 ${scripts_dir}/schemawrap.sh ${output_dir}/valueConstraintsField.json valueConstraintsField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldSingleValueContent.json templateFieldSingleValueContent
