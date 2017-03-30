@@ -711,7 +711,7 @@
      "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
      "_valueLabel": { "$ref": "#/definitions/valueLabelFieldContent" }
      },
-     "required": [ "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "_valueLabel" ],
+     "required": [ "@type", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "_valueLabel" ],
      "additionalProperties": false
     }
     ,
