@@ -29,7 +29,6 @@ public class CEDARModelValidator
   private static final String JSON_SCHEMA_PROPERTIES_FIELD_NAME = "properties";
 
   private static final String JSON_LD_TYPE_FIELD_NAME = "@type";
-  private static final String JSON_LD_ID_FIELD_NAME = "@id";
 
   private static final String CEDAR_TEMPLATE_TYPE_URI = "https://schema.metadatacenter.org/core/Template";
   private static final String CEDAR_TEMPLATE_ELEMENT_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateElement";
@@ -49,8 +48,6 @@ public class CEDARModelValidator
   private static final String TEMPLATE_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME = "templateJSONLDContextField.json";
   private static final String TEMPLATE_UI_FIELD_SCHEMA_RESOURCE_NAME = "templateUIField.json";
   private static final String TEMPLATE_REQUIRED_FIELD_SCHEMA_RESOURCE_NAME = "templateRequiredField.json";
-  private static final String TEMPLATE_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME = "templatePropertiesField.json";
-  private static final String TEMPLATE_SCHEMA_RESOURCE_NAME = "template.json";
 
   private static final String TEMPLATE_SCHEMA_RESOURCE_NAMES[] = {
     CORE_JSON_SCHEMA_TEMPLATE_FIELDS_SCHEMA_RESOURCE_NAME, TEMPLATE_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME,
@@ -60,9 +57,7 @@ public class CEDARModelValidator
   private static final String CORE_JSON_SCHEMA_TEMPLATE_ELEMENT_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaTemplateElementFields.json";
   private static final String TEMPLATE_ELEMENT_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "templateElementJSONLDTypeField.json";
   private static final String TEMPLATE_ELEMENT_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME = "templateElementJSONLDContextField.json";
-  private static final String TEMPLATE_ELEMENT_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME = "templateElementPropertiesField.json";
   private static final String TEMPLATE_ELEMENT_UI_FIELD_SCHEMA_RESOURCE_NAME = "templateElementUIField.json";
-  private static final String TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAME = "templateElement.json";
 
   private static final String TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES[] = {
     CORE_JSON_SCHEMA_TEMPLATE_ELEMENT_FIELDS_SCHEMA_RESOURCE_NAME,
