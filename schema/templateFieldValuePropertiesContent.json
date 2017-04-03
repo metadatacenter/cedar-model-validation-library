@@ -12,6 +12,6 @@
         "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" },
         "_valueLabel": { "$ref": "file:valueLabelFieldContent.json" }
     },
-    "required": [ "@type", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "_valueLabel" ],
+    "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
     "additionalProperties": false
 }
