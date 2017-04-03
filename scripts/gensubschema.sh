@@ -32,6 +32,7 @@ ${scripts_dir}/schemawrap.sh ${output_dir}/templatePropertiesField.json template
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateRequiredField.json templateRequiredField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateUIField.json templateUIField
 
+${scripts_dir}/schemawrap.sh ${output_dir}/coreJSONSchemaTemplateFieldFields.json coreJSONSchemaTemplateFieldFields
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldJSONLDContextField.json templateFieldJSONLDContextField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldJSONLDTypeField.json templateFieldJSONLDTypeField
 ${scripts_dir}/schemawrap.sh ${output_dir}/templateFieldJSONLDIDField.json templateFieldJSONLDIDField

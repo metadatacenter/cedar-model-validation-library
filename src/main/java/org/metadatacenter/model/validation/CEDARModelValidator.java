@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.report.ConsoleProcessingReport;
 import com.github.fge.jsonschema.core.report.ListProcessingReport;
 import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
@@ -27,8 +26,15 @@ public class CEDARModelValidator
   private final JsonValidator jsonSchemaValidator;
 
   private static final String JSON_SCHEMA_PROPERTIES_FIELD_NAME = "properties";
+  private static final String VALUE_CONSTRAINTS_FIELD_NAME = "_valueConstraints";
+  private static final String ONTOLOGIES_CONSTRAINT_FIELD_NAME = "ontologies";
+  private static final String BRANCHES_CONSTRAINT_FIELD_NAME = "branches";
+  private static final String CLASSES_CONSTRAINT_FIELD_NAME = "classes";
+  private static final String VALUE_SETS_CONSTRAINT_FIELD_NAME = "branches";
 
   private static final String JSON_LD_TYPE_FIELD_NAME = "@type";
+  private static final String JSON_LD_VALUE_FIELD_NAME = "@value";
+  private static final String JSON_LD_ID_FIELD_NAME = "@id";
 
   private static final String CEDAR_TEMPLATE_TYPE_URI = "https://schema.metadatacenter.org/core/Template";
   private static final String CEDAR_TEMPLATE_ELEMENT_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateElement";
@@ -65,22 +71,22 @@ public class CEDARModelValidator
     TEMPLATE_ELEMENT_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME,
     TEMPLATE_ELEMENT_UI_FIELD_SCHEMA_RESOURCE_NAME };
 
+  private static final String CORE_JSON_SCHEMA_TEMPLATE_FIELD_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaTemplateFieldFields.json";
   private static final String TEMPLATE_FIELD_JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldJSONLDIDField.json";
   private static final String TEMPLATE_FIELD_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldJSONLDTypeField.json";
   private static final String TEMPLATE_FIELD_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldJSONLDContextField.json";
   private static final String VALUE_CONSTRAINTS_FIELD_SCHEMA_RESOURCE_NAME = "valueConstraintsField.json";
   private static final String TEMPLATE_FIELD_SINGLE_VALUE_CONTENT_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldSingleValueContent.json";
   private static final String TEMPLATE_FIELD_UI_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldUIField.json";
-  private static final String TEMPLATE_FIELD_SCHEMA_RESOURCE_NAME = "templateField.json";
 
   private static final String CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[] = { CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME,
     TEMPLATE_FIELD_JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME, JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME,
     PROVENANCE_FIELDS_SCHEMA_RESOURCE_NAME};
 
-  private static final String TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[] = {
+  private static final String TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[] = { CORE_JSON_SCHEMA_TEMPLATE_FIELD_FIELDS_SCHEMA_RESOURCE_NAME,
     TEMPLATE_FIELD_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME, TEMPLATE_FIELD_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME,
     VALUE_CONSTRAINTS_FIELD_SCHEMA_RESOURCE_NAME, TEMPLATE_FIELD_SINGLE_VALUE_CONTENT_FIELD_SCHEMA_RESOURCE_NAME,
-    TEMPLATE_FIELD_UI_FIELD_SCHEMA_RESOURCE_NAME, TEMPLATE_FIELD_SCHEMA_RESOURCE_NAME };
+    TEMPLATE_FIELD_UI_FIELD_SCHEMA_RESOURCE_NAME };
 
   public CEDARModelValidator()
   {
@@ -148,11 +154,11 @@ public class CEDARModelValidator
     return Optional.empty();
   }
 
-  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode, JsonPointer path)
+  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode, JsonPointer basePath)
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, path);
+      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, basePath);
 
       if (report.isPresent())
         return report;
@@ -161,10 +167,15 @@ public class CEDARModelValidator
     for (int resourceNameIndex = 0;
          resourceNameIndex < TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, path);
+      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, basePath);
 
       if (report.isPresent())
         return report;
+    }
+
+    Optional<ProcessingReport> propertiesReport = validateTemplateFieldPropertiesNode(templateFieldNode, basePath);
+    if (propertiesReport.isPresent()) {
+      return propertiesReport;
     }
 
     return Optional.empty();
@@ -264,6 +275,129 @@ public class CEDARModelValidator
           "Unexpected nested artifact type " + jsonLDArtifactType + " in artifact at path " + currentPath));
     }
     return Optional.empty();
+  }
+
+  private Optional<ProcessingReport> validateTemplateFieldPropertiesNode(JsonNode templateFieldNode, JsonPointer basePath)
+  {
+    JsonNode propertiesNode = templateFieldNode.get(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
+    JsonPointer currentPath = basePath.append(JsonPointer.compile("/properties/"));
+
+    Optional<ProcessingReport> report;
+    if (hasValueConstraints(templateFieldNode)) {
+      report = validateIdFieldIsRequired(propertiesNode, currentPath);
+    } else {
+      report = validateValueFieldIsRequired(propertiesNode, currentPath);
+    }
+    return report;
+  }
+
+  private Optional<ProcessingReport> validateIdFieldIsRequired(JsonNode propertiesNode, JsonPointer path) {
+    ProcessingReport report = null;
+    if (hasBoth(JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
+      report = generateErrorProcessingReport(
+          String.format("A template field with value constraints must not have a '%s' field at path %s",
+              JSON_LD_VALUE_FIELD_NAME, path));
+    }
+    if (hasNone(JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
+      report = generateErrorProcessingReport(
+          String.format("A template field with value constraints must have an '%s' field at path %s",
+              JSON_LD_ID_FIELD_NAME, path));
+    }
+    if (isMisused(JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
+      report = generateErrorProcessingReport(
+          String.format("A template field with value constraints must have an '%s' and not a '%s' field at path %s",
+              JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, path));
+    }
+    return Optional.ofNullable(report);
+  }
+
+  private Optional<ProcessingReport> validateValueFieldIsRequired(JsonNode propertiesNode, JsonPointer path) {
+    ProcessingReport report = null;
+    if (hasBoth(JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, propertiesNode)) {
+      report = generateErrorProcessingReport(
+          String.format("A template field without value constraints must not have an '%s' field at path %s",
+              JSON_LD_ID_FIELD_NAME, path));
+    }
+    if (hasNone(JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, propertiesNode)) {
+      report = generateErrorProcessingReport(
+          String.format("A template field without value constraints must have a '%s' field at path %s",
+              JSON_LD_VALUE_FIELD_NAME, path));
+    }
+    if (isMisused(JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, propertiesNode)) {
+      report = generateErrorProcessingReport(
+          String.format("A template field without value constraints must have a '%s' and not an '%s' field at path %s",
+              JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, path));
+    }
+    return Optional.ofNullable(report);
+  }
+
+  private boolean hasValueConstraints(JsonNode templateFieldNode)
+  {
+    JsonNode valueConstraintsNode = templateFieldNode.get(VALUE_CONSTRAINTS_FIELD_NAME);
+    return hasOntologySources(valueConstraintsNode) ||
+        hasBranchSources(valueConstraintsNode) ||
+        hasClassSources(valueConstraintsNode) ||
+        hasValueSetSources(valueConstraintsNode);
+  }
+
+  private boolean hasOntologySources(JsonNode valueConstraintsNode) {
+    boolean hasSources = false;
+    if (valueConstraintsNode.has(ONTOLOGIES_CONSTRAINT_FIELD_NAME)) {
+      JsonNode ontologiesNode = valueConstraintsNode.get(ONTOLOGIES_CONSTRAINT_FIELD_NAME);
+      if (hasElements(ontologiesNode)) {
+        hasSources = true;
+      }
+    }
+    return hasSources;
+  }
+
+  private boolean hasBranchSources(JsonNode valueConstraintsNode) {
+    boolean hasSources = false;
+    if (valueConstraintsNode.has(BRANCHES_CONSTRAINT_FIELD_NAME)) {
+      JsonNode branchesNode = valueConstraintsNode.get(BRANCHES_CONSTRAINT_FIELD_NAME);
+      if (hasElements(branchesNode)) {
+        hasSources = true;
+      }
+    }
+    return hasSources;
+  }
+
+  private boolean hasClassSources(JsonNode valueConstraintsNode) {
+    boolean hasSources = false;
+    if (valueConstraintsNode.has(CLASSES_CONSTRAINT_FIELD_NAME)) {
+      JsonNode classesNode = valueConstraintsNode.get(CLASSES_CONSTRAINT_FIELD_NAME);
+      if (hasElements(classesNode)) {
+        hasSources = true;
+      }
+    }
+    return hasSources;
+  }
+
+  private boolean hasValueSetSources(JsonNode valueConstraintsNode) {
+    boolean hasSources = false;
+    if (valueConstraintsNode.has(VALUE_SETS_CONSTRAINT_FIELD_NAME)) {
+      JsonNode valueSetsNode = valueConstraintsNode.get(VALUE_SETS_CONSTRAINT_FIELD_NAME);
+      if (hasElements(valueSetsNode)) {
+        hasSources = true;
+      }
+    }
+    return hasSources;
+  }
+
+  private static boolean hasBoth(String field1, String field2, JsonNode objectNode) {
+    return objectNode.has(field1) && objectNode.has(field2);
+  }
+
+  private static boolean hasNone(String field1, String field2, JsonNode objectNode) {
+    return !objectNode.has(field1) && !objectNode.has(field2);
+  }
+
+  private static boolean isMisused(String correctField, String incorrectField, JsonNode objectNode) {
+    return !objectNode.has(correctField) && objectNode.has(incorrectField);
+  }
+
+  private static boolean hasElements(JsonNode node) {
+    return (node.size() > 0) ? true : false;
   }
 
   public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode)
