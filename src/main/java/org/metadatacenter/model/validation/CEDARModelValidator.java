@@ -181,6 +181,12 @@ public class CEDARModelValidator
     return Optional.empty();
   }
 
+  public Optional<ProcessingReport> validateTemplateInstanceNode(JsonNode templateInstanceNode, JsonNode templateSchema)
+      throws URISyntaxException, IOException, ProcessingException {
+    ProcessingReport report = jsonSchemaValidate(templateSchema, templateInstanceNode);
+    return Optional.ofNullable(report);
+  }
+
   private Optional<ProcessingReport> validateJSONSchemaPropertiesNode(JsonNode artifactNode, JsonPointer basePath)
   {
     JsonNode jsonSchemaPropertiesNode = artifactNode.get(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
