@@ -27,15 +27,11 @@ public class ValidateTemplateField
       JsonNode templateFieldNode = MAPPER.readTree(templateFieldFile);
 
       CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
-      Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateFieldNode(templateFieldNode);
-
-      if (processingReport.isPresent()) {
-        for (ProcessingMessage processingMessage : processingReport.get()) {
-          processingMessage.setLogLevel(LogLevel.DEBUG);
-          System.out.println("Message: " + processingMessage.getMessage());
-        }
-      } else
-        System.out.println("Template field is valid");
+      ProcessingReport processingReport = cedarModelValidator.validateTemplateFieldNode(templateFieldNode);
+      for (ProcessingMessage processingMessage : processingReport) {
+        processingMessage.setLogLevel(LogLevel.DEBUG);
+        System.out.println("Message: " + processingMessage.getMessage());
+      }
     } catch (ProcessingException e) {
       System.err.println("Processing exception: " + e.getMessage());
     } catch (IOException e) {

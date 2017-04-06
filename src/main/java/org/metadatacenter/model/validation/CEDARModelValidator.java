@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import com.github.fge.jsonschema.core.report.ListProcessingReport;
+import com.github.fge.jsonschema.core.report.LogLevel;
 import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
@@ -94,7 +95,7 @@ public class CEDARModelValidator
     this.jsonSchemaValidator = factory.getValidator();
   }
 
-  public Optional<ProcessingReport> validateTemplateNode(JsonNode templateNode)
+  public ProcessingReport validateTemplateNode(JsonNode templateNode)
   {
     JsonPointer path = JsonPointer.compile("/");
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
@@ -102,45 +103,45 @@ public class CEDARModelValidator
       Optional<ProcessingReport> report = validateArtifact(resourceName, templateNode, path);
 
       if (report.isPresent())
-        return report;
+        return report.get();
     }
 
     Optional<ProcessingReport> propertiesReport = validateJSONSchemaPropertiesNode(templateNode, path);
 
     if (propertiesReport.isPresent())
-      return propertiesReport;
+      return propertiesReport.get();
 
     for (int resourceNameIndex = 0; resourceNameIndex < TEMPLATE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
       Optional<ProcessingReport> report = validateArtifact(resourceName, templateNode, path);
 
       if (report.isPresent())
-        return report;
+        return report.get();
     }
 
-    return Optional.empty();
+    return newSuccessProcessingReport();
   }
 
-  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode)
+  public ProcessingReport validateTemplateElementNode(JsonNode templateElementNode)
   {
     JsonPointer path = JsonPointer.compile("/");
     return validateTemplateElementNode(templateElementNode, path);
   }
 
-  public Optional<ProcessingReport> validateTemplateElementNode(JsonNode templateElementNode, JsonPointer basePath)
+  public ProcessingReport validateTemplateElementNode(JsonNode templateElementNode, JsonPointer basePath)
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
       Optional<ProcessingReport> report = validateArtifact(resourceName, templateElementNode, basePath);
 
       if (report.isPresent())
-        return report;
+        return report.get();
     }
 
     Optional<ProcessingReport> propertiesReport = validateJSONSchemaPropertiesNode(templateElementNode, basePath);
 
     if (propertiesReport.isPresent())
-      return propertiesReport;
+      return propertiesReport.get();
 
     for (int resourceNameIndex = 0;
          resourceNameIndex < TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
@@ -148,20 +149,27 @@ public class CEDARModelValidator
       Optional<ProcessingReport> report = validateArtifact(resourceName, templateElementNode, basePath);
 
       if (report.isPresent())
-        return report;
+        return report.get();
     }
 
-    return Optional.empty();
+    return newSuccessProcessingReport();
   }
 
-  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode, JsonPointer basePath)
+  public ProcessingReport validateTemplateFieldNode(JsonNode templateFieldNode)
+      throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
+  {
+    JsonPointer path = JsonPointer.compile("/");
+    return validateTemplateFieldNode(templateFieldNode, path);
+  }
+
+  public ProcessingReport validateTemplateFieldNode(JsonNode templateFieldNode, JsonPointer basePath)
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
       Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, basePath);
 
       if (report.isPresent())
-        return report;
+        return report.get();
     }
 
     for (int resourceNameIndex = 0;
@@ -170,21 +178,27 @@ public class CEDARModelValidator
       Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, basePath);
 
       if (report.isPresent())
-        return report;
+        return report.get();
     }
 
     Optional<ProcessingReport> propertiesReport = validateTemplateFieldPropertiesNode(templateFieldNode, basePath);
     if (propertiesReport.isPresent()) {
-      return propertiesReport;
+      return propertiesReport.get();
     }
 
-    return Optional.empty();
+    return newSuccessProcessingReport();
   }
 
-  public Optional<ProcessingReport> validateTemplateInstanceNode(JsonNode templateInstanceNode, JsonNode templateSchema)
+  public ProcessingReport validateTemplateInstanceNode(JsonNode templateInstanceNode, JsonNode templateSchema)
       throws URISyntaxException, IOException, ProcessingException {
     ProcessingReport report = jsonSchemaValidate(templateSchema, templateInstanceNode);
-    return Optional.ofNullable(report);
+    return report;
+  }
+
+  private static ProcessingReport newSuccessProcessingReport() {
+    ListProcessingReport report = new ListProcessingReport();
+    report.log(LogLevel.INFO, new ProcessingMessage().setMessage("success"));
+    return report;
   }
 
   private Optional<ProcessingReport> validateJSONSchemaPropertiesNode(JsonNode artifactNode, JsonPointer basePath)
@@ -267,12 +281,12 @@ public class CEDARModelValidator
         return Optional
           .of(generateErrorProcessingReport("Not expecting nested template in artifact at path " + currentPath));
       } else if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_ELEMENT_TYPE_URI)) {
-        Optional<ProcessingReport> report = validateTemplateElementNode(jsonSchemaPropertiesValueNode, currentPath);
+        Optional<ProcessingReport> report = validateInnerTemplateElementNode(jsonSchemaPropertiesValueNode, currentPath);
 
         if (report.isPresent())
           return report;
       } else if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_FIELD_TYPE_URI)) {
-        Optional<ProcessingReport> report = validateTemplateFieldNode(jsonSchemaPropertiesValueNode, currentPath);
+        Optional<ProcessingReport> report = validateInnerTemplateFieldNode(jsonSchemaPropertiesValueNode, currentPath);
 
         if (report.isPresent())
           return report;
@@ -280,6 +294,58 @@ public class CEDARModelValidator
         return Optional.of(generateErrorProcessingReport(
           "Unexpected nested artifact type " + jsonLDArtifactType + " in artifact at path " + currentPath));
     }
+    return Optional.empty();
+  }
+
+  private Optional<ProcessingReport> validateInnerTemplateElementNode(ObjectNode templateElementNode, JsonPointer basePath) {
+    for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      Optional<ProcessingReport> report = validateArtifact(resourceName, templateElementNode, basePath);
+
+      if (report.isPresent())
+        return report;
+    }
+
+    Optional<ProcessingReport> propertiesReport = validateJSONSchemaPropertiesNode(templateElementNode, basePath);
+
+    if (propertiesReport.isPresent())
+      return propertiesReport;
+
+    for (int resourceNameIndex = 0;
+         resourceNameIndex < TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      Optional<ProcessingReport> report = validateArtifact(resourceName, templateElementNode, basePath);
+
+      if (report.isPresent())
+        return report;
+    }
+
+    return Optional.empty();
+  }
+
+  private Optional<ProcessingReport> validateInnerTemplateFieldNode(ObjectNode templateFieldNode, JsonPointer basePath) {
+    for (int resourceNameIndex = 0; resourceNameIndex < CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, basePath);
+
+      if (report.isPresent())
+        return report;
+    }
+
+    for (int resourceNameIndex = 0;
+         resourceNameIndex < TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
+      String resourceName = TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
+      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, basePath);
+
+      if (report.isPresent())
+        return report;
+    }
+
+    Optional<ProcessingReport> propertiesReport = validateTemplateFieldPropertiesNode(templateFieldNode, basePath);
+    if (propertiesReport.isPresent()) {
+      return propertiesReport;
+    }
+
     return Optional.empty();
   }
 
@@ -406,13 +472,6 @@ public class CEDARModelValidator
     return (node.size() > 0) ? true : false;
   }
 
-  public Optional<ProcessingReport> validateTemplateFieldNode(JsonNode templateFieldNode)
-    throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
-  {
-    JsonPointer path = JsonPointer.compile("/");
-    return validateTemplateFieldNode(templateFieldNode, path);
-  }
-
   /**
    * Validate a JSON node against a JSON Schema node
    *
@@ -424,7 +483,7 @@ public class CEDARModelValidator
    * @throws URISyntaxException  If a URI syntax exception occurs during processing
    */
 
-  public ProcessingReport jsonSchemaValidate(JsonNode schemaNode, JsonNode instanceNode)
+  private ProcessingReport jsonSchemaValidate(JsonNode schemaNode, JsonNode instanceNode)
     throws ProcessingException, IOException, URISyntaxException
   {
     JsonSchema schema = JsonSchemaFactory.byDefault().getJsonSchema(schemaNode);

@@ -25,15 +25,11 @@ public class ValidateTemplate
       JsonNode templateNode = MAPPER.readTree(templateFile);
 
       CEDARModelValidator cedarModelValidator = new CEDARModelValidator();
-      Optional<ProcessingReport> processingReport = cedarModelValidator.validateTemplateNode(templateNode);
-
-      if (processingReport.isPresent()) {
-        for (ProcessingMessage processingMessage : processingReport.get()) {
-          processingMessage.setLogLevel(LogLevel.DEBUG);
-          System.out.println("Message: " + processingMessage.getMessage());
-        }
-      } else
-        System.out.println("Template is valid");
+      ProcessingReport processingReport = cedarModelValidator.validateTemplateNode(templateNode);
+      for (ProcessingMessage processingMessage : processingReport) {
+        processingMessage.setLogLevel(LogLevel.DEBUG);
+        System.out.println("Message: " + processingMessage.getMessage());
+      }
     } catch (IOException e) {
       System.err.println("IO exception: " + e.getMessage());
     } catch (IllegalArgumentException e) {

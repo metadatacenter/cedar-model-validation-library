@@ -28,7 +28,7 @@ public class JSONSchemaValidate
     JsonNode schema = MAPPER.readTree(schemaFile);
     JsonNode instance = MAPPER.readTree(instanceFile);
 
-    ProcessingReport processingReport = cedarModelValidator.jsonSchemaValidate(schema, instance);
+    ProcessingReport processingReport = cedarModelValidator.validateTemplateInstanceNode(instance, schema);
 
     for (ProcessingMessage processingMessage : processingReport) {
       processingMessage.setLogLevel(LogLevel.DEBUG);
