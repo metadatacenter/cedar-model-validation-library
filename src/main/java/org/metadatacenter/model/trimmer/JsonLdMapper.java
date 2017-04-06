@@ -1,4 +1,4 @@
-package org.metadatacenter.model.validation;
+package org.metadatacenter.model.trimmer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

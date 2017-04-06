@@ -1,17 +1,14 @@
-package org.metadatacenter.model.validation;
+package org.metadatacenter.model.trimmer;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
-import org.metadatacenter.model.trimmer.JsonTrimmer;
 
 import javax.annotation.Nonnull;
 
-import java.io.IOException;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;

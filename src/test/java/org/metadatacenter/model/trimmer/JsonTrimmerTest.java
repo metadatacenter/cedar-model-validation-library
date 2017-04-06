@@ -1,4 +1,4 @@
-package org.metadatacenter.model.validation;
+package org.metadatacenter.model.trimmer;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
