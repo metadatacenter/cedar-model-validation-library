@@ -9,7 +9,6 @@ import com.github.fge.jsonschema.core.report.ProcessingReport;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
 
 public class ValidateTemplate
 {
