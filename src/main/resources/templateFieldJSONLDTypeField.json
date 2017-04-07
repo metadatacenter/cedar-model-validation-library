@@ -608,7 +608,13 @@
      "description": "A schema that describes a template field's JSON-LD '@type' field",
      "type": "object",
      "properties": {
-     "@type": { "type": "string", "format": "uri", "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ] }
+     "@type": {
+     "type": "string",
+     "format": "uri",
+     "enum": [
+     "https://schema.metadatacenter.org/core/TemplateField",
+     "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+     }
      },
      "required": [ "@type" ]
     }
@@ -1065,7 +1071,13 @@
      "description": "A schema that describes a template field's JSON-LD '@type' field",
      "type": "object",
      "properties": {
-     "@type": { "type": "string", "format": "uri", "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ] }
+     "@type": {
+     "type": "string",
+     "format": "uri",
+     "enum": [
+     "https://schema.metadatacenter.org/core/TemplateField",
+     "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+     }
      },
      "required": [ "@type" ]
 }
