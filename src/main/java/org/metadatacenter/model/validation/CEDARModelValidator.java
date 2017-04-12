@@ -40,6 +40,7 @@ public class CEDARModelValidator
   private static final String CEDAR_TEMPLATE_TYPE_URI = "https://schema.metadatacenter.org/core/Template";
   private static final String CEDAR_TEMPLATE_ELEMENT_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateElement";
   private static final String CEDAR_TEMPLATE_FIELD_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateField";
+  private static final String CEDAR_STATIC_TEMPLATE_FIELD_TYPE_URI = "https://schema.metadatacenter.org/core/StaticTemplateField";
 
   private static final String CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaFields.json";
   private static final String JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME = "jsonLDIDField.json";
@@ -285,7 +286,8 @@ public class CEDARModelValidator
 
         if (report.isPresent())
           return report;
-      } else if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_FIELD_TYPE_URI)) {
+      } else if (jsonLDArtifactType.equals(CEDAR_TEMPLATE_FIELD_TYPE_URI)
+          || jsonLDArtifactType.equals(CEDAR_STATIC_TEMPLATE_FIELD_TYPE_URI)) {
         Optional<ProcessingReport> report = validateInnerTemplateFieldNode(jsonSchemaPropertiesValueNode, currentPath);
 
         if (report.isPresent())
