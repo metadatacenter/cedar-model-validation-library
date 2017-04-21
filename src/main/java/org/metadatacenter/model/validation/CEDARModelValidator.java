@@ -390,19 +390,10 @@ public class CEDARModelValidator implements ModelValidator
   private Optional<ProcessingReport> validateIdFieldIsRequired(JsonNode propertiesNode, JsonPointer path) {
     ProcessingReport report = null;
     if (hasBoth(JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
-      report = generateErrorProcessingReport(
-          String.format("A template field with value constraints must not have a '%s' field at path %s",
-              JSON_LD_VALUE_FIELD_NAME, path));
+      report = generateErrorProcessingReport("object has invalid properties ([\"@value\"])");
     }
-    if (hasNone(JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
-      report = generateErrorProcessingReport(
-          String.format("A template field with value constraints must have an '%s' field at path %s",
-              JSON_LD_ID_FIELD_NAME, path));
-    }
-    if (isMisused(JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
-      report = generateErrorProcessingReport(
-          String.format("A template field with value constraints must have an '%s' and not a '%s' field at path %s",
-              JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, path));
+    if (hasMissing(JSON_LD_ID_FIELD_NAME, propertiesNode)) {
+      report = generateErrorProcessingReport("object has missing required properties ([\"@id\"])");
     }
     return Optional.ofNullable(report);
   }
@@ -410,19 +401,10 @@ public class CEDARModelValidator implements ModelValidator
   private Optional<ProcessingReport> validateValueFieldIsRequired(JsonNode propertiesNode, JsonPointer path) {
     ProcessingReport report = null;
     if (hasBoth(JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, propertiesNode)) {
-      report = generateErrorProcessingReport(
-          String.format("A template field without value constraints must not have an '%s' field at path %s",
-              JSON_LD_ID_FIELD_NAME, path));
+      report = generateErrorProcessingReport("object has invalid properties ([\"@id\"])");
     }
-    if (hasNone(JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, propertiesNode)) {
-      report = generateErrorProcessingReport(
-          String.format("A template field without value constraints must have a '%s' field at path %s",
-              JSON_LD_VALUE_FIELD_NAME, path));
-    }
-    if (isMisused(JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, propertiesNode)) {
-      report = generateErrorProcessingReport(
-          String.format("A template field without value constraints must have a '%s' and not an '%s' field at path %s",
-              JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, path));
+    if (hasMissing(JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
+      report = generateErrorProcessingReport("object has missing required properties ([\"@value\"])");
     }
     return Optional.ofNullable(report);
   }
@@ -484,12 +466,8 @@ public class CEDARModelValidator implements ModelValidator
     return objectNode.has(field1) && objectNode.has(field2);
   }
 
-  private static boolean hasNone(String field1, String field2, JsonNode objectNode) {
-    return !objectNode.has(field1) && !objectNode.has(field2);
-  }
-
-  private static boolean isMisused(String correctField, String incorrectField, JsonNode objectNode) {
-    return !objectNode.has(correctField) && objectNode.has(incorrectField);
+  private static boolean hasMissing(String field1, JsonNode objectNode) {
+    return !objectNode.has(field1);
   }
 
   private static boolean hasElements(JsonNode node) {
