@@ -13,6 +13,10 @@ import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import com.github.fge.jsonschema.main.JsonValidator;
+import org.metadatacenter.model.validation.report.CedarValidationReport;
+import org.metadatacenter.model.validation.report.ErrorItem;
+import org.metadatacenter.model.validation.report.ValidationReport;
+import org.metadatacenter.model.validation.report.WarningItem;
 
 import java.io.IOException;
 import java.net.URI;
@@ -21,7 +25,7 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Optional;
 
-public class CEDARModelValidator
+public class CEDARModelValidator implements ModelValidator
 {
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
   private final JsonValidator jsonSchemaValidator;
@@ -97,110 +101,127 @@ public class CEDARModelValidator
     this.jsonSchemaValidator = factory.getValidator();
   }
 
-  public ProcessingReport validateTemplateNode(JsonNode templateNode)
+  @Override
+  public ValidationReport validateTemplate(JsonNode templateNode)
   {
     JsonPointer path = JsonPointer.compile("/");
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateNode, path);
+      Optional<ProcessingReport> processingReport = validateArtifact(resourceName, templateNode, path);
 
-      if (report.isPresent())
-        return report.get();
+      if (processingReport.isPresent())
+        return newValidationReport(processingReport.get());
     }
 
-    Optional<ProcessingReport> propertiesReport = validateJSONSchemaPropertiesNode(templateNode, path);
+    Optional<ProcessingReport> processingPropertiesReport = validateJSONSchemaPropertiesNode(templateNode, path);
 
-    if (propertiesReport.isPresent())
-      return propertiesReport.get();
+    if (processingPropertiesReport.isPresent())
+      return newValidationReport(processingPropertiesReport.get());
 
     for (int resourceNameIndex = 0; resourceNameIndex < TEMPLATE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateNode, path);
+      Optional<ProcessingReport> processingReport = validateArtifact(resourceName, templateNode, path);
 
-      if (report.isPresent())
-        return report.get();
+      if (processingReport.isPresent())
+        return newValidationReport(processingReport.get());
     }
 
-    return newSuccessProcessingReport();
+    return newEmptyValidationReport();
   }
 
-  public ProcessingReport validateTemplateElementNode(JsonNode templateElementNode)
+  @Override
+  public ValidationReport validateTemplateElement(JsonNode templateElementNode)
   {
     JsonPointer path = JsonPointer.compile("/");
     return validateTemplateElementNode(templateElementNode, path);
   }
 
-  public ProcessingReport validateTemplateElementNode(JsonNode templateElementNode, JsonPointer basePath)
+  public ValidationReport validateTemplateElementNode(JsonNode templateElementNode, JsonPointer basePath)
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateElementNode, basePath);
+      Optional<ProcessingReport> processingReport = validateArtifact(resourceName, templateElementNode, basePath);
 
-      if (report.isPresent())
-        return report.get();
+      if (processingReport.isPresent())
+        return newValidationReport(processingReport.get());
     }
 
-    Optional<ProcessingReport> propertiesReport = validateJSONSchemaPropertiesNode(templateElementNode, basePath);
+    Optional<ProcessingReport> processingPropertiesReport = validateJSONSchemaPropertiesNode(templateElementNode, basePath);
 
-    if (propertiesReport.isPresent())
-      return propertiesReport.get();
+    if (processingPropertiesReport.isPresent())
+      return newValidationReport(processingPropertiesReport.get());
 
     for (int resourceNameIndex = 0;
          resourceNameIndex < TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateElementNode, basePath);
+      Optional<ProcessingReport> processingReport = validateArtifact(resourceName, templateElementNode, basePath);
 
-      if (report.isPresent())
-        return report.get();
+      if (processingReport.isPresent())
+        return newValidationReport(processingReport.get());
     }
 
-    return newSuccessProcessingReport();
+    return newEmptyValidationReport();
   }
 
-  public ProcessingReport validateTemplateFieldNode(JsonNode templateFieldNode)
+  private static CedarValidationReport newValidationReport(ProcessingReport processingReport) {
+    CedarValidationReport validationReport = newEmptyValidationReport();
+    for (ProcessingMessage processingMessage : processingReport) {
+      LogLevel messageLevel = processingMessage.getLogLevel();
+      if (messageLevel == LogLevel.ERROR) {
+        ErrorItem errorItem = new ErrorItem(processingMessage.getMessage());
+        validationReport.addError(errorItem);
+      } else if (messageLevel == LogLevel.WARNING) {
+        WarningItem warningItem = new WarningItem(processingMessage.getMessage());
+        validationReport.addWarning(warningItem);
+      }
+    }
+    return validationReport;
+  }
+
+  private static CedarValidationReport newEmptyValidationReport() {
+    return CedarValidationReport.newEmptyReport();
+  }
+
+  @Override
+  public ValidationReport validateTemplateField(JsonNode templateFieldNode)
       throws ProcessingException, IOException, URISyntaxException, IllegalArgumentException
   {
     JsonPointer path = JsonPointer.compile("/");
-    return validateTemplateFieldNode(templateFieldNode, path);
+    return validateTemplateField(templateFieldNode, path);
   }
 
-  public ProcessingReport validateTemplateFieldNode(JsonNode templateFieldNode, JsonPointer basePath)
+  public ValidationReport validateTemplateField(JsonNode templateFieldNode, JsonPointer basePath)
   {
     for (int resourceNameIndex = 0; resourceNameIndex < CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, basePath);
+      Optional<ProcessingReport> processingReport = validateArtifact(resourceName, templateFieldNode, basePath);
 
-      if (report.isPresent())
-        return report.get();
+      if (processingReport.isPresent())
+        return newValidationReport(processingReport.get());
     }
 
     for (int resourceNameIndex = 0;
          resourceNameIndex < TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES.length; resourceNameIndex++) {
       String resourceName = TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[resourceNameIndex];
-      Optional<ProcessingReport> report = validateArtifact(resourceName, templateFieldNode, basePath);
+      Optional<ProcessingReport> processingReport = validateArtifact(resourceName, templateFieldNode, basePath);
 
-      if (report.isPresent())
-        return report.get();
+      if (processingReport.isPresent())
+        return newValidationReport(processingReport.get());
     }
 
-    Optional<ProcessingReport> propertiesReport = validateTemplateFieldPropertiesNode(templateFieldNode, basePath);
-    if (propertiesReport.isPresent()) {
-      return propertiesReport.get();
+    Optional<ProcessingReport> processingPropertiesReport = validateTemplateFieldPropertiesNode(templateFieldNode, basePath);
+    if (processingPropertiesReport.isPresent()) {
+      return newValidationReport(processingPropertiesReport.get());
     }
 
-    return newSuccessProcessingReport();
+    return newEmptyValidationReport();
   }
 
-  public ProcessingReport validateTemplateInstanceNode(JsonNode templateInstanceNode, JsonNode templateSchema)
+  @Override
+  public ValidationReport validateTemplateInstance(JsonNode templateInstanceNode, JsonNode templateSchema)
       throws URISyntaxException, IOException, ProcessingException {
-    ProcessingReport report = jsonSchemaValidate(templateSchema, templateInstanceNode);
-    return report;
-  }
-
-  private static ProcessingReport newSuccessProcessingReport() {
-    ListProcessingReport report = new ListProcessingReport();
-    report.log(LogLevel.INFO, new ProcessingMessage().setMessage("success"));
-    return report;
+    ProcessingReport processingReport = jsonSchemaValidate(templateSchema, templateInstanceNode);
+    return newValidationReport(processingReport);
   }
 
   private Optional<ProcessingReport> validateJSONSchemaPropertiesNode(JsonNode artifactNode, JsonPointer basePath)
