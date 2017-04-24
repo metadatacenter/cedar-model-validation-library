@@ -34,11 +34,11 @@ public class CedarValidator implements ModelValidator {
 
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
 
-  private static final String JSON_SCHEMA_PROPERTIES_FIELD_NAME = "properties";
+  private static final String JSON_SCHEMA_PROPERTIES = "properties";
 
-  private static final String JSON_LD_TYPE_FIELD_NAME = "@type";
-  private static final String JSON_LD_VALUE_FIELD_NAME = "@value";
-  private static final String JSON_LD_ID_FIELD_NAME = "@id";
+  private static final String JSON_LD_TYPE = "@type";
+  private static final String JSON_LD_VALUE = "@value";
+  private static final String JSON_LD_ID = "@id";
 
   private final JsonPointer startingLocation;
 
@@ -133,7 +133,7 @@ public class CedarValidator implements ModelValidator {
 
   private void validateUserSpecifiedPropertiesMemberFields(JsonNode artifactNode, JsonPointer currentLocation)
       throws CedarModelValidationException, IOException {
-    JsonNode propertiesNode = artifactNode.path(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
+    JsonNode propertiesNode = artifactNode.path(JSON_SCHEMA_PROPERTIES);
     if (!propertiesNode.isMissingNode()) {
       for (Iterator<String> iter = propertiesNode.fieldNames(); iter.hasNext(); ) {
         String propertiesMemberField = iter.next();
@@ -172,7 +172,7 @@ public class CedarValidator implements ModelValidator {
 
   private void validateValueConstrainedPropertiesMemberFields(JsonNode fieldNode, JsonPointer currentPath)
       throws CedarModelValidationException, IOException {
-    JsonNode propertiesNode = fieldNode.path(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
+    JsonNode propertiesNode = fieldNode.path(JSON_SCHEMA_PROPERTIES);
     if (!propertiesNode.isMissingNode()) {
       JsonPointer propertiesPointer = createJsonPointer(currentPath, "/properties");
       JsonNode valueConstraintsNode = fieldNode.path(CedarModelVocabulary.VALUE_CONSTRAINTS);
@@ -217,11 +217,11 @@ public class CedarValidator implements ModelValidator {
       throws CedarModelValidationException, IOException {
     ListProcessingReport errorReport = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
     try {
-      if (hasBoth(JSON_LD_ID_FIELD_NAME, JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
+      if (hasBoth(JSON_LD_ID, JSON_LD_VALUE, propertiesNode)) {
         ProcessingMessage message = createErrorMessage("object has invalid properties ([\"@value\"])");
         errorReport.error(message);
       }
-      if (hasMissing(JSON_LD_ID_FIELD_NAME, propertiesNode)) {
+      if (hasMissing(JSON_LD_ID, propertiesNode)) {
         ProcessingMessage message = createErrorMessage("object has missing required properties ([\"@id\"])");
         errorReport.error(message);
       }
@@ -237,11 +237,11 @@ public class CedarValidator implements ModelValidator {
       throws CedarModelValidationException, IOException {
     ListProcessingReport errorReport = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
     try {
-      if (hasBoth(JSON_LD_VALUE_FIELD_NAME, JSON_LD_ID_FIELD_NAME, propertiesNode)) {
+      if (hasBoth(JSON_LD_VALUE, JSON_LD_ID, propertiesNode)) {
         ProcessingMessage message = createErrorMessage("object has invalid properties ([\"@id\"])");
         errorReport.error(message);
       }
-      if (hasMissing(JSON_LD_VALUE_FIELD_NAME, propertiesNode)) {
+      if (hasMissing(JSON_LD_VALUE, propertiesNode)) {
         ProcessingMessage message = createErrorMessage("object has missing required properties ([\"@value\"])");
         errorReport.error(message);
       }
@@ -383,19 +383,19 @@ public class CedarValidator implements ModelValidator {
   }
 
   private static boolean isTemplateElement(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CedarConstants.TEMPLATE_ELEMENT_TYPE_URI);
+    return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.TEMPLATE_ELEMENT_TYPE_URI);
   }
 
   private static boolean isStaticTemplateElement(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CedarConstants.STATIC_TEMPLATE_FIELD_TYPE_URI);
+    return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.STATIC_TEMPLATE_FIELD_TYPE_URI);
   }
 
   private static boolean isTemplateField(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CedarConstants.TEMPLATE_FIELD_TYPE_URI);
+    return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.TEMPLATE_FIELD_TYPE_URI);
   }
 
   private static String getPropertiesMemberPath(String fieldName) {
-    return String.format("/%s/%s", JSON_SCHEMA_PROPERTIES_FIELD_NAME, fieldName);
+    return String.format("/%s/%s", JSON_SCHEMA_PROPERTIES, fieldName);
   }
 
   private static String getArrayItemPath(int index) {
