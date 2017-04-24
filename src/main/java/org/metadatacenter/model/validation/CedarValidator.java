@@ -13,6 +13,8 @@ import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
+import org.metadatacenter.model.core.CedarConstants;
+import org.metadatacenter.model.core.CedarModelVocabulary;
 import org.metadatacenter.model.validation.internal.ParsedProcessingMessage;
 import org.metadatacenter.model.validation.internal.SchemaResources;
 import org.metadatacenter.model.validation.report.CedarValidationReport;
@@ -33,19 +35,10 @@ public class CedarValidator implements ModelValidator {
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
 
   private static final String JSON_SCHEMA_PROPERTIES_FIELD_NAME = "properties";
-  private static final String VALUE_CONSTRAINTS_FIELD_NAME = "_valueConstraints";
-  private static final String ONTOLOGIES_CONSTRAINT_FIELD_NAME = "ontologies";
-  private static final String BRANCHES_CONSTRAINT_FIELD_NAME = "branches";
-  private static final String CLASSES_CONSTRAINT_FIELD_NAME = "classes";
-  private static final String VALUE_SETS_CONSTRAINT_FIELD_NAME = "branches";
 
   private static final String JSON_LD_TYPE_FIELD_NAME = "@type";
   private static final String JSON_LD_VALUE_FIELD_NAME = "@value";
   private static final String JSON_LD_ID_FIELD_NAME = "@id";
-
-  private static final String CEDAR_TEMPLATE_ELEMENT_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateElement";
-  private static final String CEDAR_TEMPLATE_FIELD_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateField";
-  private static final String CEDAR_STATIC_TEMPLATE_FIELD_TYPE_URI = "https://schema.metadatacenter.org/core/StaticTemplateField";
 
   private final JsonPointer startingLocation;
 
@@ -182,7 +175,7 @@ public class CedarValidator implements ModelValidator {
     JsonNode propertiesNode = fieldNode.path(JSON_SCHEMA_PROPERTIES_FIELD_NAME);
     if (!propertiesNode.isMissingNode()) {
       JsonPointer propertiesPointer = createJsonPointer(currentPath, "/properties");
-      JsonNode valueConstraintsNode = fieldNode.path(VALUE_CONSTRAINTS_FIELD_NAME);
+      JsonNode valueConstraintsNode = fieldNode.path(CedarModelVocabulary.VALUE_CONSTRAINTS);
       if (!valueConstraintsNode.isMissingNode()) {
         if (hasConstraintSources(valueConstraintsNode)) {
           validateConstrainedField(propertiesNode, propertiesPointer);
@@ -316,8 +309,8 @@ public class CedarValidator implements ModelValidator {
 
   private boolean hasOntologySources(JsonNode valueConstraintsNode) {
     boolean hasSources = false;
-    if (valueConstraintsNode.has(ONTOLOGIES_CONSTRAINT_FIELD_NAME)) {
-      JsonNode ontologiesNode = valueConstraintsNode.get(ONTOLOGIES_CONSTRAINT_FIELD_NAME);
+    if (valueConstraintsNode.has(CedarModelVocabulary.ONTOLOGIES)) {
+      JsonNode ontologiesNode = valueConstraintsNode.get(CedarModelVocabulary.ONTOLOGIES);
       if (hasElements(ontologiesNode)) {
         hasSources = true;
       }
@@ -327,8 +320,8 @@ public class CedarValidator implements ModelValidator {
 
   private boolean hasBranchSources(JsonNode valueConstraintsNode) {
     boolean hasSources = false;
-    if (valueConstraintsNode.has(BRANCHES_CONSTRAINT_FIELD_NAME)) {
-      JsonNode branchesNode = valueConstraintsNode.get(BRANCHES_CONSTRAINT_FIELD_NAME);
+    if (valueConstraintsNode.has(CedarModelVocabulary.BRANCHES)) {
+      JsonNode branchesNode = valueConstraintsNode.get(CedarModelVocabulary.BRANCHES);
       if (hasElements(branchesNode)) {
         hasSources = true;
       }
@@ -338,8 +331,8 @@ public class CedarValidator implements ModelValidator {
 
   private boolean hasClassSources(JsonNode valueConstraintsNode) {
     boolean hasSources = false;
-    if (valueConstraintsNode.has(CLASSES_CONSTRAINT_FIELD_NAME)) {
-      JsonNode classesNode = valueConstraintsNode.get(CLASSES_CONSTRAINT_FIELD_NAME);
+    if (valueConstraintsNode.has(CedarModelVocabulary.CLASSES)) {
+      JsonNode classesNode = valueConstraintsNode.get(CedarModelVocabulary.CLASSES);
       if (hasElements(classesNode)) {
         hasSources = true;
       }
@@ -349,8 +342,8 @@ public class CedarValidator implements ModelValidator {
 
   private boolean hasValueSetSources(JsonNode valueConstraintsNode) {
     boolean hasSources = false;
-    if (valueConstraintsNode.has(VALUE_SETS_CONSTRAINT_FIELD_NAME)) {
-      JsonNode valueSetsNode = valueConstraintsNode.get(VALUE_SETS_CONSTRAINT_FIELD_NAME);
+    if (valueConstraintsNode.has(CedarModelVocabulary.VALUE_SETS)) {
+      JsonNode valueSetsNode = valueConstraintsNode.get(CedarModelVocabulary.VALUE_SETS);
       if (hasElements(valueSetsNode)) {
         hasSources = true;
       }
@@ -390,15 +383,15 @@ public class CedarValidator implements ModelValidator {
   }
 
   private static boolean isTemplateElement(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CEDAR_TEMPLATE_ELEMENT_TYPE_URI);
+    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CedarConstants.TEMPLATE_ELEMENT_TYPE_URI);
   }
 
   private static boolean isStaticTemplateElement(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CEDAR_STATIC_TEMPLATE_FIELD_TYPE_URI);
+    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CedarConstants.STATIC_TEMPLATE_FIELD_TYPE_URI);
   }
 
   private static boolean isTemplateField(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CEDAR_TEMPLATE_FIELD_TYPE_URI);
+    return memberNode.path(JSON_LD_TYPE_FIELD_NAME).asText().equals(CedarConstants.TEMPLATE_FIELD_TYPE_URI);
   }
 
   private static String getPropertiesMemberPath(String fieldName) {
