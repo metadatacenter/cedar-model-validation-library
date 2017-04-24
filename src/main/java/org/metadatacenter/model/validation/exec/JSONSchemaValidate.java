@@ -1,9 +1,10 @@
-package org.metadatacenter.model.validation;
+package org.metadatacenter.model.validation.exec;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
+import org.metadatacenter.model.validation.CEDARModelValidator;
 import org.metadatacenter.model.validation.report.ErrorItem;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
