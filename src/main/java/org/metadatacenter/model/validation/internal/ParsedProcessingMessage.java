@@ -71,7 +71,14 @@ public class ParsedProcessingMessage {
   @Nullable
   public static String getLocation(JsonNode node) {
     JsonNode locationNode = node.path("instance").path("pointer");
-    return (!locationNode.isMissingNode()) ? locationNode.asText() : null;
+    if (!locationNode.isMissingNode()) {
+      String location = locationNode.asText();
+      if (location.isEmpty()) {
+        location = "/";
+      }
+      return location;
+    }
+    return null;
   }
 
   @Nullable
