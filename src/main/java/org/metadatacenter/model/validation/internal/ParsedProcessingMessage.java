@@ -65,7 +65,11 @@ public class ParsedProcessingMessage {
   @Nullable
   public static String getMessage(JsonNode node) {
     JsonNode messageNode = node.path("message");
-    return (!messageNode.isMissingNode()) ? messageNode.asText() : null;
+    return (!messageNode.isMissingNode()) ? prettyText(messageNode.asText()) : null;
+  }
+
+  private static String prettyText(String s) {
+    return s.replace("\"", "'");
   }
 
   @Nullable
