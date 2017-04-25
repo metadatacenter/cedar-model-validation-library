@@ -163,8 +163,8 @@ public class CedarValidator implements ModelValidator {
       throws CedarModelValidationException, IOException {
     if (isTemplateElement(propertiesMemberNode)) {
       doElementValidation(propertiesMemberNode, currentLocation);
-    } else if (isStaticTemplateElement(propertiesMemberNode)) {
-      doElementValidation(propertiesMemberNode, currentLocation);
+    } else if (isStaticTemplateField(propertiesMemberNode)) {
+      doFieldValidation(propertiesMemberNode, currentLocation);
     } else if (isTemplateField(propertiesMemberNode)) {
       doFieldValidation(propertiesMemberNode, currentLocation);
     }
@@ -386,7 +386,7 @@ public class CedarValidator implements ModelValidator {
     return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.TEMPLATE_ELEMENT_TYPE_URI);
   }
 
-  private static boolean isStaticTemplateElement(JsonNode memberNode) {
+  private static boolean isStaticTemplateField(JsonNode memberNode) {
     return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.STATIC_TEMPLATE_FIELD_TYPE_URI);
   }
 
