@@ -7,6 +7,6 @@
         "order": { "$ref": "file:stringArray.json" },
         "propertyLabels": { "$ref": "file:propertyLabelContent.json" }
     },
-    "required": [ "title", "description", "order" ],
+    "required": [ "title", "description", "order", "propertyLabels" ],
     "additionalProperties": false
 }
