@@ -35,6 +35,8 @@ public class CedarValidator implements ModelValidator {
   private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
 
   private static final String JSON_SCHEMA_PROPERTIES = "properties";
+  private static final String JSON_SCHEMA_TYPE = "type";
+  private static final String JSON_SCHEMA_ITEMS = "items";
 
   private static final String JSON_LD_TYPE = "@type";
   private static final String JSON_LD_VALUE = "@value";
@@ -149,12 +151,10 @@ public class CedarValidator implements ModelValidator {
     if (isObjectNode(propertiesMemberNode)) {
       checkAndValidateTemplateOrField(propertiesMemberNode, propertiesMemberPointer);
     } else if (isArrayNode(propertiesMemberNode)) {
-      for (int index = 0; index < propertiesMemberNode.size(); index++) {
-        JsonNode arrayItemNode = propertiesMemberNode.get(index);
-        JsonPointer arrayItemPath = createJsonPointer(propertiesMemberPointer, getArrayItemPath(index));
-        if (isObjectNode(arrayItemNode)) {
-          checkAndValidateTemplateOrField(propertiesMemberNode, arrayItemPath);
-        }
+      JsonNode arrayItem = propertiesMemberNode.path(JSON_SCHEMA_ITEMS);
+      if (!arrayItem.isMissingNode()) {
+        JsonPointer arrayItemPath = createJsonPointer(propertiesMemberPointer, "/items");
+        checkAndValidateTemplateOrField(arrayItem, arrayItemPath);
       }
     }
   }
@@ -376,6 +376,13 @@ public class CedarValidator implements ModelValidator {
     return exception;
   }
 
+  private static CedarModelValidationException newCedarModelValidationException(ProcessingMessage message,
+        JsonPointer currentLocation) {
+    CedarModelValidationException exception = new CedarModelValidationException();
+    exception.addProcessingMessage(message, currentLocation);
+    return exception;
+  }
+
   private JsonNode loadSchemaFromFile(String resourceName) throws IOException {
     ClassLoader classLoader = getClass().getClassLoader();
     URL resource = classLoader.getResource(resourceName);
@@ -398,16 +405,14 @@ public class CedarValidator implements ModelValidator {
     return String.format("/%s/%s", JSON_SCHEMA_PROPERTIES, fieldName);
   }
 
-  private static String getArrayItemPath(int index) {
-    return String.format("[%d]", index);
-  }
-
   private static boolean isObjectNode(JsonNode node) {
-    return node.isObject();
+    String type = node.path(JSON_SCHEMA_TYPE).asText();
+    return type.equals("object");
   }
 
   private static boolean isArrayNode(JsonNode node) {
-    return node.isArray();
+    String type = node.path(JSON_SCHEMA_TYPE).asText();
+    return type.equals("array");
   }
 
   private static JsonPointer createJsonPointer(JsonPointer basePointer, String relativeDestination) {
