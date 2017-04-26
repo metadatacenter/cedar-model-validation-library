@@ -544,7 +544,7 @@
      "order": { "$ref": "#/definitions/stringArray" },
      "propertyLabels": { "$ref": "#/definitions/propertyLabelContent" }
      },
-     "required": [ "title", "description", "order" ],
+     "required": [ "title", "description", "order", "propertyLabels" ],
      "additionalProperties": false
     }
     ,
@@ -870,7 +870,7 @@
      "pages": { "$ref": "#/definitions/stringArray" },
      "propertyLabels": { "$ref": "#/definitions/propertyLabelContent" }
      },
-     "required": [ "title", "description", "order", "pages" ],
+     "required": [ "title", "description", "order", "pages", "propertyLabels" ],
      "additionalProperties": false
     }
     ,
