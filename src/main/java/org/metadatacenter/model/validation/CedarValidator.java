@@ -240,11 +240,11 @@ public class CedarValidator implements ModelValidator {
     ListProcessingReport errorReport = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
     try {
       if (hasBoth(JSON_LD_ID, JSON_LD_VALUE, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has invalid properties ([\"@value\"])");
+        ProcessingMessage message = createErrorMessage("object has invalid properties (['@value'])");
         errorReport.error(message);
       }
       if (hasMissing(JSON_LD_ID, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has missing required properties ([\"@id\"])");
+        ProcessingMessage message = createErrorMessage("object has missing required properties (['@id'])");
         errorReport.error(message);
       }
       if (!errorReport.isSuccess()) {
@@ -260,11 +260,11 @@ public class CedarValidator implements ModelValidator {
     ListProcessingReport errorReport = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
     try {
       if (hasBoth(JSON_LD_VALUE, JSON_LD_ID, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has invalid properties ([\"@id\"])");
+        ProcessingMessage message = createErrorMessage("object has invalid properties (['@id'])");
         errorReport.error(message);
       }
       if (hasMissing(JSON_LD_VALUE, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has missing required properties ([\"@value\"])");
+        ProcessingMessage message = createErrorMessage("object has missing required properties (['@value'])");
         errorReport.error(message);
       }
       if (!errorReport.isSuccess()) {
