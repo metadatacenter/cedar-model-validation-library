@@ -139,11 +139,17 @@ public class CedarValidator implements ModelValidator {
     if (!propertiesNode.isMissingNode()) {
       for (Iterator<String> iter = propertiesNode.fieldNames(); iter.hasNext(); ) {
         String propertiesMemberField = iter.next();
-        JsonNode propertiesMemberNode = propertiesNode.get(propertiesMemberField);
-        JsonPointer propertiesMemberPointer = createJsonPointer(currentLocation, getPropertiesMemberPath(propertiesMemberField));
-        validatePropertiesMemberField(propertiesMemberNode, propertiesMemberPointer);
+        if (isUserSpecifiedField(propertiesMemberField)) {
+          JsonNode propertiesMemberNode = propertiesNode.get(propertiesMemberField);
+          JsonPointer propertiesMemberPointer = createJsonPointer(currentLocation, getPropertiesMemberPath(propertiesMemberField));
+          validatePropertiesMemberField(propertiesMemberNode, propertiesMemberPointer);
+        }
       }
     }
+  }
+
+  private static boolean isUserSpecifiedField(String propertiesMemberField) {
+    return !CedarModelVocabulary.CommonPropertiesInnerFields.contains(propertiesMemberField);
   }
 
   private void validatePropertiesMemberField(JsonNode propertiesMemberNode, JsonPointer propertiesMemberPointer)
