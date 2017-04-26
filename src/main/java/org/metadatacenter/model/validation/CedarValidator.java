@@ -148,6 +148,7 @@ public class CedarValidator implements ModelValidator {
 
   private void validatePropertiesMemberField(JsonNode propertiesMemberNode, JsonPointer propertiesMemberPointer)
       throws CedarModelValidationException, IOException {
+    checkJsonSchemaTypeExists(propertiesMemberNode, propertiesMemberPointer);
     if (isObjectNode(propertiesMemberNode)) {
       checkAndValidateTemplateOrField(propertiesMemberNode, propertiesMemberPointer);
     } else if (isArrayNode(propertiesMemberNode)) {
@@ -157,6 +158,16 @@ public class CedarValidator implements ModelValidator {
         checkAndValidateTemplateOrField(arrayItem, arrayItemPath);
       }
     }
+  }
+
+  private static JsonNode checkJsonSchemaTypeExists(JsonNode node, JsonPointer currentLocation)
+      throws CedarModelValidationException {
+    JsonNode typeNode = node.path(JSON_SCHEMA_TYPE);
+    if (typeNode.isMissingNode()) {
+      ProcessingMessage message = createErrorMessage("object has missing required properties (['type'])");
+      throw newCedarModelValidationException(message, currentLocation);
+    }
+    return node;
   }
 
   private void checkAndValidateTemplateOrField(JsonNode propertiesMemberNode, JsonPointer currentLocation)
