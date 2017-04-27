@@ -81,11 +81,7 @@ public class SchemaResources {
           TEMPLATE_ELEMENT_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME,
           TEMPLATE_ELEMENT_UI_FIELD_SCHEMA_RESOURCE_NAME));
 
-  public static final Set<String> coreFieldSchemaResources = new HashSet<>(
-      Arrays.asList(CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME,
-          TEMPLATE_FIELD_JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME,
-          JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME,
-          PROVENANCE_FIELDS_SCHEMA_RESOURCE_NAME));
+  public static final Set<String> coreFieldSchemaResources = Sets.newHashSet(coreSchemaResources);
 
   public static final Set<String> fieldSchemaResources = new HashSet<>(
       Arrays.asList(CORE_JSON_SCHEMA_TEMPLATE_FIELD_FIELDS_SCHEMA_RESOURCE_NAME,
