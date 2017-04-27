@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {             
         "properties": { "$ref": "file:templateFieldValuePropertiesContent.json" },
-        "required": { "$ref": "file:nonEmptyStringArray.json" },
+        "required": { "$ref": "file:stringArray.json" },
         "additionalProperties": { "type": "boolean", "enum": [ false ] }
     },
     "required": [ "properties", "required", "additionalProperties" ]
