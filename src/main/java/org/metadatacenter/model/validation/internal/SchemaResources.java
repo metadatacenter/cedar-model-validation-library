@@ -91,6 +91,14 @@ public class SchemaResources {
           TEMPLATE_FIELD_SINGLE_VALUE_CONTENT_FIELD_SCHEMA_RESOURCE_NAME,
           TEMPLATE_FIELD_UI_FIELD_SCHEMA_RESOURCE_NAME));
 
+  public static final Set<String> coreStaticFieldSchemaResources = Sets.newHashSet(coreSchemaResources);
+
+  public static final Set<String> staticFieldSchemaResources = new HashSet<>(
+      Arrays.asList(CORE_JSON_SCHEMA_TEMPLATE_FIELD_FIELDS_SCHEMA_RESOURCE_NAME,
+          TEMPLATE_FIELD_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME,
+          TEMPLATE_FIELD_SINGLE_VALUE_CONTENT_FIELD_SCHEMA_RESOURCE_NAME,
+          TEMPLATE_FIELD_UI_FIELD_SCHEMA_RESOURCE_NAME));
+
   public static final Set<String> fullTemplateSchemaResources = Sets.newHashSet();
   static {
     fullTemplateSchemaResources.addAll(coreTemplateSchemaResources);
@@ -107,5 +115,11 @@ public class SchemaResources {
   static {
     fullFieldSchemaResources.addAll(coreFieldSchemaResources);
     fullFieldSchemaResources.addAll(fieldSchemaResources);
+  }
+
+  public static final Set<String> fullStaticFieldSchemaResources = Sets.newHashSet();
+  static {
+    fullStaticFieldSchemaResources.addAll(coreStaticFieldSchemaResources);
+    fullStaticFieldSchemaResources.addAll(staticFieldSchemaResources);
   }
 }

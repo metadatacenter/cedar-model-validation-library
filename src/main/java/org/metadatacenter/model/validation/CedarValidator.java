@@ -124,8 +124,23 @@ public class CedarValidator implements ModelValidator {
 
   private void doFieldValidation(JsonNode fieldNode, JsonPointer currentLocation)
       throws CedarModelValidationException, IOException {
+    checkJsonLdTypeNodeExists(fieldNode, currentLocation);
+    if (isTemplateField(fieldNode)) {
+      doNonStaticFieldValidation(fieldNode, currentLocation);
+    } else if (isStaticTemplateField(fieldNode)) {
+      doStaticFieldValidation(fieldNode, currentLocation);
+    }
+  }
+
+  private void doNonStaticFieldValidation(JsonNode fieldNode, JsonPointer currentLocation)
+      throws CedarModelValidationException, IOException {
     validateValueConstrainedPropertiesMemberFields(fieldNode, currentLocation);
     validateNodeStructureAgainstFieldSchema(fieldNode, currentLocation);
+  }
+
+  private void doStaticFieldValidation(JsonNode fieldNode, JsonPointer currentLocation)
+      throws CedarModelValidationException, IOException {
+    validateNodeStructureAgainstStaticFieldSchema(fieldNode, currentLocation);
   }
 
   private void doInstanceValidation(JsonNode templateInstance, JsonNode instanceSchema, JsonPointer currentLocation)
@@ -181,9 +196,7 @@ public class CedarValidator implements ModelValidator {
     checkJsonLdTypeNodeExists(propertiesMemberNode, currentLocation);
     if (isTemplateElement(propertiesMemberNode)) {
       doElementValidation(propertiesMemberNode, currentLocation);
-    } else if (isStaticTemplateField(propertiesMemberNode)) {
-      doFieldValidation(propertiesMemberNode, currentLocation);
-    } else if (isTemplateField(propertiesMemberNode)) {
+    } else {
       doFieldValidation(propertiesMemberNode, currentLocation);
     }
   }
@@ -231,6 +244,13 @@ public class CedarValidator implements ModelValidator {
   private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
       throws CedarModelValidationException, IOException {
     for (String resourceName : SchemaResources.fullFieldSchemaResources) {
+      validateArtifact(resourceName, fieldNode, currentLocation);
+    }
+  }
+
+  private void validateNodeStructureAgainstStaticFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
+      throws CedarModelValidationException, IOException {
+    for (String resourceName : SchemaResources.fullStaticFieldSchemaResources) {
       validateArtifact(resourceName, fieldNode, currentLocation);
     }
   }
