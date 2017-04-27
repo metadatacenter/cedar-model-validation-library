@@ -339,6 +339,19 @@
      "additionalProperties": false
     }
     ,
+    "propertyLabelContent": 
+    {
+     "description": "Schema that describes the schema of a property label in the _ui field in a template or element",
+     "type": "object",
+     "patternProperties": {
+     "^[a-zA-Z][a-zA-Z0-9]*$": {
+     "type": "string",
+     "minLength": 1
+     }
+     },
+     "additionalProperties": false
+    }
+    ,
     "provenanceFields": 
     {
      "description": "A schema that describes CEDAR provenance fields",
@@ -528,9 +541,10 @@
      "properties": {
      "title": { "type": "string", "minLength": 1 },
      "description": { "type": "string" },
-     "order": { "$ref": "#/definitions/stringArray" }
+     "order": { "$ref": "#/definitions/stringArray" },
+     "propertyLabels": { "$ref": "#/definitions/propertyLabelContent" }
      },
-     "required": [ "title", "description", "order" ],
+     "required": [ "title", "description", "order", "propertyLabels" ],
      "additionalProperties": false
     }
     ,
@@ -580,12 +594,27 @@
      "additionalProperties": false
     }
     ,
+    "templateFieldJSONLDIDField": 
+    {
+     "description": "A schema that describes a JSON-LD '@id' field in a template field",
+     "type": "object",
+     "properties": {
+     "@id": { "type": [ "string", "null" ], "format": "uri" }
+     }
+    }
+    ,
     "templateFieldJSONLDTypeField": 
     {
      "description": "A schema that describes a template field's JSON-LD '@type' field",
      "type": "object",
      "properties": {
-     "@type": { "type": "string", "format": "uri", "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ] }
+     "@type": {
+     "type": "string",
+     "format": "uri",
+     "enum": [
+     "https://schema.metadatacenter.org/core/TemplateField",
+     "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+     }
      },
      "required": [ "@type" ]
     }
@@ -649,7 +678,7 @@
      "type": "object",
      "properties": {
      "properties": { "$ref": "#/definitions/templateFieldValuePropertiesContent" },
-     "required": { "$ref": "#/definitions/nonEmptyStringArray" },
+     "required": { "$ref": "#/definitions/stringArray" },
      "additionalProperties": { "type": "boolean", "enum": [ false ] }
      },
      "required": [ "properties", "required", "additionalProperties" ]
@@ -674,7 +703,8 @@
      "description": { "type": "string" },
      "inputType": { "$ref": "#/definitions/templateFieldUIInputTypeFieldContent" },
      "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
-     "valueRecommendationEnabled": { "type": "boolean" }
+     "valueRecommendationEnabled": { "type": "boolean" },
+     "content": { "type": "string" }
      },
      "required": [ "description", "title", "inputType" ],
      "additionalProperties": false
@@ -684,7 +714,7 @@
     {
      "description": "Schema describing the schema of the 'inputType' field in a template field '_ui' field",
      "type": "string",
-     "enum": [ "textfield", "textarea", "radio", "checkbox", "date", "email", "list", "numeric", "phone-number", "section-break", "richtext", "image", "youtube" ]
+     "enum": [ "textfield", "textarea", "radio", "checkbox", "date", "email", "list", "numeric", "phone-number", "section-break", "richtext", "image", "youtube", "link" ]
     }
     ,
     "templateFieldValuePropertiesContent": 
@@ -702,7 +732,7 @@
      "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
      "_valueLabel": { "$ref": "#/definitions/valueLabelFieldContent" }
      },
-     "required": [ "@type", "@id", "@value", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "_valueLabel" ],
+     "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
      "additionalProperties": false
     }
     ,
@@ -806,8 +836,9 @@
     "templateRequiredFieldContent": 
     {
      "description": "Schema describing the schema of the 'required' field in a template",
-     "type": "array", "minItems": 8, "maxItems": 8, "uniqueItems": true,
+     "type": "array", "minItems": 9, "uniqueItems": true,
      "items": [
+     { "type": "string", "enum": [ "@context" ] },
      { "type": "string", "enum": [ "@id" ] },
      { "type": "string", "enum": [ "schema:isBasedOn" ] },
      { "type": "string", "enum": [ "schema:name" ] },
@@ -837,9 +868,10 @@
      "title": { "type": "string", "minLength": 1 },
      "description": { "type": "string" },
      "order": { "$ref": "#/definitions/stringArray" },
-     "pages": { "$ref": "#/definitions/stringArray" }
+     "pages": { "$ref": "#/definitions/stringArray" },
+     "propertyLabels": { "$ref": "#/definitions/propertyLabelContent" }
      },
-     "required": [ "title", "description", "order", "pages" ],
+     "required": [ "title", "description", "order", "pages", "propertyLabels" ],
      "additionalProperties": false
     }
     ,

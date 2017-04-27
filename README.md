@@ -12,13 +12,13 @@ methods to validate CEDAR templates, elements, and fields.
 
 Running validation on example artifacts from base of this repo:
 
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="./examples/templates/empty-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="./examples/templates/single-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplate" -Dexec.args="./examples/templates/multi-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="./examples/elements/empty-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateElement" -Dexec.args="./examples/elements/multi-field-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="./examples/fields/basic-text-field.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.ValidateTemplateField" -Dexec.args="./examples/fields/value-constrained-field.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./examples/templates/empty-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./examples/templates/single-field-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./examples/templates/multi-field-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./examples/elements/empty-element.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./examples/elements/multi-field-element.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./examples/fields/basic-text-field.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./examples/fields/value-constrained-field.json"
 
 ### Example Python-Based Validation
 
@@ -43,7 +43,7 @@ validation errors.
 
 For example, to run the Java-based JSON Schema validator in this library to validate provenance fields in an example template:
 
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.JSONSchemaValidate" \
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.JSONSchemaValidate" \
       -Dexec.args="./src/main/resources/provenanceFields.json ./examples/templates/empty-template.json"
 
 The individual JSON Schema files in the </tt>schema</tt> directory can be assembled into
