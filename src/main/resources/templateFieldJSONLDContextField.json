@@ -556,7 +556,7 @@
      { "$ref": "#/definitions/coreJSONSchemaTemplateFieldFields" },
      { "$ref": "#/definitions/templateFieldJSONLDContextField" },
      { "$ref": "#/definitions/templateFieldJSONLDTypeField" },
-     { "$ref": "#/definitions/templateFieldJSONLDIDField" },
+     { "$ref": "#/definitions/jsonLDIDField" },
      { "$ref": "#/definitions/templateFieldUIField" },
      { "$ref": "#/definitions/valueConstraintsField" },
      { "$ref": "#/definitions/templateFieldSingleValueContent" },
