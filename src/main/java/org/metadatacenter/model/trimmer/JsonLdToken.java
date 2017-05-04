@@ -1,4 +1,4 @@
-package org.metadatacenter.model.validation;
+package org.metadatacenter.model.trimmer;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,7 +1,8 @@
 {
     "description": "Schema describing the schema of the 'required' field in a template",
-    "type": "array", "minItems": 8, "maxItems": 8, "uniqueItems": true,
+    "type": "array", "minItems": 9, "uniqueItems": true,
     "items": [
+        { "type": "string", "enum": [ "@context" ] },
         { "type": "string", "enum": [ "@id" ] },
         { "type": "string", "enum": [ "schema:isBasedOn" ] },
         { "type": "string", "enum": [ "schema:name" ] },

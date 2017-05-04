@@ -1070,12 +1070,9 @@
      "additionalProperties": false
     }
   },
-     "description": "Schema that describes the schema of a single value in a template field",
+     "description": "A schema that describes a JSON-LD '@id' field in a template field",
      "type": "object",
      "properties": {
-     "properties": { "$ref": "#/definitions/templateFieldValuePropertiesContent" },
-     "required": { "$ref": "#/definitions/stringArray" },
-     "additionalProperties": { "type": "boolean", "enum": [ false ] }
-     },
-     "required": [ "properties", "required", "additionalProperties" ]
+     "@id": { "type": [ "string", "null" ], "format": "uri" }
+     }
 }
