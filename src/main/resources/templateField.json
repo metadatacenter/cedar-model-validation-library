@@ -178,9 +178,10 @@
     {
      "description": "Schema that describes the schema of a '@type' field in a 'properties' field in a template, element or field",
      "properties": {
-     "oneOf": { "$ref": "#/definitions/jsonLDTypeFieldOneOfFieldContent" }
+     "oneOf": { "$ref": "#/definitions/jsonLDTypeFieldOneOfFieldContent" },
+     "type": { "type": "string", "enum": [ "string" ] },
+     "format": { "type": "string", "enum": [ "uri" ] }
      },
-     "required": [ "oneOf" ],
      "additionalProperties": false
     }
     ,
