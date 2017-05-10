@@ -307,7 +307,7 @@ public class CedarValidator implements ModelValidator {
       Collection<ProcessingMessage> processingMessages = errorDetails.get(errorLocation);
       for (ProcessingMessage processingMessage : processingMessages) {
         final LogLevel messageLevel = processingMessage.getLogLevel();
-        if (messageLevel == LogLevel.ERROR) {
+        if (messageLevel == LogLevel.ERROR || messageLevel == LogLevel.FATAL) {
           ParsedProcessingMessage parsedMessage = new ParsedProcessingMessage(processingMessage);
           for (ParsedProcessingMessage.ReportItem reportItem : parsedMessage.getReportItems()) {
             ErrorItem errorItem = createErrorItem(errorLocation,
