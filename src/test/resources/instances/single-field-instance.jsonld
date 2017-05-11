@@ -1,0 +1,41 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "pav": "http://purl.org/pav/",
+    "schema": "http://schema.org/",
+    "oslc": "http://open-services.net/ns/core#",
+    "schema:isBasedOn": {
+      "@type": "@id"
+    },
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
+    "pav:createdOn": {
+      "@type": "xsd:dateTime"
+    },
+    "pav:createdBy": {
+      "@type": "@id"
+    },
+    "pav:lastUpdatedOn": {
+      "@type": "xsd:dateTime"
+    },
+    "oslc:modifiedBy": {
+      "@type": "@id"
+    },
+    "studyName": "https://schema.metadatacenter.orgx/properties/studyName"
+  },
+  "studyName": {
+    "@value": "Probing Unicorn Stem Cell"
+  },
+  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/ba9844b0-5b12-4a54-ab4e-94261f10ffae",
+  "schema:name": "Single-Field Template metadata",
+  "schema:description": "Description",
+  "pav:createdOn": "2017-04-12T16:49:32-0700",
+  "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
+  "pav:lastUpdatedOn": "2017-04-12T16:49:32-0700",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
+  "@id": "https://repo.metadatacenter.orgx/template-instances/c661712c-3f4d-437e-9e52-8d9c8feec58a"
+}
