@@ -46,45 +46,49 @@ public class CEDARModelValidator implements ModelValidator
   private static final String CEDAR_TEMPLATE_FIELD_TYPE_URI = "https://schema.metadatacenter.org/core/TemplateField";
   private static final String CEDAR_STATIC_TEMPLATE_FIELD_TYPE_URI = "https://schema.metadatacenter.org/core/StaticTemplateField";
 
-  private static final String CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaFields.json";
-  private static final String JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME = "jsonLDIDField.json";
-  private static final String JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "jsonLDTypeField.json";
-  private static final String PROVENANCE_FIELDS_SCHEMA_RESOURCE_NAME = "provenanceFields.json";
+  private static final String CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME = "old/coreJSONSchemaFields.json";
+  private static final String JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME = "old/jsonLDIDField.json";
+  private static final String JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "old/jsonLDTypeField.json";
+  private static final String PROVENANCE_FIELDS_SCHEMA_RESOURCE_NAME = "old/provenanceFields.json";
 
   private static final String CORE_SCHEMA_RESOURCE_NAMES[] = { CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME,
     JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME, JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME,
     PROVENANCE_FIELDS_SCHEMA_RESOURCE_NAME };
 
-  private static final String CORE_JSON_SCHEMA_TEMPLATE_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaTemplateFields.json";
-  private static final String TEMPLATE_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "templateJSONLDTypeField.json";
-  private static final String TEMPLATE_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME = "templateJSONLDContextField.json";
-  private static final String TEMPLATE_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME = "templatePropertiesField.json";
-  private static final String TEMPLATE_UI_FIELD_SCHEMA_RESOURCE_NAME = "templateUIField.json";
-  private static final String TEMPLATE_REQUIRED_FIELD_SCHEMA_RESOURCE_NAME = "templateRequiredField.json";
+  private static final String CORE_JSON_SCHEMA_TEMPLATE_FIELDS_SCHEMA_RESOURCE_NAME = "old" +
+      "/coreJSONSchemaTemplateFields.json";
+  private static final String TEMPLATE_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "old/templateJSONLDTypeField.json";
+  private static final String TEMPLATE_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME = "old/templateJSONLDContextField" +
+      ".json";
+  private static final String TEMPLATE_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME = "old/templatePropertiesField.json";
+  private static final String TEMPLATE_UI_FIELD_SCHEMA_RESOURCE_NAME = "old/templateUIField.json";
+  private static final String TEMPLATE_REQUIRED_FIELD_SCHEMA_RESOURCE_NAME = "old/templateRequiredField.json";
 
   private static final String TEMPLATE_SCHEMA_RESOURCE_NAMES[] = {
     CORE_JSON_SCHEMA_TEMPLATE_FIELDS_SCHEMA_RESOURCE_NAME, TEMPLATE_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME,
     TEMPLATE_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME, TEMPLATE_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME,
     TEMPLATE_UI_FIELD_SCHEMA_RESOURCE_NAME, TEMPLATE_REQUIRED_FIELD_SCHEMA_RESOURCE_NAME };
 
-  private static final String CORE_JSON_SCHEMA_TEMPLATE_ELEMENT_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaTemplateElementFields.json";
-  private static final String TEMPLATE_ELEMENT_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "templateElementJSONLDTypeField.json";
-  private static final String TEMPLATE_ELEMENT_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME = "templateElementJSONLDContextField.json";
-  private static final String TEMPLATE_ELEMENT_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME = "templateElementPropertiesField.json";
-  private static final String TEMPLATE_ELEMENT_UI_FIELD_SCHEMA_RESOURCE_NAME = "templateElementUIField.json";
+  private static final String CORE_JSON_SCHEMA_TEMPLATE_ELEMENT_FIELDS_SCHEMA_RESOURCE_NAME =
+      "old/coreJSONSchemaTemplateElementFields.json";
+  private static final String TEMPLATE_ELEMENT_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "old/templateElementJSONLDTypeField.json";
+  private static final String TEMPLATE_ELEMENT_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME =
+      "old/templateElementJSONLDContextField.json";
+  private static final String TEMPLATE_ELEMENT_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME = "old/templateElementPropertiesField.json";
+  private static final String TEMPLATE_ELEMENT_UI_FIELD_SCHEMA_RESOURCE_NAME = "old/templateElementUIField.json";
 
   private static final String TEMPLATE_ELEMENT_SCHEMA_RESOURCE_NAMES[] = {
     CORE_JSON_SCHEMA_TEMPLATE_ELEMENT_FIELDS_SCHEMA_RESOURCE_NAME, TEMPLATE_ELEMENT_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME,
     TEMPLATE_ELEMENT_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME, TEMPLATE_ELEMENT_PROPERTIES_FIELD_SCHEMA_RESOURCE_NAME,
     TEMPLATE_ELEMENT_UI_FIELD_SCHEMA_RESOURCE_NAME };
 
-  private static final String CORE_JSON_SCHEMA_TEMPLATE_FIELD_FIELDS_SCHEMA_RESOURCE_NAME = "coreJSONSchemaTemplateFieldFields.json";
-  private static final String TEMPLATE_FIELD_JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldJSONLDIDField.json";
-  private static final String TEMPLATE_FIELD_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldJSONLDTypeField.json";
-  private static final String TEMPLATE_FIELD_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldJSONLDContextField.json";
-  private static final String VALUE_CONSTRAINTS_FIELD_SCHEMA_RESOURCE_NAME = "valueConstraintsField.json";
-  private static final String TEMPLATE_FIELD_SINGLE_VALUE_CONTENT_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldSingleValueContent.json";
-  private static final String TEMPLATE_FIELD_UI_FIELD_SCHEMA_RESOURCE_NAME = "templateFieldUIField.json";
+  private static final String CORE_JSON_SCHEMA_TEMPLATE_FIELD_FIELDS_SCHEMA_RESOURCE_NAME = "old/coreJSONSchemaTemplateFieldFields.json";
+  private static final String TEMPLATE_FIELD_JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME = "old/templateFieldJSONLDIDField.json";
+  private static final String TEMPLATE_FIELD_JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME = "old/templateFieldJSONLDTypeField.json";
+  private static final String TEMPLATE_FIELD_JSON_LD_CONTEXT_FIELD_SCHEMA_RESOURCE_NAME = "old/templateFieldJSONLDContextField.json";
+  private static final String VALUE_CONSTRAINTS_FIELD_SCHEMA_RESOURCE_NAME = "old/valueConstraintsField.json";
+  private static final String TEMPLATE_FIELD_SINGLE_VALUE_CONTENT_FIELD_SCHEMA_RESOURCE_NAME = "old/templateFieldSingleValueContent.json";
+  private static final String TEMPLATE_FIELD_UI_FIELD_SCHEMA_RESOURCE_NAME = "old/templateFieldUIField.json";
 
   private static final String CORE_TEMPLATE_FIELD_SCHEMA_RESOURCE_NAMES[] = { CORE_JSON_SCHEMA_FIELDS_SCHEMA_RESOURCE_NAME,
     TEMPLATE_FIELD_JSON_LD_ID_FIELD_SCHEMA_RESOURCE_NAME, JSON_LD_TYPE_FIELD_SCHEMA_RESOURCE_NAME,

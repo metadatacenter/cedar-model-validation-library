@@ -1,5 +1,32 @@
 {
- "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "A schema that describes core JSON Schema fields used in templates, elements, and fields",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
+      "type": "string", "format": "uri",
+      "enum": [ "http://json-schema.org/draft-04/schema#" ]
+    },
+    "type": {
+      "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
+      "type": "string", "enum": [ "object", "array" ]
+    },
+    "title": {
+      "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
+      "type": "string", "minLength": 1
+    },
+    "description": {
+      "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
+      "type": "string", "minLength": 1
+    },
+    "additionalProperties": {
+      "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
+      "type": "boolean", "enum": [ false ]
+    }
+  },
+  "required": [ "$schema", "type", "title", "description" ],
+
  "definitions": {
     "arrayAndNullTypeContent": 
     {
@@ -1070,32 +1097,5 @@
      "required": [ "type" ],
      "additionalProperties": false
     }
-  },
-     "$schema": "http://json-schema.org/draft-04/schema#",
-     "description": "A schema that describes core JSON Schema fields used in templates, elements, and fields",
-     "type": "object",
-     "properties": {
-     "$schema": {
-     "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
-     "type": "string", "format": "uri",
-     "enum": [ "http://json-schema.org/draft-04/schema#" ]
-     },
-     "type": {
-     "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
-     "type": "string", "enum": [ "object", "array" ]
-     },
-     "title": {
-     "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
-     "type": "string", "minLength": 1
-     },
-     "description": {
-     "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
-     "type": "string", "minLength": 1
-     },
-     "additionalProperties": {
-     "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
-     "type": "boolean", "enum": [ false ]
-     }
-     },
-     "required": [ "$schema", "type", "title", "description" ]
+  }
 }
