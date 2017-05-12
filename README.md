@@ -1,79 +1,59 @@
+# CEDAR Model Library
 
 Provides a Java-based CEDAR library to validate JSON Schema-encoded CEDAR model artifacts.
 
 Also provides command line Java- and Python-based validators 
 
-### Java Validation Library
+## Validation Library
 
-The library provides a class called <tt>org.metadatacenter.model.validation.CEDARModelValidator</tt> that contains
-methods to validate CEDAR templates, elements, and fields. 
+The library provides a interface <tt>org.metadatacenter.model.validation.ModelValidator</tt> that contains
+methods to validate CEDAR resources, such as, templates, elements, and fields. The libarary also provides its
+implementation <tt>org.metadatacenter.model.validation.CedarValidator</tt> that uses a third-party Java library
+called [JSON Schema Validator](https://github.com/java-json-tools/json-schema-validator).
 
-### Example Java-Based Validation
+### Generate Validation Schemas
 
-Running validation on example artifacts from base of this repo:
+The <tt>schema</tt> directory contains a collection of JSON Schema definitions which collectively form the CEDAR Resource Validation Schema.
+We designed the schema definitions to be modular for easy development and reuse.
 
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./examples/templates/empty-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./examples/templates/single-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./examples/templates/multi-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./examples/elements/empty-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./examples/elements/multi-field-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./examples/fields/basic-text-field.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./examples/fields/value-constrained-field.json"
+The <tt>CedarValidator</tt> requires the validation schema files stored in the Java <tt>resources</tt> directory. To get those files
+we need to merge some of the schemas in the <tt>schema</tt> directory and assemble them into a standalone self-contained schema file.
+We have already provided a script to perform the action in the <tt>scripts</tt> directory.
 
-### Example Python-Based Validation
+    cd scripts
+    ./generate-schema.sh
 
-Running validation on example artifacts from base of this repo:
+The script will generate four schema files, i.e., <tt>template-schema.json</tt>, <tt>element-schema.json</tt>, <tt>field-schema.json</tt>
+and <tt>static-field-schema.json</tt> in the <tt>src/main/resources</tt> directory.
 
-    ./scripts/validate-template.sh . ./examples/templates/empty-template.json
-    ./scripts/validate-template.sh . ./examples/templates/multi-field-template.json
-    ./scripts/validate-element.sh . ./examples/elements/empty-element.json
-    ./scripts/validate-element.sh . ./examples/elements/multi-field-element.json
-    ./scripts/validate-field.sh . ./examples/fields/basic-text-field.json
-    ./scripts/validate-field.sh . ./examples/fields/value-constrained-field.json
+The description about the components to generate each schema can be found in the YAML files in <tt>schema</tt> directory.
 
-### Configuring
+### Run Test in Java
 
-The <tt>schema</tt> directory contains a collection of JSON Schema specifications for individual CEDAR model artifacts, 
-which collectively form the CEDAR Template Validation Schema. 
+Below are some examples to test the <tt>CedarValidator</tt> implementation.
 
-These schema can be used to incrementally validate CEDAR model artifacts, such as templates, elements, and fields (which are
-themselves encoded as JSON Schema).
-Incremental validation is desirable because JSON Schema artifact validation using top level schema can produce imprecise
-validation errors. 
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/empty-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/single-field-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/multi-field-template.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./src/test/resources/elements/empty-element.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./src/test/resources/elements/multi-field-element.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./src/test/resources/fields/text-field.json"
+    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./src/test/resources/fields/constrained-text-field.json"
 
-For example, to run the Java-based JSON Schema validator in this library to validate provenance fields in an example template:
+### Run Test in Python
 
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.JSONSchemaValidate" \
-      -Dexec.args="./src/main/resources/provenanceFields.json ./examples/templates/empty-template.json"
+Below are some examples to test Python <tt>jsonschema</tt> implementation (required Python 3.x).
 
-The individual JSON Schema files in the </tt>schema</tt> directory can be assembled into
-standalone self-contained schema files using the <tt>schemawrap.sh</tt> script in the <tt>scripts</tt> directory.
-
-This script takes two arguments:
-
-   schemawrap.sh output-json-file sub-schema-name
-
-The output file will contain a standalone, fully self-contained schema for the specified sub-schema with all necessary imports.
-
-Make sure the output file is not placed in the <tt>schema</tt> directory or it may also be processed by the script.
-
-A script called <tt>gensubschema.sh</tt> can be used to generate all needed sub-schema:
-
-    ./scripts/gensubschema.sh ~/workspace/cedar/server/cedar-model-validation-library/scripts \
-      ~/workspace/cedar/server/cedar-model-validation-library/schema \
-      ~/workspace/cedar/server/cedar-model-validation-library/src/main/resources
-
-We can put these generated files into the Java resources directory so that that are packaged with the Java-based validation library.
-
-The <tt>examples</tt> directory contains example templates, elements, and instances.
-
-The <tt>scripts</tt> directory also contains a Python JSON Schema validation script called <tt>jsvalid.py</tt>.
-
-An example of its use is:
-
-    ../scripts/jsvalid.py -s <json_schema_file> <json_file>
-
-#### Questions
+    cd scripts
+    ./validate-template.sh ../src/test/resources/templates/empty-template.json
+    ./validate-template.sh ../src/test/resources/templates/single-field-template.json
+    ./validate-template.sh ../src/test/resources/templates/multi-field-template.json
+    ./validate-element.sh ../src/test/resources/elements/empty-element.json
+    ./validate-element.sh ../src/test/resources/elements/multi-field-element.json
+    ./validate-field.sh ../src/test/resources/fields/text-field.json
+    ./validate-field.sh ../src/test/resources/fields/constrained-text-field.json
+    
+## Questions
 
 If you have questions about this repository, please subscribe to the [CEDAR Developer Support
 mailing list](https://mailman.stanford.edu/mailman/listinfo/cedar-developers).
