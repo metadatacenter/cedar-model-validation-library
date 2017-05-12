@@ -1,0 +1,95 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "pav": "http://purl.org/pav/",
+    "schema": "http://schema.org/",
+    "oslc": "http://open-services.net/ns/core#",
+    "schema:isBasedOn": {
+      "@type": "@id"
+    },
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
+    "pav:createdOn": {
+      "@type": "xsd:dateTime"
+    },
+    "pav:createdBy": {
+      "@type": "@id"
+    },
+    "pav:lastUpdatedOn": {
+      "@type": "xsd:dateTime"
+    },
+    "oslc:modifiedBy": {
+      "@type": "@id"
+    },
+    "companyName": "https://schema.metadatacenter.orgx/properties/companyName",
+    "exportGood": "https://schema.metadatacenter.orgx/properties/exportGood",
+    "importGood": "https://schema.metadatacenter.orgx/properties/importGood"
+  },
+  "companyName": {
+    "@value": "Cedar Inc."
+  },
+  "exportGood": {
+    "@context": {
+      "pav": "http://purl.org/pav/",
+      "oslc": "http://open-services.net/ns/core#",
+      "productName": "https://schema.metadatacenter.orgx/properties/productName",
+      "d5676d68-a765-4c37-b812-6b2735ea7f69": "https://schema.metadatacenter.orgx/properties/d5676d68-a765-4c37-b812-6b2735ea7f69",
+      "quantity": "https://schema.metadatacenter.orgx/properties/quantity"
+    },
+    "productName": {
+      "@value": "Redwood plank"
+    },
+    "quantity": {
+      "@context": {
+        "pav": "http://purl.org/pav/",
+        "oslc": "http://open-services.net/ns/core#",
+        "value": "https://schema.metadatacenter.orgx/properties/value",
+        "unitOfMeasurement": "https://schema.metadatacenter.orgx/properties/unitOfMeasurement"
+      },
+      "value": {
+        "@value": "100"
+      },
+      "unitOfMeasurement": {
+        "@value": "Tonne"
+      }
+    }
+  },
+  "importGood": {
+    "@context": {
+      "pav": "http://purl.org/pav/",
+      "oslc": "http://open-services.net/ns/core#",
+      "productName": "https://schema.metadatacenter.orgx/properties/productName",
+      "d5676d68-a765-4c37-b812-6b2735ea7f69": "https://schema.metadatacenter.orgx/properties/d5676d68-a765-4c37-b812-6b2735ea7f69",
+      "quantity": "https://schema.metadatacenter.orgx/properties/quantity"
+    },
+    "productName": {
+      "@value": "Redwood"
+    },
+    "quantity": {
+      "@context": {
+        "pav": "http://purl.org/pav/",
+        "oslc": "http://open-services.net/ns/core#",
+        "value": "https://schema.metadatacenter.orgx/properties/value",
+        "unitOfMeasurement": "https://schema.metadatacenter.orgx/properties/unitOfMeasurement"
+      },
+      "value": {
+        "@value": "200"
+      },
+      "unitOfMeasurement": {
+        "@value": "Tonne"
+      }
+    }
+  },
+  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/02aa679f-3248-44b7-8953-99b507a179ee",
+  "schema:name": "Nested Field Template metadata",
+  "schema:description": "Description",
+  "pav:createdOn": "2017-04-18T09:35:15-0700",
+  "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
+  "pav:lastUpdatedOn": "2017-04-18T09:35:15-0700",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
+  "@id": "https://repo.metadatacenter.orgx/template-instances/0a223162-0b3e-41a4-a92c-50a7a1f27cdc"
+}

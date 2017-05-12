@@ -1,0 +1,53 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "pav": "http://purl.org/pav/",
+    "schema": "http://schema.org/",
+    "oslc": "http://open-services.net/ns/core#",
+    "schema:isBasedOn": {
+      "@type": "@id"
+    },
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
+    "pav:createdOn": {
+      "@type": "xsd:dateTime"
+    },
+    "pav:createdBy": {
+      "@type": "@id"
+    },
+    "pav:lastUpdatedOn": {
+      "@type": "xsd:dateTime"
+    },
+    "oslc:modifiedBy": {
+      "@type": "@id"
+    },
+    "studyName": "https://schema.metadatacenter.orgx/properties/studyName",
+    "topics": "https://schema.metadatacenter.orgx/properties/topics"
+  },
+  "studyName": {
+    "@value": "Probing Unicorn Stem Cells"
+  },
+  "topics": [
+    {
+      "@value": "Experimental Drug"
+    },
+    {
+      "@value": "Molecular Biology"
+    },
+    {
+      "@value": "Cell Regeneration"
+    }
+  ],
+  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/e37ba933-10f7-4ef0-948d-27976f53139b",
+  "schema:name": "Multivalued Field Template metadata",
+  "schema:description": "Description",
+  "pav:createdOn": "2017-04-18T09:32:38-0700",
+  "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
+  "pav:lastUpdatedOn": "2017-04-18T10:01:31-0700",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
+  "@id": "https://repo.metadatacenter.orgx/template-instances/96de1f0b-a0ca-45e8-ada2-782f69ad77d3"
+}
