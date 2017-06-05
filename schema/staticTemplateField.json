@@ -23,12 +23,6 @@
         "_ui": {
             "$ref": "#/definitions/templateFieldUIFieldContent"
         },
-        "_valueConstraints": {
-            "$ref": "#/definitions/valueConstraintsFieldContent"
-        },
-        "@context": {
-            "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
-        },
         "@id": {
             "type": [ "string", "null" ], "format": "uri"
         },
@@ -62,7 +56,6 @@
             "type": "boolean", "enum": [ false ]
         }
     },
-    "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
-        "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-        "oslc:modifiedBy" ]
+    "required": [ "$schema", "type", "title", "description", "_ui", "@id", "@type", "properties", "required",
+        "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }

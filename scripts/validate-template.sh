@@ -4,27 +4,28 @@
 #
 # e.g., 
 #
-# validate-template <cedar_model_validation_library_home> <template_file_path>
+# validate-template <template_file_path>
 
-if [ "$#" -ne 2 ]; then
-    echo "Usage: <cedar_model_validation_library_home> <template_file_path>"
+if [ "$#" -ne 1 ]; then
+    echo "Usage: <template_file_path>"
     exit 1
 fi
 
-cedar_model_validation_library_home=$1
-template_file_path=$2
+template_file_path=$1
+
+BASE_DIR="`dirname \"$0\"`"              # relative
+BASE_DIR="`( cd \"$BASE_DIR\" && pwd )`"  # absolutized and normalized
+PROJECT_BASE_DIR="`( cd .. && pwd )`"  # absolutized and normalized
+if [ -z "$PROJECT_BASE_DIR" ] ; then
+  # error; for some reason, the path is not accessible
+  # to the script (e.g. permissions re-evaled after suid)
+  exit 1  # fail
+fi
+
+SCRIPTS_DIR=${PROJECT_BASE_DIR}/scripts
+RESOURCES_DIR=${PROJECT_BASE_DIR}/src/main/resources
 
 echo "Validating template" ${template_file_path} "using Python validator"
 
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/coreJSONSchemaFields.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/jsonLDIDField.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/jsonLDTypeField.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/provenanceFields.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/coreJSONSchemaTemplateFields.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/templateJSONLDTypeField.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/templateJSONLDContextField.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/templateUIField.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/templateRequiredField.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/templatePropertiesField.json -i ${template_file_path}
-${cedar_model_validation_library_home}/scripts/jsvalid.py -s ${cedar_model_validation_library_home}/src/main/resources/template.json -i ${template_file_path}
+python ${SCRIPTS_DIR}/jsvalid.py -s ${RESOURCES_DIR}/template-schema.json -i ${template_file_path}
 

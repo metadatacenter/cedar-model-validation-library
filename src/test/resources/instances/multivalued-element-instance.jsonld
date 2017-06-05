@@ -1,0 +1,110 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "pav": "http://purl.org/pav/",
+    "schema": "http://schema.org/",
+    "oslc": "http://open-services.net/ns/core#",
+    "schema:isBasedOn": {
+      "@type": "@id"
+    },
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
+    "pav:createdOn": {
+      "@type": "xsd:dateTime"
+    },
+    "pav:createdBy": {
+      "@type": "@id"
+    },
+    "pav:lastUpdatedOn": {
+      "@type": "xsd:dateTime"
+    },
+    "oslc:modifiedBy": {
+      "@type": "@id"
+    },
+    "studyName": "https://schema.metadatacenter.orgx/properties/studyName",
+    "participants": "https://schema.metadatacenter.orgx/properties/participants"
+  },
+  "studyName": {
+    "@value": "Probing Unicorn Stem Cells"
+  },
+  "participants": [
+    {
+      "@context": {
+        "pav": "http://purl.org/pav/",
+        "oslc": "http://open-services.net/ns/core#",
+        "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
+        "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
+        "lastName": "https://schema.metadatacenter.orgx/properties/lastName",
+        "title": "https://schema.metadatacenter.orgx/properties/title"
+      },
+      "firstName": {
+        "@value": "Jim"
+      },
+      "middleName": {
+        "@value": null
+      },
+      "lastName": {
+        "@value": "Wayne"
+      },
+      "title": {
+        "@value": "Mr."
+      }
+    },
+    {
+      "@context": {
+        "pav": "http://purl.org/pav/",
+        "oslc": "http://open-services.net/ns/core#",
+        "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
+        "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
+        "lastName": "https://schema.metadatacenter.orgx/properties/lastName",
+        "title": "https://schema.metadatacenter.orgx/properties/title"
+      },
+      "firstName": {
+        "@value": "Amy"
+      },
+      "middleName": {
+        "@value": "Young"
+      },
+      "lastName": {
+        "@value": "Smith"
+      },
+      "title": {
+        "@value": null
+      }
+    },
+    {
+      "@context": {
+        "pav": "http://purl.org/pav/",
+        "oslc": "http://open-services.net/ns/core#",
+        "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
+        "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
+        "lastName": "https://schema.metadatacenter.orgx/properties/lastName",
+        "title": "https://schema.metadatacenter.orgx/properties/title"
+      },
+      "firstName": {
+        "@value": "John"
+      },
+      "middleName": {
+        "@value": null
+      },
+      "lastName": {
+        "@value": "Doe"
+      },
+      "title": {
+        "@value": null
+      }
+    }
+  ],
+  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/4bea0c2d-a5a5-42e4-8ac6-0eb08242e57f",
+  "schema:name": "Multivalued Element Template metadata",
+  "schema:description": "Description",
+  "pav:createdOn": "2017-04-18T09:42:07-0700",
+  "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
+  "pav:lastUpdatedOn": "2017-04-18T10:01:07-0700",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
+  "@id": "https://repo.metadatacenter.orgx/template-instances/f26d3353-bb92-4708-bece-df47631f5764"
+}
