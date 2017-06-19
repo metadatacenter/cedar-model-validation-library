@@ -12,7 +12,7 @@
     "title": "Write a description",
     "description": "",
     "inputType": "richtext",
-    "_content": null
+    "_content": "This is a text"
   },
   "properties": {},
   "pav:createdOn": "2017-05-19T11:03:58-0700",
