@@ -7,7 +7,7 @@
         "inputType": { "$ref": "file:templateFieldUIInputTypeFieldContent.json" },
         "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "valueRecommendationEnabled": { "type": "boolean" },
-        "content": { "type": "string" }
+        "_content": { "type": "string" }
     },
     "required": [ "description", "title", "inputType" ],
     "additionalProperties": false           
