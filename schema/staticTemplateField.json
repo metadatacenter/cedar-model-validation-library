@@ -33,9 +33,7 @@
                 "https://schema.metadatacenter.org/core/TemplateField",
                 "https://schema.metadatacenter.org/core/StaticTemplateField" ]
         },
-        "properties": {
-            "$ref": "#/definitions/templateFieldValuePropertiesContent"
-        },
+        "properties": {},
         "pav:createdOn": {
             "type": [ "string", "null" ], "format": "date-time"
         },
