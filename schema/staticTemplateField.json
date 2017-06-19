@@ -56,6 +56,6 @@
             "type": "boolean", "enum": [ false ]
         }
     },
-    "required": [ "$schema", "type", "title", "description", "_ui", "@id", "@type", "properties", "required",
+    "required": [ "$schema", "type", "title", "description", "_ui", "@id", "@type",
         "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }
