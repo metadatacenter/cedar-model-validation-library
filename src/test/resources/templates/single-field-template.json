@@ -29,7 +29,7 @@
     "order": [
       "studyName"
     ],
-    "propertyLabels": {"study,and, ==Name": "Study Name"}
+    "propertyLabels": {}
   },
   "properties": {
     "@context": {
@@ -231,7 +231,7 @@
       ],
       "format": "uri"
     },
-    "study,and, ==Name": {
+    "studyName": {
       "@type": "https://schema.metadatacenter.org/core/TemplateField",
       "@context": {
         "xsd": "http://www.w3.org/2001/XMLSchema#",
