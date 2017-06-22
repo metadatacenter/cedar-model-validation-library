@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
@@ -73,6 +74,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "true");
   }
 
+  @Ignore("The validation for multivalued element instances is not ready yet")
   @Test
   public void shouldPassMultivaluedElementInstance() {
     // Arrange
