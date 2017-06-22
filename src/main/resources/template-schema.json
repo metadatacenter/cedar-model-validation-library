@@ -150,7 +150,7 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
             },
             "patternProperties": {
-                "^[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
+                "^[a-zA-Z][^@][^schema:][^pav:][^oslc:][^\"]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
             },
             "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
         },
@@ -336,7 +336,7 @@
           "description": "Schema that describes the schema of a property label in the _ui field in a template or element",
           "type": "object",
           "patternProperties": {
-            "^[a-zA-Z][a-zA-Z0-9]*$": {
+            "^[a-zA-Z][^\"]*$": {
               "type": "string",
               "minLength": 1
             }
@@ -620,14 +620,6 @@
             },
             "required": [ "_ui" ]
         },
-        "templateElementPropertiesField": {
-            "description": "Schema that describes the schema of 'properties' and 'patternProperties' fields in a template element",
-            "type": "object",
-            "properties": {             
-                "properties": { "$ref": "#/definitions/templateElementPropertiesFieldContent" }
-            },
-            "required": [ "properties" ]
-        },
         "templateFieldOrElement": {
             "description": "Schema that describes a template field or element",
             "oneOf": [
@@ -747,7 +739,7 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
             },
             "patternProperties": {
-                "^[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
+                "^[a-zA-Z][^@][^schema:][^pav:][^oslc:][^\"]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
             },
             "required": [ "@type", "@id", "@context", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
         },
