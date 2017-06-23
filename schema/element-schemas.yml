@@ -27,6 +27,7 @@ definitions:
   - jsonLDContextFieldPropertiesContent.json
   - jsonLDContextFieldPatternPropertiesContent.json
   - templateField.json
+  - staticTemplateField.json
   - templateElement.json
   - templateFieldOrElementArray.json
   - uriEnumContent.json

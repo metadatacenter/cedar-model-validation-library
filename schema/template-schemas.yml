@@ -30,6 +30,7 @@ definitions:
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - templateField.json
+  - staticTemplateField.json
   - templateElement.json
   - templateFieldOrElementArray.json
   - uriEnumContent.json
