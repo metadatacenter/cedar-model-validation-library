@@ -29,9 +29,7 @@
         "@type": {
             "type": "string",
             "format": "uri",
-            "enum": [
-                "https://schema.metadatacenter.org/core/TemplateField",
-                "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+            "enum": [ "https://schema.metadatacenter.org/core/StaticTemplateField" ]
         },
         "properties": {},
         "pav:createdOn": {
