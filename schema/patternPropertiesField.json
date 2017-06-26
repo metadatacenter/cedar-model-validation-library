@@ -1,7 +1,0 @@
-{
-    "description": "Schema that describes the schema of a 'patternProperties' field in a template",
-    "patternProperties": {
-        "^[a-zA-Z][a-zA-Z0-9]*$": { "$ref": "file:templateFieldOrElementOrArrayOfFieldOrElement.json" }
-    },
-    "additionalProperties": false
-}
