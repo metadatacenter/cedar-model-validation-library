@@ -13,5 +13,6 @@
     "patternProperties": {
         "^(?!(schema:|pav:|oslc:))[a-zA-Z][^\"/]*$": { "$ref": "file:templateFieldOrElementOrArrayOfFieldOrElement.json" }
     },
+    "additionalProperties": false,
     "required": [ "@type", "@id", "@context", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }
