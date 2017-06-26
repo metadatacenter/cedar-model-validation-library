@@ -14,7 +14,7 @@
         "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
     },
     "patternProperties": {
-        "^(?!(schema:|pav:|oslc:))[a-zA-Z][^\"]*$": { "$ref": "file:templateFieldOrElementOrArrayOfFieldOrElement.json" }
+        "^(?!(schema:|pav:|oslc:))[a-zA-Z][^\"/]*$": { "$ref": "file:templateFieldOrElementOrArrayOfFieldOrElement.json" }
     },
     "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }
