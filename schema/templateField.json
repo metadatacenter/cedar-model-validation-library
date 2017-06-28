@@ -35,9 +35,7 @@
         "@type": {
             "type": "string",
             "format": "uri",
-            "enum": [
-                "https://schema.metadatacenter.org/core/TemplateField",
-                "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+            "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
         },
         "properties": {
             "$ref": "#/definitions/templateFieldValuePropertiesContent"
@@ -60,9 +58,12 @@
         "additionalProperties": {
             "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
             "type": "boolean", "enum": [ false ]
+        },
+        "schema:schemaVersion": {
+            "type": "string", "minLength": 1
         }
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
         "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-        "oslc:modifiedBy" ]
+        "oslc:modifiedBy", "schema:schemaVersion" ]
 }

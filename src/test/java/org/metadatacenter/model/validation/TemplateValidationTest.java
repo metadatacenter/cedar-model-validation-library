@@ -47,6 +47,16 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassStaticFieldTemplate() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/static-field-template.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassMultiFieldTemplate() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/multi-field-template.json");

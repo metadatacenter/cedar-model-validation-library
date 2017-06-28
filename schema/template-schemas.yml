@@ -30,6 +30,7 @@ definitions:
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - templateField.json
+  - staticTemplateField.json
   - templateElement.json
   - templateFieldOrElementArray.json
   - uriEnumContent.json
@@ -44,7 +45,6 @@ definitions:
   - templateElementJSONLDContextField.json
   - templateElementJSONLDTypeField.json
   - templateElementUIField.json
-  - templateElementPropertiesField.json
   - templateFieldOrElement.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json

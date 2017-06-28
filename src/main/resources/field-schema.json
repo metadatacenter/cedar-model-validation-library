@@ -35,9 +35,7 @@
         "@type": {
             "type": "string",
             "format": "uri",
-            "enum": [
-                "https://schema.metadatacenter.org/core/TemplateField",
-                "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+            "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
         },
         "properties": {
             "$ref": "#/definitions/templateFieldValuePropertiesContent"
@@ -60,11 +58,14 @@
         "additionalProperties": {
             "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
             "type": "boolean", "enum": [ false ]
+        },
+        "schema:schemaVersion": {
+            "type": "string", "minLength": 1
         }
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
         "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-        "oslc:modifiedBy" ]
+        "oslc:modifiedBy", "schema:schemaVersion" ]
     ,
     "definitions": {
         "templateFieldUIFieldContent": {
@@ -76,10 +77,11 @@
                 "inputType": { "$ref": "#/definitions/templateFieldUIInputTypeFieldContent" },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
-                "content": { "type": "string" }
+                "_content": { "type": "string" },
+                "hidden": { "type": "boolean" }
             },
             "required": [ "description", "title", "inputType" ],
-            "additionalProperties": false           
+            "additionalProperties": false
         },
         "valueConstraintsFieldContent": {
             "description": "Schema that describes the schema of a '_valueConstraints' field in a template field",
@@ -91,7 +93,8 @@
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
-                "multipleChoice": { "type": "boolean" }
+                "multipleChoice": { "type": "boolean" },
+                "defaultValue": { "type": "string" }
             },
             "required": [ "requiredValue" ],
             "additionalProperties": false
