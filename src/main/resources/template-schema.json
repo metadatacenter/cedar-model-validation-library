@@ -54,10 +54,13 @@
         "additionalProperties": {
             "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
             "type": "boolean", "enum": [ false ]
+        },
+        "schema:schemaVersion": {
+            "type": "string", "minLength": 1
         }
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
-        "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+        "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion" ]
     ,
     "definitions": {
         "coreJSONSchemaFields": {
@@ -434,11 +437,14 @@
                 "additionalProperties": {
                     "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
                     "type": "boolean", "enum": [ false ]
+                },
+                "schema:schemaVersion": {
+                    "type": "string", "minLength": 1
                 }
             },
             "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
                 "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-                "oslc:modifiedBy" ]
+                "oslc:modifiedBy", "schema:schemaVersion" ]
         },
         "staticTemplateField": {
             "$schema": "http://json-schema.org/draft-04/schema#",
@@ -549,10 +555,13 @@
                 "additionalProperties": {
                     "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
                     "type": "boolean", "enum": [ false ]
+                },
+                "schema:schemaVersion": {
+                    "type": "string", "minLength": 1
                 }
             },
             "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
-                "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+                "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion" ]
         },
         "templateFieldOrElementArray": {
             "description": "Schema that describes a template field or element array",
