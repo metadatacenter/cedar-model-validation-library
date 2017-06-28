@@ -77,10 +77,11 @@
                 "inputType": { "$ref": "#/definitions/templateFieldUIInputTypeFieldContent" },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
-                "_content": { "type": "string" }
+                "_content": { "type": "string" },
+                "hidden": { "type": "boolean" }
             },
             "required": [ "description", "title", "inputType" ],
-            "additionalProperties": false           
+            "additionalProperties": false
         },
         "valueConstraintsFieldContent": {
             "description": "Schema that describes the schema of a '_valueConstraints' field in a template field",
@@ -92,7 +93,8 @@
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
-                "multipleChoice": { "type": "boolean" }
+                "multipleChoice": { "type": "boolean" },
+                "defaultValue": { "type": "string" }
             },
             "required": [ "requiredValue" ],
             "additionalProperties": false
