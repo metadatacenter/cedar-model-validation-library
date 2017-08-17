@@ -8,6 +8,6 @@
         "required": { "$ref": "file:stringArray.json" },
         "additionalProperties": { "type": "boolean", "enum": [ false ] }
     },
-    "required": [ "type", "properties", "patternProperties", "required", "additionalProperties" ],
+    "required": [ "type", "properties", "patternProperties", "additionalProperties" ],
     "additionalProperties": false
 }
