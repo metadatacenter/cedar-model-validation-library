@@ -77,7 +77,7 @@
                 "inputType": { "$ref": "#/definitions/templateFieldUIInputTypeFieldContent" },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
-                "_content": { "type": "string" },
+                "_content": { "type": [ "string", "null" ] },
                 "hidden": { "type": "boolean" }
             },
             "required": [ "description", "title", "inputType" ],
