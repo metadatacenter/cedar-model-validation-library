@@ -62,12 +62,6 @@
           ]
         }
       },
-      "patternProperties": {
-        "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$": {
-          "type": "string",
-          "format": "uri"
-        }
-      },
       "required": [
         "productName",
         "quantity"
@@ -288,12 +282,6 @@
               "enum": [
                 "https://schema.metadatacenter.orgx/properties/unitOfMeasurement"
               ]
-            }
-          },
-          "patternProperties": {
-            "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$": {
-              "type": "string",
-              "format": "uri"
             }
           },
           "required": [

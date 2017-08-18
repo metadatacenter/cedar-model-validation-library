@@ -25,7 +25,6 @@ definitions:
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - jsonLDContextFieldPropertiesContent.json
-  - jsonLDContextFieldPatternPropertiesContent.json
   - templateField.json
   - staticTemplateField.json
   - templateElement.json

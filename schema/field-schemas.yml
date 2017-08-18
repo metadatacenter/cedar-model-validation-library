@@ -36,7 +36,6 @@ definitions:
   - uriEnumArrayContent.json
   - jsonLDValueFieldContent.json
   - jsonLDContextFieldPropertiesContent.json
-  - jsonLDContextFieldPatternPropertiesContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json

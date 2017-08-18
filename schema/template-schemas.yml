@@ -26,7 +26,6 @@ definitions:
   - stringArray.json
   - propertyLabelContent.json
   - jsonLDContextFieldPropertiesContent.json
-  - jsonLDContextFieldPatternPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - templateField.json

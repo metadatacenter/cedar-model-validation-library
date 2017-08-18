@@ -4,10 +4,9 @@
     "properties": {
         "type": { "type": "string", "enum": [ "object" ] },
         "properties": { "$ref": "file:jsonLDContextFieldPropertiesContent.json" },
-        "patternProperties": { "$ref": "file:jsonLDContextFieldPatternPropertiesContent.json" },
         "required": { "$ref": "file:stringArray.json" },
         "additionalProperties": { "type": "boolean", "enum": [ false ] }
     },
-    "required": [ "type", "properties", "patternProperties", "additionalProperties" ],
+    "required": [ "type", "properties", "additionalProperties" ],
     "additionalProperties": false
 }

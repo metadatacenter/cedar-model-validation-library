@@ -228,11 +228,10 @@
             "properties": {
                 "type": { "type": "string", "enum": [ "object" ] },
                 "properties": { "$ref": "#/definitions/jsonLDContextFieldPropertiesContent" },
-                "patternProperties": { "$ref": "#/definitions/jsonLDContextFieldPatternPropertiesContent" },
                 "required": { "$ref": "#/definitions/stringArray" },
                 "additionalProperties": { "type": "boolean", "enum": [ false ] }
             },
-            "required": [ "type", "properties", "patternProperties", "additionalProperties" ],
+            "required": [ "type", "properties", "additionalProperties" ],
             "additionalProperties": false
         },
         "jsonLDTypeFieldContent": {
@@ -351,15 +350,6 @@
         "jsonLDContextFieldPropertiesContent": {
             "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in template or element TODO INCOMPLETE",
             "type": "object"
-        },
-        "jsonLDContextFieldPatternPropertiesContent": {
-            "description": "Schema that describes a 'patternProperties field in a '@context' field in a 'properties' field in template or element",
-            "type": "object",
-            "properties": {
-                "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$": { "type": "object" }
-            },
-            "required": [ "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$" ],
-            "additionalProperties": false
         },
         "jsonLDTypeFieldOneOfFieldContent": {
             "description": "Schema that describes the schema of a '@type.oneOf' field in a 'properties' field in a template, element or field",
@@ -726,7 +716,7 @@
                 "hidden": { "type": "boolean" }
             },
             "required": [ "description", "title", "inputType" ],
-            "additionalProperties": false
+            "additionalProperties": false           
         },
         "valueConstraintsFieldContent": {
             "description": "Schema that describes the schema of a '_valueConstraints' field in a template field",
