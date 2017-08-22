@@ -4,12 +4,12 @@
  <parent>
     <groupId>org.metadatacenter</groupId>
     <artifactId>cedar-parent</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
   </parent>
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>1.4.0</version>
+  <version>1.4.1</version>
   <name>CEDAR Model Validation Library</name>
   <description>Library for validating CEDAR artifacts</description>
 
@@ -22,7 +22,7 @@
     <connection>scm:git:git@github.com:metadatacenter/cedar-model-validation-library.git</connection>
     <developerConnection>scm:git:git@github.com:metadatacenter/cedar-model-validation-library.git</developerConnection>
     <url>https://github.com/metadatacenter/cedar-model-validation-library</url>
-    <tag>release-1.4.0</tag>
+    <tag>release-1.4.1</tag>
   </scm>
 
   <dependencies>
