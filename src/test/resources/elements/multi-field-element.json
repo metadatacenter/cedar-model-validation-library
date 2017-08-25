@@ -187,7 +187,7 @@
             "null"
           ]
         },
-        "_valueLabel": {
+        "rdfs:label": {
           "type": [
             "string",
             "null"
@@ -289,7 +289,7 @@
             "null"
           ]
         },
-        "_valueLabel": {
+        "rdfs:label": {
           "type": [
             "string",
             "null"
@@ -391,7 +391,7 @@
             "null"
           ]
         },
-        "_valueLabel": {
+        "rdfs:label": {
           "type": [
             "string",
             "null"
@@ -508,7 +508,7 @@
             "null"
           ]
         },
-        "_valueLabel": {
+        "rdfs:label": {
           "type": [
             "string",
             "null"

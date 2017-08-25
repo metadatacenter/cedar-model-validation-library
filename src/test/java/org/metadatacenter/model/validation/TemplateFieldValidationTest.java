@@ -479,10 +479,10 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassMissingProperties_ValueLabel() {
+  public void shouldPassMissingProperties_RdfsLabel() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
-    fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/properties/_valueLabel");
+    fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/properties/rdfs:label");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
