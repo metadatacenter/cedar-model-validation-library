@@ -51,7 +51,7 @@ definitions:
   - valueConstraintsClassesFieldContent.json
   - valueConstraintsBranchesFieldContent.json
   - valueConstraintsLiteralsFieldContent.json
-  - valueLabelFieldContent.json
+  - rdfsLabelFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json

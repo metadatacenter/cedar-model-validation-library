@@ -22,7 +22,7 @@ definitions:
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json
   - oslcModifiedByFieldContent.json
-  - valueLabelFieldContent.json
+  - rdfsLabelFieldContent.json
   - valueConstraintsOntologiesFieldContent.json
   - valueConstraintsValueSetsFieldContent.json
   - valueConstraintsClassesFieldContent.json

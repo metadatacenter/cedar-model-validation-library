@@ -10,7 +10,7 @@
         "pav:createdBy": { "$ref": "file:pavCreatedByFieldContent.json" },
         "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
         "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" },
-        "_valueLabel": { "$ref": "file:valueLabelFieldContent.json" }
+        "rdfs:label": { "$ref": "file:rdfsLabelFieldContent.json" }
     },
     "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
     "additionalProperties": false

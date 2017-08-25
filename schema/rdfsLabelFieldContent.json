@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a '_valueLabel' field in a 'properties' field in a template field",
+    "description": "Schema that describes the schema of a 'rdfs:label' field in a 'properties' field in a template field",
     "type": "object",
     "properties": {
         "type": { "$ref": "file:stringAndNullTypeContent.json" }

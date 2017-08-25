@@ -16,7 +16,7 @@ definitions:
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json
   - oslcModifiedByFieldContent.json
-  - valueLabelFieldContent.json
+  - rdfsLabelFieldContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - numberAndNullTypeContent.json

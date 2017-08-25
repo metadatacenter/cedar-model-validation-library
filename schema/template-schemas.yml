@@ -60,7 +60,7 @@ definitions:
   - valueConstraintsBranchesFieldContent.json
   - valueConstraintsLiteralsFieldContent.json
   - jsonLDValueFieldContent.json
-  - valueLabelFieldContent.json
+  - rdfsLabelFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json
