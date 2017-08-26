@@ -16,7 +16,9 @@ definitions:
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
   - schemaNameFieldContent.json
+  - schemaNameContextFieldContent.json
   - schemaDescriptionFieldContent.json
+  - schemaDescriptionContextFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - schemaIsBasedOnFieldContent.json
