@@ -97,7 +97,7 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
                 "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
             },
-            "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
+            "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "rdfs:label" ],
             "additionalProperties": false
         },
         "stringArray": {
