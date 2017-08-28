@@ -372,10 +372,12 @@
           "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in a template",
           "type": "object",
           "properties": {
+            "rdfs": { "ref": "#/definitions/rdfsContextPropertiesContent" },
             "xsd": { "ref": "#/definitions/xsdContextPropertiesContent" },
             "pav": { "ref": "#/definitions/pavContextPropertiesContent" },
             "schema": { "ref": "#/definitions/schemaContextPropertiesContent" },
             "oslc": { "ref": "#/definitions/oslcContextPropertiesContent" },
+            "rdfs:label": { "ref": "#/definitions/rdfsLabelContextPropertiesContent" },
             "schema:isBasedOn": { "ref": "#/definitions/schemaIsBasedOnContextPropertiesContent" },
             "schema:name": { "ref": "#/definitions/schemaNameContextPropertiesContent" },
             "schema:description": { "ref": "#/definitions/schemaDescriptionContextPropertiesContent" },
@@ -385,10 +387,26 @@
             "oslc:modifiedBy": { "ref": "#/definitions/oslcModifiedByContextPropertiesContent" }
           },
           "patternProperties": {
-            "^(?!(xsd|schema|pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
+            "^(?!(rdfs|xsd|schema|pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
           },
           "additionalProperties": false,
-          "required": [ "xsd", "pav", "schema", "oslc", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+          "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+        },
+        "rdfsContextPropertiesContent": {
+          "description": "Schema describing the 'rdfs' prefix in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "string" ] },
+            "format": { "type": "string", "enum": [ "uri" ] },
+            "enum": {
+              "type": "array",  "minItems": 1,  "maxItems": 1,
+              "items": [
+                { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2000/01/rdf-schema#" ] }
+              ]
+            }
+          },
+          "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
         },
         "xsdContextPropertiesContent": {
           "description": "Schema describing the 'xsd' prefix in the '@context/properties' field",
@@ -452,6 +470,34 @@
             }
           },
           "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
+        },
+        "rdfsLabelContextPropertiesContent": {
+          "description": "Schema describing the 'rdfs:label' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "xsd:string" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
           "additionalProperties": false
         },
         "schemaIsBasedOnContextPropertiesContent": {
