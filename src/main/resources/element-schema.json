@@ -161,14 +161,14 @@
             "properties": {
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-                "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
+                "@context": { "$ref": "#/definitions/templateElementContextFieldContent" },
                 "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
                 "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
                 "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
             },
             "patternProperties": {
-                "^(?!(schema:|pav:|oslc:))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
+                "^(?!(pav:|oslc:))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
             },
             "additionalProperties": false,
             "required": [ "@type", "@id", "@context", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
@@ -259,12 +259,12 @@
             "required": [ "type", "format" ],
             "additionalProperties": false
         },
-        "jsonLDContextFieldContent": {
-            "description": "Schema that describes the schema of a '@context' field in a 'properties' field in a template or element",
+        "templateElementContextFieldContent": {
+            "description": "Schema that describes the schema of a '@context' field in a 'properties' field in a template element",
             "type": "object",
             "properties": {
                 "type": { "type": "string", "enum": [ "object" ] },
-                "properties": { "$ref": "#/definitions/jsonLDContextFieldPropertiesContent" },
+                "properties": { "$ref": "#/definitions/templateElementContextPropertiesFieldContent" },
                 "required": { "$ref": "#/definitions/stringArray" },
                 "additionalProperties": { "type": "boolean", "enum": [ false ] }
             },
@@ -336,9 +336,59 @@
                 { "type": "string", "enum": [ "null" ] }
             ] 
         },
-        "jsonLDContextFieldPropertiesContent": {
-            "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in template or element TODO INCOMPLETE",
-            "type": "object"
+        "templateElementContextPropertiesFieldContent": {
+          "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in a template element",
+          "type": "object",
+          "properties": {
+            "pav": { "ref": "#/definitions/pavContextPropertiesContent" },
+            "oslc": { "ref": "#/definitions/oslcContextPropertiesContent" }
+          },
+          "patternProperties": {
+            "^(?!(pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
+          },
+          "additionalProperties": false,
+          "required": [ "pav", "oslc" ]
+        },
+        "pavContextPropertiesContent": {
+          "description": "Schema describing the 'pav' prefix in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "string" ] },
+            "format": { "type": "string", "enum": [ "uri" ] },
+            "enum": {
+              "type": "array",  "minItems": 1,  "maxItems": 1,
+              "items": [
+                { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] }
+              ]
+            }
+          },
+          "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
+        },
+        "oslcContextPropertiesContent": {
+          "description": "Schema describing the 'oslc' prefix in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "string" ] },
+            "format": { "type": "string", "enum": [ "uri" ] },
+            "enum": {
+              "type": "array",  "minItems": 1,  "maxItems": 1,
+              "items": [
+                { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+              ]
+            }
+          },
+          "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
+        },
+        "userFieldContextPropertiesContent": {
+          "description": "Schema describing any user's field in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "enum": { "ref": "#/definitions/singleURIArray" }
+          },
+          "required": [ "enum" ],
+          "additionalProperties": false
         },
         "templateField": {
             "$schema": "http://json-schema.org/draft-04/schema#",
@@ -696,7 +746,6 @@
             "description": "Schema that describes the schema of 'properties' field value in a template field",
             "type": "object",
             "properties": {
-                "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
                 "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },

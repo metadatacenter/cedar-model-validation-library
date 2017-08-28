@@ -144,7 +144,7 @@
             "description": "Schema that describes the schema of a 'properties' field in a template",
             "type": "object",
             "properties": {
-                "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
+                "@context": { "$ref": "#/definitions/templateContextFieldContent" },
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
                 "schema:name": { "$ref": "#/definitions/schemaNameFieldContent" },
@@ -225,12 +225,12 @@
             "required": [ "@type" ],
             "additionalProperties": false
         },
-        "jsonLDContextFieldContent": {
-            "description": "Schema that describes the schema of a '@context' field in a 'properties' field in a template or element",
+        "templateContextFieldContent": {
+            "description": "Schema that describes the schema of a '@context' field in a 'properties' field in a template",
             "type": "object",
             "properties": {
                 "type": { "type": "string", "enum": [ "object" ] },
-                "properties": { "$ref": "#/definitions/jsonLDContextFieldPropertiesContent" },
+                "properties": { "$ref": "#/definitions/templateContextPropertiesFieldContent" },
                 "required": { "$ref": "#/definitions/stringArray" },
                 "additionalProperties": { "type": "boolean", "enum": [ false ] }
             },
@@ -368,9 +368,296 @@
           },
           "additionalProperties": false
         },
-        "jsonLDContextFieldPropertiesContent": {
-            "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in template or element TODO INCOMPLETE",
-            "type": "object"
+        "templateContextPropertiesFieldContent": {
+          "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in a template",
+          "type": "object",
+          "properties": {
+            "xsd": { "ref": "#/definitions/xsdContextPropertiesContent" },
+            "pav": { "ref": "#/definitions/pavContextPropertiesContent" },
+            "schema": { "ref": "#/definitions/schemaContextPropertiesContent" },
+            "oslc": { "ref": "#/definitions/oslcContextPropertiesContent" },
+            "schema:isBasedOn": { "ref": "#/definitions/schemaIsBasedOnContextPropertiesContent" },
+            "schema:name": { "ref": "#/definitions/schemaNameContextPropertiesContent" },
+            "schema:description": { "ref": "#/definitions/schemaDescriptionContextPropertiesContent" },
+            "pav:createdOn": { "ref": "#/definitions/pavCreatedOnContextPropertiesContent" },
+            "pav:createdBy": { "ref": "#/definitions/pavCreatedByContextPropertiesContent" },
+            "pav:lastUpdatedOn": { "ref": "#/definitions/pavLastUpdatedOnContextPropertiesContent" },
+            "oslc:modifiedBy": { "ref": "#/definitions/oslcModifiedByContextPropertiesContent" }
+          },
+          "patternProperties": {
+            "^(?!(xsd|schema|pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
+          },
+          "additionalProperties": false,
+          "required": [ "xsd", "pav", "schema", "oslc", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+        },
+        "xsdContextPropertiesContent": {
+          "description": "Schema describing the 'xsd' prefix in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "string" ] },
+            "format": { "type": "string", "enum": [ "uri" ] },
+            "enum": {
+              "type": "array",  "minItems": 1,  "maxItems": 1,
+              "items": [
+                { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2001/XMLSchema#" ] }
+              ]
+            }
+          },
+          "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
+        },
+        "pavContextPropertiesContent": {
+          "description": "Schema describing the 'pav' prefix in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "string" ] },
+            "format": { "type": "string", "enum": [ "uri" ] },
+            "enum": {
+              "type": "array",  "minItems": 1,  "maxItems": 1,
+              "items": [
+                { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] }
+              ]
+            }
+          },
+          "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
+        },
+        "schemaContextPropertiesContent": {
+          "description": "Schema describing the 'schema' prefix in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "string" ] },
+            "format": { "type": "string", "enum": [ "uri" ] },
+            "enum": {
+              "type": "array",  "minItems": 1,  "maxItems": 1,
+              "items": [
+                { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] }
+              ]
+            }
+          },
+          "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
+        },
+        "oslcContextPropertiesContent": {
+          "description": "Schema describing the 'oslc' prefix in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "string" ] },
+            "format": { "type": "string", "enum": [ "uri" ] },
+            "enum": {
+              "type": "array",  "minItems": 1,  "maxItems": 1,
+              "items": [
+                { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+              ]
+            }
+          },
+          "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
+        },
+        "schemaIsBasedOnContextPropertiesContent": {
+          "description": "Schema describing the 'schema:isBasedOn' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "@id" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "schemaNameContextPropertiesContent": {
+          "description": "Schema describing the 'schema:name' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "xsd:string" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "schemaDescriptionContextPropertiesContent": {
+          "description": "Schema describing the 'schema:description' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "xsd:string" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "pavCreatedOnContextPropertiesContent": {
+          "description": "Schema describing the 'pav:createdOn' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "xsd:dateTime" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "pavCreatedByContextPropertiesContent": {
+          "description": "Schema describing the 'pav:createdOn' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "@id" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "pavLastUpdatedOnContextPropertiesContent": {
+          "description": "Schema describing the 'pav:lastUpdatedOn' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "xsd:dateTime" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "oslcModifiedByContextPropertiesContent": {
+          "description": "Schema describing the 'oslc:modifiedBy' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "@id" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "userFieldContextPropertiesContent": {
+          "description": "Schema describing any user's field in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "enum": { "ref": "#/definitions/singleURIArray" }
+          },
+          "required": [ "enum" ],
+          "additionalProperties": false
         },
         "jsonLDTypeFieldOneOfFieldContent": {
             "description": "Schema that describes the schema of a '@type.oneOf' field in a 'properties' field in a template, element or field",
@@ -759,7 +1046,6 @@
             "description": "Schema that describes the schema of 'properties' field value in a template field",
             "type": "object",
             "properties": {
-                "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
                 "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
@@ -808,14 +1094,14 @@
             "properties": {
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-                "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
+                "@context": { "$ref": "#/definitions/templateElementContextFieldContent" },
                 "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
                 "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
                 "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
             },
             "patternProperties": {
-                "^(?!(schema:|pav:|oslc:))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
+                "^(?!(pav:|oslc:))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
             },
             "additionalProperties": false,
             "required": [ "@type", "@id", "@context", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
