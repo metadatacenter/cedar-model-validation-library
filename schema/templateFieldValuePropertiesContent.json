@@ -11,6 +11,6 @@
         "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" },
         "rdfs:label": { "$ref": "file:rdfsLabelFieldContent.json" }
     },
-    "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
+    "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "rdfs:label" ],
     "additionalProperties": false
 }
