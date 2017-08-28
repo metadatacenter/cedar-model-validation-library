@@ -1,4 +1,0 @@
-{
-    "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in template or element TODO INCOMPLETE",
-    "type": "object"
-}

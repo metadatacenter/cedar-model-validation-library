@@ -16,7 +16,7 @@ definitions:
   - propertyLabelContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
-  - jsonLDContextFieldContent.json
+  - templateElementContextFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json
@@ -24,7 +24,10 @@ definitions:
   - templateFieldOrElementOrArrayOfFieldOrElement.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
-  - jsonLDContextFieldPropertiesContent.json
+  - templateElementContextPropertiesFieldContent.json
+  - pavContextPropertiesContent.json
+  - oslcContextPropertiesContent.json
+  - userFieldContextPropertiesContent.json
   - templateField.json
   - staticTemplateField.json
   - templateElement.json

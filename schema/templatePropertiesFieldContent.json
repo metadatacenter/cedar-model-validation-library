@@ -2,7 +2,7 @@
     "description": "Schema that describes the schema of a 'properties' field in a template",
     "type": "object",
     "properties": {
-        "@context": { "$ref": "#/definitions/jsonLDContextFieldContent" },
+        "@context": { "$ref": "#/definitions/templateContextFieldContent" },
         "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
         "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
         "schema:name": { "$ref": "#/definitions/schemaNameFieldContent" },

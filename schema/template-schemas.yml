@@ -12,7 +12,7 @@ definitions:
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json
   - oslcModifiedByContextFieldContent.json
-  - jsonLDContextFieldContent.json
+  - templateContextFieldContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
   - schemaNameFieldContent.json
@@ -27,7 +27,19 @@ definitions:
   - templateFieldOrElementOrArrayOfFieldOrElement.json
   - stringArray.json
   - propertyLabelContent.json
-  - jsonLDContextFieldPropertiesContent.json
+  - templateContextPropertiesFieldContent.json
+  - xsdContextPropertiesContent.json
+  - pavContextPropertiesContent.json
+  - schemaContextPropertiesContent.json
+  - oslcContextPropertiesContent.json
+  - schemaIsBasedOnContextPropertiesContent.json
+  - schemaNameContextPropertiesContent.json
+  - schemaDescriptionContextPropertiesContent.json
+  - pavCreatedOnContextPropertiesContent.json
+  - pavCreatedByContextPropertiesContent.json
+  - pavLastUpdatedOnContextPropertiesContent.json
+  - oslcModifiedByContextPropertiesContent.json
+  - userFieldContextPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - templateField.json

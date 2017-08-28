@@ -11,7 +11,6 @@ definitions:
   - oslcModifiedByContextFieldContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
-  - jsonLDContextFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json
@@ -24,4 +23,3 @@ definitions:
   - uriEnumContent.json
   - uriEnumArrayContent.json
   - jsonLDValueFieldContent.json
-  - jsonLDContextFieldPropertiesContent.json

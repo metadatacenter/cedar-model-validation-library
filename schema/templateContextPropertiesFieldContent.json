@@ -1,0 +1,22 @@
+{
+  "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in a template",
+  "type": "object",
+  "properties": {
+    "xsd": { "ref": "file:xsdContextPropertiesContent.json" },
+    "pav": { "ref": "file:pavContextPropertiesContent.json" },
+    "schema": { "ref": "file:schemaContextPropertiesContent.json" },
+    "oslc": { "ref": "file:oslcContextPropertiesContent.json" },
+    "schema:isBasedOn": { "ref": "file:schemaIsBasedOnContextPropertiesContent.json" },
+    "schema:name": { "ref": "file:schemaNameContextPropertiesContent.json" },
+    "schema:description": { "ref": "file:schemaDescriptionContextPropertiesContent.json" },
+    "pav:createdOn": { "ref": "file:pavCreatedOnContextPropertiesContent.json" },
+    "pav:createdBy": { "ref": "file:pavCreatedByContextPropertiesContent.json" },
+    "pav:lastUpdatedOn": { "ref": "file:pavLastUpdatedOnContextPropertiesContent.json" },
+    "oslc:modifiedBy": { "ref": "file:oslcModifiedByContextPropertiesContent.json" }
+  },
+  "patternProperties": {
+    "^(?!(xsd|schema|pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "file:userFieldContextPropertiesContent.json" }
+  },
+  "additionalProperties": false,
+  "required": [ "xsd", "pav", "schema", "oslc", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+}
