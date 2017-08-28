@@ -28,10 +28,12 @@ definitions:
   - stringArray.json
   - propertyLabelContent.json
   - templateContextPropertiesFieldContent.json
+  - rdfsContextPropertiesContent.json
   - xsdContextPropertiesContent.json
   - pavContextPropertiesContent.json
   - schemaContextPropertiesContent.json
   - oslcContextPropertiesContent.json
+  - rdfsLabelContextPropertiesContent.json
   - schemaIsBasedOnContextPropertiesContent.json
   - schemaNameContextPropertiesContent.json
   - schemaDescriptionContextPropertiesContent.json

@@ -2,10 +2,12 @@
   "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in a template",
   "type": "object",
   "properties": {
+    "rdfs": { "ref": "file:rdfsContextPropertiesContent.json" },
     "xsd": { "ref": "file:xsdContextPropertiesContent.json" },
     "pav": { "ref": "file:pavContextPropertiesContent.json" },
     "schema": { "ref": "file:schemaContextPropertiesContent.json" },
     "oslc": { "ref": "file:oslcContextPropertiesContent.json" },
+    "rdfs:label": { "ref": "file:rdfsLabelContextPropertiesContent.json" },
     "schema:isBasedOn": { "ref": "file:schemaIsBasedOnContextPropertiesContent.json" },
     "schema:name": { "ref": "file:schemaNameContextPropertiesContent.json" },
     "schema:description": { "ref": "file:schemaDescriptionContextPropertiesContent.json" },
@@ -15,8 +17,8 @@
     "oslc:modifiedBy": { "ref": "file:oslcModifiedByContextPropertiesContent.json" }
   },
   "patternProperties": {
-    "^(?!(xsd|schema|pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "file:userFieldContextPropertiesContent.json" }
+    "^(?!(rdfs|xsd|schema|pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "file:userFieldContextPropertiesContent.json" }
   },
   "additionalProperties": false,
-  "required": [ "xsd", "pav", "schema", "oslc", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+  "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }
