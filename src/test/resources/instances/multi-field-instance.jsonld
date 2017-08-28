@@ -33,7 +33,7 @@
   },
   "disease": {
     "@id": "http://purl.obolibrary.org/obo/DOID_0050140",
-    "_valueLabel": "acute diarrhea"
+    "rdfs:label": "acute diarrhea"
   },
   "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/44bc43df-fe44-4308-97f1-2c4063e3ae97",
   "schema:name": "Multi-Fields Template metadata",
