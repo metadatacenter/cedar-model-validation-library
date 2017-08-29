@@ -431,11 +431,6 @@
                   "https://schema.metadatacenter.orgx/properties/lastName"
                 ]
               },
-              "6953bd5c-7e44-4820-a2ce-ddee5726d6a0": {
-                "enum": [
-                  "https://schema.metadatacenter.orgx/properties/6953bd5c-7e44-4820-a2ce-ddee5726d6a0"
-                ]
-              },
               "title": {
                 "enum": [
                   "https://schema.metadatacenter.orgx/properties/title"
@@ -446,7 +441,6 @@
               "firstName",
               "middleName",
               "lastName",
-              "6953bd5c-7e44-4820-a2ce-ddee5726d6a0",
               "title"
             ],
             "additionalProperties": false
