@@ -1,0 +1,268 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema that describes a static-valued template field",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
+            "type": "string", "format": "uri",
+            "enum": [ "http://json-schema.org/draft-04/schema#" ]
+        },
+        "type": {
+            "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
+            "type": "string", "enum": [ "object" ]
+        },
+        "title": {
+            "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
+            "type": "string", "minLength": 1
+        },
+        "description": {
+            "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
+            "type": "string", "minLength": 1
+        },
+        "_ui": {
+            "$ref": "#/definitions/staticValuedUIFieldContent"
+        },
+        "@id": {
+            "type": [ "string", "null" ], "format": "uri"
+        },
+        "@type": {
+            "type": "string",
+            "format": "uri",
+            "enum": [ "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+        },
+        "properties": {},
+        "pav:createdOn": {
+            "type": [ "string", "null" ], "format": "date-time"
+        },
+        "pav:createdBy":  {
+            "type": [ "string", "null" ], "format": "uri"
+        },
+        "pav:lastUpdatedOn":  {
+            "type": [ "string", "null" ], "format": "date-time"
+        },
+        "oslc:modifiedBy": {
+            "type": [ "string", "null" ], "format": "uri"
+        },
+        "additionalProperties": {
+            "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
+            "type": "boolean", "enum": [ false ]
+        }
+    },
+    "required": [ "$schema", "type", "title", "description", "_ui", "@id", "@type",
+        "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+    ,
+    "definitions": {
+        "staticValuedUIFieldContent": {
+            "description": "Schema that describes the schema of a '_ui' field of a static-valued template field",
+            "type": "object",
+            "properties": {
+                "title": { "type": "string", "minLength": 1 },
+                "description": { "type": "string" },
+                "inputType": {
+                    "type": "string",
+                    "enum": [ "section-break", "richtext", "image", "youtube" ]
+                },
+                "_content": { "type": [ "string", "null" ] },
+                "hidden": { "type": "boolean" }
+            },
+            "required": [ "description", "title", "inputType", "_content" ],
+            "additionalProperties": false
+        },
+        "templateFieldValuePropertiesContent": {
+            "description": "Schema that describes the schema of 'properties' field value in a template field",
+            "type": "object",
+            "properties": {
+                "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
+                "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
+                "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
+                "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
+                "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
+                "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
+                "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
+                "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
+            },
+            "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "rdfs:label" ],
+            "additionalProperties": false
+        },
+        "stringArray": {
+            "description": "Schema that describes the schema of a possibly-empty string array",
+            "type": "array", "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }            
+        },
+        "pavCreatedOnContextFieldContent": {
+            "description": "Schema that describes the schema of 'pav:createdOn' field content in a @context",
+            "type": "object",
+            "properties": {
+                "@type": { "type": "string", "enum": [ "xsd:dateTime" ] }
+            },
+            "required": [ "@type" ],
+            "additionalProperties": false
+        },
+        "pavCreatedByContextFieldContent": {
+            "description": "Schema that describes the schema of 'pav:createdBy' field content in a @context",
+            "type": "object",
+            "properties": {
+                "@type": { "type": "string", "enum": [ "@id" ] }
+            },
+            "required": [ "@type" ],
+            "additionalProperties": false
+        },
+        "pavLastUpdatedOnContextFieldContent": {
+            "description": "Schema that describes the schema of 'oslc:lastUpdatedOn' field content in a @context",
+            "type": "object",
+            "properties": {
+                "@type": { "type": "string", "enum": [ "xsd:dateTime" ] }
+            },
+            "required": [ "@type" ],
+            "additionalProperties": false
+        },
+        "oslcModifiedByContextFieldContent": {
+            "description": "Schema that describes the schema of 'oslc:modifiedBy' field content in a @context",
+            "type": "object",
+            "properties": {
+                "@type": { "type": "string", "enum": [ "@id" ] }
+            },
+            "required": [ "@type" ],
+            "additionalProperties": false
+        },
+        "jsonLDTypeFieldContent": {
+            "description": "Schema that describes the schema of a '@type' field in a 'properties' field in a template, element or field",
+            "properties": {
+                "oneOf": { "$ref": "#/definitions/jsonLDTypeFieldOneOfFieldContent" },
+                "type": { "type": "string", "enum": [ "string" ] },
+                "format": { "type": "string", "enum": [ "uri" ] }
+            },
+            "additionalProperties": false
+        },
+        "jsonLDIDFieldContent": {
+            "description": "Schema that describes the schema for a '@id' field",
+            "type": "object",
+            "properties": {
+                "type": { "$ref": "#/definitions/stringAndNullTypeContent" },
+                "format": { "type": "string", "enum": [ "uri" ] }
+            },
+            "required": [ "type", "format" ],
+            "additionalProperties": false
+        },
+        "pavCreatedOnFieldContent": {
+            "description": "Schema that describes the schema of a 'pav:createdOn' field in a 'properties' field in a template",
+            "type": "object",
+            "properties": {
+                "type": { "$ref": "#/definitions/stringAndNullTypeContent" },
+                "format": { "type": "string", "enum": [ "date-time" ] }
+            },
+            "required": [ "type", "format" ],
+            "additionalProperties": false
+        },
+        "pavCreatedByFieldContent": {
+            "description": "Schema that describes the schema of a 'pav:createdBy' field in a 'properties' field in a template",
+            "type": "object",
+            "properties": {
+                "type": { "$ref": "#/definitions/stringAndNullTypeContent" },
+                "format": { "type": "string", "enum": [ "uri" ] }
+            },
+            "required": [ "type", "format" ],
+            "additionalProperties": false
+        },
+        "pavLastUpdatedOnFieldContent": {
+            "description": "Schema that describes the schema of a 'pav:lastUpdatedOn' field in a 'properties' field in a template",
+            "type": "object",
+            "properties": {
+                "type": { "$ref": "#/definitions/stringAndNullTypeContent" },
+                "format": { "type": "string", "enum": [ "date-time" ] }
+            },
+            "required": [ "type", "format" ],
+            "additionalProperties": false
+        },
+        "oslcModifiedByFieldContent": {
+            "description": "Schema that describes the schema of a 'oslc:modifiedBy' field in a 'properties' field in a template",
+            "type": "object",
+            "properties": {
+                "type": { "$ref": "#/definitions/stringAndNullTypeContent" },
+                "format": { "type": "string", "enum": [ "uri" ] }
+            },
+            "required": [ "type", "format" ],
+            "additionalProperties": false
+        },
+        "rdfsLabelFieldContent": {
+            "description": "Schema that describes the schema of a 'rdfs:label' field in a 'properties' field in a template field",
+            "type": "object",
+            "properties": {
+                "type": { "$ref": "#/definitions/stringAndNullTypeContent" }
+            },
+            "required": [ "type" ],
+            "additionalProperties": false
+        },
+        "jsonLDTypeFieldOneOfFieldContent": {
+            "description": "Schema that describes the schema of a '@type.oneOf' field in a 'properties' field in a template, element or field",
+            "type": "array", "minItems": 2, "maxItems": 2,
+            "items": [
+                { "$ref": "#/definitions/uriEnumContent" },
+                { "$ref": "#/definitions/uriEnumArrayContent" }
+            ]
+        },
+        "stringAndNullTypeContent": {
+            "description": "Schema that describes the schema for an array containing strings 'string' and 'null'",
+            "type": "array",  "minItems": 2,  "maxItems": 2, 
+            "items": [ 
+                { "type": "string", "enum": [ "string" ] },
+                { "type": "string", "enum": [ "null" ] }
+            ] 
+        },
+        "numberAndNullTypeContent": {
+            "description": "Schema that describes the schema for an array containing strings 'number' and 'null'",
+            "type": "array",  "minItems": 2,  "maxItems": 2, 
+            "items": [ 
+                { "type": "string", "enum": [ "number" ] },
+                { "type": "string", "enum": [ "null" ] }
+            ] 
+        },
+        "arrayAndNullTypeContent": {
+            "description": "Schema that describes the schema for an array containing strings 'array' and 'null'",
+            "type": "array",  "minItems": 2,  "maxItems": 2, 
+            "items": [ 
+                { "type": "string", "enum": [ "array" ] },
+                { "type": "string", "enum": [ "null" ] }
+            ] 
+        },
+        "uriEnumContent": {
+            "description": "Schema that specifies the schema of a type field oneOf URI field with an optional 'enum'",
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": [ "string" ] },
+                "format": { "type": "string", "enum": [ "uri" ] },
+                "enum": { "$ref": "#/definitions/arrayOfURIs" }
+            },
+            "required": [ "type", "format" ],
+            "additionalProperties": false
+        },
+        "uriEnumArrayContent": {
+            "description": "Schema that specifies the schema of an array of URIs field with optional 'enum'",
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": [ "array" ] },
+                "minItems": { "type": "integer", "enum": [ 1 ] },
+                "items": { "$ref": "#/definitions/uriEnumContent" },
+                "uniqueItems": { "type": "boolean", "enum": [ true ] }
+            },
+            "required": [ "type", "minItems", "items", "uniqueItems" ],
+            "additionalProperties": false
+        },
+        "jsonLDValueFieldContent": {
+            "description": "Schema that describes the schema for a '@value' field",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "oneOf": [
+                        { "$ref": "#/definitions/stringAndNullTypeContent" },
+                        { "$ref": "#/definitions/numberAndNullTypeContent" },
+                        { "$ref": "#/definitions/arrayAndNullTypeContent" }
+                    ]
+                }
+            },
+            "required": [ "type" ],
+            "additionalProperties": false    
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a template field",
+    "description": "Schema that describes a single-valued template field",
     "type": "object",
     "properties": {
         "$schema": {
@@ -10,7 +10,7 @@
         },
         "type": {
             "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
-            "type": "string", "enum": [ "object", "array" ]
+            "type": "string", "enum": [ "object" ]
         },
         "title": {
             "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
@@ -21,7 +21,13 @@
             "type": "string", "minLength": 1
         },
         "_ui": {
-            "$ref": "#/definitions/templateFieldUIFieldContent"
+            "$ref": "#/definitions/singleValuedUIFieldContent"
+        },
+        "_valueConstraints": {
+            "$ref": "#/definitions/singleValuedValueConstraintsFieldContent"
+        },
+        "@context": {
+            "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
         },
         "@id": {
             "type": [ "string", "null" ], "format": "uri"
@@ -29,9 +35,14 @@
         "@type": {
             "type": "string",
             "format": "uri",
-            "enum": [ "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+            "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
         },
-        "properties": {},
+        "properties": {
+            "$ref": "#/definitions/templateFieldValuePropertiesContent"
+        },
+        "required": {
+            "$ref": "#/definitions/stringArray"
+        },
         "pav:createdOn": {
             "type": [ "string", "null" ], "format": "date-time"
         },
@@ -47,29 +58,35 @@
         "additionalProperties": {
             "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
             "type": "boolean", "enum": [ false ]
+        },
+        "schema:schemaVersion": {
+            "type": "string", "minLength": 1
         }
     },
-    "required": [ "$schema", "type", "title", "description", "_ui", "@id", "@type",
-        "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+    "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
+        "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+        "oslc:modifiedBy", "schema:schemaVersion" ]
     ,
     "definitions": {
-        "templateFieldUIFieldContent": {
-            "description": "Schema that describes the schema of a '_ui' field in a template field",
+        "singleValuedUIFieldContent": {
+            "description": "Schema that describes the schema of a '_ui' field of a single-valued template field",
             "type": "object",
             "properties": {
                 "title": { "type": "string", "minLength": 1 },
                 "description": { "type": "string" },
-                "inputType": { "$ref": "#/definitions/templateFieldUIInputTypeFieldContent" },
+                "inputType": {
+                    "type": "string",
+                    "enum": [ "textfield", "textarea", "radio", "date", "email", "list", "numeric", "phone-number", "link" ]
+                },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
-                "_content": { "type": [ "string", "null" ] },
                 "hidden": { "type": "boolean" }
             },
             "required": [ "description", "title", "inputType" ],
-            "additionalProperties": false           
+            "additionalProperties": false
         },
-        "valueConstraintsFieldContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a template field",
+        "singleValuedValueConstraintsFieldContent": {
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a single-valued template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -78,10 +95,28 @@
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
-                "multipleChoice": { "type": "boolean" },
+                "multipleChoice": { "type": "boolean", "enum": [ false ] },
                 "defaultValue": { "type": "string" }
             },
             "required": [ "requiredValue" ],
+            "additionalProperties": false
+        },
+        "templateFieldJSONLDContextFieldContent": {
+            "description": "Schema describing the schema of the '@context' field in a template field",
+            "type": "object",
+            "properties": {
+                "xsd": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2001/XMLSchema#" ] },
+                "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
+                "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
+                "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+                "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnContextFieldContent" },
+                "pav:createdBy": { "$ref": "#/definitions/pavCreatedByContextFieldContent" },
+                "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnContextFieldContent" },
+                "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
+            },
+            "patternProperties": {
+                "^(?!pav)(?!schema)(?!oslc)(?!xsd)(?!pav:createdOn)(?!pav:createdBy)(?!pav:lastUpdatedOn)(?!oslc:modifiedBy)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+            },
             "additionalProperties": false
         },
         "templateFieldValuePropertiesContent": {
@@ -105,10 +140,30 @@
             "type": "array", "uniqueItems": true,
             "items": { "type": "string", "minLength": 1 }            
         },
-        "templateFieldUIInputTypeFieldContent": {
-            "description": "Schema describing the schema of the 'inputType' field in a template field '_ui' field",
-            "type": "string",
-            "enum": [ "textfield", "textarea", "radio", "checkbox", "date", "email", "list", "numeric", "phone-number", "section-break", "richtext", "image", "youtube", "link" ]
+        "valueConstraintsOntologiesFieldContent": {
+            "description": "Schema that describes the schema of the 'ontologies' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": {  "$ref": "#/definitions/valueConstraintsOntologiesFieldItemContent" }
+        },
+        "valueConstraintsValueSetsFieldContent": {
+            "description": "Schema that describes the schema of 'valueSets' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": { "$ref": "#/definitions/valueConstraintsValueSetsFieldItemContent" }
+        },
+        "valueConstraintsClassesFieldContent": {
+            "description": "Schema that describes the schema of the 'classes' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": { "$ref": "#/definitions/valueConstraintsClassesFieldItemContent"}            
+        },
+        "valueConstraintsBranchesFieldContent": {
+            "description": "Schema that describes the schema of the 'branches' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": {  "$ref": "#/definitions/valueConstraintsBranchesFieldItemContent"  }            
+        },
+        "valueConstraintsLiteralsFieldContent": {
+            "description": "Schema that describes the schema of the 'literals' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": { "$ref": "#/definitions/valueConstraintsLiteralsFieldItemContent"}            
         },
         "pavCreatedOnContextFieldContent": {
             "description": "Schema that describes the schema of 'pav:createdOn' field content in a @context",
@@ -214,6 +269,31 @@
             "required": [ "type" ],
             "additionalProperties": false
         },
+        "valueConstraintsOntologiesFieldContent": {
+            "description": "Schema that describes the schema of the 'ontologies' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": {  "$ref": "#/definitions/valueConstraintsOntologiesFieldItemContent" }
+        },
+        "valueConstraintsValueSetsFieldContent": {
+            "description": "Schema that describes the schema of 'valueSets' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": { "$ref": "#/definitions/valueConstraintsValueSetsFieldItemContent" }
+        },
+        "valueConstraintsClassesFieldContent": {
+            "description": "Schema that describes the schema of the 'classes' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": { "$ref": "#/definitions/valueConstraintsClassesFieldItemContent"}            
+        },
+        "valueConstraintsBranchesFieldContent": {
+            "description": "Schema that describes the schema of the 'branches' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": {  "$ref": "#/definitions/valueConstraintsBranchesFieldItemContent"  }            
+        },
+        "valueConstraintsLiteralsFieldContent": {
+            "description": "Schema that describes the schema of the 'literals' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": { "$ref": "#/definitions/valueConstraintsLiteralsFieldItemContent"}            
+        },
         "jsonLDTypeFieldOneOfFieldContent": {
             "description": "Schema that describes the schema of a '@type.oneOf' field in a 'properties' field in a template, element or field",
             "type": "array", "minItems": 2, "maxItems": 2,
@@ -283,6 +363,81 @@
             },
             "required": [ "type" ],
             "additionalProperties": false    
+        },
+        "valueConstraintsOntologiesFieldItemContent": {
+            "description": "Schema that describes the schema of each entry in the 'ontologies' field array in a '_valueConstraints' field",
+            "type": "object",
+            "properties": {
+                "uri": { "type": "string", "format": "uri" },
+                "acronym": { "type": "string", "minLength": 1 },
+                "name": { "type": "string", "minLength": 1 },
+                "numTerms": { "type": "integer", "minimum": 1 },
+                "exclusions": { "$ref": "#/definitions/valueConstraintsOntologiesExclusionsFieldContent" },
+                "selectedByDefault": { "type": "boolean" }
+            },
+            "required": [ "uri" ],
+            "additionalProperties": false
+        },
+        "valueConstraintsValueSetsFieldItemContent": {
+            "description": "Schema that describes the schema of each entry in the 'valueSets' field array in a '_valueConstraints' field",
+            "type": "object",
+            "properties": {
+                "uri": { "type": "string", "format": "uri" },
+                "name": { "type": "string", "minLength": 1 },
+                "vsCollection": { "type": "string", "format": "uri" },
+                "exclusions": { "$ref": "#/definitions/valueConstraintsValueSetsExclusionsFieldContent" },
+                "selectedByDefault": { "type": "boolean" }
+            },
+            "required": [ "uri" ],
+            "additionalProperties": false
+        },
+        "valueConstraintsClassesFieldItemContent": {
+            "description": "Schema that describes the schema of each entry in the 'classes' field array in a '_valueConstraints' field",
+            "type": "object",
+            "properties": {
+                "uri": { "type": "string", "format": "uri" },
+                "prefLabel": { "type": "string", "minLength": 1 },
+                "type": { "type": "string", "minLength": 1 },
+                "label": { "type": "string", "minLength": 1 },
+                "source": { "type": "string", "minLength": 1 },
+                "selectedByDefault": { "type": "boolean" }
+            },
+            "required": [ "uri", "prefLabel", "type", "label", "source" ],
+            "additionalProperties": false
+        },
+        "valueConstraintsBranchesFieldItemContent": {
+            "description": "Schema that describes the schema of each entry in the 'branches' field array in a '_valueConstraints' field",
+            "type": "object",
+            "properties": {
+                "source": { "type": "string", "minLength": 1 },
+                "acronym": { "type": "string", "minLength": 1 },
+                "name": { "type": "string", "minLength": 1 },
+                "uri": { "type": "string", "format": "uri" },
+                "maxDepth": { "type": "integer", "minimum": 0 },
+                "selectedByDefault": { "type": "boolean" }
+            },
+            "required": [ "source", "acronym", "name", "uri", "maxDepth" ],
+            "additionalProperties": false
+        },
+        "valueConstraintsLiteralsFieldItemContent": {
+            "description": "Schema that describes the schema of each entry in the 'literals' field array in a '_valueConstraints' field",
+            "type": "object",
+            "properties": {
+                "label": { "type": "string" },
+                "selectedByDefault": { "type": "boolean" }
+            },
+            "required": [ "label" ],
+            "additionalProperties": false
+        },
+        "valueConstraintsOntologiesExclusionsFieldContent": {
+           "description": "Schema that describes the schema of the 'ontologies.exclusions' field in a '_valueConstraints' field",
+           "type": "array", "uniqueItems": true,
+           "items": { "type": "string", "format": "uri" }
+        },
+        "valueConstraintsValueSetsExclusionsFieldContent": {
+            "description": "Schema that describes the schema of the 'valueSets.exclusions' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": { "type": "string", "format": "uri" }
         }
     }
 }
