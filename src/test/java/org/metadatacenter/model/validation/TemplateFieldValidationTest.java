@@ -479,14 +479,15 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassMissingProperties_RdfsLabel() {
+  public void shouldFailMissingProperties_RdfsLabel() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
     fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/properties/rdfs:label");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
-    assertValidationStatus(validationReport, "true");
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "object has missing required properties (['rdfs:label'])");
   }
 
   @Test
