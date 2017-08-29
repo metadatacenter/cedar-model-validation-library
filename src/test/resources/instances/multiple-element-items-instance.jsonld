@@ -52,7 +52,7 @@
         "@value": "Wayne"
       },
       "title": {
-        "@value": "Mr."
+        "@value": [ "Mr." ]
       },
       "@id": "https://repo.metadatacenter.orgx/template-element-instances/59051812-bc89-47a5-bc1c-0e35e68c45c3"
     },

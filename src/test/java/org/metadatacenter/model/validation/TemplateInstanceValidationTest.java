@@ -74,7 +74,6 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "true");
   }
 
-  @Ignore("The validation for multivalued element instances is not ready yet")
   @Test
   public void shouldPassMultipleElementItemsInstance() {
     // Arrange
