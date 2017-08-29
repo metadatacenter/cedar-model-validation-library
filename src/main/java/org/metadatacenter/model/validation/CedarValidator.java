@@ -133,14 +133,15 @@ public class CedarValidator implements ModelValidator {
   }
 
   private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer currentLocation) throws CedarModelValidationException, IOException {
-    checkJsonLdTypeNodeExists(fieldNode, currentLocation);
-    checkJsonSchemaTypeNodeExists(fieldNode, currentLocation);
     if (isSingleValuedTemplateField(fieldNode)) {
       validateNodeStructureAgainstSingleValuedFieldSchema(fieldNode, currentLocation);
     } else if (isMultiValuedTemplateField(fieldNode)) {
       validateNodeStructureAgainstMultiValuedFieldSchema(fieldNode, currentLocation);
     } else if (isStaticValuedTemplateField(fieldNode)) {
       validateNodeStructureAgainstStaticValuedFieldSchema(fieldNode, currentLocation);
+    } else {
+      checkJsonLdTypeNodeExists(fieldNode, currentLocation);
+      checkJsonSchemaTypeNodeExists(fieldNode, currentLocation);
     }
   }
 
