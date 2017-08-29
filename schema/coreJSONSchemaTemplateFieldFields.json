@@ -1,7 +1,0 @@
-{
-    "description": "A schema that describes the core JSON Schema fields in a template field",
-    "type": "object",
-    "allOf": [
-        { "$ref": "file:coreJSONSchemaFields.json" }
-    ]
-}

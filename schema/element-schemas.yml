@@ -1,9 +1,6 @@
 base: templateElement.json
 definitions:
-  - coreJSONSchemaFields.json
   - jsonLDValueFieldContent.json
-  - jsonLDIDField.json
-  - provenanceFields.json
   - templateElementJSONLDContextFieldContent.json
   - templateElementUIFieldContent.json
   - templateElementPropertiesFieldContent.json
@@ -28,27 +25,24 @@ definitions:
   - pavContextPropertiesContent.json
   - oslcContextPropertiesContent.json
   - userFieldContextPropertiesContent.json
-  - templateField.json
-  - staticTemplateField.json
+  - singleValuedTemplateField.json
+  - multiValuedTemplateField.json
+  - staticValuedTemplateField.json
+  - singleValuedUIFieldContent.json
+  - singleValuedValueConstraintsFieldContent.json
+  - multiValuedUIFieldContent.json
+  - multiValuedValueConstraintsFieldContent.json
+  - staticValuedUIFieldContent.json
   - templateElement.json
   - templateFieldOrElementArray.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
   - numberAndNullTypeContent.json
   - arrayAndNullTypeContent.json
-  - coreJSONSchemaTemplateFieldFields.json
-  - templateFieldJSONLDContextField.json
-  - templateFieldJSONLDTypeField.json
-  - templateFieldUIField.json
-  - valueConstraintsField.json
   - templateFieldSingleValueContent.json
-  - templateFieldOrElement.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
-  - templateFieldUIFieldContent.json
-  - valueConstraintsFieldContent.json
   - templateFieldValuePropertiesContent.json
-  - templateFieldUIInputTypeFieldContent.json
   - valueConstraintsOntologiesFieldContent.json
   - valueConstraintsValueSetsFieldContent.json
   - valueConstraintsClassesFieldContent.json

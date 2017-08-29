@@ -1,0 +1,16 @@
+{
+    "description": "Schema that describes the schema of a '_ui' field of a multi-valued template field",
+    "type": "object",
+    "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "inputType": {
+            "type": "string",
+            "enum": [ "checkbox", "list" ]
+        },
+        "valueRecommendationEnabled": { "type": "boolean" },
+        "hidden": { "type": "boolean" }
+    },
+    "required": [ "description", "title", "inputType" ],
+    "additionalProperties": false
+}

@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "A schema that describes core JSON Schema fields used in templates, elements, and fields",
+    "description": "Schema that describes a static-valued template field",
     "type": "object",
     "properties": {
         "$schema": {
@@ -10,7 +10,7 @@
         },
         "type": {
             "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
-            "type": "string", "enum": [ "object", "array" ]
+            "type": "string", "enum": [ "object" ]
         },
         "title": {
             "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
@@ -20,10 +20,35 @@
             "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
             "type": "string", "minLength": 1
         },
+        "_ui": {
+            "$ref": "#/definitions/staticValuedUIFieldContent"
+        },
+        "@id": {
+            "type": [ "string", "null" ], "format": "uri"
+        },
+        "@type": {
+            "type": "string",
+            "format": "uri",
+            "enum": [ "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+        },
+        "properties": {},
+        "pav:createdOn": {
+            "type": [ "string", "null" ], "format": "date-time"
+        },
+        "pav:createdBy":  {
+            "type": [ "string", "null" ], "format": "uri"
+        },
+        "pav:lastUpdatedOn":  {
+            "type": [ "string", "null" ], "format": "date-time"
+        },
+        "oslc:modifiedBy": {
+            "type": [ "string", "null" ], "format": "uri"
+        },
         "additionalProperties": {
             "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
             "type": "boolean", "enum": [ false ]
         }
     },
-    "required": [ "$schema", "type", "title", "description" ]
+    "required": [ "$schema", "type", "title", "description", "_ui", "@id", "@type",
+        "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }

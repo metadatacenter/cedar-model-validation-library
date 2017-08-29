@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a template field",
+    "description": "Schema that describes a single-valued template field",
     "type": "object",
     "properties": {
         "$schema": {
@@ -10,7 +10,7 @@
         },
         "type": {
             "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
-            "type": "string", "enum": [ "object", "array" ]
+            "type": "string", "enum": [ "object" ]
         },
         "title": {
             "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
@@ -21,10 +21,10 @@
             "type": "string", "minLength": 1
         },
         "_ui": {
-            "$ref": "#/definitions/templateFieldUIFieldContent"
+            "$ref": "#/definitions/singleValuedUIFieldContent"
         },
         "_valueConstraints": {
-            "$ref": "#/definitions/valueConstraintsFieldContent"
+            "$ref": "#/definitions/singleValuedValueConstraintsFieldContent"
         },
         "@context": {
             "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"

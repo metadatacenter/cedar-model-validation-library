@@ -1,10 +1,8 @@
-base: staticTemplateField.json
+base: staticValuedTemplateField.json
 definitions:
-  - templateFieldUIFieldContent.json
-  - valueConstraintsFieldContent.json
+  - staticValuedUIFieldContent.json
   - templateFieldValuePropertiesContent.json
   - stringArray.json
-  - templateFieldUIInputTypeFieldContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json
