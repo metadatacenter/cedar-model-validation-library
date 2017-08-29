@@ -47,6 +47,26 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassTemplateWithCheckbox() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/checkbox-template.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassTemplateWithMultiSelectList() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/multi-select-list-template.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassStaticFieldTemplate() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/static-field-template.json");
