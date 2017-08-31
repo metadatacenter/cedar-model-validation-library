@@ -6,7 +6,7 @@
     "oslc": { "ref": "file:oslcContextPropertiesContent.json" }
   },
   "patternProperties": {
-    "^(?!(pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "file:userFieldContextPropertiesContent.json" }
+    "^(?!(pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
   },
   "additionalProperties": false,
   "required": [ "pav", "oslc" ]
