@@ -91,7 +91,7 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
             },
             "patternProperties": {
-                "^(?!pav)(?!schema)(?!oslc)(?!xsd)(?!pav:createdOn)(?!pav:createdBy)(?!pav:lastUpdatedOn)(?!oslc:modifiedBy)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+                "^(?!(schema|xsd|pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "type": "string", "format": "uri" }
             },
             "additionalProperties": false
         },
@@ -297,7 +297,7 @@
             "oslc": { "ref": "#/definitions/oslcContextPropertiesContent" }
           },
           "patternProperties": {
-            "^(?!(pav|oslc))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
+            "^(?!(pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
           },
           "additionalProperties": false,
           "required": [ "pav", "oslc" ]
@@ -771,7 +771,7 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
             },
             "patternProperties": {
-                "^(?!pav)(?!schema)(?!oslc)(?!xsd)(?!pav:createdOn)(?!pav:createdBy)(?!pav:lastUpdatedOn)(?!oslc:modifiedBy)[a-zA-Z][a-zA-Z0-9]*$": { "type": "string", "format": "uri" }
+                "^(?!(schema|xsd|pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "type": "string", "format": "uri" }
             },
             "additionalProperties": false
         },
