@@ -1,8 +1,0 @@
-{
-    "description": "A schema that describes a '_ui' field in a template element",
-    "type": "object",
-    "properties": {
-        "_ui": { "$ref": "file:templateElementUIFieldContent.json" }
-    },
-    "required": [ "_ui" ]
-}

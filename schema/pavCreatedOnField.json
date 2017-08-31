@@ -1,8 +1,0 @@
-{
-    "description": "A schema that describes a 'pav:createdOn' field content",
-    "type": "object",
-    "properties": {
-        "@id": { "type": [ "string", "null" ], "format": "uri" }
-    },
-    "required": [ "@id" ]
-}

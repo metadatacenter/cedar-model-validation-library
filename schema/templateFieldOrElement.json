@@ -1,7 +1,0 @@
-{
-    "description": "Schema that describes a template field or element",
-    "oneOf": [
-        { "$ref": "file:templateField.json" },
-        { "$ref": "file:templateElement.json" }
-    ]
-}

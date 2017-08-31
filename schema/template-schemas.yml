@@ -1,9 +1,5 @@
 base: template.json
 definitions:
-  - coreJSONSchemaFields.json
-  - jsonLDIDField.json
-  - provenanceFields.json
-  - templateUIField.json
   - templateJSONLDContextFieldContent.json
   - templatePropertiesFieldContent.json
   - templateUIFieldContent.json
@@ -12,11 +8,13 @@ definitions:
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json
   - oslcModifiedByContextFieldContent.json
-  - jsonLDContextFieldContent.json
+  - templateContextFieldContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
   - schemaNameFieldContent.json
+  - schemaNameContextFieldContent.json
   - schemaDescriptionFieldContent.json
+  - schemaDescriptionContextFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - schemaIsBasedOnFieldContent.json
@@ -25,43 +23,49 @@ definitions:
   - templateFieldOrElementOrArrayOfFieldOrElement.json
   - stringArray.json
   - propertyLabelContent.json
-  - jsonLDContextFieldPropertiesContent.json
-  - jsonLDContextFieldPatternPropertiesContent.json
+  - templateContextPropertiesFieldContent.json
+  - rdfsContextPropertiesContent.json
+  - xsdContextPropertiesContent.json
+  - pavContextPropertiesContent.json
+  - schemaContextPropertiesContent.json
+  - oslcContextPropertiesContent.json
+  - rdfsLabelContextPropertiesContent.json
+  - schemaIsBasedOnContextPropertiesContent.json
+  - schemaNameContextPropertiesContent.json
+  - schemaDescriptionContextPropertiesContent.json
+  - pavCreatedOnContextPropertiesContent.json
+  - pavCreatedByContextPropertiesContent.json
+  - pavLastUpdatedOnContextPropertiesContent.json
+  - oslcModifiedByContextPropertiesContent.json
+  - userFieldContextPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
-  - templateField.json
-  - staticTemplateField.json
+  - singleValuedTemplateField.json
+  - multiValuedTemplateField.json
+  - staticValuedTemplateField.json
+  - singleValuedUIFieldContent.json
+  - singleValuedValueConstraintsFieldContent.json
+  - multiValuedUIFieldContent.json
+  - multiValuedValueConstraintsFieldContent.json
+  - staticValuedUIFieldContent.json
   - templateElement.json
   - templateFieldOrElementArray.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
-  - coreJSONSchemaTemplateFieldFields.json
-  - templateFieldJSONLDContextField.json
-  - templateFieldJSONLDTypeField.json
-  - templateFieldUIField.json
-  - valueConstraintsField.json
   - templateFieldSingleValueContent.json
-  - coreJSONSchemaTemplateElementFields.json
-  - templateElementJSONLDContextField.json
-  - templateElementJSONLDTypeField.json
-  - templateElementUIField.json
-  - templateFieldOrElement.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
-  - templateFieldUIFieldContent.json
-  - valueConstraintsFieldContent.json
   - templateFieldValuePropertiesContent.json
   - templateElementJSONLDContextFieldContent.json
   - templateElementUIFieldContent.json
   - templateElementPropertiesFieldContent.json
-  - templateFieldUIInputTypeFieldContent.json
   - valueConstraintsOntologiesFieldContent.json
   - valueConstraintsValueSetsFieldContent.json
   - valueConstraintsClassesFieldContent.json
   - valueConstraintsBranchesFieldContent.json
   - valueConstraintsLiteralsFieldContent.json
   - jsonLDValueFieldContent.json
-  - valueLabelFieldContent.json
+  - rdfsLabelFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json
