@@ -666,4 +666,52 @@ public class TemplateValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport, "object has missing required properties (['@value'])");
   }
+
+  @Test
+  public void shouldFailFieldNameUsingColon() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-colon.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
+        "['study:name']");
+  }
+
+  @Test
+  public void shouldFailFieldNameUsingDoubleQuotes() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-double-quotes.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
+        "['\\'study name\\'']");
+  }
+
+  @Test
+  public void shouldFailFieldNameUsingPeriod() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-period.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
+        "['study.name']");
+  }
+
+  @Test
+  public void shouldFailFieldNameUsingSlash() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-slash.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
+        "['study/name']");
+  }
 }
