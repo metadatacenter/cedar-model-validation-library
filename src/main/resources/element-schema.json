@@ -85,6 +85,8 @@
                 "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
                 "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
                 "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+                "schema:name": { "$ref": "#/definitions/schemaNameContextFieldContent" },
+                "schema:description": { "$ref": "#/definitions/schemaDescriptionContextFieldContent" },
                 "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnContextFieldContent" },
                 "pav:createdBy": { "$ref": "#/definitions/pavCreatedByContextFieldContent" },
                 "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnContextFieldContent" },
@@ -93,7 +95,8 @@
             "patternProperties": {
                 "^(?!(schema|xsd|pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "type": "string", "format": "uri" }
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
         },
         "templateElementUIFieldContent": {
             "type": "object",
