@@ -5,6 +5,8 @@ definitions:
   - templateElementUIFieldContent.json
   - templateElementPropertiesFieldContent.json
   - templateRequiredFieldContent.json
+  - schemaNameContextFieldContent.json
+  - schemaDescriptionContextFieldContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json
