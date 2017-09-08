@@ -4,15 +4,11 @@
     "properties": {
         "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
         "@id": { "$ref": "file:jsonLDIDFieldContent.json" },
-        "@context": { "$ref": "file:templateElementContextFieldContent.json" },
-        "pav:createdOn": { "$ref": "file:pavCreatedOnFieldContent.json" },
-        "pav:createdBy": { "$ref": "file:pavCreatedByFieldContent.json" },
-        "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
-        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" }
+        "@context": { "$ref": "file:templateElementContextFieldContent.json" }
     },
     "patternProperties": {
         "^(?!(pav:|oslc:))[a-zA-Z0-9][^\"/]*$": { "$ref": "file:templateFieldOrElementOrArrayOfFieldOrElement.json" }
     },
     "additionalProperties": false,
-    "required": [ "@type", "@id", "@context", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+    "required": [ "@type", "@id", "@context" ]
 }

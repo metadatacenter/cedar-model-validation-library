@@ -5,12 +5,8 @@
         "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
         "@id": { "$ref": "file:jsonLDIDFieldContent.json" },
         "@value": { "$ref": "file:jsonLDValueFieldContent.json" },
-        "pav:createdOn": { "$ref": "file:pavCreatedOnFieldContent.json" },
-        "pav:createdBy": { "$ref": "file:pavCreatedByFieldContent.json" },
-        "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
-        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" },
         "rdfs:label": { "$ref": "file:rdfsLabelFieldContent.json" }
     },
-    "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "rdfs:label" ],
+    "required": [ "@type", "rdfs:label" ],
     "additionalProperties": false
 }

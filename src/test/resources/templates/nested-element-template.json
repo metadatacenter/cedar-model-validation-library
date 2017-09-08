@@ -326,34 +326,6 @@
             "string",
             "null"
           ]
-        },
-        "pav:createdOn": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "pav:createdBy": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uri"
-        },
-        "pav:lastUpdatedOn": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "oslc:modifiedBy": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uri"
         }
       },
       "required": [
@@ -468,34 +440,6 @@
             }
           ]
         },
-        "pav:createdOn": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "pav:createdBy": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uri"
-        },
-        "pav:lastUpdatedOn": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "oslc:modifiedBy": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uri"
-        },
         "productName": {
           "@type": "https://schema.metadatacenter.org/core/TemplateField",
           "@context": {
@@ -556,34 +500,6 @@
                 "string",
                 "null"
               ]
-            },
-            "pav:createdOn": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "date-time"
-            },
-            "pav:createdBy": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uri"
-            },
-            "pav:lastUpdatedOn": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "date-time"
-            },
-            "oslc:modifiedBy": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uri"
             }
           },
           "required": [
@@ -690,34 +606,6 @@
                 }
               ]
             },
-            "pav:createdOn": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "date-time"
-            },
-            "pav:createdBy": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uri"
-            },
-            "pav:lastUpdatedOn": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "date-time"
-            },
-            "oslc:modifiedBy": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uri"
-            },
             "value": {
               "@type": "https://schema.metadatacenter.org/core/TemplateField",
               "@context": {
@@ -778,34 +666,6 @@
                     "string",
                     "null"
                   ]
-                },
-                "pav:createdOn": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "date-time"
-                },
-                "pav:createdBy": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "uri"
-                },
-                "pav:lastUpdatedOn": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "date-time"
-                },
-                "oslc:modifiedBy": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "uri"
                 }
               },
               "required": [
@@ -880,34 +740,6 @@
                     "string",
                     "null"
                   ]
-                },
-                "pav:createdOn": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "date-time"
-                },
-                "pav:createdBy": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "uri"
-                },
-                "pav:lastUpdatedOn": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "date-time"
-                },
-                "oslc:modifiedBy": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "uri"
                 }
               },
               "required": [
@@ -1050,34 +882,6 @@
             }
           ]
         },
-        "pav:createdOn": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "pav:createdBy": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uri"
-        },
-        "pav:lastUpdatedOn": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date-time"
-        },
-        "oslc:modifiedBy": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uri"
-        },
         "productName": {
           "@type": "https://schema.metadatacenter.org/core/TemplateField",
           "@context": {
@@ -1138,34 +942,6 @@
                 "string",
                 "null"
               ]
-            },
-            "pav:createdOn": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "date-time"
-            },
-            "pav:createdBy": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uri"
-            },
-            "pav:lastUpdatedOn": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "date-time"
-            },
-            "oslc:modifiedBy": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uri"
             }
           },
           "required": [
@@ -1272,34 +1048,6 @@
                 }
               ]
             },
-            "pav:createdOn": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "date-time"
-            },
-            "pav:createdBy": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uri"
-            },
-            "pav:lastUpdatedOn": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "date-time"
-            },
-            "oslc:modifiedBy": {
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uri"
-            },
             "value": {
               "@type": "https://schema.metadatacenter.org/core/TemplateField",
               "@context": {
@@ -1360,34 +1108,6 @@
                     "string",
                     "null"
                   ]
-                },
-                "pav:createdOn": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "date-time"
-                },
-                "pav:createdBy": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "uri"
-                },
-                "pav:lastUpdatedOn": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "date-time"
-                },
-                "oslc:modifiedBy": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "uri"
                 }
               },
               "required": [
@@ -1462,34 +1182,6 @@
                     "string",
                     "null"
                   ]
-                },
-                "pav:createdOn": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "date-time"
-                },
-                "pav:createdBy": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "uri"
-                },
-                "pav:lastUpdatedOn": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "date-time"
-                },
-                "oslc:modifiedBy": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "format": "uri"
                 }
               },
               "required": [

@@ -320,54 +320,6 @@ public class TemplateElementValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldFailMissingProperties_CreatedOn() {
-    // Arrange
-    String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/properties/pav:createdOn");
-    // Act
-    ValidationReport validationReport = runValidation(elementString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])");
-  }
-
-  @Test
-  public void shouldFailMissingProperties_CreatedBy() {
-    // Arrange
-    String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/properties/pav:createdBy");
-    // Act
-    ValidationReport validationReport = runValidation(elementString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])");
-  }
-
-  @Test
-  public void shouldFailMissingProperties_LastUpdatedOn() {
-    // Arrange
-    String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/properties/pav:lastUpdatedOn");
-    // Act
-    ValidationReport validationReport = runValidation(elementString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])");
-  }
-
-  @Test
-  public void shouldFailMissingProperties_ModifiedBy() {
-    // Arrange
-    String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/properties/oslc:modifiedBy");
-    // Act
-    ValidationReport validationReport = runValidation(elementString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])");
-  }
-
-  @Test
   public void shouldFailMissingProperties_Field_Type() {
     // Arrange
     String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");

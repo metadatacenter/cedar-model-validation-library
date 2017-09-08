@@ -76,13 +76,9 @@
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
                 "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
-                "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
-                "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
-                "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
-                "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
                 "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
             },
-            "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "rdfs:label" ],
+            "required": [ "@type", "rdfs:label" ],
             "additionalProperties": false
         },
         "stringArray": {

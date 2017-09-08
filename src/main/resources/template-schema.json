@@ -1089,13 +1089,9 @@
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
                 "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
-                "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
-                "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
-                "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
-                "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
                 "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
             },
-            "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "rdfs:label" ],
+            "required": [ "@type", "rdfs:label" ],
             "additionalProperties": false
         },
         "templateElementJSONLDContextFieldContent": {
@@ -1137,17 +1133,13 @@
             "properties": {
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-                "@context": { "$ref": "#/definitions/templateElementContextFieldContent" },
-                "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
-                "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
-                "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
-                "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
+                "@context": { "$ref": "#/definitions/templateElementContextFieldContent" }
             },
             "patternProperties": {
                 "^(?!(pav:|oslc:))[a-zA-Z0-9][^\"/]*$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
             },
             "additionalProperties": false,
-            "required": [ "@type", "@id", "@context", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+            "required": [ "@type", "@id", "@context" ]
         },
         "valueConstraintsOntologiesFieldContent": {
             "description": "Schema that describes the schema of the 'ontologies' field in a '_valueConstraints' field",
