@@ -49,10 +49,13 @@ definitions:
   - multiValuedValueConstraintsFieldContent.json
   - staticValuedUIFieldContent.json
   - templateElement.json
+  - templateElementContextFieldContent.json
+  - templateElementContextPropertiesFieldContent.json
   - templateFieldOrElementArray.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
   - templateFieldSingleValueContent.json
+  - singleURIArray.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
   - templateFieldValuePropertiesContent.json

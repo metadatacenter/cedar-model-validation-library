@@ -34,8 +34,6 @@
   "participants": [
     {
       "@context": {
-        "pav": "http://purl.org/pav/",
-        "oslc": "http://open-services.net/ns/core#",
         "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
         "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
         "lastName": "https://schema.metadatacenter.orgx/properties/lastName",
@@ -57,8 +55,6 @@
     },
     {
       "@context": {
-        "pav": "http://purl.org/pav/",
-        "oslc": "http://open-services.net/ns/core#",
         "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
         "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
         "lastName": "https://schema.metadatacenter.orgx/properties/lastName",
@@ -80,8 +76,6 @@
     },
     {
       "@context": {
-        "pav": "http://purl.org/pav/",
-        "oslc": "http://open-services.net/ns/core#",
         "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
         "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
         "lastName": "https://schema.metadatacenter.orgx/properties/lastName",

@@ -43,20 +43,6 @@
     "@context": {
       "type": "object",
       "properties": {
-        "pav": {
-          "type": "string",
-          "format": "uri",
-          "enum": [
-            "http://purl.org/pav/"
-          ]
-        },
-        "oslc": {
-          "type": "string",
-          "format": "uri",
-          "enum": [
-            "http://open-services.net/ns/core#"
-          ]
-        },
         "firstName": {
           "enum": [
             "https://schema.metadatacenter.orgx/properties/firstName"

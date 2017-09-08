@@ -42,6 +42,7 @@ definitions:
   - numberAndNullTypeContent.json
   - arrayAndNullTypeContent.json
   - templateFieldSingleValueContent.json
+  - singleURIArray.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
   - templateFieldValuePropertiesContent.json

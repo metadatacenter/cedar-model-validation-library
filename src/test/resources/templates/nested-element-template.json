@@ -385,20 +385,6 @@
         "@context": {
           "type": "object",
           "properties": {
-            "pav": {
-              "type": "string",
-              "format": "uri",
-              "enum": [
-                "http://purl.org/pav/"
-              ]
-            },
-            "oslc": {
-              "type": "string",
-              "format": "uri",
-              "enum": [
-                "http://open-services.net/ns/core#"
-              ]
-            },
             "productName": {
               "enum": [
                 "https://schema.metadatacenter.orgx/properties/productName"
@@ -522,6 +508,12 @@
             "pav": "http://purl.org/pav/",
             "oslc": "http://open-services.net/ns/core#",
             "schema": "http://schema.org/",
+            "schema:name": {
+              "@type": "xsd:string"
+            },
+            "schema:description": {
+              "@type": "xsd:string"
+            },
             "pav:createdOn": {
               "@type": "xsd:dateTime"
             },
@@ -551,20 +543,6 @@
             "@context": {
               "type": "object",
               "properties": {
-                "pav": {
-                  "type": "string",
-                  "format": "uri",
-                  "enum": [
-                    "http://purl.org/pav/"
-                  ]
-                },
-                "oslc": {
-                  "type": "string",
-                  "format": "uri",
-                  "enum": [
-                    "http://open-services.net/ns/core#"
-                  ]
-                },
                 "value": {
                   "enum": [
                     "https://schema.metadatacenter.orgx/properties/value"
@@ -827,20 +805,6 @@
         "@context": {
           "type": "object",
           "properties": {
-            "pav": {
-              "type": "string",
-              "format": "uri",
-              "enum": [
-                "http://purl.org/pav/"
-              ]
-            },
-            "oslc": {
-              "type": "string",
-              "format": "uri",
-              "enum": [
-                "http://open-services.net/ns/core#"
-              ]
-            },
             "productName": {
               "enum": [
                 "https://schema.metadatacenter.orgx/properties/productName"
@@ -964,6 +928,12 @@
             "pav": "http://purl.org/pav/",
             "oslc": "http://open-services.net/ns/core#",
             "schema": "http://schema.org/",
+            "schema:name": {
+              "@type": "xsd:string"
+            },
+            "schema:description": {
+              "@type": "xsd:string"
+            },
             "pav:createdOn": {
               "@type": "xsd:dateTime"
             },
@@ -993,20 +963,6 @@
             "@context": {
               "type": "object",
               "properties": {
-                "pav": {
-                  "type": "string",
-                  "format": "uri",
-                  "enum": [
-                    "http://purl.org/pav/"
-                  ]
-                },
-                "oslc": {
-                  "type": "string",
-                  "format": "uri",
-                  "enum": [
-                    "http://open-services.net/ns/core#"
-                  ]
-                },
                 "value": {
                   "enum": [
                     "https://schema.metadatacenter.orgx/properties/value"

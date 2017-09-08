@@ -1,13 +1,8 @@
 {
   "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in a template element",
   "type": "object",
-  "properties": {
-    "pav": { "ref": "file:pavContextPropertiesContent.json" },
-    "oslc": { "ref": "file:oslcContextPropertiesContent.json" }
-  },
   "patternProperties": {
-    "^(?!(pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
+    "^(?!(rdfs|schema|xsd|pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
   },
-  "additionalProperties": false,
-  "required": [ "pav", "oslc" ]
+  "additionalProperties": false
 }
