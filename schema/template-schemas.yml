@@ -4,6 +4,7 @@ definitions:
   - templatePropertiesFieldContent.json
   - templateUIFieldContent.json
   - templateRequiredFieldContent.json
+  - templateElementRequiredContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json

@@ -4,6 +4,7 @@ definitions:
   - templateElementJSONLDContextFieldContent.json
   - templateElementUIFieldContent.json
   - templateElementPropertiesFieldContent.json
+  - templateElementRequiredContent.json
   - templateRequiredFieldContent.json
   - schemaNameContextFieldContent.json
   - schemaDescriptionContextFieldContent.json

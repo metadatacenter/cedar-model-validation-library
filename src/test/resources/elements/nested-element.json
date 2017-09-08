@@ -393,6 +393,7 @@
       },
       "required": [
         "@context",
+        "@id",
         "value",
         "unitOfMeasurement"
       ],
@@ -407,6 +408,7 @@
   },
   "required": [
     "@context",
+    "@id",
     "productName",
     "quantity"
   ],

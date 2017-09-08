@@ -36,7 +36,7 @@
             "$ref": "#/definitions/templateElementPropertiesFieldContent"
         },
         "required": {
-            "$ref": "#/definitions/stringArray"
+            "$ref": "#/definitions/templateElementRequiredContent"
         },
         "pav:createdOn": {
             "type": [ "string", "null" ], "format": "date-time"

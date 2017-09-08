@@ -410,6 +410,7 @@
   },
   "required": [
     "@context",
+    "@id",
     "firstName",
     "middleName",
     "lastName",

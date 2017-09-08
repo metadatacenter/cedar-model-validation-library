@@ -133,6 +133,14 @@
                 { "type": "string", "enum": [ "oslc:modifiedBy" ] }
             ]
         },
+        "templateElementRequiredContent": {
+            "description": "Schema that describes the mandatory array items for the required field of a template element",
+            "type": "array", "minItems": 2, "uniqueItems": true,
+            "items": [
+                { "type": "string", "enum": [ "@context" ] },
+                { "type": "string", "enum": [ "@id" ] }
+            ]
+        },
         "pavCreatedOnContextFieldContent": {
             "description": "Schema that describes the schema of 'pav:createdOn' field content in a @context",
             "type": "object",
@@ -985,7 +993,7 @@
                     "$ref": "#/definitions/templateElementPropertiesFieldContent"
                 },
                 "required": {
-                    "$ref": "#/definitions/stringArray"
+                    "$ref": "#/definitions/templateElementRequiredContent"
                 },
                 "pav:createdOn": {
                     "type": [ "string", "null" ], "format": "date-time"
