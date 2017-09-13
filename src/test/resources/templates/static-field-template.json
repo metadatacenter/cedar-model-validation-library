@@ -6,6 +6,12 @@
     "pav": "http://purl.org/pav/",
     "oslc": "http://open-services.net/ns/core#",
     "schema": "http://schema.org/",
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
     "pav:createdOn": {
       "@type": "xsd:dateTime"
     },
@@ -35,6 +41,13 @@
     "@context": {
       "type": "object",
       "properties": {
+        "rdfs": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://www.w3.org/2000/01/rdf-schema#"
+          ]
+        },
         "xsd": {
           "type": "string",
           "format": "uri",
@@ -62,6 +75,17 @@
           "enum": [
             "http://open-services.net/ns/core#"
           ]
+        },
+        "rdfs:label": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:string"
+              ]
+            }
+          }
         },
         "schema:isBasedOn": {
           "type": "object",
@@ -144,12 +168,6 @@
           "enum": [
             "https://schema.metadatacenter.orgx/properties/studyName"
           ]
-        }
-      },
-      "patternProperties": {
-        "^(?!pav)(?!schema)(?!oslc)[a-zA-Z][a-zA-Z0-9]*$": {
-          "type": "string",
-          "format": "uri"
         }
       },
       "required": [

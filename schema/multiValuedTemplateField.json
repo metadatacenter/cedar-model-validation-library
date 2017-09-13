@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Schema that describes a multi-valued template field",
+    "type": "object",
+    "properties": {
+        "type": { "type": "string", "enum": [ "array" ] },
+        "minItems": { "type": "integer", "minimum": 1 },
+        "items": {
+            "type": "object",
+            "properties": {
+                "$schema": {
+                    "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
+                    "type": "string", "format": "uri",
+                    "enum": [ "http://json-schema.org/draft-04/schema#" ]
+                },
+                "type": {
+                    "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
+                    "type": "string", "enum": [ "object" ]
+                },
+                "title": {
+                    "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
+                    "type": "string", "minLength": 1
+                },
+                "description": {
+                    "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
+                    "type": "string", "minLength": 1
+                },
+                "_ui": {
+                    "$ref": "#/definitions/multiValuedUIFieldContent"
+                },
+                "_valueConstraints": {
+                    "$ref": "#/definitions/multiValuedValueConstraintsFieldContent"
+                },
+                "@context": {
+                    "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
+                },
+                "@id": {
+                    "type": [ "string", "null" ], "format": "uri"
+                },
+                "@type": {
+                    "type": "string",
+                    "format": "uri",
+                    "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
+                },
+                "properties": {
+                    "$ref": "#/definitions/templateFieldValuePropertiesContent"
+                },
+                "required": {
+                    "$ref": "#/definitions/stringArray"
+                },
+                "pav:createdOn": {
+                    "type": [ "string", "null" ], "format": "date-time"
+                },
+                "pav:createdBy":  {
+                    "type": [ "string", "null" ], "format": "uri"
+                },
+                "pav:lastUpdatedOn":  {
+                    "type": [ "string", "null" ], "format": "date-time"
+                },
+                "oslc:modifiedBy": {
+                    "type": [ "string", "null" ], "format": "uri"
+                },
+                "additionalProperties": {
+                    "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
+                    "type": "boolean", "enum": [ false ]
+                },
+                "schema:schemaVersion": {
+                    "type": "string", "minLength": 1
+                }
+            },
+            "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
+                "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+                "oslc:modifiedBy", "schema:schemaVersion" ]
+        }
+    },
+    "required": [ "type", "minItems", "items" ]
+}

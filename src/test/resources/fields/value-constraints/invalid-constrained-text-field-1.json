@@ -60,7 +60,7 @@
         }
       ]
     },
-    "_valueLabel": {
+    "rdfs:label": {
       "type": [
         "string",
         "null"

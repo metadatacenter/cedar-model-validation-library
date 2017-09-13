@@ -1,8 +1,0 @@
-{
-    "description": "A schema that describes a JSON-LD '@id' field",
-    "type": "object",
-    "properties": {
-        "@id": { "type": [ "string", "null" ], "format": "uri" }
-    },
-    "required": [ "@id" ]
-}

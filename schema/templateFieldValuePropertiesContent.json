@@ -2,7 +2,6 @@
     "description": "Schema that describes the schema of 'properties' field value in a template field",
     "type": "object",
     "properties": {
-        "@context": { "$ref": "file:jsonLDContextFieldContent.json" },
         "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
         "@id": { "$ref": "file:jsonLDIDFieldContent.json" },
         "@value": { "$ref": "file:jsonLDValueFieldContent.json" },
@@ -10,8 +9,8 @@
         "pav:createdBy": { "$ref": "file:pavCreatedByFieldContent.json" },
         "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnFieldContent.json" },
         "oslc:modifiedBy": { "$ref": "file:oslcModifiedByFieldContent.json" },
-        "_valueLabel": { "$ref": "file:valueLabelFieldContent.json" }
+        "rdfs:label": { "$ref": "file:rdfsLabelFieldContent.json" }
     },
-    "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ],
+    "required": [ "@type", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "rdfs:label" ],
     "additionalProperties": false
 }

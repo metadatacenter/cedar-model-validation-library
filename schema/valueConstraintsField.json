@@ -1,8 +1,0 @@
-{
-    "description": "A schema that describes a '_valueConstraints' field in a template field",
-    "type": "object",
-    "properties": {
-        "_valueConstraints": { "$ref": "file:valueConstraintsFieldContent.json" }
-    },
-    "required": [ "_valueConstraints" ]
-}

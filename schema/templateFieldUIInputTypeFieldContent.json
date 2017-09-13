@@ -1,5 +1,0 @@
-{
-    "description": "Schema describing the schema of the 'inputType' field in a template field '_ui' field",
-    "type": "string",
-    "enum": [ "textfield", "textarea", "radio", "checkbox", "date", "email", "list", "numeric", "phone-number", "section-break", "richtext", "image", "youtube", "link" ]
-}

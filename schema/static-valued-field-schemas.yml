@@ -1,0 +1,23 @@
+base: staticValuedTemplateField.json
+definitions:
+  - staticValuedUIFieldContent.json
+  - templateFieldValuePropertiesContent.json
+  - stringArray.json
+  - pavCreatedOnContextFieldContent.json
+  - pavCreatedByContextFieldContent.json
+  - pavLastUpdatedOnContextFieldContent.json
+  - oslcModifiedByContextFieldContent.json
+  - jsonLDTypeFieldContent.json
+  - jsonLDIDFieldContent.json
+  - pavCreatedOnFieldContent.json
+  - pavCreatedByFieldContent.json
+  - pavLastUpdatedOnFieldContent.json
+  - oslcModifiedByFieldContent.json
+  - rdfsLabelFieldContent.json
+  - jsonLDTypeFieldOneOfFieldContent.json
+  - stringAndNullTypeContent.json
+  - numberAndNullTypeContent.json
+  - arrayAndNullTypeContent.json
+  - uriEnumContent.json
+  - uriEnumArrayContent.json
+  - jsonLDValueFieldContent.json
