@@ -251,27 +251,27 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldFailMissingUi_Title() {
+  public void shouldFailMissingSchemaName() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
-    fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/_ui/title");
+    fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/schema:name");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['title'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:name'])");
   }
 
   @Test
-  public void shouldFailMissingUi_Description() {
+  public void shouldFailMissingSchemaDescription() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
-    fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/_ui/description");
+    fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/schema:description");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['description'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:description'])");
   }
 
   @Test
