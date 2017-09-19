@@ -876,6 +876,16 @@
                 "_ui": {
                     "$ref": "#/definitions/staticValuedUIFieldContent"
                 },
+                "@context": {
+                    "description": "Schema describing the '@context' of a static template field",
+                    "type": "object",
+                    "properties": {
+                        "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
+                        "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
+                        "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+                    },
+                    "required": [ "schema", "pav", "oslc" ]
+                },
                 "@id": {
                     "type": [ "string", "null" ], "format": "uri"
                 },
