@@ -130,7 +130,7 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
             },
             "patternProperties": {
-                "^(?!(schema|xsd|pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "type": "string", "format": "uri" }
+                "^(?!(schema|xsd|pav|oslc|$))[a-zA-Z0-9][^.]+$": { "type": "string", "format": "uri" }
             },
             "additionalProperties": false,
             "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
