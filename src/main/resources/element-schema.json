@@ -102,7 +102,7 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
             },
             "patternProperties": {
-                "^(?!(schema|xsd|pav|oslc|$))[a-zA-Z0-9][^.]+$": { "type": "string", "format": "uri" }
+                "^(?!(schema|xsd|pav|oslc|\\$))[a-zA-Z0-9][^.]+$": { "type": "string", "format": "uri" }
             },
             "additionalProperties": false,
             "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
@@ -126,7 +126,7 @@
                 "@context": { "$ref": "#/definitions/templateElementContextFieldContent" }
             },
             "patternProperties": {
-                "^(?!(rdfs|schema|xsd|pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
+                "^(?!(rdfs|schema|xsd|pav|oslc|\\$))[a-zA-Z0-9][^.]+$": { "$ref": "#/definitions/templateFieldOrElementOrArrayOfFieldOrElement" }
             },
             "additionalProperties": false,
             "required": [ "@type", "@id", "@context" ]
@@ -325,7 +325,7 @@
           "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in a template element",
           "type": "object",
           "patternProperties": {
-            "^(?!(rdfs|schema|xsd|pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
+            "^(?!(rdfs|schema|xsd|pav|oslc|\\$))[a-zA-Z0-9][^.]+$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
           },
           "additionalProperties": false
         },
@@ -843,7 +843,7 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
             },
             "patternProperties": {
-                "^(?!(schema|xsd|pav|oslc|$))[a-zA-Z0-9][^.]+$": { "type": "string", "format": "uri" }
+                "^(?!(schema|xsd|pav|oslc|\\$))[a-zA-Z0-9][^.]+$": { "type": "string", "format": "uri" }
             },
             "additionalProperties": false,
             "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]

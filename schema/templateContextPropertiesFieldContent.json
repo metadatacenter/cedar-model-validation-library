@@ -17,7 +17,7 @@
     "oslc:modifiedBy": { "ref": "file:oslcModifiedByContextPropertiesContent.json" }
   },
   "patternProperties": {
-    "^(?!(rdfs|schema|xsd|pav|oslc))[a-zA-Z0-9][^\b\f\n\r\t\\\"/:.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
+    "^(?!(rdfs|schema|xsd|pav|oslc|\\$))[a-zA-Z0-9][^.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
   },
   "additionalProperties": false,
   "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
