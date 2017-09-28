@@ -668,15 +668,13 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldFailFieldNameUsingColon() {
+  public void shouldPassFieldNameUsingColon() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-colon.json");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
-        "['study:name']");
+    assertValidationStatus(validationReport, "true");
   }
 
   @Test
@@ -704,14 +702,12 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldFailFieldNameUsingSlash() {
+  public void shouldPassFieldNameUsingSlash() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-slash.json");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
-        "['study/name']");
+    assertValidationStatus(validationReport, "true");
   }
 }
