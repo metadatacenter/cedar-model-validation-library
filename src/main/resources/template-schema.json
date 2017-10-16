@@ -974,7 +974,7 @@
                 "multipleChoice": { "type": "boolean", "enum": [ true ] },
                 "defaultValue": { "type": "string" }
             },
-            "required": [ "requiredValue" ],
+            "required": [ "requiredValue", "multipleChoice" ],
             "additionalProperties": false
         },
         "staticValuedUIFieldContent": {
