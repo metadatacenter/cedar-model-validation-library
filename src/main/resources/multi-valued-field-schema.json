@@ -416,7 +416,8 @@
                 "name": { "type": "string", "minLength": 1 },
                 "vsCollection": { "type": "string", "format": "uri" },
                 "exclusions": { "$ref": "#/definitions/valueConstraintsValueSetsExclusionsFieldContent" },
-                "selectedByDefault": { "type": "boolean" }
+                "selectedByDefault": { "type": "boolean" },
+                "numTerms": { "type": "integer", "minimum": 0 }
             },
             "required": [ "uri" ],
             "additionalProperties": false
