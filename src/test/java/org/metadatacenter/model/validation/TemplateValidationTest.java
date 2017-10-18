@@ -670,7 +670,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   @Test
   public void shouldPassFieldNameUsingColon() {
     // Arrange
-    String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-colon.json");
+    String templateString = TestResourcesUtils.getStringContent("templates/check-characters/using-colon.json");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -678,21 +678,9 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldFailFieldNameUsingDoubleQuotes() {
-    // Arrange
-    String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-double-quotes.json");
-    // Act
-    ValidationReport validationReport = runValidation(templateString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
-        "['\\'study name\\'']");
-  }
-
-  @Test
   public void shouldFailFieldNameUsingPeriod() {
     // Arrange
-    String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-period.json");
+    String templateString = TestResourcesUtils.getStringContent("templates/check-characters/using-period.json");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -702,9 +690,41 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldFailFieldNameUsingDollar() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/check-characters/using-dollar.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
+        "['$studyname']");
+  }
+
+  @Test
   public void shouldPassFieldNameUsingSlash() {
     // Arrange
-    String templateString = TestResourcesUtils.getStringContent("templates/bad-characters/using-slash.json");
+    String templateString = TestResourcesUtils.getStringContent("templates/check-characters/using-slash.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassFieldNameUsingParentheses() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/check-characters/using-parentheses.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassFieldNameUsingDoubleQuotes() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/check-characters/using-quotes.json");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
