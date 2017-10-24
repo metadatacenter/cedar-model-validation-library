@@ -730,4 +730,14 @@ public class TemplateValidationTest extends BaseValidationTest {
     // Assert
     assertValidationStatus(validationReport, "true");
   }
+
+  @Test
+  public void shouldPassFieldNameUsingAt() {
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/check-characters/using-at.json");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
 }
