@@ -34,8 +34,6 @@
   },
   "exportGood": {
     "@context": {
-      "pav": "http://purl.org/pav/",
-      "oslc": "http://open-services.net/ns/core#",
       "productName": "https://schema.metadatacenter.orgx/properties/productName",
       "quantity": "https://schema.metadatacenter.orgx/properties/quantity"
     },
@@ -44,8 +42,6 @@
     },
     "quantity": {
       "@context": {
-        "pav": "http://purl.org/pav/",
-        "oslc": "http://open-services.net/ns/core#",
         "value": "https://schema.metadatacenter.orgx/properties/value",
         "unitOfMeasurement": "https://schema.metadatacenter.orgx/properties/unitOfMeasurement"
       },
@@ -61,8 +57,6 @@
   },
   "importGood": {
     "@context": {
-      "pav": "http://purl.org/pav/",
-      "oslc": "http://open-services.net/ns/core#",
       "productName": "https://schema.metadatacenter.orgx/properties/productName",
       "quantity": "https://schema.metadatacenter.orgx/properties/quantity"
     },
@@ -71,8 +65,6 @@
     },
     "quantity": {
       "@context": {
-        "pav": "http://purl.org/pav/",
-        "oslc": "http://open-services.net/ns/core#",
         "value": "https://schema.metadatacenter.orgx/properties/value",
         "unitOfMeasurement": "https://schema.metadatacenter.orgx/properties/unitOfMeasurement"
       },

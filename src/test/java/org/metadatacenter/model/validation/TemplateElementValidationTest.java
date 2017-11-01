@@ -141,27 +141,27 @@ public class TemplateElementValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldFailMissingUi_Title() {
+  public void shouldFailMissingSchemaName() {
     // Arrange
     String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/_ui/title");
+    elementString = JsonUtils.removeFieldFromDocument(elementString, "/schema:name");
     // Act
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['title'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:name'])");
   }
 
   @Test
-  public void shouldFailMissingUi_Description() {
+  public void shouldFailMissingSchemaDescription() {
     // Arrange
     String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/_ui/description");
+    elementString = JsonUtils.removeFieldFromDocument(elementString, "/schema:description");
     // Act
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['description'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:description'])");
   }
 
   @Test
@@ -317,54 +317,6 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     // Assert
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
-  }
-
-  @Test
-  public void shouldFailMissingProperties_CreatedOn() {
-    // Arrange
-    String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/properties/pav:createdOn");
-    // Act
-    ValidationReport validationReport = runValidation(elementString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])");
-  }
-
-  @Test
-  public void shouldFailMissingProperties_CreatedBy() {
-    // Arrange
-    String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/properties/pav:createdBy");
-    // Act
-    ValidationReport validationReport = runValidation(elementString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])");
-  }
-
-  @Test
-  public void shouldFailMissingProperties_LastUpdatedOn() {
-    // Arrange
-    String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/properties/pav:lastUpdatedOn");
-    // Act
-    ValidationReport validationReport = runValidation(elementString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])");
-  }
-
-  @Test
-  public void shouldFailMissingProperties_ModifiedBy() {
-    // Arrange
-    String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
-    elementString = JsonUtils.removeFieldFromDocument(elementString, "/properties/oslc:modifiedBy");
-    // Act
-    ValidationReport validationReport = runValidation(elementString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])");
   }
 
   @Test

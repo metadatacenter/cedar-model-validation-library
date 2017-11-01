@@ -10,6 +10,8 @@ definitions:
   - valueConstraintsClassesFieldContent.json
   - valueConstraintsBranchesFieldContent.json
   - valueConstraintsLiteralsFieldContent.json
+  - schemaNameContextFieldContent.json
+  - schemaDescriptionContextFieldContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json

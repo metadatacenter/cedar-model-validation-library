@@ -1,0 +1,8 @@
+{
+    "description": "Schema that describes the mandatory array items for the required field of a template element",
+    "type": "array", "minItems": 2, "uniqueItems": true,
+    "items": [
+        { "type": "string", "enum": [ "@context" ] },
+        { "type": "string", "enum": [ "@id" ] }
+    ]
+}

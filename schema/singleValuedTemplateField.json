@@ -12,6 +12,14 @@
             "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
             "type": "string", "enum": [ "object" ]
         },
+        "schema:name": {
+            "description": "Schema describing the template field name",
+            "type": "string", "minLength": 1
+        },
+        "schema:description": {
+            "description": "Schema describing the template field description",
+            "type": "string"
+        },
         "title": {
             "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
             "type": "string", "minLength": 1
@@ -65,5 +73,5 @@
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
         "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-        "oslc:modifiedBy", "schema:schemaVersion" ]
+        "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
 }

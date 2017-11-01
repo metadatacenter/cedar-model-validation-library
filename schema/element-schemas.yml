@@ -4,7 +4,10 @@ definitions:
   - templateElementJSONLDContextFieldContent.json
   - templateElementUIFieldContent.json
   - templateElementPropertiesFieldContent.json
+  - templateElementRequiredContent.json
   - templateRequiredFieldContent.json
+  - schemaNameContextFieldContent.json
+  - schemaDescriptionContextFieldContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json
@@ -40,6 +43,7 @@ definitions:
   - numberAndNullTypeContent.json
   - arrayAndNullTypeContent.json
   - templateFieldSingleValueContent.json
+  - singleURIArray.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
   - templateFieldValuePropertiesContent.json

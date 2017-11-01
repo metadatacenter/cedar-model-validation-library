@@ -2,7 +2,7 @@
   "description": "Schema describing any user's field in the '@context/properties' field",
   "type": "object",
   "properties": {
-    "enum": { "ref": "file:singleURIArray.json" }
+    "enum": { "$ref": "file:singleURIArray.json" }
   },
   "required": [ "enum" ],
   "additionalProperties": false

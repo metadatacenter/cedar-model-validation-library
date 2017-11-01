@@ -3,6 +3,8 @@ definitions:
   - staticValuedUIFieldContent.json
   - templateFieldValuePropertiesContent.json
   - stringArray.json
+  - schemaNameContextFieldContent.json
+  - schemaDescriptionContextFieldContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json
