@@ -21,8 +21,6 @@ import org.metadatacenter.model.validation.report.CedarValidationReport;
 import org.metadatacenter.model.validation.report.ErrorItem;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
@@ -51,7 +49,7 @@ public class CedarValidator implements ModelValidator {
     this("/");
   }
 
-  public CedarValidator(@Nonnull String startingLocation) {
+  public CedarValidator(String startingLocation) {
     checkNotNull(startingLocation);
     this.startingLocation = JsonPointer.compile(startingLocation);
   }
@@ -132,7 +130,8 @@ public class CedarValidator implements ModelValidator {
     checkCorrectFieldForConstrainedValue(fieldNode, currentLocation);
   }
 
-  private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer currentLocation) throws CedarModelValidationException, IOException {
+  private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer currentLocation) throws
+      CedarModelValidationException, IOException {
     if (isSingleValuedTemplateField(fieldNode)) {
       validateNodeStructureAgainstSingleValuedFieldSchema(fieldNode, currentLocation);
     } else if (isMultiValuedTemplateField(fieldNode)) {
@@ -157,7 +156,8 @@ public class CedarValidator implements ModelValidator {
       String propertiesMemberField = iter.next();
       if (isUserSpecifiedField(propertiesMemberField)) {
         JsonNode propertiesMemberNode = propertiesNode.get(propertiesMemberField);
-        JsonPointer propertiesMemberPointer = createJsonPointer(currentLocation, getPropertiesMemberPath(propertiesMemberField));
+        JsonPointer propertiesMemberPointer = createJsonPointer(currentLocation, getPropertiesMemberPath
+            (propertiesMemberField));
         checkPropertiesMemberField(propertiesMemberNode, propertiesMemberPointer);
       }
     }
@@ -292,7 +292,7 @@ public class CedarValidator implements ModelValidator {
       Collection<ProcessingMessage> processingMessages = errorDetails.get(errorLocation);
       for (ProcessingMessage processingMessage : processingMessages) {
         final LogLevel messageLevel = processingMessage.getLogLevel();
-        if (messageLevel == LogLevel.ERROR ) {
+        if (messageLevel == LogLevel.ERROR) {
           ParsedProcessingMessage parsedMessage = new ParsedProcessingMessage(processingMessage);
           for (ParsedProcessingMessage.ReportItem reportItem : parsedMessage.getReportItems()) {
             ErrorItem errorItem = createErrorItem(errorLocation,
@@ -311,15 +311,16 @@ public class CedarValidator implements ModelValidator {
    * Private helper methods
    */
 
-  private ErrorItem createErrorItem(@Nonnull JsonPointer baseLocation, @Nullable String message,
-                                    @Nullable String location, @Nullable String schemaResource, @Nullable String schemaPointer) {
+  private ErrorItem createErrorItem(JsonPointer baseLocation, String message,
+                                    String location, String schemaResource, String
+                                        schemaPointer) {
     ErrorItem errorItem = new ErrorItem(message, createLocation(baseLocation.toString(), location));
     errorItem.addAdditionalInfo("schemaPointer", schemaPointer);
     errorItem.addAdditionalInfo("schemaFile", schemaResource);
     return errorItem;
   }
 
-  private static String createLocation(@Nonnull String baseLocation, @Nullable String relativeLocation) {
+  private static String createLocation(String baseLocation, String relativeLocation) {
     String absoluteLocation = relativeLocation;
     if (!baseLocation.equals("/")) {
       absoluteLocation = baseLocation.toString();
@@ -405,7 +406,7 @@ public class CedarValidator implements ModelValidator {
   }
 
   private static CedarModelValidationException newCedarModelValidationException(ProcessingReport report,
-        JsonPointer currentLocation) {
+                                                                                JsonPointer currentLocation) {
     CedarModelValidationException exception = new CedarModelValidationException();
     exception.addProcessingReport(report, currentLocation);
     return exception;
@@ -418,7 +419,7 @@ public class CedarValidator implements ModelValidator {
   }
 
   private static CedarModelValidationException newCedarModelValidationException(ProcessingMessage message,
-        JsonPointer currentLocation) {
+                                                                                JsonPointer currentLocation) {
     CedarModelValidationException exception = new CedarModelValidationException();
     exception.addProcessingMessage(message, currentLocation);
     return exception;
@@ -441,7 +442,7 @@ public class CedarValidator implements ModelValidator {
 
   private static boolean isSingleValuedTemplateField(JsonNode memberNode) {
     return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.TEMPLATE_FIELD_TYPE_URI)
-        &&  memberNode.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_OBJECT);
+        && memberNode.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_OBJECT);
   }
 
   private static boolean isMultiValuedTemplateField(JsonNode memberNode) {

@@ -7,8 +7,6 @@ import com.github.jsonldjava.core.JsonLdError;
 import com.github.jsonldjava.core.JsonLdProcessor;
 import com.github.jsonldjava.impl.NQuadTripleCallback;
 
-import javax.annotation.Nonnull;
-
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -21,7 +19,7 @@ public class JsonLdDocument {
 
   private final JsonNode rootNode;
 
-  public JsonLdDocument(@Nonnull JsonNode rootNode) {
+  public JsonLdDocument(JsonNode rootNode) {
     this.rootNode = checkNotNull(rootNode);
   }
 

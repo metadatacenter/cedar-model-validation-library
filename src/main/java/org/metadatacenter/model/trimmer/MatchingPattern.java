@@ -6,7 +6,6 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 
-import javax.annotation.Nonnull;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -19,12 +18,12 @@ public class MatchingPattern {
     this.patternNode = patternNode;
   }
 
-  public static MatchingPattern whenFound(@Nonnull ObjectNode matchingPattern) {
+  public static MatchingPattern whenFound(ObjectNode matchingPattern) {
     checkNotNull(matchingPattern);
     return new MatchingPattern(matchingPattern);
   }
 
-  public boolean matches(@Nonnull ObjectNode targetNode) {
+  public boolean matches(ObjectNode targetNode) {
     checkNotNull(targetNode);
     return allMatchingFieldsArePresent(targetNode)
         && allValueNodesAreTheSame(targetNode);
@@ -39,7 +38,7 @@ public class MatchingPattern {
     return true;
   }
 
-  private boolean allValueNodesAreTheSame(@Nonnull ObjectNode targetNode) {
+  private boolean allValueNodesAreTheSame(ObjectNode targetNode) {
     Set<String> patternNodeFields = getFieldNames(patternNode);
     for (String fieldName : patternNodeFields) {
       JsonNode valueNodeInPatternNode = patternNode.get(fieldName);

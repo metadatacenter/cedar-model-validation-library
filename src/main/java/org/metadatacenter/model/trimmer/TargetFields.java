@@ -5,7 +5,6 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 
-import javax.annotation.Nonnull;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -16,21 +15,21 @@ public class TargetFields implements Iterable<String> {
 
   private final Set<String> fieldSet;
 
-  public TargetFields(@Nonnull Set<String> fieldSet) {
+  public TargetFields(Set<String> fieldSet) {
     this.fieldSet = checkNotNull(fieldSet);
   }
 
-  public static TargetFields at(@Nonnull String... fieldNames) {
+  public static TargetFields at(String... fieldNames) {
     checkNotNull(fieldNames);
     return new TargetFields(Sets.newHashSet(fieldNames));
   }
 
-  public static TargetFields at(@Nonnull Set<String> fieldNames) {
+  public static TargetFields at(Set<String> fieldNames) {
     checkNotNull(fieldNames);
     return new TargetFields(fieldNames);
   }
 
-  public boolean within(@Nonnull ObjectNode objectNode) {
+  public boolean within(ObjectNode objectNode) {
     checkNotNull(objectNode);
     Set<String> fieldsAtObjectNode = getFieldNames(objectNode);
     for (String fieldName : fieldSet) {
@@ -41,7 +40,7 @@ public class TargetFields implements Iterable<String> {
     return false;
   }
 
-  public Set<String> getMatchingFields(@Nonnull ObjectNode objectNode) {
+  public Set<String> getMatchingFields(ObjectNode objectNode) {
     checkNotNull(objectNode);
     Set<String> fieldsAtObjectNode = getFieldNames(objectNode);
     final Set<String> matchingFields = new HashSet<>();

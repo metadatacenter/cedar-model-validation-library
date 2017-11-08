@@ -4,14 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class JsonUtils {
 
-  public static String removeFieldFromDocument(@Nonnull String jsonDocument, @Nonnull String pathToRemove) {
+  public static String removeFieldFromDocument(String jsonDocument, String pathToRemove) {
     checkNotNull(jsonDocument);
     checkNotNull(pathToRemove);
     ObjectNode jsonObject = getJsonObject(jsonDocument);

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.google.common.collect.Sets;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Set;
 
@@ -15,7 +13,7 @@ public class ParsedProcessingMessage {
 
   private final JsonNode parsedMessage;
 
-  public ParsedProcessingMessage(@Nonnull ProcessingMessage processingMessage) {
+  public ParsedProcessingMessage(ProcessingMessage processingMessage) {
     checkNotNull(processingMessage);
     this.parsedMessage = processingMessage.asJson();
   }
@@ -62,7 +60,6 @@ public class ParsedProcessingMessage {
     reportItems.add(reportItem);
   }
 
-  @Nullable
   public static String getMessage(JsonNode node) {
     JsonNode messageNode = node.path("message");
     return (!messageNode.isMissingNode()) ? prettyText(messageNode.asText()) : null;
@@ -72,7 +69,6 @@ public class ParsedProcessingMessage {
     return s.replace("\"", "'");
   }
 
-  @Nullable
   public static String getLocation(JsonNode node) {
     JsonNode locationNode = node.path("instance").path("pointer");
     if (!locationNode.isMissingNode()) {
@@ -85,14 +81,12 @@ public class ParsedProcessingMessage {
     return null;
   }
 
-  @Nullable
   public static String getSchemaResource(JsonNode node) {
     JsonNode schemaResourceNode = node.path("schema").path("loadingURI");
     return (!schemaResourceNode.isMissingNode()) ? schemaResourceNode.asText() : null;
 
   }
 
-  @Nullable
   public static String getSchemaPointer(JsonNode node) {
     JsonNode schemaPointerNode = node.path("schema").path("pointer");
     return (!schemaPointerNode.isMissingNode()) ? schemaPointerNode.asText() : null;
@@ -105,30 +99,25 @@ public class ParsedProcessingMessage {
     private final String schemaResource;
     private final String schemaPointer;
 
-    public ReportItem(@Nullable String message, @Nullable String location, @Nullable String schemaResource, @Nullable
-        String schemaPointer) {
+    public ReportItem(String message, String location, String schemaResource, String schemaPointer) {
       this.message = message;
       this.location = location;
       this.schemaResource = schemaResource;
       this.schemaPointer = schemaPointer;
     }
 
-    @Nullable
     public String getMessage() {
       return message;
     }
 
-    @Nullable
     public String getLocation() {
       return location;
     }
 
-    @Nullable
     public String getSchemaResource() {
       return schemaResource;
     }
 
-    @Nullable
     public String getSchemaPointer() {
       return schemaPointer;
     }
