@@ -72,7 +72,7 @@
         }
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
-        "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+        "properties", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
         "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
     ,
     "definitions": {

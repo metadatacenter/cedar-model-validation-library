@@ -38,7 +38,6 @@
     "@context": {
       "type": "object",
       "properties": {},
-      "required": [],
       "additionalProperties": false
     },
     "@id": {
