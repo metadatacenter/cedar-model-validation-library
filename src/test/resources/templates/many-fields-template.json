@@ -194,10 +194,7 @@
       "additionalProperties": false
     },
     "@id": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": "string",
       "format": "uri"
     },
     "@type": {
@@ -411,16 +408,11 @@
           ]
         },
         "@id": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": "string",
           "format": "uri"
         }
       },
-      "required": [
-        "@id"
-      ],
+      "required": [],
       "pav:createdOn": "2017-05-19T11:09:51-0700",
       "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
       "pav:lastUpdatedOn": "2017-05-19T11:09:51-0700",
