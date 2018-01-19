@@ -681,7 +681,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "section-break", "richtext", "image", "youtube" ]
+                    "enum": [ "section-break", "page-break", "richtext", "image", "youtube" ]
                 },
                 "_content": { "type": [ "string", "null" ] },
                 "hidden": { "type": "boolean" }

@@ -168,6 +168,26 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassSectionBreak() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/section-break.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassPageBreak() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/page-break.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldFailMissingContext() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
