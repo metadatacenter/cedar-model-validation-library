@@ -9,7 +9,6 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 
-import javax.annotation.Nonnull;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,7 +21,7 @@ public class CollapseOperation implements Operation {
 
   private Optional<MatchingPattern> condition = Optional.empty();
 
-  public CollapseOperation(@Nonnull ObjectNode objectNode, @Nonnull TargetFields targetFields) {
+  public CollapseOperation(ObjectNode objectNode, TargetFields targetFields) {
     this.objectNode = checkNotNull(objectNode);
     this.targetFields = checkNotNull(targetFields);
   }

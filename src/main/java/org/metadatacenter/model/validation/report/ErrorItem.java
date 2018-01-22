@@ -6,8 +6,6 @@ import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -19,11 +17,11 @@ public class ErrorItem {
   private final String location;
   private final Map<String, Object> additionalInfo = Maps.newHashMap();
 
-  public ErrorItem(@Nullable String message) {
+  public ErrorItem(String message) {
     this(message, null);
   }
 
-  public ErrorItem(@Nullable String message, @Nullable String location) {
+  public ErrorItem(String message, String location) {
     this.message = message;
     this.location = location;
   }
@@ -38,7 +36,7 @@ public class ErrorItem {
     return location;
   }
 
-  public void addAdditionalInfo(@Nonnull String key, @Nullable Object value) {
+  public void addAdditionalInfo(String key, Object value) {
     additionalInfo.put(checkNotNull(key), value);
   }
 

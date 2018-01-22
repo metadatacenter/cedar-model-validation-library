@@ -5,11 +5,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-import javax.annotation.Nonnull;
-import java.util.List;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -35,7 +32,7 @@ public class CedarValidationReport implements ValidationReport {
     return errorDetails.isEmpty() + "";
   }
 
-  public void addWarning(@Nonnull WarningItem warning) {
+  public void addWarning(WarningItem warning) {
     checkNotNull(warning);
     warningDetails.add(warning);
   }
@@ -46,7 +43,7 @@ public class CedarValidationReport implements ValidationReport {
     return warningDetails;
   }
 
-  public void addError(@Nonnull ErrorItem error) {
+  public void addError(ErrorItem error) {
     checkNotNull(error);
     errorDetails.add(error);
   }

@@ -2,13 +2,11 @@ package org.metadatacenter.model.validation.report;
 
 import org.slf4j.Logger;
 
-import javax.annotation.Nonnull;
-
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ReportUtils {
 
-  public static void outputLogger(@Nonnull Logger logger, @Nonnull ValidationReport report, boolean printWarning) {
+  public static void outputLogger(Logger logger, ValidationReport report, boolean printWarning) {
     checkNotNull(logger);
     checkNotNull(report);
     StringBuilder logBuilder = new StringBuilder();

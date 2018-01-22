@@ -9,7 +9,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 
-import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -26,14 +25,14 @@ public class CedarModelValidationException extends Exception {
     super();
   }
 
-  public void addProcessingReport(@Nonnull ProcessingReport report) {
+  public void addProcessingReport(ProcessingReport report) {
     checkNotNull(report);
     for (ProcessingMessage message : report) {
       addProcessingMessage(message);
     }
   }
 
-  public void addProcessingReport(@Nonnull ProcessingReport report, @Nonnull JsonPointer baseLocation) {
+  public void addProcessingReport(ProcessingReport report, JsonPointer baseLocation) {
     checkNotNull(report);
     checkNotNull(baseLocation);
     for (ProcessingMessage message : report) {
@@ -41,12 +40,12 @@ public class CedarModelValidationException extends Exception {
     }
   }
 
-  public void addProcessingMessage(@Nonnull ProcessingMessage message) {
+  public void addProcessingMessage(ProcessingMessage message) {
     checkNotNull(message);
     validationMessages.put(JsonPointer.compile("/"), message);
   }
 
-  public void addProcessingMessage(@Nonnull ProcessingMessage message, @Nonnull JsonPointer baseLocation) {
+  public void addProcessingMessage(ProcessingMessage message, JsonPointer baseLocation) {
     checkNotNull(message);
     checkNotNull(baseLocation);
     validationMessages.put(baseLocation, message);

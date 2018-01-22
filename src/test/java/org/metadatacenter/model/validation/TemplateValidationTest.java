@@ -3,6 +3,7 @@ package org.metadatacenter.model.validation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
@@ -536,6 +537,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  @Ignore
   public void shouldFailMissingProperties_Field_Required() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");

@@ -196,10 +196,7 @@
       "additionalProperties": false
     },
     "@id": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": "string",
       "format": "uri"
     },
     "@type": {
@@ -416,10 +413,7 @@
             "additionalProperties": false
           },
           "@id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": "string",
             "format": "uri"
           },
           "@type": {

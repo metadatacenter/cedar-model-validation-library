@@ -209,7 +209,16 @@
             "description": "Schema that describes the schema for a '@id' field",
             "type": "object",
             "properties": {
-                "type": { "$ref": "#/definitions/stringAndNullTypeContent" },
+                "type": {
+                    "oneOf": [
+                      { "type": "string", "enum": [ "string" ] },
+                      { "type": "array",  "minItems": 2,  "maxItems": 2,
+                        "items": [
+                          { "type": "string", "enum": [ "string" ] },
+                          { "type": "string", "enum": [ "null" ] }
+                        ]}
+                    ]
+                },
                 "format": { "type": "string", "enum": [ "uri" ] }
             },
             "required": [ "type", "format" ],
@@ -755,7 +764,7 @@
                 }
             },
             "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
-                "properties", "required", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+                "properties", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
                 "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
         },
         "multiValuedTemplateField": {
@@ -983,7 +992,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "section-break", "richtext", "image", "youtube" ]
+                    "enum": [ "section-break", "page-break", "richtext", "image", "youtube" ]
                 },
                 "_content": { "type": [ "string", "null" ] },
                 "hidden": { "type": "boolean" }

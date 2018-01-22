@@ -1,6 +1,5 @@
 package org.metadatacenter.model.validation;
 
-import javax.annotation.Nonnull;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -11,7 +10,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class TestResourcesUtils {
 
-  public static String getStringContent(@Nonnull String path) {
+  public static String getStringContent(String path) {
     checkNotNull(path);
     URL resourceUrl = getResourceUrl(path);
     try {
@@ -22,7 +21,7 @@ public class TestResourcesUtils {
     }
   }
 
-  public static List<String> getLineByLineContent(@Nonnull String path) {
+  public static List<String> getLineByLineContent(String path) {
     checkNotNull(path);
     URL resourceUrl = getResourceUrl(path);
     try {
@@ -34,7 +33,7 @@ public class TestResourcesUtils {
     }
   }
 
-  private static URL getResourceUrl(@Nonnull String path) {
+  private static URL getResourceUrl(String path) {
     return TestResourcesUtils.class.getClassLoader().getResource(path);
   }
 }
