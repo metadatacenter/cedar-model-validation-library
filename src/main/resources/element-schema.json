@@ -307,9 +307,9 @@
         "templateFieldOrElementOrArrayOfFieldOrElement": {
             "description": "Schema that describes a template field, element, or a field or element array",
             "oneOf": [
-                { "$ref": "#/definitions/singleValuedTemplateField" },
-                { "$ref": "#/definitions/multiValuedTemplateField" },
-                { "$ref": "#/definitions/staticValuedTemplateField" },
+                { "$ref": "#/definitions/singleDataTemplateField" },
+                { "$ref": "#/definitions/multiDataTemplateField" },
+                { "$ref": "#/definitions/staticTemplateField" },
                 { "$ref": "#/definitions/templateElement" },
                 { "$ref": "#/definitions/templateFieldOrElementArray" }
             ]
@@ -379,86 +379,138 @@
           "required": [ "enum" ],
           "additionalProperties": false
         },
-        "singleValuedTemplateField": {
-            "$schema": "http://json-schema.org/draft-04/schema#",
-            "description": "Schema that describes a single-valued template field",
-            "type": "object",
-            "properties": {
-                "$schema": {
-                    "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
-                    "type": "string", "format": "uri",
-                    "enum": [ "http://json-schema.org/draft-04/schema#" ]
-                },
-                "type": {
-                    "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
-                    "type": "string", "enum": [ "object" ]
-                },
-                "schema:name": {
-                    "description": "Schema describing the template field name",
-                    "type": "string", "minLength": 1
-                },
-                "schema:description": {
-                    "description": "Schema describing the template field description",
-                    "type": "string"
-                },
-                "title": {
-                    "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
-                    "type": "string", "minLength": 1
-                },
-                "description": {
-                    "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
-                    "type": "string", "minLength": 1
-                },
-                "_ui": {
-                    "$ref": "#/definitions/singleValuedUIFieldContent"
-                },
-                "_valueConstraints": {
-                    "$ref": "#/definitions/singleValuedValueConstraintsFieldContent"
-                },
-                "@context": {
-                    "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
-                },
-                "@id": {
-                    "type": [ "string", "null" ], "format": "uri"
-                },
-                "@type": {
-                    "type": "string",
-                    "format": "uri",
-                    "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
-                },
-                "properties": {
-                    "$ref": "#/definitions/templateFieldValuePropertiesContent"
-                },
-                "required": {
-                    "$ref": "#/definitions/stringArray"
-                },
-                "pav:createdOn": {
-                    "type": [ "string", "null" ], "format": "date-time"
-                },
-                "pav:createdBy":  {
-                    "type": [ "string", "null" ], "format": "uri"
-                },
-                "pav:lastUpdatedOn":  {
-                    "type": [ "string", "null" ], "format": "date-time"
-                },
-                "oslc:modifiedBy": {
-                    "type": [ "string", "null" ], "format": "uri"
-                },
-                "additionalProperties": {
-                    "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
-                    "type": "boolean", "enum": [ false ]
-                },
-                "schema:schemaVersion": {
-                    "type": "string", "minLength": 1
-                }
+        "singleDataTemplateField": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "description": "Schema that describes a single data template field",
+          "type": "object",
+          "properties": {
+            "$schema": {
+              "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
+              "type": "string",
+              "format": "uri",
+              "enum": [
+                "http://json-schema.org/draft-04/schema#"
+              ]
             },
-            "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
-                "properties", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-                "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
+            "type": {
+              "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
+              "type": "string",
+              "enum": [
+                "object"
+              ]
+            },
+            "schema:name": {
+              "description": "Schema describing the template field name",
+              "type": "string",
+              "minLength": 1
+            },
+            "schema:description": {
+              "description": "Schema describing the template field description",
+              "type": "string"
+            },
+            "title": {
+              "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
+              "type": "string",
+              "minLength": 1
+            },
+            "description": {
+              "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
+              "type": "string",
+              "minLength": 1
+            },
+            "_ui": {
+              "$ref": "#/definitions/singleDataUIFieldContent"
+            },
+            "_valueConstraints": {
+              "$ref": "#/definitions/singleDataValueConstraintsFieldContent"
+            },
+            "@context": {
+              "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
+            },
+            "@id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri"
+            },
+            "@type": {
+              "type": "string",
+              "format": "uri",
+              "enum": [
+                "https://schema.metadatacenter.org/core/TemplateField"
+              ]
+            },
+            "properties": {
+              "$ref": "#/definitions/templateFieldValuePropertiesContent"
+            },
+            "required": {
+              "$ref": "#/definitions/stringArray"
+            },
+            "pav:createdOn": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            },
+            "pav:createdBy": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri"
+            },
+            "pav:lastUpdatedOn": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            },
+            "oslc:modifiedBy": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri"
+            },
+            "additionalProperties": {
+              "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
+              "type": "boolean",
+              "enum": [
+                false
+              ]
+            },
+            "schema:schemaVersion": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "$schema",
+            "type",
+            "title",
+            "description",
+            "_ui",
+            "_valueConstraints",
+            "@context",
+            "@id",
+            "@type",
+            "properties",
+            "additionalProperties",
+            "pav:createdOn",
+            "pav:createdBy",
+            "pav:lastUpdatedOn",
+            "oslc:modifiedBy",
+            "schema:schemaVersion",
+            "schema:name",
+            "schema:description"
+          ]
         },
-        "multiValuedTemplateField": {
+        "multiDataTemplateField": {
             "$schema": "http://json-schema.org/draft-04/schema#",
-            "description": "Schema that describes a multi-valued template field",
+            "description": "Schema that describes a multi data template field",
             "type": "object",
             "properties": {
                 "type": { "type": "string", "enum": [ "array" ] },
@@ -492,10 +544,10 @@
                             "type": "string", "minLength": 1
                         },
                         "_ui": {
-                            "$ref": "#/definitions/multiValuedUIFieldContent"
+                            "$ref": "#/definitions/multiDataUIFieldContent"
                         },
                         "_valueConstraints": {
-                            "$ref": "#/definitions/multiValuedValueConstraintsFieldContent"
+                            "$ref": "#/definitions/multiDataValueConstraintsFieldContent"
                         },
                         "@context": {
                             "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
@@ -541,9 +593,9 @@
             },
             "required": [ "type", "minItems", "items" ]
         },
-        "staticValuedTemplateField": {
+        "staticTemplateField": {
             "$schema": "http://json-schema.org/draft-04/schema#",
-            "description": "Schema that describes a static-valued template field",
+            "description": "Schema that describes a static template field",
             "type": "object",
             "properties": {
                 "$schema": {
@@ -572,7 +624,7 @@
                     "type": "string", "minLength": 1
                 },
                 "_ui": {
-                    "$ref": "#/definitions/staticValuedUIFieldContent"
+                    "$ref": "#/definitions/staticUIFieldContent"
                 },
                 "@context": {
                     "description": "Schema describing the '@context' of a static template field",
@@ -614,8 +666,8 @@
                 "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy",
                 "schema:name", "schema:description"  ]
         },
-        "singleValuedUIFieldContent": {
-            "description": "Schema that describes the schema of a '_ui' field of a single-valued template field",
+        "singleDataUIFieldContent": {
+            "description": "Schema that describes the schema of a '_ui' field of a single data template field",
             "type": "object",
             "properties": {
                 "inputType": {
@@ -629,8 +681,8 @@
             "required": [ "inputType" ],
             "additionalProperties": false
         },
-        "singleValuedValueConstraintsFieldContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a single-valued template field",
+        "singleDataValueConstraintsFieldContent": {
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -645,8 +697,8 @@
             "required": [ "requiredValue" ],
             "additionalProperties": false
         },
-        "multiValuedUIFieldContent": {
-            "description": "Schema that describes the schema of a '_ui' field of a multi-valued template field",
+        "multiDataUIFieldContent": {
+            "description": "Schema that describes the schema of a '_ui' field of a multi data template field",
             "type": "object",
             "properties": {
                 "inputType": {
@@ -659,8 +711,8 @@
             "required": [ "inputType" ],
             "additionalProperties": false
         },
-        "multiValuedValueConstraintsFieldContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-valued template field",
+        "multiDataValueConstraintsFieldContent": {
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a multi data template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -675,8 +727,8 @@
             "required": [ "requiredValue", "multipleChoice" ],
             "additionalProperties": false
         },
-        "staticValuedUIFieldContent": {
-            "description": "Schema that describes the schema of a '_ui' field of a static-valued template field",
+        "staticUIFieldContent": {
+            "description": "Schema that describes the schema of a '_ui' field of a static template field",
             "type": "object",
             "properties": {
                 "inputType": {
@@ -762,7 +814,7 @@
                 "schema:description" ]
         },
         "templateFieldOrElementArray": {
-            "description": "Schema that describes a single-valued template field or element array",
+            "description": "Schema that describes a single data template field or element array",
             "type": "object",
             "properties": {
                 "type": { "type": "string", "enum": [ "array" ] },
@@ -770,7 +822,7 @@
                 "maxItems": { "type": "integer", "minimum": 1 },
                 "items": {
                     "oneOf": [
-                        { "$ref": "#/definitions/singleValuedTemplateField" },
+                        { "$ref": "#/definitions/singleDataTemplateField" },
                         { "$ref": "#/definitions/templateElement" }
                     ]
                 }

@@ -1,9 +1,9 @@
 {
     "description": "Schema that describes a template field, element, or a field or element array",
     "oneOf": [
-        { "$ref": "file:singleValuedTemplateField.json" },
-        { "$ref": "file:multiValuedTemplateField.json" },
-        { "$ref": "file:staticValuedTemplateField.json" },
+        { "$ref": "file:singleDataTemplateField.json" },
+        { "$ref": "file:multiDataTemplateField.json" },
+        { "$ref": "file:staticTemplateField.json" },
         { "$ref": "file:templateElement.json" },
         { "$ref": "file:templateFieldOrElementArray.json" }
     ]

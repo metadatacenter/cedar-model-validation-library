@@ -1,7 +1,7 @@
-base: multiValuedTemplateField.json
+base: multiDataTemplateField.json
 definitions:
-  - multiValuedUIFieldContent.json
-  - multiValuedValueConstraintsFieldContent.json
+  - multiDataUIFieldContent.json
+  - multiDataValueConstraintsFieldContent.json
   - templateFieldJSONLDContextFieldContent.json
   - templateFieldValuePropertiesContent.json
   - stringArray.json

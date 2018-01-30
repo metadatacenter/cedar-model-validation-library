@@ -1,6 +1,6 @@
-base: staticValuedTemplateField.json
+base: staticTemplateField.json
 definitions:
-  - staticValuedUIFieldContent.json
+  - staticUIFieldContent.json
   - templateFieldValuePropertiesContent.json
   - stringArray.json
   - schemaNameContextFieldContent.json
