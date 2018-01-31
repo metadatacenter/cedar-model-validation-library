@@ -207,7 +207,7 @@ public class CedarValidator implements ModelValidator {
       JsonNode propertiesNode = fieldNode.get(JSON_SCHEMA_PROPERTIES);
       JsonPointer propertiesPointer = createJsonPointer(currentPath, "/properties");
       JsonNode valueConstraintsNode = fieldNode.get(CedarModelVocabulary.VALUE_CONSTRAINTS);
-      if (hasConstraintSources(valueConstraintsNode)) {
+      if (hasConstraintSources(valueConstraintsNode) || isTypedLink(fieldNode)) {
         validateConstrainedField(propertiesNode, propertiesPointer);
       } else {
         validateNonConstrainedField(propertiesNode, propertiesPointer);
@@ -461,6 +461,15 @@ public class CedarValidator implements ModelValidator {
   private static boolean isArrayNode(JsonNode node) {
     String type = node.path(JSON_SCHEMA_TYPE).asText();
     return type.equals("array");
+  }
+
+  private static boolean isTypedLink(JsonNode node) {
+    if (node.has(CedarModelVocabulary.UI)) {
+      JsonNode uiNode = node.get(CedarModelVocabulary.UI);
+      String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();
+      return inputType.equals("link");
+    }
+    return false;
   }
 
   private static JsonPointer createJsonPointer(JsonPointer basePointer, String relativeDestination) {
