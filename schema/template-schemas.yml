@@ -55,7 +55,6 @@ definitions:
   - templateFieldOrElementArray.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
-  - templateFieldSingleValueContent.json
   - singleURIArray.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
