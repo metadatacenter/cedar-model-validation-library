@@ -25,6 +25,9 @@ echo -n "Generating the element schema... "
 echo -n "Generating the single data field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/single-data-field-schemas.yml ${RESOURCES_DIR}/single-data-field-schema.json
 
+echo -n "Generating the single object field schema... "
+./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/single-object-field-schemas.yml ${RESOURCES_DIR}/single-object-field-schema.json
+
 echo -n "Generating the multi data field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/multi-data-field-schemas.yml ${RESOURCES_DIR}/multi-data-field-schema.json
 

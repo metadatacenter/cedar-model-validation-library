@@ -61,7 +61,7 @@
       ]
     },
     "properties": {
-      "$ref": "#/definitions/templateFieldValuePropertiesContent"
+      "$ref": "#/definitions/singleDataPropertiesContent"
     },
     "required": {
       "$ref": "#/definitions/stringArray"
@@ -113,6 +113,7 @@
     "description",
     "_ui",
     "_valueConstraints",
+    "required",
     "@context",
     "@id",
     "@type",
@@ -134,7 +135,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "textfield", "textarea", "radio", "date", "email", "list", "numeric", "phone-number", "link" ]
+                    "enum": [ "textfield", "textarea", "radio", "date", "email", "list", "numeric", "phone-number", "checkbox" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
@@ -147,16 +148,23 @@
             "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
             "type": "object",
             "properties": {
-                "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
-                "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
-                "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
-                "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
-                "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
-                "multipleChoice": { "type": "boolean", "enum": [ false ] },
+                "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
+                "multipleChoice": { "type": "boolean" },
                 "defaultValue": { "type": "string" }
             },
             "required": [ "requiredValue" ],
+            "additionalProperties": false
+        },
+        "singleDataPropertiesContent": {
+            "description": "Schema that describes the schema of 'properties' in a single data template field",
+            "type": "object",
+            "properties": {
+              "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
+              "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
+              "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
+            },
+            "required": [ "@type", "@value" ],
             "additionalProperties": false
         },
         "templateFieldJSONLDContextFieldContent": {
@@ -179,18 +187,6 @@
             },
             "additionalProperties": false,
             "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
-        },
-        "templateFieldValuePropertiesContent": {
-            "description": "Schema that describes the schema of 'properties' field value in a template field",
-            "type": "object",
-            "properties": {
-                "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
-                "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-                "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
-                "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
-            },
-            "required": [ "@type", "rdfs:label" ],
-            "additionalProperties": false
         },
         "stringArray": {
             "description": "Schema that describes the schema of a possibly-empty string array",

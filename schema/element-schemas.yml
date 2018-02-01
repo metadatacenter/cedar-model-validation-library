@@ -29,10 +29,15 @@ definitions:
   - oslcContextPropertiesContent.json
   - userFieldContextPropertiesContent.json
   - singleDataTemplateField.json
-  - multiDataTemplateField.json
-  - staticTemplateField.json
   - singleDataUIFieldContent.json
   - singleDataValueConstraintsFieldContent.json
+  - singleDataPropertiesContent.json
+  - singleObjectTemplateField.json
+  - singleObjectUIFieldContent.json
+  - singleObjectValueConstraintsFieldContent.json
+  - singleObjectPropertiesContent.json
+  - multiDataTemplateField.json
+  - staticTemplateField.json
   - multiDataUIFieldContent.json
   - multiDataValueConstraintsFieldContent.json
   - staticUIFieldContent.json
@@ -45,7 +50,6 @@ definitions:
   - singleURIArray.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
-  - templateFieldValuePropertiesContent.json
   - valueConstraintsOntologiesFieldContent.json
   - valueConstraintsValueSetsFieldContent.json
   - valueConstraintsClassesFieldContent.json

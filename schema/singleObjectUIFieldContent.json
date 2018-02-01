@@ -1,10 +1,10 @@
 {
-    "description": "Schema that describes the schema of a '_ui' field of a single data template field",
+    "description": "Schema that describes the schema of a '_ui' field of a single resource object template field",
     "type": "object",
     "properties": {
         "inputType": {
             "type": "string",
-            "enum": [ "textfield", "textarea", "radio", "date", "email", "list", "numeric", "phone-number", "checkbox" ]
+            "enum": [ "controlled-term", "link" ]
         },
         "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "valueRecommendationEnabled": { "type": "boolean" },

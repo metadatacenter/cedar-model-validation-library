@@ -41,11 +41,16 @@ definitions:
   - userFieldContextPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
-  - singleDataTemplateField.json
   - multiDataTemplateField.json
   - staticTemplateField.json
+  - singleDataTemplateField.json
   - singleDataUIFieldContent.json
   - singleDataValueConstraintsFieldContent.json
+  - singleDataPropertiesContent.json
+  - singleObjectTemplateField.json
+  - singleObjectUIFieldContent.json
+  - singleObjectValueConstraintsFieldContent.json
+  - singleObjectPropertiesContent.json
   - multiDataUIFieldContent.json
   - multiDataValueConstraintsFieldContent.json
   - staticUIFieldContent.json
@@ -58,7 +63,6 @@ definitions:
   - singleURIArray.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
-  - templateFieldValuePropertiesContent.json
   - templateElementJSONLDContextFieldContent.json
   - templateElementUIFieldContent.json
   - templateElementPropertiesFieldContent.json

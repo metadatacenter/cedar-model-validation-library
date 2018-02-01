@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.report.ListProcessingReport;
 import com.github.fge.jsonschema.core.report.LogLevel;
 import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
@@ -127,7 +126,6 @@ public class CedarValidator implements ModelValidator {
   private void doFieldValidation(JsonNode fieldNode, JsonPointer currentLocation)
       throws CedarModelValidationException, IOException {
     validateNodeStructureAgainstFieldSchema(fieldNode, currentLocation);
-    checkCorrectFieldForConstrainedValue(fieldNode, currentLocation);
   }
 
   private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer currentLocation) throws
@@ -156,8 +154,7 @@ public class CedarValidator implements ModelValidator {
       String propertiesMemberField = iter.next();
       if (isUserSpecifiedField(propertiesMemberField)) {
         JsonNode propertiesMemberNode = propertiesNode.get(propertiesMemberField);
-        JsonPointer propertiesMemberPointer = createJsonPointer(currentLocation, getPropertiesMemberPath
-            (propertiesMemberField));
+        JsonPointer propertiesMemberPointer = createJsonPointer(currentLocation, getPropertiesMemberPath(propertiesMemberField));
         checkPropertiesMemberField(propertiesMemberNode, propertiesMemberPointer);
       }
     }
@@ -179,9 +176,14 @@ public class CedarValidator implements ModelValidator {
     if (isTemplateElement(propertiesMemberNode)) {
       checkUserSpecifiedPropertiesMemberFields(propertiesMemberNode, currentLocation);
     } else {
-      checkCorrectFieldForConstrainedValue(propertiesMemberNode, currentLocation);
+      if (isSingleDataTemplateField(propertiesMemberNode)) {
+        validateNodeStructureAgainstSingleDataFieldSchema(propertiesMemberNode, currentLocation);
+      } else if (isStaticTemplateField(propertiesMemberNode)) {
+        validateNodeStructureAgainstStaticFieldSchema(propertiesMemberNode, currentLocation);
+      }
     }
   }
+
 
   private static void checkJsonLdTypeNodeExists(JsonNode node, JsonPointer currentLocation)
       throws CedarModelValidationException {
@@ -201,20 +203,6 @@ public class CedarValidator implements ModelValidator {
     }
   }
 
-  private void checkCorrectFieldForConstrainedValue(JsonNode fieldNode, JsonPointer currentPath)
-      throws CedarModelValidationException, IOException {
-    if (isSingleDataTemplateField(fieldNode)) {
-      JsonNode propertiesNode = fieldNode.get(JSON_SCHEMA_PROPERTIES);
-      JsonPointer propertiesPointer = createJsonPointer(currentPath, "/properties");
-      JsonNode valueConstraintsNode = fieldNode.get(CedarModelVocabulary.VALUE_CONSTRAINTS);
-      if (hasConstraintSources(valueConstraintsNode) || isTypedLink(fieldNode)) {
-        validateConstrainedField(propertiesNode, propertiesPointer);
-      } else {
-        validateNonConstrainedField(propertiesNode, propertiesPointer);
-      }
-    }
-  }
-
   private void validateNodeStructureAgainstTemplateSchema(JsonNode templateNode, JsonPointer currentLocation)
       throws CedarModelValidationException, IOException {
     validateArtifact(SchemaResources.TEMPLATE_SCHEMA, templateNode, currentLocation);
@@ -227,7 +215,11 @@ public class CedarValidator implements ModelValidator {
 
   private void validateNodeStructureAgainstSingleDataFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
       throws CedarModelValidationException, IOException {
-    validateArtifact(SchemaResources.SINGLE_DATA_FIELD_SCHEMA, fieldNode, currentLocation);
+    if (isObjectTyped(fieldNode)) {
+      validateArtifact(SchemaResources.SINGLE_OBJECT_FIELD_SCHEMA, fieldNode, currentLocation);
+    } else {
+      validateArtifact(SchemaResources.SINGLE_DATA_FIELD_SCHEMA, fieldNode, currentLocation);
+    }
   }
 
   private void validateNodeStructureAgainstMultiDataFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
@@ -244,46 +236,6 @@ public class CedarValidator implements ModelValidator {
       throws CedarModelValidationException, IOException {
     final JsonNode jsonSchemaNode = loadSchemaFromFile(schemaResourceLocation);
     doValidation(jsonSchemaNode, artifactNode, currentLocation);
-  }
-
-  private void validateConstrainedField(JsonNode propertiesNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    ListProcessingReport errorReport = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
-    try {
-      if (hasBoth(JSON_LD_ID, JSON_LD_VALUE, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has invalid properties (['@value'])");
-        errorReport.error(message);
-      }
-      if (hasMissing(JSON_LD_ID, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has missing required properties (['@id'])");
-        errorReport.error(message);
-      }
-      if (!errorReport.isSuccess()) {
-        throw newCedarModelValidationException(errorReport, currentLocation);
-      }
-    } catch (ProcessingException e) {
-      throw new IOException(e.getMessage(), e);
-    }
-  }
-
-  private void validateNonConstrainedField(JsonNode propertiesNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    ListProcessingReport errorReport = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
-    try {
-      if (hasBoth(JSON_LD_VALUE, JSON_LD_ID, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has invalid properties (['@id'])");
-        errorReport.error(message);
-      }
-      if (hasMissing(JSON_LD_VALUE, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has missing required properties (['@value'])");
-        errorReport.error(message);
-      }
-      if (!errorReport.isSuccess()) {
-        throw newCedarModelValidationException(errorReport, currentLocation);
-      }
-    } catch (ProcessingException e) {
-      throw new IOException(e.getMessage(), e);
-    }
   }
 
   private void collectErrorMessages(CedarModelValidationException exception, final CedarValidationReport report) {
@@ -463,11 +415,11 @@ public class CedarValidator implements ModelValidator {
     return type.equals("array");
   }
 
-  private static boolean isTypedLink(JsonNode node) {
+  private static boolean isObjectTyped(JsonNode node) {
     if (node.has(CedarModelVocabulary.UI)) {
       JsonNode uiNode = node.get(CedarModelVocabulary.UI);
       String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();
-      return inputType.equals("link");
+      return inputType.equals("link") || inputType.equals("controlled-term");
     }
     return false;
   }

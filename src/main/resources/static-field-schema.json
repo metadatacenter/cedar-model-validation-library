@@ -86,16 +86,15 @@
             "required": [ "inputType", "_content" ],
             "additionalProperties": false
         },
-        "templateFieldValuePropertiesContent": {
-            "description": "Schema that describes the schema of 'properties' field value in a template field",
+        "singleDataPropertiesContent": {
+            "description": "Schema that describes the schema of 'properties' in a single data template field",
             "type": "object",
             "properties": {
-                "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
-                "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-                "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
-                "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
+              "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
+              "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
+              "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
             },
-            "required": [ "@type", "rdfs:label" ],
+            "required": [ "@type", "@value" ],
             "additionalProperties": false
         },
         "stringArray": {

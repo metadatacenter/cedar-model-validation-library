@@ -51,7 +51,7 @@
                     "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
                 },
                 "properties": {
-                    "$ref": "#/definitions/templateFieldValuePropertiesContent"
+                    "$ref": "#/definitions/singleDataPropertiesContent"
                 },
                 "required": {
                     "$ref": "#/definitions/stringArray"

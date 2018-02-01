@@ -3,11 +3,11 @@
     "type": "object",
     "properties": {
         "type": { "type": "string", "enum": [ "array" ] },
-        "minItems": { "type": "integer", "minimum": 0 },
-        "maxItems": { "type": "integer", "minimum": 1 },
+        "minItems": { "type": "integer", "minimum": 1 },
         "items": {
             "oneOf": [
                 { "$ref": "file:singleDataTemplateField.json" },
+                { "$ref": "file:singleObjectTemplateField.json" },
                 { "$ref": "file:templateElement.json" }
             ]
         }

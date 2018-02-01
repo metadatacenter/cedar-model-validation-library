@@ -2,10 +2,10 @@
     "description": "Schema that describes the schema of a multi-value template field",
     "type": "object",
     "properties": {
-        "items": {             
+        "items": {
             "properties": {
                 "type": { "type": "string", "enum": [ "object" ] },
-                "properties": { "$ref": "file:templateFieldValuePropertiesContent.json" },
+                "properties": { "$ref": "file:singleDataPropertiesContent.json" },
                 "required": { "$ref": "file:nonEmptyStringArray.json" },
                 "additionalProperties": { "type": "boolean", "enum": [ false ] }
             },

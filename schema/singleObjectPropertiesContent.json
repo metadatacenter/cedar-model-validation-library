@@ -1,12 +1,11 @@
 {
-    "description": "Schema that describes the schema of 'properties' field value in a template field",
+    "description": "Schema that describes the schema of 'properties' in a single resource object template field",
     "type": "object",
     "properties": {
         "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
         "@id": { "$ref": "file:jsonLDIDFieldContent.json" },
-        "@value": { "$ref": "file:jsonLDValueFieldContent.json" },
         "rdfs:label": { "$ref": "file:rdfsLabelFieldContent.json" }
     },
-    "required": [ "@type", "rdfs:label" ],
+    "required": [ "@type", "@id", "rdfs:label" ],
     "additionalProperties": false
 }
