@@ -22,14 +22,14 @@ echo -n "Generating the template schema... "
 echo -n "Generating the element schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/element-schemas.yml ${RESOURCES_DIR}/element-schema.json
 
-echo -n "Generating the single data field schema... "
-./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/single-data-field-schemas.yml ${RESOURCES_DIR}/single-data-field-schema.json
+echo -n "Generating the literal field schema... "
+./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/literal-field-schemas.yml ${RESOURCES_DIR}/literal-field-schema.json
 
-echo -n "Generating the single object field schema... "
-./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/single-object-field-schemas.yml ${RESOURCES_DIR}/single-object-field-schema.json
+echo -n "Generating the object field schema... "
+./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/object-field-schemas.yml ${RESOURCES_DIR}/object-field-schema.json
 
-echo -n "Generating the multi data field schema... "
-./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/multi-data-field-schemas.yml ${RESOURCES_DIR}/multi-data-field-schema.json
+echo -n "Generating the multi-entries field schema... "
+./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/multi-entries-field-schemas.yml ${RESOURCES_DIR}/multi-entries-field-schema.json
 
 echo -n "Generating the static field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/static-field-schemas.yml ${RESOURCES_DIR}/static-field-schema.json

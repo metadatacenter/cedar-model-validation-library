@@ -38,10 +38,10 @@
       "minLength": 1
     },
     "_ui": {
-      "$ref": "#/definitions/singleObjectUIFieldContent"
+      "$ref": "#/definitions/objectFieldUIContent"
     },
     "_valueConstraints": {
-      "$ref": "#/definitions/singleObjectValueConstraintsFieldContent"
+      "$ref": "#/definitions/objectFieldValueConstraintsContent"
     },
     "@context": {
       "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
@@ -61,7 +61,7 @@
       ]
     },
     "properties": {
-      "$ref": "#/definitions/singleObjectPropertiesContent"
+      "$ref": "#/definitions/objectFieldPropertiesContent"
     },
     "required": {
       "$ref": "#/definitions/stringArray"
@@ -128,7 +128,7 @@
   ]
     ,
     "definitions": {
-        "singleObjectUIFieldContent": {
+        "objectFieldUIContent": {
             "description": "Schema that describes the schema of a '_ui' field of a single resource object template field",
             "type": "object",
             "properties": {
@@ -143,7 +143,7 @@
             "required": [ "inputType" ],
             "additionalProperties": false
         },
-        "singleObjectValueConstraintsFieldContent": {
+        "objectFieldValueConstraintsContent": {
             "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
             "type": "object",
             "properties": {
@@ -159,7 +159,7 @@
             "required": [ "requiredValue" ],
             "additionalProperties": false
         },
-        "singleObjectPropertiesContent": {
+        "objectFieldPropertiesContent": {
             "description": "Schema that describes the schema of 'properties' in a single resource object template field",
             "type": "object",
             "properties": {

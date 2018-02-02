@@ -1,8 +1,8 @@
-base: singleDataTemplateField.json
+base: literalTemplateField.json
 definitions:
-  - singleDataUIFieldContent.json
-  - singleDataValueConstraintsFieldContent.json
-  - singleDataPropertiesContent.json
+  - literalFieldUIContent.json
+  - literalFieldValueConstraintsContent.json
+  - literalFieldPropertiesContent.json
   - templateFieldJSONLDContextFieldContent.json
   - stringArray.json
   - valueConstraintsOntologiesFieldContent.json

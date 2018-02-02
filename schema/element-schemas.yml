@@ -21,28 +21,28 @@ definitions:
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json
   - oslcModifiedByFieldContent.json
-  - templateFieldOrElementOrArrayOfFieldOrElement.json
+  - userSpecifiedFields.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - templateElementContextPropertiesFieldContent.json
   - pavContextPropertiesContent.json
   - oslcContextPropertiesContent.json
   - userFieldContextPropertiesContent.json
-  - singleDataTemplateField.json
-  - singleDataUIFieldContent.json
-  - singleDataValueConstraintsFieldContent.json
-  - singleDataPropertiesContent.json
-  - singleObjectTemplateField.json
-  - singleObjectUIFieldContent.json
-  - singleObjectValueConstraintsFieldContent.json
-  - singleObjectPropertiesContent.json
-  - multiDataTemplateField.json
+  - literalTemplateField.json
+  - literalFieldUIContent.json
+  - literalFieldValueConstraintsContent.json
+  - literalFieldPropertiesContent.json
+  - objectTemplateField.json
+  - objectFieldUIContent.json
+  - objectFieldValueConstraintsContent.json
+  - objectFieldPropertiesContent.json
+  - multiEntriesTemplateField.json
   - staticTemplateField.json
-  - multiDataUIFieldContent.json
-  - multiDataValueConstraintsFieldContent.json
-  - staticUIFieldContent.json
+  - multiEntriesFieldUIContent.json
+  - multiEntriesFieldValueConstraintsContent.json
+  - staticFieldUIContent.json
   - templateElement.json
-  - templateFieldOrElementArray.json
+  - multipleTemplateFieldsOrElements.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
   - numberAndNullTypeContent.json

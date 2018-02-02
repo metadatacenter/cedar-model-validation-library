@@ -1,7 +1,7 @@
 base: staticTemplateField.json
 definitions:
-  - staticUIFieldContent.json
-  - singleDataPropertiesContent.json
+  - staticFieldUIContent.json
+  - literalFieldPropertiesContent.json
   - stringArray.json
   - schemaNameContextFieldContent.json
   - schemaDescriptionContextFieldContent.json

@@ -7,7 +7,7 @@
         "@context": { "$ref": "file:templateElementContextFieldContent.json" }
     },
     "patternProperties": {
-        "^(?!(@context|@type|@id|schema|xsd|pav|oslc|rdfs|\\$))[^\\.]+$": { "$ref": "file:templateFieldOrElementOrArrayOfFieldOrElement.json" }
+        "^(?!(@context|@type|@id|schema|xsd|pav|oslc|rdfs|\\$))[^\\.]+$": { "$ref": "file:userSpecifiedFields.json" }
     },
     "additionalProperties": false,
     "required": [ "@type", "@id", "@context" ]

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Schema that describes a single resource object template field",
+  "description": "Schema that describes a single data template field",
   "type": "object",
   "properties": {
     "$schema": {
@@ -38,10 +38,10 @@
       "minLength": 1
     },
     "_ui": {
-      "$ref": "#/definitions/singleObjectUIFieldContent"
+      "$ref": "#/definitions/literalFieldUIContent"
     },
     "_valueConstraints": {
-      "$ref": "#/definitions/singleObjectValueConstraintsFieldContent"
+      "$ref": "#/definitions/literalFieldValueConstraintsContent"
     },
     "@context": {
       "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
@@ -61,7 +61,7 @@
       ]
     },
     "properties": {
-      "$ref": "#/definitions/singleObjectPropertiesContent"
+      "$ref": "#/definitions/literalFieldPropertiesContent"
     },
     "required": {
       "$ref": "#/definitions/stringArray"
@@ -113,6 +113,7 @@
     "description",
     "_ui",
     "_valueConstraints",
+    "required",
     "@context",
     "@id",
     "@type",

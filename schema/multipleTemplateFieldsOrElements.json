@@ -6,8 +6,8 @@
         "minItems": { "type": "integer", "minimum": 1 },
         "items": {
             "oneOf": [
-                { "$ref": "file:singleDataTemplateField.json" },
-                { "$ref": "file:singleObjectTemplateField.json" },
+                { "$ref": "file:literalTemplateField.json" },
+                { "$ref": "file:objectTemplateField.json" },
                 { "$ref": "file:templateElement.json" }
             ]
         }

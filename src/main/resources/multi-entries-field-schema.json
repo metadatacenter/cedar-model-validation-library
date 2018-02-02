@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a multi data template field",
+    "description": "Schema that describes a multi-entries template field",
     "type": "object",
     "properties": {
         "type": { "type": "string", "enum": [ "array" ] },
@@ -34,10 +34,10 @@
                     "type": "string", "minLength": 1
                 },
                 "_ui": {
-                    "$ref": "#/definitions/multiDataUIFieldContent"
+                    "$ref": "#/definitions/multiEntriesFieldUIContent"
                 },
                 "_valueConstraints": {
-                    "$ref": "#/definitions/multiDataValueConstraintsFieldContent"
+                    "$ref": "#/definitions/multiEntriesFieldValueConstraintsContent"
                 },
                 "@context": {
                     "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
@@ -51,7 +51,7 @@
                     "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
                 },
                 "properties": {
-                    "$ref": "#/definitions/singleDataPropertiesContent"
+                    "$ref": "#/definitions/literalFieldPropertiesContent"
                 },
                 "required": {
                     "$ref": "#/definitions/stringArray"
@@ -84,8 +84,8 @@
     "required": [ "type", "minItems", "items" ]
     ,
     "definitions": {
-        "multiDataUIFieldContent": {
-            "description": "Schema that describes the schema of a '_ui' field of a multi data template field",
+        "multiEntriesFieldUIContent": {
+            "description": "Schema that describes the schema of a '_ui' field of a multi-entries template field",
             "type": "object",
             "properties": {
                 "inputType": {
@@ -98,8 +98,8 @@
             "required": [ "inputType" ],
             "additionalProperties": false
         },
-        "multiDataValueConstraintsFieldContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a multi data template field",
+        "multiEntriesFieldValueConstraintsContent": {
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-entries template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -135,7 +135,7 @@
             "additionalProperties": false,
             "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
         },
-        "singleDataPropertiesContent": {
+        "literalFieldPropertiesContent": {
             "description": "Schema that describes the schema of 'properties' in a single data template field",
             "type": "object",
             "properties": {

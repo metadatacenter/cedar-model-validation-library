@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a '_valueConstraints' field in a multi data template field",
+    "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-entries template field",
     "type": "object",
     "properties": {
         "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
