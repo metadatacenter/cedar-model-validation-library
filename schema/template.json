@@ -65,9 +65,21 @@
         },
         "schema:schemaVersion": {
             "type": "string", "minLength": 1
+        },
+        "bibo:status": {
+            "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+        },
+        "pav:version": {
+            "type": "string", "minLength": 1
+        },
+        "pav:previousVersion": {
+            "type": "string", "minLength": 1
+        },
+        "pav:derivedFrom": {
+            "type": "string", "format": "uri"
         }
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
         "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion", "schema:name",
-        "schema:description" ]
+        "schema:description", "bibo:status", "pav:version" ]
 }

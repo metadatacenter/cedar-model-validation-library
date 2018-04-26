@@ -536,8 +536,8 @@ public class TemplateValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['description'])");
   }
 
-  @Test
   @Ignore
+  @Test
   public void shouldFailMissingProperties_Field_Required() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");

@@ -64,11 +64,23 @@
         },
         "schema:schemaVersion": {
             "type": "string", "minLength": 1
+        },
+        "bibo:status": {
+            "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+        },
+        "pav:version": {
+            "type": "string", "minLength": 1
+        },
+        "pav:previousVersion": {
+            "type": "string", "minLength": 1
+        },
+        "pav:derivedFrom": {
+            "type": "string", "format": "uri"
         }
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
         "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion", "schema:name",
-        "schema:description" ]
+        "schema:description", "bibo:status", "pav:version" ]
     ,
     "definitions": {
         "jsonLDValueFieldContent": {
@@ -94,6 +106,7 @@
                 "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
                 "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
                 "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+                "bibo": { "type": "string", "format": "uri", "enum": [ "http://purl.org/ontology/bibo/" ] },
                 "schema:name": { "$ref": "#/definitions/schemaNameContextFieldContent" },
                 "schema:description": { "$ref": "#/definitions/schemaDescriptionContextFieldContent" },
                 "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnContextFieldContent" },
@@ -102,10 +115,10 @@
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
             },
             "patternProperties": {
-                "^(?!(schema|xsd|pav|oslc|\\$))[^.]+$": { "type": "string", "format": "uri" }
+                "^(?!(schema|xsd|pav|oslc|bibo|\\$))[^.]+$": { "type": "string", "format": "uri" }
             },
             "additionalProperties": false,
-            "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+            "required": [ "xsd", "pav", "schema", "oslc", "bibo", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
         },
         "templateElementUIFieldContent": {
             "type": "object",
@@ -755,11 +768,23 @@
                 },
                 "schema:schemaVersion": {
                     "type": "string", "minLength": 1
+                },
+                "bibo:status": {
+                    "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+                },
+                "pav:version": {
+                    "type": "string", "minLength": 1
+                },
+                "pav:previousVersion": {
+                    "type": "string", "minLength": 1
+                },
+                "pav:derivedFrom": {
+                    "type": "string", "format": "uri"
                 }
             },
             "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
                 "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion", "schema:name",
-                "schema:description" ]
+                "schema:description", "bibo:status", "pav:version" ]
         },
         "templateFieldOrElementArray": {
             "description": "Schema that describes a single-valued template field or element array",

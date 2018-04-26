@@ -201,7 +201,6 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['properties'])");
   }
 
-  @Ignore
   @Test
   public void shouldFailMissingRequired() {
     // Arrange
@@ -381,7 +380,6 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['description'])");
   }
 
-  @Test
   @Ignore
   public void shouldFailMissingProperties_Field_Required() {
     // Arrange
