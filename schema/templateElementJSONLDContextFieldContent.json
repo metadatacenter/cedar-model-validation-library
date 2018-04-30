@@ -6,6 +6,7 @@
         "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
         "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
         "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+        "bibo": { "type": "string", "format": "uri", "enum": [ "http://purl.org/ontology/bibo/" ] },
         "schema:name": { "$ref": "file:schemaNameContextFieldContent.json" },
         "schema:description": { "$ref": "file:schemaDescriptionContextFieldContent.json" },
         "pav:createdOn": { "$ref": "file:pavCreatedOnContextFieldContent.json" },
@@ -14,8 +15,8 @@
         "oslc:modifiedBy": { "$ref": "file:oslcModifiedByContextFieldContent.json" }
     },
     "patternProperties": {
-        "^(?!(schema|xsd|pav|oslc|\\$))[^.]+$": { "type": "string", "format": "uri" }
+        "^(?!(schema|xsd|pav|oslc|bibo|\\$))[^.]+$": { "type": "string", "format": "uri" }
     },
     "additionalProperties": false,
-    "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+    "required": [ "xsd", "pav", "schema", "oslc", "bibo", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }

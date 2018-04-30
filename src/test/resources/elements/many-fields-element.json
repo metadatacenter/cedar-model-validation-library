@@ -5,6 +5,7 @@
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "pav": "http://purl.org/pav/",
     "oslc": "http://open-services.net/ns/core#",
+    "bibo": "http://purl.org/ontology/bibo/",
     "schema": "http://schema.org/",
     "schema:name": {
       "@type": "xsd:string"
@@ -441,7 +442,9 @@
   "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
   "pav:lastUpdatedOn": "2017-05-19T11:43:12-0700",
   "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
-  "schema:schemaVersion": "1.1.0",
+  "schema:schemaVersion": "1.4.0",
+  "bibo:status": "bibo:draft",
+  "pav:version": "0.0.1",
   "additionalProperties": false,
   "$schema": "http://json-schema.org/draft-04/schema#"
 }
