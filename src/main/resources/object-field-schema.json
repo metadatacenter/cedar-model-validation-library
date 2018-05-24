@@ -1,88 +1,140 @@
 {
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a single-valued template field",
-    "type": "object",
-    "properties": {
-        "$schema": {
-            "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
-            "type": "string", "format": "uri",
-            "enum": [ "http://json-schema.org/draft-04/schema#" ]
-        },
-        "type": {
-            "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
-            "type": "string", "enum": [ "object" ]
-        },
-        "schema:name": {
-            "description": "Schema describing the template field name",
-            "type": "string", "minLength": 1
-        },
-        "schema:description": {
-            "description": "Schema describing the template field description",
-            "type": "string"
-        },
-        "title": {
-            "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
-            "type": "string", "minLength": 1
-        },
-        "description": {
-            "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
-            "type": "string", "minLength": 1
-        },
-        "_ui": {
-            "$ref": "#/definitions/singleValuedUIFieldContent"
-        },
-        "_valueConstraints": {
-            "$ref": "#/definitions/singleValuedValueConstraintsFieldContent"
-        },
-        "@context": {
-            "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
-        },
-        "@id": {
-            "type": [ "string", "null" ], "format": "uri"
-        },
-        "@type": {
-            "type": "string",
-            "format": "uri",
-            "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
-        },
-        "properties": {
-            "$ref": "#/definitions/templateFieldValuePropertiesContent"
-        },
-        "required": {
-            "$ref": "#/definitions/stringArray"
-        },
-        "pav:createdOn": {
-            "type": [ "string", "null" ], "format": "date-time"
-        },
-        "pav:createdBy":  {
-            "type": [ "string", "null" ], "format": "uri"
-        },
-        "pav:lastUpdatedOn":  {
-            "type": [ "string", "null" ], "format": "date-time"
-        },
-        "oslc:modifiedBy": {
-            "type": [ "string", "null" ], "format": "uri"
-        },
-        "additionalProperties": {
-            "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
-            "type": "boolean", "enum": [ false ]
-        },
-        "schema:schemaVersion": {
-            "type": "string", "minLength": 1
-        }
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Schema that describes a single resource object template field",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
+      "type": "string",
+      "format": "uri",
+      "enum": [
+        "http://json-schema.org/draft-04/schema#"
+      ]
     },
-    "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
-        "properties", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-        "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
+    "type": {
+      "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
+      "type": "string",
+      "enum": [
+        "object"
+      ]
+    },
+    "schema:name": {
+      "description": "Schema describing the template field name",
+      "type": "string",
+      "minLength": 1
+    },
+    "schema:description": {
+      "description": "Schema describing the template field description",
+      "type": "string"
+    },
+    "title": {
+      "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
+      "type": "string",
+      "minLength": 1
+    },
+    "_ui": {
+      "$ref": "#/definitions/objectFieldUIContent"
+    },
+    "_valueConstraints": {
+      "$ref": "#/definitions/objectFieldValueConstraintsContent"
+    },
+    "@context": {
+      "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
+    },
+    "@id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "@type": {
+      "type": "string",
+      "format": "uri",
+      "enum": [
+        "https://schema.metadatacenter.org/core/TemplateField"
+      ]
+    },
+    "properties": {
+      "$ref": "#/definitions/objectFieldPropertiesContent"
+    },
+    "required": {
+      "$ref": "#/definitions/stringArray"
+    },
+    "pav:createdOn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "pav:createdBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "pav:lastUpdatedOn": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "oslc:modifiedBy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri"
+    },
+    "additionalProperties": {
+      "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
+      "type": "boolean",
+      "enum": [
+        false
+      ]
+    },
+    "schema:schemaVersion": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "$schema",
+    "type",
+    "title",
+    "description",
+    "_ui",
+    "_valueConstraints",
+    "@context",
+    "@id",
+    "@type",
+    "properties",
+    "additionalProperties",
+    "pav:createdOn",
+    "pav:createdBy",
+    "pav:lastUpdatedOn",
+    "oslc:modifiedBy",
+    "schema:schemaVersion",
+    "schema:name",
+    "schema:description"
+  ]
     ,
     "definitions": {
-        "singleValuedUIFieldContent": {
-            "description": "Schema that describes the schema of a '_ui' field of a single-valued template field",
+        "objectFieldUIContent": {
+            "description": "Schema that describes the schema of a '_ui' field of a single resource object template field",
             "type": "object",
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "textfield", "textarea", "radio", "date", "email", "list", "numeric", "phone-number", "link" ]
+                    "enum": [ "controlled-term", "link" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
@@ -91,8 +143,8 @@
             "required": [ "inputType" ],
             "additionalProperties": false
         },
-        "singleValuedValueConstraintsFieldContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a single-valued template field",
+        "objectFieldValueConstraintsContent": {
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -105,6 +157,17 @@
                 "defaultValue": { "type": "string" }
             },
             "required": [ "requiredValue" ],
+            "additionalProperties": false
+        },
+        "objectFieldPropertiesContent": {
+            "description": "Schema that describes the schema of 'properties' in a single resource object template field",
+            "type": "object",
+            "properties": {
+                "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
+                "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
+                "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
+            },
+            "required": [ "@type", "@id", "rdfs:label" ],
             "additionalProperties": false
         },
         "templateFieldJSONLDContextFieldContent": {
@@ -127,18 +190,6 @@
             },
             "additionalProperties": false,
             "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
-        },
-        "templateFieldValuePropertiesContent": {
-            "description": "Schema that describes the schema of 'properties' field value in a template field",
-            "type": "object",
-            "properties": {
-                "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
-                "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-                "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
-                "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
-            },
-            "required": [ "@type", "rdfs:label" ],
-            "additionalProperties": false
         },
         "stringArray": {
             "description": "Schema that describes the schema of a possibly-empty string array",

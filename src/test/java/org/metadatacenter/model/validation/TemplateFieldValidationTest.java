@@ -3,7 +3,6 @@ package org.metadatacenter.model.validation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
@@ -160,7 +159,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   @Test
   public void shouldPassConstrainedTextField() {
     // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/constrained-text-field.json");
+    String fieldString = TestResourcesUtils.getStringContent("fields/controlled-term-field.json");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
@@ -320,7 +319,6 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  @Ignore
   public void shouldFailMissingRequired() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
@@ -431,7 +429,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   @Test
   public void shouldFailMissingProperties_Id() {
     // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/constrained-text-field.json");
+    String fieldString = TestResourcesUtils.getStringContent("fields/controlled-term-field.json");
     fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/properties/@id");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
@@ -443,7 +441,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   @Test
   public void shouldFailMissingProperties_Type() {
     // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
+    String fieldString = TestResourcesUtils.getStringContent("fields/controlled-term-field.json");
     fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/properties/@type");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
@@ -455,69 +453,12 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   @Test
   public void shouldFailMissingProperties_RdfsLabel() {
     // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
+    String fieldString = TestResourcesUtils.getStringContent("fields/controlled-term-field.json");
     fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/properties/rdfs:label");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport, "object has missing required properties (['rdfs:label'])");
-  }
-
-  @Test
-  public void shouldFailMisplacedIdProperty_InTextField() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/value-constraints/invalid-text-field-1.json");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@value'])");
-  }
-
-  @Test
-  public void shouldFailMisplacedValueProperty_InConstrainedTextField() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent
-        ("fields/value-constraints/invalid-constrained-text-field-1.json");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@id'])");
-  }
-
-  @Test
-  public void shouldFailMisplaceValueIdProperty_InTextField() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/value-constraints/invalid-text-field-2.json");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has invalid properties (['@id'])");
-  }
-
-  @Test
-  public void shouldFailMisplaceValueIdProperty_InConstrainedTextField() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent
-        ("fields/value-constraints/invalid-constrained-text-field-2.json");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has invalid properties (['@value'])");
-  }
-
-  @Test
-  public void shouldFailMisplacedIdProperty_InRadioField() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/value-constraints/invalid-radio-field.json");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@value'])");
   }
 }

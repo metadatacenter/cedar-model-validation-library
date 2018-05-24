@@ -1,13 +1,13 @@
 {
-    "description": "Schema that describes a single-valued template field or element array",
+    "description": "Schema that describes a single data template field or element array",
     "type": "object",
     "properties": {
         "type": { "type": "string", "enum": [ "array" ] },
-        "minItems": { "type": "integer", "minimum": 0 },
-        "maxItems": { "type": "integer", "minimum": 1 },
+        "minItems": { "type": "integer", "minimum": 1 },
         "items": {
             "oneOf": [
-                { "$ref": "file:singleValuedTemplateField.json" },
+                { "$ref": "file:literalTemplateField.json" },
+                { "$ref": "file:objectTemplateField.json" },
                 { "$ref": "file:templateElement.json" }
             ]
         }

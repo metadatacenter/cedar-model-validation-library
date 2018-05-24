@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a multi-valued template field",
+    "description": "Schema that describes a multi-entries template field",
     "type": "object",
     "properties": {
         "type": { "type": "string", "enum": [ "array" ] },
@@ -34,10 +34,10 @@
                     "type": "string", "minLength": 1
                 },
                 "_ui": {
-                    "$ref": "#/definitions/multiValuedUIFieldContent"
+                    "$ref": "#/definitions/multiEntriesFieldUIContent"
                 },
                 "_valueConstraints": {
-                    "$ref": "#/definitions/multiValuedValueConstraintsFieldContent"
+                    "$ref": "#/definitions/multiEntriesFieldValueConstraintsContent"
                 },
                 "@context": {
                     "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
@@ -51,7 +51,7 @@
                     "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
                 },
                 "properties": {
-                    "$ref": "#/definitions/templateFieldValuePropertiesContent"
+                    "$ref": "#/definitions/literalFieldPropertiesContent"
                 },
                 "required": {
                     "$ref": "#/definitions/stringArray"
@@ -84,13 +84,13 @@
     "required": [ "type", "minItems", "items" ]
     ,
     "definitions": {
-        "multiValuedUIFieldContent": {
-            "description": "Schema that describes the schema of a '_ui' field of a multi-valued template field",
+        "multiEntriesFieldUIContent": {
+            "description": "Schema that describes the schema of a '_ui' field of a multi-entries template field",
             "type": "object",
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "checkbox", "list" ]
+                    "enum": [ "checkbox" ]
                 },
                 "valueRecommendationEnabled": { "type": "boolean" },
                 "hidden": { "type": "boolean" }
@@ -98,8 +98,8 @@
             "required": [ "inputType" ],
             "additionalProperties": false
         },
-        "multiValuedValueConstraintsFieldContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-valued template field",
+        "multiEntriesFieldValueConstraintsContent": {
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-entries template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -135,16 +135,15 @@
             "additionalProperties": false,
             "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
         },
-        "templateFieldValuePropertiesContent": {
-            "description": "Schema that describes the schema of 'properties' field value in a template field",
+        "literalFieldPropertiesContent": {
+            "description": "Schema that describes the schema of 'properties' in a single data template field",
             "type": "object",
             "properties": {
-                "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
-                "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-                "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
-                "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
+              "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
+              "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
+              "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
             },
-            "required": [ "@type", "rdfs:label" ],
+            "required": [ "@type", "@value" ],
             "additionalProperties": false
         },
         "stringArray": {

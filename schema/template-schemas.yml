@@ -21,7 +21,7 @@ definitions:
   - schemaIsBasedOnFieldContent.json
   - pavLastUpdatedOnFieldContent.json
   - oslcModifiedByFieldContent.json
-  - templateFieldOrElementOrArrayOfFieldOrElement.json
+  - userSpecifiedFields.json
   - stringArray.json
   - propertyLabelContent.json
   - templateContextPropertiesFieldContent.json
@@ -41,25 +41,28 @@ definitions:
   - userFieldContextPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
-  - singleValuedTemplateField.json
-  - multiValuedTemplateField.json
-  - staticValuedTemplateField.json
-  - singleValuedUIFieldContent.json
-  - singleValuedValueConstraintsFieldContent.json
-  - multiValuedUIFieldContent.json
-  - multiValuedValueConstraintsFieldContent.json
-  - staticValuedUIFieldContent.json
+  - multiEntriesTemplateField.json
+  - staticTemplateField.json
+  - literalTemplateField.json
+  - literalFieldUIContent.json
+  - literalFieldValueConstraintsContent.json
+  - literalFieldPropertiesContent.json
+  - objectTemplateField.json
+  - objectFieldUIContent.json
+  - objectFieldValueConstraintsContent.json
+  - objectFieldPropertiesContent.json
+  - multiEntriesFieldUIContent.json
+  - multiEntriesFieldValueConstraintsContent.json
+  - staticFieldUIContent.json
   - templateElement.json
   - templateElementContextFieldContent.json
   - templateElementContextPropertiesFieldContent.json
-  - templateFieldOrElementArray.json
+  - multipleTemplateFieldsOrElements.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
-  - templateFieldSingleValueContent.json
   - singleURIArray.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
-  - templateFieldValuePropertiesContent.json
   - templateElementJSONLDContextFieldContent.json
   - templateElementUIFieldContent.json
   - templateElementPropertiesFieldContent.json

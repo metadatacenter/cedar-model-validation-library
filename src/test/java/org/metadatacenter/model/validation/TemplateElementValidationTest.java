@@ -381,6 +381,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
   }
 
   @Ignore
+  @Test
   public void shouldFailMissingProperties_Field_Required() {
     // Arrange
     String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
