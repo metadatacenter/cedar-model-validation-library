@@ -3,6 +3,10 @@
     "type": "object",
     "properties": {
         "requiredValue": { "type": "boolean" },
+        "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
+        "valueSets": {  "$ref": "file:valueConstraintsValueSetsFieldContent.json" },
+        "classes": {  "$ref": "file:valueConstraintsClassesFieldContent.json" },
+        "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
         "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
         "multipleChoice": { "type": "boolean" },
         "defaultValue": { "type": "string" }

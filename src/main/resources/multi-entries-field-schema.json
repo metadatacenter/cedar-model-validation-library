@@ -140,10 +140,11 @@
             "type": "object",
             "properties": {
               "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
+              "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
               "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
               "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
             },
-            "required": [ "@type", "@value" ],
+            "required": [ "@type" ],
             "additionalProperties": false
         },
         "stringArray": {

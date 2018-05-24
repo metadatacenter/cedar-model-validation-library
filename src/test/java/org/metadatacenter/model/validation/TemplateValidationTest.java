@@ -657,6 +657,7 @@ public class TemplateValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
   }
 
+  @Ignore
   @Test
   public void shouldFailMissingProperties_Field_Properties_Value() {
     // Arrange

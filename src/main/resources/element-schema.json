@@ -507,7 +507,6 @@
             "description",
             "_ui",
             "_valueConstraints",
-            "required",
             "@context",
             "@id",
             "@type",
@@ -541,8 +540,12 @@
             "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
             "type": "object",
             "properties": {
-                "requiredValue": { "type": "boolean" },
+                "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
+                "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
+                "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
+                "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
+                "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean" },
                 "defaultValue": { "type": "string" }
             },
@@ -554,10 +557,11 @@
             "type": "object",
             "properties": {
               "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
+              "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
               "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
               "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
             },
-            "required": [ "@type", "@value" ],
+            "required": [ "@type" ],
             "additionalProperties": false
         },
         "objectTemplateField": {
@@ -695,7 +699,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "controlled-term", "link" ]
+                    "enum": [ "link" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },

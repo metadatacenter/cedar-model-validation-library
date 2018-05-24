@@ -4,7 +4,7 @@
     "properties": {
         "inputType": {
             "type": "string",
-            "enum": [ "controlled-term", "link" ]
+            "enum": [ "link" ]
         },
         "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "valueRecommendationEnabled": { "type": "boolean" },

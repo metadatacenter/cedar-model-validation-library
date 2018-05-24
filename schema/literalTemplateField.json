@@ -113,7 +113,6 @@
     "description",
     "_ui",
     "_valueConstraints",
-    "required",
     "@context",
     "@id",
     "@type",
