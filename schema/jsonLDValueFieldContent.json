@@ -8,6 +8,12 @@
                 { "$ref": "file:numberAndNullTypeContent.json" },
                 { "$ref": "file:arrayAndNullTypeContent.json" }
             ]
+        },
+        "minLength": {
+            "type": "integer"
+        },
+        "maxLength": {
+            "type": "integer"
         }
     },
     "required": [ "type" ],

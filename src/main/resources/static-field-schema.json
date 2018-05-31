@@ -299,6 +299,12 @@
                         { "$ref": "#/definitions/numberAndNullTypeContent" },
                         { "$ref": "#/definitions/arrayAndNullTypeContent" }
                     ]
+                },
+                "minLength": {
+                    "type": "integer"
+                },
+                "maxLength": {
+                    "type": "integer"
                 }
             },
             "required": [ "type" ],

@@ -147,12 +147,12 @@
             "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
             "type": "object",
             "properties": {
+                "requiredValue": { "type": "boolean" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
-                "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean" },
                 "defaultValue": { "type": "string" }
             },
@@ -443,6 +443,12 @@
                         { "$ref": "#/definitions/numberAndNullTypeContent" },
                         { "$ref": "#/definitions/arrayAndNullTypeContent" }
                     ]
+                },
+                "minLength": {
+                    "type": "integer"
+                },
+                "maxLength": {
+                    "type": "integer"
                 }
             },
             "required": [ "type" ],
