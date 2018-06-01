@@ -38,6 +38,16 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassTextFieldWithMinMaxLength() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/text-field-minmax-length.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassCheckboxField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/checkbox-field.json");

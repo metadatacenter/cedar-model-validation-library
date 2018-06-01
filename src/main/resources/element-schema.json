@@ -93,16 +93,10 @@
                         { "$ref": "#/definitions/numberAndNullTypeContent" },
                         { "$ref": "#/definitions/arrayAndNullTypeContent" }
                     ]
-                },
-                "minLength": {
-                    "type": "integer"
-                },
-                "maxLength": {
-                    "type": "integer"
                 }
             },
             "required": [ "type" ],
-            "additionalProperties": false    
+            "additionalProperties": false
         },
         "templateElementJSONLDContextFieldContent": {
             "description": "Schema describing the schema of the '@context' field in a template element",
@@ -547,6 +541,8 @@
             "type": "object",
             "properties": {
                 "requiredValue": { "type": "boolean" },
+                "minLength": { "type": "string" },
+                "maxLength": { "type": "string" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },

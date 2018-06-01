@@ -148,6 +148,8 @@
             "type": "object",
             "properties": {
                 "requiredValue": { "type": "boolean" },
+                "minLength": { "type": "string" },
+                "maxLength": { "type": "string" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
@@ -443,16 +445,10 @@
                         { "$ref": "#/definitions/numberAndNullTypeContent" },
                         { "$ref": "#/definitions/arrayAndNullTypeContent" }
                     ]
-                },
-                "minLength": {
-                    "type": "integer"
-                },
-                "maxLength": {
-                    "type": "integer"
                 }
             },
             "required": [ "type" ],
-            "additionalProperties": false    
+            "additionalProperties": false
         },
         "valueConstraintsOntologiesFieldItemContent": {
             "description": "Schema that describes the schema of each entry in the 'ontologies' field array in a '_valueConstraints' field",
