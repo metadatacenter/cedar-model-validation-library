@@ -1012,6 +1012,8 @@
                 "requiredValue": { "type": "boolean" },
                 "minLength": { "type": "string" },
                 "maxLength": { "type": "string" },
+                "minValue": { "type": "string" },
+                "maxValue": { "type": "string" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },

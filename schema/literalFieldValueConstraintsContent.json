@@ -5,6 +5,8 @@
         "requiredValue": { "type": "boolean" },
         "minLength": { "type": "string" },
         "maxLength": { "type": "string" },
+        "minValue": { "type": "string" },
+        "maxValue": { "type": "string" },
         "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
         "valueSets": {  "$ref": "file:valueConstraintsValueSetsFieldContent.json" },
         "classes": {  "$ref": "file:valueConstraintsClassesFieldContent.json" },
