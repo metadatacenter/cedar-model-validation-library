@@ -38,6 +38,9 @@
     ],
     "propertyLabels": {
       "quantity": "Quantity"
+    },
+    "propertyDescriptions": {
+      "quantity": "Enter the quantity"
     }
   },
   "properties": {
@@ -200,7 +203,8 @@
           "value",
           "unitOfMeasurement"
         ],
-        "propertyLabels": {}
+        "propertyLabels": {},
+        "propertyDescriptions": {}
       },
       "properties": {
         "@context": {

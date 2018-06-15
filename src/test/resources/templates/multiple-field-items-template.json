@@ -37,7 +37,8 @@
       "studyName",
       "topics"
     ],
-    "propertyLabels": {}
+    "propertyLabels": {},
+    "propertyDescriptions": {}
   },
   "properties": {
     "@context": {
