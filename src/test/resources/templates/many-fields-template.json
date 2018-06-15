@@ -37,7 +37,8 @@
       "studyName",
       "disease"
     ],
-    "propertyLabels": {}
+    "propertyLabels": {},
+    "propertyDescriptions": {}
   },
   "properties": {
     "@context": {

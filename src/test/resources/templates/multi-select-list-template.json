@@ -36,7 +36,8 @@
     "order": [
       "selectTheOptions"
     ],
-    "propertyLabels": {}
+    "propertyLabels": {},
+    "propertyDescriptions": {}
   },
   "properties": {
     "@context": {

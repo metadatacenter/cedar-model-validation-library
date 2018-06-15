@@ -41,7 +41,10 @@
     "propertyLabels": {
       "exportGood": "Export Good",
       "importGood": "Import Good"
-    }
+    },
+    "propertyDescriptions": {
+      "exportGood": "Enter the export goods",
+      "importGood": "Enter the import goods"}
   },
   "properties": {
     "@context": {
@@ -384,6 +387,9 @@
         ],
         "propertyLabels": {
           "quantity": "Quantity"
+        },
+        "propertyDescriptions": {
+          "quantity": "Enter the quantity"
         }
       },
       "properties": {
@@ -824,6 +830,9 @@
         ],
         "propertyLabels": {
           "quantity": "Quantity"
+        },
+        "propertyDescriptions": {
+          "quantity": "Enter the quantity"
         }
       },
       "properties": {

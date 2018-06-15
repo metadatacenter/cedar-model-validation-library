@@ -36,7 +36,8 @@
     "order": [
       "study:name"
     ],
-    "propertyLabels": {}
+    "propertyLabels": {},
+    "propertyDescriptions": {}
   },
   "properties": {
     "@context": {

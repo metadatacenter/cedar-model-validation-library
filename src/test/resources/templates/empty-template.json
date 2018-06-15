@@ -34,7 +34,8 @@
   "_ui": {
     "pages": [],
     "order": [],
-    "propertyLabels": {}
+    "propertyLabels": {},
+    "propertyDescriptions": {}
   },
   "properties": {
     "@context": {
