@@ -24,6 +24,7 @@ definitions:
   - userSpecifiedFields.json
   - stringArray.json
   - propertyLabelContent.json
+  - propertyDescriptionContent.json
   - templateContextPropertiesFieldContent.json
   - rdfsContextPropertiesContent.json
   - xsdContextPropertiesContent.json
