@@ -34,8 +34,8 @@
   },
   "_valueConstraints": {
     "requiredValue": false,
-    "minLength": "10",
-    "maxLength": "100"
+    "minLength": 10,
+    "maxLength": 100
   },
   "properties": {
     "@type": {

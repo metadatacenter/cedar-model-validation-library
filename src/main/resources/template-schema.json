@@ -1022,8 +1022,8 @@
             "type": "object",
             "properties": {
                 "requiredValue": { "type": "boolean" },
-                "minLength": { "type": "string" },
-                "maxLength": { "type": "string" },
+                "minLength": { "type": "integer" },
+                "maxLength": { "type": "integer" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
