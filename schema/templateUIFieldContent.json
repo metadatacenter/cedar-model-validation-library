@@ -4,7 +4,8 @@
     "properties": {
         "order": { "$ref": "file:stringArray.json" },
         "pages": { "$ref": "file:stringArray.json" },
-        "propertyLabels": { "$ref": "file:propertyLabelContent.json" }
+        "propertyLabels": { "$ref": "file:propertyLabelContent.json" },
+        "propertyDescriptions": { "$ref": "file:propertyDescriptionContent.json" }
     },
     "required": [ "order", "pages", "propertyLabels" ],
     "additionalProperties": false

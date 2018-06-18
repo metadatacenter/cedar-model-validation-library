@@ -39,6 +39,9 @@
     ],
     "propertyLabels": {
       "participants": "Participants"
+    },
+    "propertyDescriptions": {
+      "participants": "Enter the participating parties"
     }
   },
   "properties": {
@@ -379,7 +382,8 @@
             "lastName",
             "title"
           ],
-          "propertyLabels": {}
+          "propertyLabels": {},
+          "propertyDescriptions": {}
         },
         "properties": {
           "@context": {

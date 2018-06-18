@@ -38,7 +38,8 @@
       "lastName",
       "title"
     ],
-    "propertyLabels": {}
+    "propertyLabels": {},
+    "propertyDescriptions": {}
   },
   "properties": {
     "@context": {
