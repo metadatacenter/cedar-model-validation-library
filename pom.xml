@@ -1,15 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
- <parent>
+  <parent>
     <groupId>org.metadatacenter</groupId>
     <artifactId>cedar-parent</artifactId>
-    <version>1.8.8</version>
+    <version>1.8.9</version>
   </parent>
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>1.8.8</version>
+  <version>1.8.9</version>
   <name>CEDAR Model Validation Library</name>
   <description>Library for validating CEDAR artifacts</description>
 
@@ -20,7 +20,7 @@
     <connection>scm:git:git@github.com:metadatacenter/cedar-model-validation-library.git</connection>
     <developerConnection>scm:git:git@github.com:metadatacenter/cedar-model-validation-library.git</developerConnection>
     <url>https://github.com/metadatacenter/cedar-model-validation-library</url>
-    <tag>release-1.8.8</tag>
+    <tag>release-1.8.9</tag>
   </scm>
 
   <dependencies>
@@ -43,6 +43,11 @@
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
     </dependency>
 
     <dependency>
