@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.metadatacenter</groupId>
     <artifactId>cedar-parent</artifactId>
-    <version>1.9.10</version>
+    <version>1.8.11-SNAPSHOT</version>
   </parent>
 
   <groupId>org.metadatacenter</groupId>
@@ -20,7 +20,7 @@
     <connection>scm:git:git@github.com:metadatacenter/cedar-model-validation-library.git</connection>
     <developerConnection>scm:git:git@github.com:metadatacenter/cedar-model-validation-library.git</developerConnection>
     <url>https://github.com/metadatacenter/cedar-model-validation-library</url>
-    <tag>HEAD</tag>
+    <tag>release-1.9.0</tag>
   </scm>
 
   <dependencies>
