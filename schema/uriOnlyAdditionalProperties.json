@@ -1,0 +1,14 @@
+{
+  "description": "Schema describing the restriction of 'additionalProperties' that must have a URI string",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string", "enum": [ "string" ]
+    },
+    "format": {
+      "type": "string", "enum": [ "uri" ]
+    }
+  },
+  "required": [ "type", "format" ],
+  "additionalProperties": false
+}

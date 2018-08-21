@@ -135,7 +135,11 @@ public class CedarValidator implements ModelValidator {
     if (isSingleValuedTemplateField(fieldNode)) {
       validateNodeStructureAgainstSingleValuedFieldSchema(fieldNode, currentLocation);
     } else if (isMultiValuedTemplateField(fieldNode)) {
-      validateNodeStructureAgainstMultiValuedFieldSchema(fieldNode, currentLocation);
+      if (isAttributeValue(fieldNode)) {
+        validateNodeStructureAgainstAttributeValueFieldSchema(fieldNode, currentLocation);
+      } else {
+        validateNodeStructureAgainstMultiValuedFieldSchema(fieldNode, currentLocation);
+      }
     } else if (isStaticValuedTemplateField(fieldNode)) {
       validateNodeStructureAgainstStaticValuedFieldSchema(fieldNode, currentLocation);
     } else {
@@ -238,6 +242,11 @@ public class CedarValidator implements ModelValidator {
   private void validateNodeStructureAgainstStaticValuedFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
       throws CedarModelValidationException, IOException {
     validateArtifact(SchemaResources.STATIC_VALUED_FIELD_SCHEMA, fieldNode, currentLocation);
+  }
+
+  private void validateNodeStructureAgainstAttributeValueFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
+      throws CedarModelValidationException, IOException {
+    validateArtifact(SchemaResources.ATTRIBUTE_VALUE_FIELD_SCHEMA, fieldNode, currentLocation);
   }
 
   private void validateArtifact(String schemaResourceLocation, JsonNode artifactNode, JsonPointer currentLocation)
@@ -447,6 +456,14 @@ public class CedarValidator implements ModelValidator {
 
   private static boolean isMultiValuedTemplateField(JsonNode memberNode) {
     return memberNode.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_ARRAY);
+  }
+
+  private static boolean isAttributeValue(JsonNode memberNode) {
+    return memberNode.path(JSON_SCHEMA_ITEMS)
+        .path(CedarModelVocabulary.UI)
+        .path(CedarModelVocabulary.INPUT_TYPE)
+        .asText()
+        .equals("attribute-value");
   }
 
   private static String getPropertiesMemberPath(String fieldName) {

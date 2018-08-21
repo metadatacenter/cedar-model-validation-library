@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Schema that describes the attribute-value template field",
+  "type": "object",
+  "properties": {
+    "type": { "type": "string", "enum": [ "array" ] },
+    "minItems": { "type": "integer", "minimum": 0 },
+    "items": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "format": "uri",
+          "enum": [ "http://json-schema.org/draft-04/schema#" ]
+        },
+        "@id": {
+          "type": [ "string", "null" ], "format": "uri"
+        },
+        "@type": {
+          "type": "string",
+          "format": "uri",
+          "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
+        },
+        "@context": {
+          "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
+        },
+        "type": {
+          "type": "string", "enum": [ "string" ]
+        },
+        "title": {
+          "type": "string", "minLength": 1
+        },
+        "description": {
+          "type": "string", "minLength": 1
+        },
+        "_ui": {
+          "type": "object",
+          "properties": {
+            "inputType": {
+              "type": "string",
+              "enum": [ "attribute-value" ]
+            }
+          },
+          "required": [ "inputType" ],
+          "additionalProperties": false
+        },
+        "schema:name": {
+          "type": "string", "minLength": 1
+        },
+        "schema:description": {
+          "type": "string"
+        },
+        "pav:createdOn": {
+          "type": [ "string", "null" ], "format": "date-time"
+        },
+        "pav:createdBy":  {
+          "type": [ "string", "null" ], "format": "uri"
+        },
+        "pav:lastUpdatedOn":  {
+          "type": [ "string", "null" ], "format": "date-time"
+        },
+        "oslc:modifiedBy": {
+          "type": [ "string", "null" ], "format": "uri"
+        },
+        "additionalProperties": {
+          "type": "boolean", "enum": [ false ]
+        },
+        "schema:schemaVersion": {
+          "type": "string", "minLength": 1
+        }
+      },
+      "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type",
+        "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+        "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
+    }
+  },
+  "required": [ "type", "minItems", "items" ]
+}

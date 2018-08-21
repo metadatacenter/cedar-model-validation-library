@@ -1,0 +1,9 @@
+base: attributeValueTemplateField.json
+definitions:
+  - templateFieldJSONLDContextFieldContent.json
+  - schemaNameContextFieldContent.json
+  - schemaDescriptionContextFieldContent.json
+  - pavCreatedOnContextFieldContent.json
+  - pavCreatedByContextFieldContent.json
+  - pavLastUpdatedOnContextFieldContent.json
+  - oslcModifiedByContextFieldContent.json

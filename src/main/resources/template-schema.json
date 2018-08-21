@@ -60,8 +60,10 @@
             "type": [ "string", "null" ], "format": "uri"
         },
         "additionalProperties": {
-            "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
-            "type": "boolean", "enum": [ false ]
+          "oneOf": [
+            { "$ref": "#/definitions/falseOnlyAdditionalProperties" },
+            { "$ref": "#/definitions/defaultObjectSchemaAdditionalProperties" }
+          ]
         },
         "schema:schemaVersion": {
             "type": "string", "minLength": 1
@@ -205,7 +207,12 @@
                 "type": { "type": "string", "enum": [ "object" ] },
                 "properties": { "$ref": "#/definitions/templateContextPropertiesFieldContent" },
                 "required": { "$ref": "#/definitions/stringArray" },
-                "additionalProperties": { "type": "boolean", "enum": [ false ] }
+                "additionalProperties": {
+                  "oneOf": [
+                    { "$ref": "#/definitions/falseOnlyAdditionalProperties" },
+                    { "$ref": "#/definitions/uriOnlyAdditionalProperties" }
+                  ]
+                }
             },
             "required": [ "type", "properties", "additionalProperties" ],
             "additionalProperties": false
@@ -331,9 +338,88 @@
                 { "$ref": "#/definitions/singleValuedTemplateField" },
                 { "$ref": "#/definitions/multiValuedTemplateField" },
                 { "$ref": "#/definitions/staticValuedTemplateField" },
+                { "$ref": "#/definitions/attributeValueTemplateField" },
                 { "$ref": "#/definitions/templateElement" },
                 { "$ref": "#/definitions/templateFieldOrElementArray" }
             ]
+        },
+        "attributeValueTemplateField": {
+          "$schema": "http://json-schema.org/draft-04/schema#",
+          "description": "Schema that describes the attribute-value template field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "array" ] },
+            "minItems": { "type": "integer", "minimum": 0 },
+            "items": {
+              "type": "object",
+              "properties": {
+                "$schema": {
+                  "type": "string",
+                  "format": "uri",
+                  "enum": [ "http://json-schema.org/draft-04/schema#" ]
+                },
+                "@id": {
+                  "type": [ "string", "null" ], "format": "uri"
+                },
+                "@type": {
+                  "type": "string",
+                  "format": "uri",
+                  "enum": [ "https://schema.metadatacenter.org/core/TemplateField" ]
+                },
+                "@context": {
+                  "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
+                },
+                "type": {
+                  "type": "string", "enum": [ "string" ]
+                },
+                "title": {
+                  "type": "string", "minLength": 1
+                },
+                "description": {
+                  "type": "string", "minLength": 1
+                },
+                "_ui": {
+                  "type": "object",
+                  "properties": {
+                    "inputType": {
+                      "type": "string",
+                      "enum": [ "attribute-value" ]
+                    }
+                  },
+                  "required": [ "inputType" ],
+                  "additionalProperties": false
+                },
+                "schema:name": {
+                  "type": "string", "minLength": 1
+                },
+                "schema:description": {
+                  "type": "string"
+                },
+                "pav:createdOn": {
+                  "type": [ "string", "null" ], "format": "date-time"
+                },
+                "pav:createdBy":  {
+                  "type": [ "string", "null" ], "format": "uri"
+                },
+                "pav:lastUpdatedOn":  {
+                  "type": [ "string", "null" ], "format": "date-time"
+                },
+                "oslc:modifiedBy": {
+                  "type": [ "string", "null" ], "format": "uri"
+                },
+                "additionalProperties": {
+                  "type": "boolean", "enum": [ false ]
+                },
+                "schema:schemaVersion": {
+                  "type": "string", "minLength": 1
+                }
+              },
+              "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type",
+                "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+                "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
+            }
+          },
+          "required": [ "type", "minItems", "items" ]
         },
         "stringArray": {
             "description": "Schema that describes the schema of a possibly-empty string array",
@@ -1086,8 +1172,10 @@
                     "type": [ "string", "null" ], "format": "uri"
                 },
                 "additionalProperties": {
-                    "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
-                    "type": "boolean", "enum": [ false ]
+                  "oneOf": [
+                    { "$ref": "#/definitions/falseOnlyAdditionalProperties" },
+                    { "$ref": "#/definitions/defaultObjectSchemaAdditionalProperties" }
+                  ]
                 },
                 "schema:schemaVersion": {
                     "type": "string", "minLength": 1
@@ -1116,7 +1204,12 @@
                 "type": { "type": "string", "enum": [ "object" ] },
                 "properties": { "$ref": "#/definitions/templateElementContextPropertiesFieldContent" },
                 "required": { "$ref": "#/definitions/stringArray" },
-                "additionalProperties": { "type": "boolean", "enum": [ false ] }
+                "additionalProperties": {
+                  "oneOf": [
+                    { "$ref": "#/definitions/falseOnlyAdditionalProperties" },
+                    { "$ref": "#/definitions/uriOnlyAdditionalProperties" }
+                  ]
+                }
             },
             "required": [ "type", "properties", "additionalProperties" ],
             "additionalProperties": false
@@ -1408,6 +1501,62 @@
             "description": "Schema that describes the schema of the 'valueSets.exclusions' field in a '_valueConstraints' field",
             "type": "array", "uniqueItems": true,
             "items": { "type": "string", "format": "uri" }
+        },
+        "falseOnlyAdditionalProperties": {
+          "description": "Schema describing the restriction of 'additionalProperties' that must have a false value",
+          "type": "boolean", "enum": [ false ]
+        },
+        "uriOnlyAdditionalProperties": {
+          "description": "Schema describing the restriction of 'additionalProperties' that must have a URI string",
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string", "enum": [ "string" ]
+            },
+            "format": {
+              "type": "string", "enum": [ "uri" ]
+            }
+          },
+          "required": [ "type", "format" ],
+          "additionalProperties": false
+        },
+        "defaultObjectSchemaAdditionalProperties": {
+          "description": "Schema that describes the schema of an 'additionalProperties' field that has attribute-value field",
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string", "enum": [ "object" ]
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string", "enum": [ "string" ]
+                    },
+                    "format": {
+                      "type": "string", "enum": [ "uri" ]
+                    }
+                  },
+                  "required": [ "type", "format" ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [ "@value", "@type" ],
+              "additionalProperties": false
+            },
+            "required": {
+              "$ref": "#/definitions/stringArray"
+            },
+            "additionalProperties": {
+              "type": "boolean", "enum": [ false ]
+            }
+          },
+          "required": [ "type", "properties", "required", "additionalProperties" ],
+          "additionalProperties": false
         }
     }
 }

@@ -168,6 +168,16 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassAttributeValueField() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/attribute-value-field.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassSectionBreak() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/section-break.json");

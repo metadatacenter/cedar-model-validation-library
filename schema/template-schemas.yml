@@ -22,6 +22,7 @@ definitions:
   - pavLastUpdatedOnFieldContent.json
   - oslcModifiedByFieldContent.json
   - templateFieldOrElementOrArrayOfFieldOrElement.json
+  - attributeValueTemplateField.json
   - stringArray.json
   - propertyLabelContent.json
   - propertyDescriptionContent.json
@@ -80,3 +81,6 @@ definitions:
   - arrayAndNullTypeContent.json
   - valueConstraintsOntologiesExclusionsFieldContent.json
   - valueConstraintsValueSetsExclusionsFieldContent.json
+  - falseOnlyAdditionalProperties.json
+  - uriOnlyAdditionalProperties.json
+  - defaultObjectSchemaAdditionalProperties.json

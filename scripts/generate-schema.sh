@@ -31,4 +31,7 @@ echo -n "Generating the multi-valued field schema... "
 echo -n "Generating the static-valued field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/static-valued-field-schemas.yml ${RESOURCES_DIR}/static-valued-field-schema.json
 
+echo -n "Generating the attribute value field schema... "
+./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/attribute-value-field-schemas.yml ${RESOURCES_DIR}/attribute-value-field-schema.json
+
 echo ""

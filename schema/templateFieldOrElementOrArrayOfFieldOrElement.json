@@ -4,6 +4,7 @@
         { "$ref": "file:singleValuedTemplateField.json" },
         { "$ref": "file:multiValuedTemplateField.json" },
         { "$ref": "file:staticValuedTemplateField.json" },
+        { "$ref": "file:attributeValueTemplateField.json" },
         { "$ref": "file:templateElement.json" },
         { "$ref": "file:templateFieldOrElementArray.json" }
     ]
