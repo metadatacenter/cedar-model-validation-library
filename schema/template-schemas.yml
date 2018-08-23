@@ -52,7 +52,8 @@ definitions:
   - objectFieldUIContent.json
   - objectFieldValueConstraintsContent.json
   - objectFieldPropertiesContent.json
-  - multiEntriesFieldUIContent.json
+  - attributeValueTemplateField.json
+  - checkBoxTemplateField.json
   - multiEntriesFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json
@@ -83,3 +84,6 @@ definitions:
   - arrayAndNullTypeContent.json
   - valueConstraintsOntologiesExclusionsFieldContent.json
   - valueConstraintsValueSetsExclusionsFieldContent.json
+  - falseOnlyAdditionalProperties.json
+  - uriOnlyAdditionalProperties.json
+  - defaultObjectSchemaAdditionalProperties.json

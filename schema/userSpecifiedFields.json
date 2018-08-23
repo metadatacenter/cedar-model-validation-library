@@ -4,6 +4,7 @@
         { "$ref": "file:literalTemplateField.json" },
         { "$ref": "file:objectTemplateField.json" },
         { "$ref": "file:staticTemplateField.json" },
+        { "$ref": "file:multiEntriesTemplateField.json" },
         { "$ref": "file:templateElement.json" },
         { "$ref": "file:multipleTemplateFieldsOrElements.json" }
     ]

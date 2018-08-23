@@ -3,8 +3,8 @@ package org.metadatacenter.model.validation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 public class TemplateFieldValidationTest extends BaseValidationTest {
@@ -181,6 +181,16 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   public void shouldPassConstrainedTextField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/constrained-text-field.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassAttributeValueField() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/attribute-value-field.json");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert

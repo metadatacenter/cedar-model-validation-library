@@ -42,6 +42,8 @@ public class CedarValidator implements ModelValidator {
 
   private static final String INPUT_TYPE_LINK = "link";
   private static final String INPUT_TYPE_CONTROLLED_TERM = "controlled-term";
+  private static final String INPUT_TYPE_ATTRIBUTE_VALUE = "attribute-value";
+  private static final String INPUT_TYPE_CHECK_BOX = "checkbox";
 
   private final JsonPointer startingLocation;
 
@@ -54,7 +56,6 @@ public class CedarValidator implements ModelValidator {
     this.startingLocation = JsonPointer.compile(startingLocation);
   }
 
-  @Override
   public ValidationReport validateTemplate(JsonNode templateNode) throws IOException {
     CedarValidationReport report = CedarValidationReport.newEmptyReport();
     try {
@@ -65,7 +66,6 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
-  @Override
   public ValidationReport validateTemplateElement(JsonNode elementNode) throws IOException {
     CedarValidationReport report = CedarValidationReport.newEmptyReport();
     try {
@@ -76,7 +76,6 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
-  @Override
   public ValidationReport validateTemplateField(JsonNode fieldNode) throws IOException {
     CedarValidationReport report = CedarValidationReport.newEmptyReport();
     try {
@@ -87,7 +86,6 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
-  @Override
   public ValidationReport validateTemplateInstance(JsonNode templateInstance, JsonNode instanceSchema)
       throws IOException {
     CedarValidationReport report = CedarValidationReport.newEmptyReport();
@@ -149,14 +147,34 @@ public class CedarValidator implements ModelValidator {
 
   private void validateUserSpecifiedField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    if (canHaveMultipleValues(fieldNode)) {
-      fieldNode = fieldNode.get(JSON_SCHEMA_ITEMS);
-      location = createJsonPointer(location, "/items");
-    }
-    if (isTemplateElement(fieldNode)) {
-      checkUserSpecifiedFieldsRecursively(fieldNode, location);
+    if (isMultiEntriesTemplateField(fieldNode)) {
+      validateMultiEntriesTemplateField(fieldNode, location);
     } else {
-      validateTemplateField(fieldNode, location);
+      if (isUsingMultipleOption(fieldNode)) {
+        validateFieldWithMultipleOption(fieldNode, location);
+      } else {
+        validateFieldWithoutMultipleOption(fieldNode, location);
+      }
+    }
+  }
+
+  private void validateFieldWithMultipleOption(JsonNode fieldNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    JsonNode resourceNode = fieldNode.get(JSON_SCHEMA_ITEMS);
+    JsonPointer newLocation = createJsonPointer(location, "/items");
+    if (isTemplateElement(resourceNode)) {
+      checkUserSpecifiedFieldsRecursively(resourceNode, newLocation);
+    } else {
+      validateTemplateField(resourceNode, newLocation);
+    }
+  }
+
+  private void validateFieldWithoutMultipleOption(JsonNode resourceNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    if (isTemplateElement(resourceNode)) {
+      checkUserSpecifiedFieldsRecursively(resourceNode, location);
+    } else {
+      validateTemplateField(resourceNode, location);
     }
   }
 
@@ -169,21 +187,21 @@ public class CedarValidator implements ModelValidator {
     }
   }
 
-  private void validateTemplate(JsonNode templateNode, JsonPointer currentLocation)
+  private void validateTemplate(JsonNode templateNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.TEMPLATE_SCHEMA, templateNode, currentLocation);
+    validateResource(SchemaResources.TEMPLATE_SCHEMA, templateNode, location);
   }
 
-  private void validateTemplateElement(JsonNode templateElementNode, JsonPointer currentLocation)
+  private void validateTemplateElement(JsonNode templateElementNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.ELEMENT_SCHEMA, templateElementNode, currentLocation);
+    validateResource(SchemaResources.ELEMENT_SCHEMA, templateElementNode, location);
   }
 
   private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
     if (isStaticTemplateField(fieldNode)) {
       validateStaticTemplateField(fieldNode, location);
-    } else if (isMultiEntriesTemplateField(fieldNode)) { // e.g., checkboxes
+    } else if (isMultiEntriesTemplateField(fieldNode)) {
       validateMultiEntriesTemplateField(fieldNode, location);
     } else {
       validateNonStaticTemplateField(fieldNode, location);
@@ -192,7 +210,7 @@ public class CedarValidator implements ModelValidator {
 
   private void validateNonStaticTemplateField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    if (isObjectTyped(fieldNode)) {
+    if (isObjectType(fieldNode)) {
       validateResource(SchemaResources.OBJECT_FIELD_SCHEMA, fieldNode, location);
     } else {
       validateResource(SchemaResources.LITERAL_FIELD_SCHEMA, fieldNode, location);
@@ -295,18 +313,30 @@ public class CedarValidator implements ModelValidator {
   }
 
   private static boolean isMultiEntriesTemplateField(JsonNode resourceNode) {
-    return canHaveMultipleValues(resourceNode);
+    if (isTypedArray(resourceNode)) {
+      JsonNode fieldNode = resourceNode.get(JSON_SCHEMA_ITEMS);
+      if (fieldNode.has(CedarModelVocabulary.UI)) {
+        JsonNode uiNode = fieldNode.get(CedarModelVocabulary.UI);
+        String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();
+        return inputType.equals(INPUT_TYPE_CHECK_BOX) || inputType.equals(INPUT_TYPE_ATTRIBUTE_VALUE);
+      }
+    }
+    return false;
+  }
+
+  private static boolean isUsingMultipleOption(JsonNode resourceNode) {
+    return isTypedArray(resourceNode);
+  }
+
+  private static boolean isTypedArray(JsonNode node) {
+    return node.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_ARRAY);
   }
 
   private static String getFieldPath(String fieldName) {
     return String.format("/%s/%s", JSON_SCHEMA_PROPERTIES, fieldName);
   }
 
-  private static boolean canHaveMultipleValues(JsonNode node) {
-    return node.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_ARRAY);
-  }
-
-  private static boolean isObjectTyped(JsonNode node) {
+  private static boolean isObjectType(JsonNode node) {
     if (node.has(CedarModelVocabulary.UI)) {
       JsonNode uiNode = node.get(CedarModelVocabulary.UI);
       String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();

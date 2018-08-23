@@ -34,4 +34,4 @@ echo -n "Generating the multi-entries field schema... "
 echo -n "Generating the static field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/static-field-schemas.yml ${RESOURCES_DIR}/static-field-schema.json
 
-echo ""
+echo""

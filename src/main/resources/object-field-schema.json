@@ -134,7 +134,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "link" ]
+                    "enum": [ "link", "controlled-term" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },

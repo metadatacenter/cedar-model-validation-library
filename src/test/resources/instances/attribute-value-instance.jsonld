@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "pav": "http://purl.org/pav/",
+    "schema": "http://schema.org/",
+    "oslc": "http://open-services.net/ns/core#",
+    "rdfs:label": {
+      "@type": "xsd:string"
+    },
+    "schema:isBasedOn": {
+      "@type": "@id"
+    },
+    "schema:name": {
+      "@type": "xsd:string"
+    },
+    "schema:description": {
+      "@type": "xsd:string"
+    },
+    "pav:createdOn": {
+      "@type": "xsd:dateTime"
+    },
+    "pav:createdBy": {
+      "@type": "@id"
+    },
+    "pav:lastUpdatedOn": {
+      "@type": "xsd:dateTime"
+    },
+    "oslc:modifiedBy": {
+      "@type": "@id"
+    },
+    "Name": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce55",
+    "Sample number": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce56",
+    "Study location": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce57"
+  },
+  "Name": {
+    "@value": "Study Result"
+  },
+  "Additional Information": [
+    "Sample number",
+    "Study location"
+  ],
+  "Sample number": {
+    "@value": "100"
+  },
+  "Study location": {
+    "@value": "USA"
+  },
+  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/5830ac43-64f2-4c0c-adf9-d45114401a22",
+  "schema:name": "Attribute Name metadata",
+  "schema:description": "",
+  "pav:createdOn": "2018-08-21T15:25:00-0700",
+  "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
+  "pav:lastUpdatedOn": "2018-08-21T15:25:00-0700",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
+  "@id": "https://repo.metadatacenter.orgx/template-instances/e5ef7626-02fc-4b36-aa05-b5e84725fdde"
+}

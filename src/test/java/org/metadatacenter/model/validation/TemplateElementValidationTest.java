@@ -58,6 +58,16 @@ public class TemplateElementValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassAttributeValueElement() {
+    // Arrange
+    String elementString = TestResourcesUtils.getStringContent("elements/attribute-value-element.json");
+    // Act
+    ValidationReport validationReport = runValidation(elementString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldFailMissingContext() {
     // Arrange
     String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
