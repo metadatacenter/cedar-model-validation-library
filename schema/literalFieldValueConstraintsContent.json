@@ -1,16 +1,20 @@
 {
-    "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-valued template field",
+    "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
     "type": "object",
     "properties": {
+        "requiredValue": { "type": "boolean" },
+        "minLength": { "type": "integer" },
+        "maxLength": { "type": "integer" },
+        "minValue": { "type": "number" },
+        "maxValue": { "type": "number" },
         "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
         "valueSets": {  "$ref": "file:valueConstraintsValueSetsFieldContent.json" },
         "classes": {  "$ref": "file:valueConstraintsClassesFieldContent.json" },
         "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
         "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
-        "requiredValue": { "type": "boolean" },
-        "multipleChoice": { "type": "boolean", "enum": [ true ] },
+        "multipleChoice": { "type": "boolean" },
         "defaultValue": { "type": "string" }
     },
-    "required": [ "requiredValue", "multipleChoice" ],
+    "required": [ "requiredValue" ],
     "additionalProperties": false
 }

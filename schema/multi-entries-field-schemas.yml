@@ -1,9 +1,10 @@
-base: multiValuedTemplateField.json
+base: multiEntriesTemplateField.json
 definitions:
-  - multiValuedUIFieldContent.json
-  - multiValuedValueConstraintsFieldContent.json
+  - attributeValueTemplateField.json
+  - checkBoxTemplateField.json
+  - multiEntriesFieldValueConstraintsContent.json
   - templateFieldJSONLDContextFieldContent.json
-  - templateFieldValuePropertiesContent.json
+  - literalFieldPropertiesContent.json
   - stringArray.json
   - valueConstraintsOntologiesFieldContent.json
   - valueConstraintsValueSetsFieldContent.json

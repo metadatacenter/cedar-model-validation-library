@@ -33,7 +33,9 @@
     "inputType": "textfield"
   },
   "_valueConstraints": {
-    "requiredValue": false
+    "requiredValue": false,
+    "minLength": 10,
+    "maxLength": 100
   },
   "properties": {
     "@type": {
@@ -52,10 +54,6 @@
           "uniqueItems": true
         }
       ]
-    },
-    "@id": {
-      "type": "string",
-      "format": "uri"
     },
     "@value": {
       "type": [

@@ -22,32 +22,36 @@ definitions:
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json
   - oslcModifiedByFieldContent.json
-  - templateFieldOrElementOrArrayOfFieldOrElement.json
+  - userSpecifiedFields.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - templateElementContextPropertiesFieldContent.json
   - pavContextPropertiesContent.json
   - oslcContextPropertiesContent.json
   - userFieldContextPropertiesContent.json
-  - singleValuedTemplateField.json
-  - multiValuedTemplateField.json
-  - staticValuedTemplateField.json
-  - singleValuedUIFieldContent.json
-  - singleValuedValueConstraintsFieldContent.json
-  - multiValuedUIFieldContent.json
-  - multiValuedValueConstraintsFieldContent.json
-  - staticValuedUIFieldContent.json
+  - literalTemplateField.json
+  - literalFieldUIContent.json
+  - literalFieldValueConstraintsContent.json
+  - literalFieldPropertiesContent.json
+  - objectTemplateField.json
+  - objectFieldUIContent.json
+  - objectFieldValueConstraintsContent.json
+  - objectFieldPropertiesContent.json
+  - multiEntriesTemplateField.json
+  - staticTemplateField.json
+  - attributeValueTemplateField.json
+  - checkBoxTemplateField.json
+  - multiEntriesFieldValueConstraintsContent.json
+  - staticFieldUIContent.json
   - templateElement.json
-  - templateFieldOrElementArray.json
+  - multipleTemplateFieldsOrElements.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
   - numberAndNullTypeContent.json
   - arrayAndNullTypeContent.json
-  - templateFieldSingleValueContent.json
   - singleURIArray.json
   - arrayOfURIs.json
   - templateFieldJSONLDContextFieldContent.json
-  - templateFieldValuePropertiesContent.json
   - valueConstraintsOntologiesFieldContent.json
   - valueConstraintsValueSetsFieldContent.json
   - valueConstraintsClassesFieldContent.json
@@ -61,3 +65,6 @@ definitions:
   - valueConstraintsLiteralsFieldItemContent.json
   - valueConstraintsOntologiesExclusionsFieldContent.json
   - valueConstraintsValueSetsExclusionsFieldContent.json
+  - falseOnlyAdditionalProperties.json
+  - uriOnlyAdditionalProperties.json
+  - defaultObjectSchemaAdditionalProperties.json

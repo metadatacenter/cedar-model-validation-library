@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jackson.JacksonUtils;
 import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.report.ListProcessingReport;
 import com.github.fge.jsonschema.core.report.LogLevel;
 import com.github.fge.jsonschema.core.report.ProcessingMessage;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
@@ -40,8 +39,11 @@ public class CedarValidator implements ModelValidator {
   private static final String JSON_SCHEMA_ARRAY = "array";
 
   private static final String JSON_LD_TYPE = "@type";
-  private static final String JSON_LD_VALUE = "@value";
-  private static final String JSON_LD_ID = "@id";
+
+  private static final String INPUT_TYPE_LINK = "link";
+  private static final String INPUT_TYPE_CONTROLLED_TERM = "controlled-term";
+  private static final String INPUT_TYPE_ATTRIBUTE_VALUE = "attribute-value";
+  private static final String INPUT_TYPE_CHECK_BOX = "checkbox";
 
   private final JsonPointer startingLocation;
 
@@ -54,7 +56,6 @@ public class CedarValidator implements ModelValidator {
     this.startingLocation = JsonPointer.compile(startingLocation);
   }
 
-  @Override
   public ValidationReport validateTemplate(JsonNode templateNode) throws IOException {
     CedarValidationReport report = CedarValidationReport.newEmptyReport();
     try {
@@ -65,7 +66,6 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
-  @Override
   public ValidationReport validateTemplateElement(JsonNode elementNode) throws IOException {
     CedarValidationReport report = CedarValidationReport.newEmptyReport();
     try {
@@ -76,7 +76,6 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
-  @Override
   public ValidationReport validateTemplateField(JsonNode fieldNode) throws IOException {
     CedarValidationReport report = CedarValidationReport.newEmptyReport();
     try {
@@ -87,7 +86,6 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
-  @Override
   public ValidationReport validateTemplateInstance(JsonNode templateInstance, JsonNode instanceSchema)
       throws IOException {
     CedarValidationReport report = CedarValidationReport.newEmptyReport();
@@ -99,191 +97,140 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
-  private static void doValidation(JsonNode schemaNode, JsonNode instanceNode, JsonPointer currentLocation) throws
+  private static void doValidation(JsonNode schemaNode, JsonNode instanceNode, JsonPointer location) throws
       CedarModelValidationException {
     try {
       JsonSchema schema = JsonSchemaFactory.byDefault().getJsonSchema(schemaNode);
       ProcessingReport processingReport = schema.validate(instanceNode, false);
       if (!processingReport.isSuccess()) {
-        throw newCedarModelValidationException(processingReport, currentLocation);
+        throw newCedarModelValidationException(processingReport, location);
       }
     } catch (ProcessingException e) {
       throw newCedarModelValidationException(e.getProcessingMessage());
     }
   }
 
-  private void doTemplateValidation(JsonNode templateNode, JsonPointer currentLocation)
+  private void doTemplateValidation(JsonNode templateNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateNodeStructureAgainstTemplateSchema(templateNode, currentLocation);
-    checkUserSpecifiedPropertiesMemberFields(templateNode, currentLocation);
+    validateTemplate(templateNode, location);
+    checkUserSpecifiedFieldsRecursively(templateNode, location);
   }
 
-  private void doElementValidation(JsonNode elementNode, JsonPointer currentLocation)
+  private void doElementValidation(JsonNode elementNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateNodeStructureAgainstElementSchema(elementNode, currentLocation);
-    checkUserSpecifiedPropertiesMemberFields(elementNode, currentLocation);
+    validateTemplateElement(elementNode, location);
+    checkUserSpecifiedFieldsRecursively(elementNode, location);
   }
 
-  private void doFieldValidation(JsonNode fieldNode, JsonPointer currentLocation)
+  private void doFieldValidation(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateNodeStructureAgainstFieldSchema(fieldNode, currentLocation);
-    checkCorrectFieldForConstrainedValue(fieldNode, currentLocation);
+    validateNodeStructureAgainstFieldSchema(fieldNode, location);
   }
 
-  private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer currentLocation) throws
-      CedarModelValidationException, IOException {
-    if (isSingleValuedTemplateField(fieldNode)) {
-      validateNodeStructureAgainstSingleValuedFieldSchema(fieldNode, currentLocation);
-    } else if (isMultiValuedTemplateField(fieldNode)) {
-      validateNodeStructureAgainstMultiValuedFieldSchema(fieldNode, currentLocation);
-    } else if (isStaticValuedTemplateField(fieldNode)) {
-      validateNodeStructureAgainstStaticValuedFieldSchema(fieldNode, currentLocation);
-    } else {
-      checkJsonLdTypeNodeExists(fieldNode, currentLocation);
-      checkJsonSchemaTypeNodeExists(fieldNode, currentLocation);
-    }
+  private void doInstanceValidation(JsonNode instanceDocument, JsonNode instanceSchema, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    doValidation(instanceSchema, instanceDocument, location);
   }
 
-  private void doInstanceValidation(JsonNode templateInstance, JsonNode instanceSchema, JsonPointer currentLocation)
+  private void checkUserSpecifiedFieldsRecursively(JsonNode resourceNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    doValidation(instanceSchema, templateInstance, currentLocation);
-  }
-
-  private void checkUserSpecifiedPropertiesMemberFields(JsonNode artifactNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    JsonNode propertiesNode = artifactNode.get(JSON_SCHEMA_PROPERTIES);
+    JsonNode propertiesNode = resourceNode.get(JSON_SCHEMA_PROPERTIES);
     for (Iterator<String> iter = propertiesNode.fieldNames(); iter.hasNext(); ) {
-      String propertiesMemberField = iter.next();
-      if (isUserSpecifiedField(propertiesMemberField)) {
-        JsonNode propertiesMemberNode = propertiesNode.get(propertiesMemberField);
-        JsonPointer propertiesMemberPointer = createJsonPointer(currentLocation, getPropertiesMemberPath
-            (propertiesMemberField));
-        checkPropertiesMemberField(propertiesMemberNode, propertiesMemberPointer);
+      String fieldItem = iter.next();
+      if (isUserSpecifiedField(fieldItem)) {
+        JsonNode fieldNode = propertiesNode.get(fieldItem);
+        JsonPointer fieldLocation = createJsonPointer(location, getFieldPath(fieldItem));
+        validateUserSpecifiedField(fieldNode, fieldLocation);
       }
     }
   }
 
-  private void checkPropertiesMemberField(JsonNode propertiesMemberNode, JsonPointer propertiesMemberPointer)
+  private void validateUserSpecifiedField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    if (isObjectNode(propertiesMemberNode)) {
-      checkAndValidateTemplateOrField(propertiesMemberNode, propertiesMemberPointer);
-    } else if (isArrayNode(propertiesMemberNode)) {
-      JsonNode arrayItem = propertiesMemberNode.get(JSON_SCHEMA_ITEMS);
-      JsonPointer arrayItemPath = createJsonPointer(propertiesMemberPointer, "/items");
-      checkAndValidateTemplateOrField(arrayItem, arrayItemPath);
-    }
-  }
-
-  private void checkAndValidateTemplateOrField(JsonNode propertiesMemberNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    if (isTemplateElement(propertiesMemberNode)) {
-      checkUserSpecifiedPropertiesMemberFields(propertiesMemberNode, currentLocation);
+    if (isMultiEntriesTemplateField(fieldNode)) {
+      validateMultiEntriesTemplateField(fieldNode, location);
     } else {
-      checkCorrectFieldForConstrainedValue(propertiesMemberNode, currentLocation);
-    }
-  }
-
-  private static void checkJsonLdTypeNodeExists(JsonNode node, JsonPointer currentLocation)
-      throws CedarModelValidationException {
-    JsonNode typeNode = node.path(JSON_LD_TYPE);
-    if (typeNode.isMissingNode()) {
-      ProcessingMessage message = createErrorMessage("object has missing required properties (['@type'])");
-      throw newCedarModelValidationException(message, currentLocation);
-    }
-  }
-
-  private static void checkJsonSchemaTypeNodeExists(JsonNode node, JsonPointer currentLocation)
-      throws CedarModelValidationException {
-    JsonNode typeNode = node.path(JSON_SCHEMA_TYPE);
-    if (typeNode.isMissingNode()) {
-      ProcessingMessage message = createErrorMessage("object has missing required properties (['type'])");
-      throw newCedarModelValidationException(message, currentLocation);
-    }
-  }
-
-  private void checkCorrectFieldForConstrainedValue(JsonNode fieldNode, JsonPointer currentPath)
-      throws CedarModelValidationException, IOException {
-    if (isSingleValuedTemplateField(fieldNode)) {
-      JsonNode propertiesNode = fieldNode.get(JSON_SCHEMA_PROPERTIES);
-      JsonPointer propertiesPointer = createJsonPointer(currentPath, "/properties");
-      JsonNode valueConstraintsNode = fieldNode.get(CedarModelVocabulary.VALUE_CONSTRAINTS);
-      if (hasConstraintSources(valueConstraintsNode) || isTypedLink(fieldNode)) {
-        validateConstrainedField(propertiesNode, propertiesPointer);
+      if (isUsingMultipleOption(fieldNode)) {
+        validateFieldWithMultipleOption(fieldNode, location);
       } else {
-        validateNonConstrainedField(propertiesNode, propertiesPointer);
+        validateFieldWithoutMultipleOption(fieldNode, location);
       }
     }
   }
 
-  private void validateNodeStructureAgainstTemplateSchema(JsonNode templateNode, JsonPointer currentLocation)
+  private void validateFieldWithMultipleOption(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateArtifact(SchemaResources.TEMPLATE_SCHEMA, templateNode, currentLocation);
-  }
-
-  private void validateNodeStructureAgainstElementSchema(JsonNode templateElementNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    validateArtifact(SchemaResources.ELEMENT_SCHEMA, templateElementNode, currentLocation);
-  }
-
-  private void validateNodeStructureAgainstSingleValuedFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    validateArtifact(SchemaResources.SINGLE_VALUED_FIELD_SCHEMA, fieldNode, currentLocation);
-  }
-
-  private void validateNodeStructureAgainstMultiValuedFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    validateArtifact(SchemaResources.MULTI_VALUED_FIELD_SCHEMA, fieldNode, currentLocation);
-  }
-
-  private void validateNodeStructureAgainstStaticValuedFieldSchema(JsonNode fieldNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    validateArtifact(SchemaResources.STATIC_VALUED_FIELD_SCHEMA, fieldNode, currentLocation);
-  }
-
-  private void validateArtifact(String schemaResourceLocation, JsonNode artifactNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    final JsonNode jsonSchemaNode = loadSchemaFromFile(schemaResourceLocation);
-    doValidation(jsonSchemaNode, artifactNode, currentLocation);
-  }
-
-  private void validateConstrainedField(JsonNode propertiesNode, JsonPointer currentLocation)
-      throws CedarModelValidationException, IOException {
-    ListProcessingReport errorReport = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
-    try {
-      if (hasBoth(JSON_LD_ID, JSON_LD_VALUE, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has invalid properties (['@value'])");
-        errorReport.error(message);
-      }
-      if (hasMissing(JSON_LD_ID, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has missing required properties (['@id'])");
-        errorReport.error(message);
-      }
-      if (!errorReport.isSuccess()) {
-        throw newCedarModelValidationException(errorReport, currentLocation);
-      }
-    } catch (ProcessingException e) {
-      throw new IOException(e.getMessage(), e);
+    JsonNode resourceNode = fieldNode.get(JSON_SCHEMA_ITEMS);
+    JsonPointer newLocation = createJsonPointer(location, "/items");
+    if (isTemplateElement(resourceNode)) {
+      checkUserSpecifiedFieldsRecursively(resourceNode, newLocation);
+    } else {
+      validateTemplateField(resourceNode, newLocation);
     }
   }
 
-  private void validateNonConstrainedField(JsonNode propertiesNode, JsonPointer currentLocation)
+  private void validateFieldWithoutMultipleOption(JsonNode resourceNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    ListProcessingReport errorReport = new ListProcessingReport(LogLevel.DEBUG, LogLevel.NONE);
-    try {
-      if (hasBoth(JSON_LD_VALUE, JSON_LD_ID, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has invalid properties (['@id'])");
-        errorReport.error(message);
-      }
-      if (hasMissing(JSON_LD_VALUE, propertiesNode)) {
-        ProcessingMessage message = createErrorMessage("object has missing required properties (['@value'])");
-        errorReport.error(message);
-      }
-      if (!errorReport.isSuccess()) {
-        throw newCedarModelValidationException(errorReport, currentLocation);
-      }
-    } catch (ProcessingException e) {
-      throw new IOException(e.getMessage(), e);
+    if (isTemplateElement(resourceNode)) {
+      checkUserSpecifiedFieldsRecursively(resourceNode, location);
+    } else {
+      validateTemplateField(resourceNode, location);
     }
+  }
+
+  private void validateTemplateField(JsonNode fieldNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    if (isStaticTemplateField(fieldNode)) {
+      validateStaticTemplateField(fieldNode, location);
+    } else {
+      validateNonStaticTemplateField(fieldNode, location);
+    }
+  }
+
+  private void validateTemplate(JsonNode templateNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    validateResource(SchemaResources.TEMPLATE_SCHEMA, templateNode, location);
+  }
+
+  private void validateTemplateElement(JsonNode templateElementNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    validateResource(SchemaResources.ELEMENT_SCHEMA, templateElementNode, location);
+  }
+
+  private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    if (isStaticTemplateField(fieldNode)) {
+      validateStaticTemplateField(fieldNode, location);
+    } else if (isMultiEntriesTemplateField(fieldNode)) {
+      validateMultiEntriesTemplateField(fieldNode, location);
+    } else {
+      validateNonStaticTemplateField(fieldNode, location);
+    }
+  }
+
+  private void validateNonStaticTemplateField(JsonNode fieldNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    if (isObjectType(fieldNode)) {
+      validateResource(SchemaResources.OBJECT_FIELD_SCHEMA, fieldNode, location);
+    } else {
+      validateResource(SchemaResources.LITERAL_FIELD_SCHEMA, fieldNode, location);
+    }
+  }
+
+  private void validateMultiEntriesTemplateField(JsonNode fieldNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    validateResource(SchemaResources.MULTI_ENTRIES_FIELD_SCHEMA, fieldNode, location);
+  }
+
+  private void validateStaticTemplateField(JsonNode fieldNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    validateResource(SchemaResources.STATIC_FIELD_SCHEMA, fieldNode, location);
+  }
+
+  private void validateResource(String schemaFile, JsonNode resourceNode, JsonPointer location)
+      throws CedarModelValidationException, IOException {
+    final JsonNode schemaNode = loadSchemaFromFile(schemaFile);
+    doValidation(schemaNode, resourceNode, location);
   }
 
   private void collectErrorMessages(CedarModelValidationException exception, final CedarValidationReport report) {
@@ -295,9 +242,10 @@ public class CedarValidator implements ModelValidator {
         if (messageLevel == LogLevel.ERROR) {
           ParsedProcessingMessage parsedMessage = new ParsedProcessingMessage(processingMessage);
           for (ParsedProcessingMessage.ReportItem reportItem : parsedMessage.getReportItems()) {
-            ErrorItem errorItem = createErrorItem(errorLocation,
+            String errorAbsoluteLocation = createLocation(errorLocation.toString(), reportItem.getLocation());
+            ErrorItem errorItem = createErrorItem(
                 reportItem.getMessage(),
-                reportItem.getLocation(),
+                errorAbsoluteLocation,
                 reportItem.getSchemaResource(),
                 reportItem.getSchemaPointer());
             report.addError(errorItem);
@@ -311,12 +259,10 @@ public class CedarValidator implements ModelValidator {
    * Private helper methods
    */
 
-  private ErrorItem createErrorItem(JsonPointer baseLocation, String message,
-                                    String location, String schemaResource, String
-                                        schemaPointer) {
-    ErrorItem errorItem = new ErrorItem(message, createLocation(baseLocation.toString(), location));
-    errorItem.addAdditionalInfo("schemaPointer", schemaPointer);
-    errorItem.addAdditionalInfo("schemaFile", schemaResource);
+  private ErrorItem createErrorItem(String message, String errorLocation, String schemaName, String schemaLocation) {
+    ErrorItem errorItem = new ErrorItem(message, errorLocation);
+    errorItem.addAdditionalInfo("schemaPointer", schemaLocation);
+    errorItem.addAdditionalInfo("schemaFile", schemaName);
     return errorItem;
   }
 
@@ -331,84 +277,14 @@ public class CedarValidator implements ModelValidator {
     return absoluteLocation;
   }
 
-  private static ProcessingMessage createErrorMessage(String message) {
-    ProcessingMessage processingMessage = new ProcessingMessage();
-    processingMessage.setLogLevel(LogLevel.ERROR);
-    processingMessage.setMessage(message);
-    return processingMessage;
+  private static boolean isUserSpecifiedField(String fieldName) {
+    return !CedarModelVocabulary.CommonPropertiesInnerFields.contains(fieldName);
   }
 
-  private static boolean hasConstraintSources(JsonNode valueConstraintsNode) {
-    return hasOntologySources(valueConstraintsNode) ||
-        hasBranchSources(valueConstraintsNode) ||
-        hasClassSources(valueConstraintsNode) ||
-        hasValueSetSources(valueConstraintsNode);
-  }
-
-  private static boolean hasOntologySources(JsonNode valueConstraintsNode) {
-    boolean hasSources = false;
-    if (valueConstraintsNode.has(CedarModelVocabulary.ONTOLOGIES)) {
-      JsonNode ontologiesNode = valueConstraintsNode.get(CedarModelVocabulary.ONTOLOGIES);
-      if (hasElements(ontologiesNode)) {
-        hasSources = true;
-      }
-    }
-    return hasSources;
-  }
-
-  private static boolean hasBranchSources(JsonNode valueConstraintsNode) {
-    boolean hasSources = false;
-    if (valueConstraintsNode.has(CedarModelVocabulary.BRANCHES)) {
-      JsonNode branchesNode = valueConstraintsNode.get(CedarModelVocabulary.BRANCHES);
-      if (hasElements(branchesNode)) {
-        hasSources = true;
-      }
-    }
-    return hasSources;
-  }
-
-  private static boolean hasClassSources(JsonNode valueConstraintsNode) {
-    boolean hasSources = false;
-    if (valueConstraintsNode.has(CedarModelVocabulary.CLASSES)) {
-      JsonNode classesNode = valueConstraintsNode.get(CedarModelVocabulary.CLASSES);
-      if (hasElements(classesNode)) {
-        hasSources = true;
-      }
-    }
-    return hasSources;
-  }
-
-  private static boolean hasValueSetSources(JsonNode valueConstraintsNode) {
-    boolean hasSources = false;
-    if (valueConstraintsNode.has(CedarModelVocabulary.VALUE_SETS)) {
-      JsonNode valueSetsNode = valueConstraintsNode.get(CedarModelVocabulary.VALUE_SETS);
-      if (hasElements(valueSetsNode)) {
-        hasSources = true;
-      }
-    }
-    return hasSources;
-  }
-
-  private static boolean isUserSpecifiedField(String propertiesMemberField) {
-    return !CedarModelVocabulary.CommonPropertiesInnerFields.contains(propertiesMemberField);
-  }
-
-  private static boolean hasBoth(String field1, String field2, JsonNode objectNode) {
-    return objectNode.has(field1) && objectNode.has(field2);
-  }
-
-  private static boolean hasMissing(String field1, JsonNode objectNode) {
-    return !objectNode.has(field1);
-  }
-
-  private static boolean hasElements(JsonNode node) {
-    return node.size() > 0;
-  }
-
-  private static CedarModelValidationException newCedarModelValidationException(ProcessingReport report,
-                                                                                JsonPointer currentLocation) {
+  private static CedarModelValidationException newCedarModelValidationException(
+      ProcessingReport report, JsonPointer location) {
     CedarModelValidationException exception = new CedarModelValidationException();
-    exception.addProcessingReport(report, currentLocation);
+    exception.addProcessingReport(report, location);
     return exception;
   }
 
@@ -418,56 +294,53 @@ public class CedarValidator implements ModelValidator {
     return exception;
   }
 
-  private static CedarModelValidationException newCedarModelValidationException(ProcessingMessage message,
-                                                                                JsonPointer currentLocation) {
-    CedarModelValidationException exception = new CedarModelValidationException();
-    exception.addProcessingMessage(message, currentLocation);
-    return exception;
-  }
-
   private JsonNode loadSchemaFromFile(String resourceName) throws IOException {
     ClassLoader classLoader = getClass().getClassLoader();
     URL resource = classLoader.getResource(resourceName);
     return MAPPER.readTree(resource);
   }
 
-  private static boolean isTemplateElement(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.TEMPLATE_ELEMENT_TYPE_URI);
+  private static boolean isTemplateElement(JsonNode resourceNode) {
+    return resourceNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.TEMPLATE_ELEMENT_TYPE_URI);
   }
 
-  private static boolean isStaticValuedTemplateField(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.STATIC_TEMPLATE_FIELD_TYPE_URI)
-        && memberNode.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_OBJECT);
+  private static boolean isTemplateField(JsonNode resourceNode) {
+    return resourceNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.TEMPLATE_FIELD_TYPE_URI);
   }
 
-  private static boolean isSingleValuedTemplateField(JsonNode memberNode) {
-    return memberNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.TEMPLATE_FIELD_TYPE_URI)
-        && memberNode.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_OBJECT);
+  private static boolean isStaticTemplateField(JsonNode resourceNode) {
+    return resourceNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.STATIC_TEMPLATE_FIELD_TYPE_URI);
   }
 
-  private static boolean isMultiValuedTemplateField(JsonNode memberNode) {
-    return memberNode.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_ARRAY);
+  private static boolean isMultiEntriesTemplateField(JsonNode resourceNode) {
+    if (isTypedArray(resourceNode)) {
+      JsonNode fieldNode = resourceNode.get(JSON_SCHEMA_ITEMS);
+      if (fieldNode.has(CedarModelVocabulary.UI)) {
+        JsonNode uiNode = fieldNode.get(CedarModelVocabulary.UI);
+        String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();
+        return inputType.equals(INPUT_TYPE_CHECK_BOX) || inputType.equals(INPUT_TYPE_ATTRIBUTE_VALUE);
+      }
+    }
+    return false;
   }
 
-  private static String getPropertiesMemberPath(String fieldName) {
+  private static boolean isUsingMultipleOption(JsonNode resourceNode) {
+    return isTypedArray(resourceNode);
+  }
+
+  private static boolean isTypedArray(JsonNode node) {
+    return node.path(JSON_SCHEMA_TYPE).asText().equals(JSON_SCHEMA_ARRAY);
+  }
+
+  private static String getFieldPath(String fieldName) {
     return String.format("/%s/%s", JSON_SCHEMA_PROPERTIES, fieldName);
   }
 
-  private static boolean isObjectNode(JsonNode node) {
-    String type = node.path(JSON_SCHEMA_TYPE).asText();
-    return type.equals("object");
-  }
-
-  private static boolean isArrayNode(JsonNode node) {
-    String type = node.path(JSON_SCHEMA_TYPE).asText();
-    return type.equals("array");
-  }
-
-  private static boolean isTypedLink(JsonNode node) {
+  private static boolean isObjectType(JsonNode node) {
     if (node.has(CedarModelVocabulary.UI)) {
       JsonNode uiNode = node.get(CedarModelVocabulary.UI);
       String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();
-      return inputType.equals("link");
+      return inputType.equals(INPUT_TYPE_LINK) || inputType.equals(INPUT_TYPE_CONTROLLED_TERM);
     }
     return false;
   }

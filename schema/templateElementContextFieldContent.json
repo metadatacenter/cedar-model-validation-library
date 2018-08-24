@@ -5,7 +5,12 @@
         "type": { "type": "string", "enum": [ "object" ] },
         "properties": { "$ref": "file:templateElementContextPropertiesFieldContent.json" },
         "required": { "$ref": "file:stringArray.json" },
-        "additionalProperties": { "type": "boolean", "enum": [ false ] }
+        "additionalProperties": {
+          "oneOf": [
+            { "$ref": "file:falseOnlyAdditionalProperties.json" },
+            { "$ref": "file:uriOnlyAdditionalProperties.json" }
+          ]
+        }
     },
     "required": [ "type", "properties", "additionalProperties" ],
     "additionalProperties": false

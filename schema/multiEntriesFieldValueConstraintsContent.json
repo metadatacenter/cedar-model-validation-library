@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a '_valueConstraints' field in a single-valued template field",
+    "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-entries template field",
     "type": "object",
     "properties": {
         "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
@@ -8,9 +8,9 @@
         "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
         "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
         "requiredValue": { "type": "boolean" },
-        "multipleChoice": { "type": "boolean", "enum": [ false ] },
+        "multipleChoice": { "type": "boolean", "enum": [ true ] },
         "defaultValue": { "type": "string" }
     },
-    "required": [ "requiredValue" ],
+    "required": [ "requiredValue", "multipleChoice" ],
     "additionalProperties": false
 }

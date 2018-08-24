@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
@@ -17,6 +16,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
   private static String multipleFieldItemsTemplate;
   private static String multipleElementItemsTemplate;
   private static String nestedElementTemplate;
+  private static String attributeValueTemplate;
 
   private ModelValidator modelValidator;
 
@@ -25,8 +25,10 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     singleFieldTemplate = TestResourcesUtils.getStringContent("templates/single-field-template.json");
     manyFieldsTemplate = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
     multipleFieldItemsTemplate = TestResourcesUtils.getStringContent("templates/multiple-field-items-template.json");
-    multipleElementItemsTemplate = TestResourcesUtils.getStringContent("templates/multiple-element-items-template.json");
+    multipleElementItemsTemplate = TestResourcesUtils.getStringContent("templates/multiple-element-items-template" +
+        ".json");
     nestedElementTemplate = TestResourcesUtils.getStringContent("templates/nested-element-template.json");
+    attributeValueTemplate = TestResourcesUtils.getStringContent("templates/attribute-value-template.json");
   }
 
   @Before
@@ -90,6 +92,16 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     String instanceString = TestResourcesUtils.getStringContent("instances/nested-element-instance.jsonld");
     // Act
     ValidationReport validationReport = runValidation(instanceString, nestedElementTemplate);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassAttributeValueInstance() {
+    // Arrange
+    String instanceString = TestResourcesUtils.getStringContent("instances/attribute-value-instance.jsonld");
+    // Act
+    ValidationReport validationReport = runValidation(instanceString, attributeValueTemplate);
     // Assert
     assertValidationStatus(validationReport, "true");
   }

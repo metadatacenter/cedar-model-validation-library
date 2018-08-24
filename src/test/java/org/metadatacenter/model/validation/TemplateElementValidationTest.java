@@ -58,6 +58,16 @@ public class TemplateElementValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassAttributeValueElement() {
+    // Arrange
+    String elementString = TestResourcesUtils.getStringContent("elements/attribute-value-element.json");
+    // Act
+    ValidationReport validationReport = runValidation(elementString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldFailMissingContext() {
     // Arrange
     String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
@@ -381,6 +391,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
   }
 
   @Ignore
+  @Test
   public void shouldFailMissingProperties_Field_Required() {
     // Arrange
     String elementString = TestResourcesUtils.getStringContent("elements/many-fields-element.json");
@@ -500,6 +511,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
   }
 
+  @Ignore
   @Test
   public void shouldFailMissingProperties_Field_Properties_Value() {
     // Arrange
