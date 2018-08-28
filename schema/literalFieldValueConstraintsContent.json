@@ -8,6 +8,7 @@
         "minValue": { "type": "number" },
         "maxValue": { "type": "number" },
         "decimalPlace": { "type": "number" },
+        "unitOfMeasure": { "type": "string" },
         "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
         "valueSets": {  "$ref": "file:valueConstraintsValueSetsFieldContent.json" },
         "classes": {  "$ref": "file:valueConstraintsClassesFieldContent.json" },

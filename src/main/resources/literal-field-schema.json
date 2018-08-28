@@ -153,6 +153,7 @@
                 "minValue": { "type": "number" },
                 "maxValue": { "type": "number" },
                 "decimalPlace": { "type": "number" },
+                "unitOfMeasure": { "type": "string" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
