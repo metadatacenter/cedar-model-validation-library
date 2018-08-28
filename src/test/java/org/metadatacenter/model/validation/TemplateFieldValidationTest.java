@@ -38,7 +38,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassTextFieldWithMinMaxLength() {
+  public void shouldPassTextFieldWithMinMaxLengthConstraint() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/text-field-minmax-length.json");
     // Act
@@ -48,9 +48,49 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassTextFieldWithMinMaxValue() {
+  public void shouldPassTextFieldWithDefaultValueConstraint() {
     // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/text-field-minmax-value.json");
+    String fieldString = TestResourcesUtils.getStringContent("fields/text-field-default-value.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassNumericFielddWithDecimalPlaceConstraint() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/numeric-field-decimal-place.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassNumericFielddWithMinMaxValueConstraint() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/numeric-field-minmax-value.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassNumericFielddWithNumberTypeConstraint() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/numeric-field-number-type.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassNumericFielddWithUnitOfMeasureConstraint() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/numeric-field-unit-of-measure.json");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
