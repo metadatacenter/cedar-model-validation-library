@@ -565,6 +565,7 @@
                 "maxLength": { "type": "integer" },
                 "minValue": { "type": "number" },
                 "maxValue": { "type": "number" },
+                "decimalPlace": { "type": "number" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },

@@ -7,6 +7,7 @@
         "maxLength": { "type": "integer" },
         "minValue": { "type": "number" },
         "maxValue": { "type": "number" },
+        "decimalPlace": { "type": "number" },
         "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
         "valueSets": {  "$ref": "file:valueConstraintsValueSetsFieldContent.json" },
         "classes": {  "$ref": "file:valueConstraintsClassesFieldContent.json" },
