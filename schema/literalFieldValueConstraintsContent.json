@@ -13,7 +13,11 @@
         "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
         "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
         "multipleChoice": { "type": "boolean" },
-        "defaultValue": { "type": "string" }
+        "defaultValue": { "type": "string" },
+        "numberType": {
+          "type": "string",
+          "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
+        }
     },
     "required": [ "requiredValue" ],
     "additionalProperties": false
