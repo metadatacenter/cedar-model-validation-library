@@ -1,6 +1,5 @@
 base: multiEntriesTemplateField.json
 definitions:
-  - attributeValueTemplateField.json
   - checkBoxTemplateField.json
   - multiEntriesFieldValueConstraintsContent.json
   - templateFieldJSONLDContextFieldContent.json
