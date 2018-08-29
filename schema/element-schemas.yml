@@ -39,7 +39,6 @@ definitions:
   - objectFieldPropertiesContent.json
   - multiEntriesTemplateField.json
   - staticTemplateField.json
-  - attributeValueTemplateField.json
   - checkBoxTemplateField.json
   - multiEntriesFieldValueConstraintsContent.json
   - staticFieldUIContent.json
