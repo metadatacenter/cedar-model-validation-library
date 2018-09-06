@@ -18,6 +18,10 @@
         "object"
       ]
     },
+    "schema:identifier": {
+      "description": "Schema describing the template field's user-defined identifier",
+      "type": "string", "minLength": 1
+    },
     "schema:name": {
       "description": "Schema describing the template field name",
       "type": "string",
