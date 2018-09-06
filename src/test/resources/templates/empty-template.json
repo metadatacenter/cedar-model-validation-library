@@ -76,6 +76,13 @@
             "http://open-services.net/ns/core#"
           ]
         },
+        "skos": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://www.w3.org/2004/02/skos/core#"
+          ]
+        },
         "rdfs:label": {
           "type": "object",
           "properties": {
@@ -163,20 +170,35 @@
               ]
             }
           }
+        },
+        "skos:notation": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:string"
+              ]
+            }
+          }
         }
       },
       "required": [
         "xsd",
-        "pav",
+        "rdfs",
         "schema",
         "oslc",
+        "pav",
+        "skos",
+        "rdfs:label",
         "schema:isBasedOn",
         "schema:name",
         "schema:description",
         "pav:createdOn",
         "pav:createdBy",
         "pav:lastUpdatedOn",
-        "oslc:modifiedBy"
+        "oslc:modifiedBy",
+        "skos:notation"
       ],
       "additionalProperties": false
     },

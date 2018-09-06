@@ -1,9 +1,14 @@
 {
   "@context": {
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "pav": "http://purl.org/pav/",
     "schema": "http://schema.org/",
     "oslc": "http://open-services.net/ns/core#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "rdfs:label": {
+      "@type": "xsd:string"
+    },
     "schema:isBasedOn": {
       "@type": "@id"
     },
@@ -24,6 +29,9 @@
     },
     "oslc:modifiedBy": {
       "@type": "@id"
+    },
+    "skos:notation": {
+      "@type": "xsd:string"
     },
     "studyName": "https://schema.metadatacenter.orgx/properties/studyName",
     "disease": "https://schema.metadatacenter.orgx/properties/disease"

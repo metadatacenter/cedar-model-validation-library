@@ -379,6 +379,7 @@
             "pav": { "ref": "#/definitions/pavContextPropertiesContent" },
             "schema": { "ref": "#/definitions/schemaContextPropertiesContent" },
             "oslc": { "ref": "#/definitions/oslcContextPropertiesContent" },
+            "skos": { "ref": "#/definitions/skosContextPropertiesContent" },
             "rdfs:label": { "ref": "#/definitions/rdfsLabelContextPropertiesContent" },
             "schema:isBasedOn": { "ref": "#/definitions/schemaIsBasedOnContextPropertiesContent" },
             "schema:name": { "ref": "#/definitions/schemaNameContextPropertiesContent" },
@@ -386,13 +387,14 @@
             "pav:createdOn": { "ref": "#/definitions/pavCreatedOnContextPropertiesContent" },
             "pav:createdBy": { "ref": "#/definitions/pavCreatedByContextPropertiesContent" },
             "pav:lastUpdatedOn": { "ref": "#/definitions/pavLastUpdatedOnContextPropertiesContent" },
-            "oslc:modifiedBy": { "ref": "#/definitions/oslcModifiedByContextPropertiesContent" }
+            "oslc:modifiedBy": { "ref": "#/definitions/oslcModifiedByContextPropertiesContent" },
+            "skos:notation": { "ref": "#/definitions/skosNotationContextPropertiesContent" }
           },
           "patternProperties": {
-            "^(?!(schema|xsd|pav|oslc|rdfs|\\$))[^.]+$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
+            "^(?!(schema|xsd|pav|oslc|rdfs|skos|\\$))[^.]+$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
           },
           "additionalProperties": false,
-          "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+          "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "skos", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "skos:notation" ]
         },
         "rdfsContextPropertiesContent": {
           "description": "Schema describing the 'rdfs' prefix in the '@context/properties' field",
@@ -468,6 +470,22 @@
               "type": "array",  "minItems": 1,  "maxItems": 1,
               "items": [
                 { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+              ]
+            }
+          },
+          "required": [ "type", "format", "enum" ],
+          "additionalProperties": false
+        },
+        "skosContextPropertiesContent": {
+          "description": "Schema describing the 'skos' prefix in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "string" ] },
+            "format": { "type": "string", "enum": [ "uri" ] },
+            "enum": {
+              "type": "array",  "minItems": 1,  "maxItems": 1,
+              "items": [
+                { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2004/02/skos/core#" ] }
               ]
             }
           },
@@ -686,6 +704,34 @@
                       "type": "array", "minItems": 1, "maxItems": 1,
                       "items": [
                         { "type": "string", "enum": [ "@id" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "skosNotationContextPropertiesContent": {
+          "description": "Schema describing the 'skos:notation' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "xsd:string" ] }
                       ]
                     }
                   },

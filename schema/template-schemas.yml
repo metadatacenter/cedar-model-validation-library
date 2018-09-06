@@ -31,6 +31,7 @@ definitions:
   - pavContextPropertiesContent.json
   - schemaContextPropertiesContent.json
   - oslcContextPropertiesContent.json
+  - skosContextPropertiesContent.json
   - rdfsLabelContextPropertiesContent.json
   - schemaIsBasedOnContextPropertiesContent.json
   - schemaNameContextPropertiesContent.json
@@ -39,6 +40,7 @@ definitions:
   - pavCreatedByContextPropertiesContent.json
   - pavLastUpdatedOnContextPropertiesContent.json
   - oslcModifiedByContextPropertiesContent.json
+  - skosNotationContextPropertiesContent.json
   - userFieldContextPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
