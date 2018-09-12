@@ -55,6 +55,7 @@ definitions:
   - objectFieldValueConstraintsContent.json
   - objectFieldPropertiesContent.json
   - checkBoxTemplateField.json
+  - attributeValueTemplateField.json
   - multiEntriesFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json
