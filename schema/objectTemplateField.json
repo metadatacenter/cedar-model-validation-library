@@ -27,6 +27,15 @@
       "type": "string",
       "minLength": 1
     },
+    "skos:prefLabel": {
+      "description": "Schema describing the preferred question text for the field, if any",
+      "type": "string"
+    },
+    "skos:altLabel": {
+      "description": "Schema describing the alternative question text for the field, if any",
+      "type": "array",
+      "uniqueItems": true
+    },
     "schema:description": {
       "description": "Schema describing the template field description",
       "type": "string"

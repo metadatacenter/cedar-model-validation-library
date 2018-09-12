@@ -6,16 +6,20 @@
         "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
         "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
         "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+        "skos": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2004/02/skos/core#" ] },
         "schema:name": { "$ref": "file:schemaNameContextFieldContent.json" },
         "schema:description": { "$ref": "file:schemaDescriptionContextFieldContent.json" },
+        "skos:prefLabel": { "$ref": "file:skosPrefLabelContextFieldContent.json" },
+        "skos:altLabel": { "$ref": "file:skosAltLabelContextFieldContent.json" },
         "pav:createdOn": { "$ref": "file:pavCreatedOnContextFieldContent.json" },
         "pav:createdBy": { "$ref": "file:pavCreatedByContextFieldContent.json" },
         "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnContextFieldContent.json" },
         "oslc:modifiedBy": { "$ref": "file:oslcModifiedByContextFieldContent.json" }
     },
     "patternProperties": {
-        "^(?!(schema|xsd|pav|oslc|\\$))[^.]+$": { "type": "string", "format": "uri" }
+        "^(?!(schema|xsd|pav|oslc|skos|\\$))[^.]+$": { "type": "string", "format": "uri" }
     },
     "additionalProperties": false,
-    "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+    "required": [ "xsd", "pav", "schema", "oslc", "skos", "schema:name", "schema:description",
+      "skos:prefLabel", "skos:altLabel", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
 }

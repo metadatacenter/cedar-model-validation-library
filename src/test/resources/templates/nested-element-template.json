@@ -296,10 +296,17 @@
         "pav": "http://purl.org/pav/",
         "oslc": "http://open-services.net/ns/core#",
         "schema": "http://schema.org/",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
         "schema:name": {
           "@type": "xsd:string"
         },
         "schema:description": {
+          "@type": "xsd:string"
+        },
+        "skos:prefLabel": {
+          "@type": "xsd:string"
+        },
+        "skos:altLabel": {
           "@type": "xsd:string"
         },
         "pav:createdOn": {
@@ -463,10 +470,17 @@
             "pav": "http://purl.org/pav/",
             "oslc": "http://open-services.net/ns/core#",
             "schema": "http://schema.org/",
+            "skos": "http://www.w3.org/2004/02/skos/core#",
             "schema:name": {
               "@type": "xsd:string"
             },
             "schema:description": {
+              "@type": "xsd:string"
+            },
+            "skos:prefLabel": {
+              "@type": "xsd:string"
+            },
+            "skos:altLabel": {
               "@type": "xsd:string"
             },
             "pav:createdOn": {
@@ -625,10 +639,17 @@
                 "pav": "http://purl.org/pav/",
                 "oslc": "http://open-services.net/ns/core#",
                 "schema": "http://schema.org/",
+                "skos": "http://www.w3.org/2004/02/skos/core#",
                 "schema:name": {
                   "@type": "xsd:string"
                 },
                 "schema:description": {
+                  "@type": "xsd:string"
+                },
+                "skos:prefLabel": {
+                  "@type": "xsd:string"
+                },
+                "skos:altLabel": {
                   "@type": "xsd:string"
                 },
                 "pav:createdOn": {
@@ -705,10 +726,17 @@
                 "pav": "http://purl.org/pav/",
                 "oslc": "http://open-services.net/ns/core#",
                 "schema": "http://schema.org/",
+                "skos": "http://www.w3.org/2004/02/skos/core#",
                 "schema:name": {
                   "@type": "xsd:string"
                 },
                 "schema:description": {
+                  "@type": "xsd:string"
+                },
+                "skos:prefLabel": {
+                  "@type": "xsd:string"
+                },
+                "skos:altLabel": {
                   "@type": "xsd:string"
                 },
                 "pav:createdOn": {
@@ -906,10 +934,17 @@
             "pav": "http://purl.org/pav/",
             "oslc": "http://open-services.net/ns/core#",
             "schema": "http://schema.org/",
+            "skos": "http://www.w3.org/2004/02/skos/core#",
             "schema:name": {
               "@type": "xsd:string"
             },
             "schema:description": {
+              "@type": "xsd:string"
+            },
+            "skos:prefLabel": {
+              "@type": "xsd:string"
+            },
+            "skos:altLabel": {
               "@type": "xsd:string"
             },
             "pav:createdOn": {
@@ -1068,10 +1103,17 @@
                 "pav": "http://purl.org/pav/",
                 "oslc": "http://open-services.net/ns/core#",
                 "schema": "http://schema.org/",
+                "skos": "http://www.w3.org/2004/02/skos/core#",
                 "schema:name": {
                   "@type": "xsd:string"
                 },
                 "schema:description": {
+                  "@type": "xsd:string"
+                },
+                "skos:prefLabel": {
+                  "@type": "xsd:string"
+                },
+                "skos:altLabel": {
                   "@type": "xsd:string"
                 },
                 "pav:createdOn": {
@@ -1148,10 +1190,17 @@
                 "pav": "http://purl.org/pav/",
                 "oslc": "http://open-services.net/ns/core#",
                 "schema": "http://schema.org/",
+                "skos": "http://www.w3.org/2004/02/skos/core#",
                 "schema:name": {
                   "@type": "xsd:string"
                 },
                 "schema:description": {
+                  "@type": "xsd:string"
+                },
+                "skos:prefLabel": {
+                  "@type": "xsd:string"
+                },
+                "skos:altLabel": {
                   "@type": "xsd:string"
                 },
                 "pav:createdOn": {

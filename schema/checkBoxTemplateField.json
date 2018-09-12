@@ -47,6 +47,15 @@
     "schema:description": {
       "type": "string"
     },
+    "skos:prefLabel": {
+      "description": "Schema describing the preferred question text for the field, if any",
+      "type": "string"
+    },
+    "skos:altLabel": {
+      "description": "Schema describing the alternative question text for the field, if any",
+      "type": "array",
+      "uniqueItems": true
+    },
     "_valueConstraints": {
       "$ref": "#/definitions/multiEntriesFieldValueConstraintsContent"
     },

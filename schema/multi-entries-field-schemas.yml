@@ -13,6 +13,8 @@ definitions:
   - valueConstraintsLiteralsFieldContent.json
   - schemaNameContextFieldContent.json
   - schemaDescriptionContextFieldContent.json
+  - skosPrefLabelContextFieldContent.json
+  - skosAltLabelContextFieldContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json

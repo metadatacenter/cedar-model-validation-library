@@ -16,6 +16,8 @@ definitions:
   - schemaNameContextFieldContent.json
   - schemaDescriptionFieldContent.json
   - schemaDescriptionContextFieldContent.json
+  - skosPrefLabelContextFieldContent.json
+  - skosAltLabelContextFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - schemaIsBasedOnFieldContent.json
