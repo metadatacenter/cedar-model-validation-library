@@ -5,6 +5,7 @@
     "pav": "http://purl.org/pav/",
     "schema": "http://schema.org/",
     "oslc": "http://open-services.net/ns/core#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
     "rdfs:label": {
       "@type": "xsd:string"
     },
@@ -28,6 +29,9 @@
     },
     "oslc:modifiedBy": {
       "@type": "@id"
+    },
+    "skos:notation": {
+      "@type": "xsd:string"
     },
     "Name": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce55",
     "Sample number": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce56",

@@ -8,6 +8,8 @@ definitions:
   - templateRequiredFieldContent.json
   - schemaNameContextFieldContent.json
   - schemaDescriptionContextFieldContent.json
+  - skosPrefLabelContextFieldContent.json
+  - skosAltLabelContextFieldContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json
@@ -40,6 +42,7 @@ definitions:
   - multiEntriesTemplateField.json
   - staticTemplateField.json
   - checkBoxTemplateField.json
+  - attributeValueTemplateField.json
   - multiEntriesFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json

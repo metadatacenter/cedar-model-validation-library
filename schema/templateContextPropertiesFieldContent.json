@@ -7,6 +7,7 @@
     "pav": { "ref": "file:pavContextPropertiesContent.json" },
     "schema": { "ref": "file:schemaContextPropertiesContent.json" },
     "oslc": { "ref": "file:oslcContextPropertiesContent.json" },
+    "skos": { "ref": "file:skosContextPropertiesContent.json" },
     "rdfs:label": { "ref": "file:rdfsLabelContextPropertiesContent.json" },
     "schema:isBasedOn": { "ref": "file:schemaIsBasedOnContextPropertiesContent.json" },
     "schema:name": { "ref": "file:schemaNameContextPropertiesContent.json" },
@@ -14,11 +15,12 @@
     "pav:createdOn": { "ref": "file:pavCreatedOnContextPropertiesContent.json" },
     "pav:createdBy": { "ref": "file:pavCreatedByContextPropertiesContent.json" },
     "pav:lastUpdatedOn": { "ref": "file:pavLastUpdatedOnContextPropertiesContent.json" },
-    "oslc:modifiedBy": { "ref": "file:oslcModifiedByContextPropertiesContent.json" }
+    "oslc:modifiedBy": { "ref": "file:oslcModifiedByContextPropertiesContent.json" },
+    "skos:notation": { "ref": "file:skosNotationContextPropertiesContent.json" }
   },
   "patternProperties": {
-    "^(?!(schema|xsd|pav|oslc|rdfs|\\$))[^.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
+    "^(?!(schema|xsd|pav|oslc|rdfs|skos|\\$))[^.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
   },
   "additionalProperties": false,
-  "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+  "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "skos", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "skos:notation" ]
 }

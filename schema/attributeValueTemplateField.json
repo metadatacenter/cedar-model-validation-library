@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Schema that describes the checkbox template field",
+  "description": "Schema that describes the attribute-value template field",
   "type": "object",
   "properties": {
     "$schema": {
@@ -20,7 +20,7 @@
       "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
     },
     "type": {
-      "type": "string", "enum": [ "object" ]
+      "type": "string", "enum": [ "string" ]
     },
     "title": {
       "type": "string", "minLength": 1
@@ -33,10 +33,8 @@
       "properties": {
         "inputType": {
           "type": "string",
-          "enum": [ "checkbox" ]
-        },
-        "valueRecommendationEnabled": { "type": "boolean" },
-        "hidden": { "type": "boolean" }
+          "enum": [ "attribute-value" ]
+        }
       },
       "required": [ "inputType" ],
       "additionalProperties": false
@@ -46,24 +44,6 @@
     },
     "schema:description": {
       "type": "string"
-    },
-    "skos:prefLabel": {
-      "description": "Schema describing the preferred question text for the field, if any",
-      "type": "string"
-    },
-    "skos:altLabel": {
-      "description": "Schema describing the alternative question text for the field, if any",
-      "type": "array",
-      "uniqueItems": true
-    },
-    "_valueConstraints": {
-      "$ref": "#/definitions/multiEntriesFieldValueConstraintsContent"
-    },
-    "properties": {
-      "$ref": "#/definitions/literalFieldPropertiesContent"
-    },
-    "required": {
-      "$ref": "#/definitions/stringArray"
     },
     "pav:createdOn": {
       "type": [ "string", "null" ], "format": "date-time"
@@ -84,7 +64,7 @@
       "type": "string", "minLength": 1
     }
   },
-  "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
-    "properties", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+  "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type",
+    "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
     "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
 }

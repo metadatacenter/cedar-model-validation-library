@@ -18,6 +18,10 @@
         "object"
       ]
     },
+    "schema:identifier": {
+      "description": "Schema describing the template field's user-defined identifier",
+      "type": "string", "minLength": 1
+    },
     "schema:name": {
       "description": "Schema describing the template field name",
       "type": "string",
@@ -26,6 +30,15 @@
     "schema:description": {
       "description": "Schema describing the template field description",
       "type": "string"
+    },
+    "skos:prefLabel": {
+      "description": "Schema describing the preferred question text for the field, if any",
+      "type": "string"
+    },
+    "skos:altLabel": {
+      "description": "Schema describing the alternative question text for the field, if any",
+      "type": "array",
+      "uniqueItems": true
     },
     "title": {
       "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
@@ -189,18 +202,22 @@
                 "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
                 "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
                 "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
+                "skos": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2004/02/skos/core#" ] },
                 "schema:name": { "$ref": "#/definitions/schemaNameContextFieldContent" },
                 "schema:description": { "$ref": "#/definitions/schemaDescriptionContextFieldContent" },
+                "skos:prefLabel": { "$ref": "#/definitions/skosPrefLabelContextFieldContent" },
+                "skos:altLabel": { "$ref": "#/definitions/skosAltLabelContextFieldContent" },
                 "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnContextFieldContent" },
                 "pav:createdBy": { "$ref": "#/definitions/pavCreatedByContextFieldContent" },
                 "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnContextFieldContent" },
                 "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByContextFieldContent" }
             },
             "patternProperties": {
-                "^(?!(schema|xsd|pav|oslc|\\$))[^.]+$": { "type": "string", "format": "uri" }
+                "^(?!(schema|xsd|pav|oslc|skos|\\$))[^.]+$": { "type": "string", "format": "uri" }
             },
             "additionalProperties": false,
-            "required": [ "xsd", "pav", "schema", "oslc", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+            "required": [ "xsd", "pav", "schema", "oslc", "skos", "schema:name", "schema:description",
+              "skos:prefLabel", "skos:altLabel", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
         },
         "stringArray": {
             "description": "Schema that describes the schema of a possibly-empty string array",
@@ -249,6 +266,24 @@
           },
           "required": [ "@type" ],
           "additionalProperties": false
+        },
+        "skosPrefLabelContextFieldContent": {
+            "description": "Schema that describes the schema of 'skos:prefLabel' field content in a @context",
+            "type": "object",
+            "properties": {
+                "@type": { "type": "string", "enum": [ "xsd:string" ] }
+            },
+            "required": [ "@type" ],
+            "additionalProperties": false
+        },
+        "skosAltLabelContextFieldContent": {
+            "description": "Schema that describes the schema of 'skos:prefLabel' field content in a @context",
+            "type": "object",
+            "properties": {
+                "@type": { "type": "string", "enum": [ "xsd:string" ] }
+            },
+            "required": [ "@type" ],
+            "additionalProperties": false
         },
         "pavCreatedOnContextFieldContent": {
             "description": "Schema that describes the schema of 'pav:createdOn' field content in a @context",

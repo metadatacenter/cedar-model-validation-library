@@ -16,6 +16,8 @@ definitions:
   - schemaNameContextFieldContent.json
   - schemaDescriptionFieldContent.json
   - schemaDescriptionContextFieldContent.json
+  - skosPrefLabelContextFieldContent.json
+  - skosAltLabelContextFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - schemaIsBasedOnFieldContent.json
@@ -31,6 +33,7 @@ definitions:
   - pavContextPropertiesContent.json
   - schemaContextPropertiesContent.json
   - oslcContextPropertiesContent.json
+  - skosContextPropertiesContent.json
   - rdfsLabelContextPropertiesContent.json
   - schemaIsBasedOnContextPropertiesContent.json
   - schemaNameContextPropertiesContent.json
@@ -39,6 +42,7 @@ definitions:
   - pavCreatedByContextPropertiesContent.json
   - pavLastUpdatedOnContextPropertiesContent.json
   - oslcModifiedByContextPropertiesContent.json
+  - skosNotationContextPropertiesContent.json
   - userFieldContextPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
@@ -53,6 +57,7 @@ definitions:
   - objectFieldValueConstraintsContent.json
   - objectFieldPropertiesContent.json
   - checkBoxTemplateField.json
+  - attributeValueTemplateField.json
   - multiEntriesFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json

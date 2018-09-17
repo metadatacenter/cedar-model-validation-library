@@ -58,6 +58,16 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassTextFieldWithQuestions() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/text-field-with-questions.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassNumericFielddWithDecimalPlaceConstraint() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/numeric-field-decimal-place.json");

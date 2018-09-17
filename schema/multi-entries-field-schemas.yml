@@ -1,6 +1,7 @@
 base: multiEntriesTemplateField.json
 definitions:
   - checkBoxTemplateField.json
+  - attributeValueTemplateField.json
   - multiEntriesFieldValueConstraintsContent.json
   - templateFieldJSONLDContextFieldContent.json
   - literalFieldPropertiesContent.json
@@ -12,6 +13,8 @@ definitions:
   - valueConstraintsLiteralsFieldContent.json
   - schemaNameContextFieldContent.json
   - schemaDescriptionContextFieldContent.json
+  - skosPrefLabelContextFieldContent.json
+  - skosAltLabelContextFieldContent.json
   - pavCreatedOnContextFieldContent.json
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json

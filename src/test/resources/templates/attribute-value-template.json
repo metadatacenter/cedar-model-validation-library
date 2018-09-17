@@ -83,6 +83,13 @@
             "http://open-services.net/ns/core#"
           ]
         },
+        "skos": {
+          "type": "string",
+          "format": "uri",
+          "enum": [
+            "http://www.w3.org/2004/02/skos/core#"
+          ]
+        },
         "rdfs:label": {
           "type": "object",
           "properties": {
@@ -171,6 +178,17 @@
             }
           }
         },
+        "skos:notation": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "xsd:string"
+              ]
+            }
+          }
+        },
         "Name": {
           "enum": [
             "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce55"
@@ -184,16 +202,20 @@
       },
       "required": [
         "xsd",
-        "pav",
+        "rdfs",
         "schema",
         "oslc",
+        "pav",
+        "skos",
+        "rdfs:label",
         "schema:isBasedOn",
         "schema:name",
         "schema:description",
         "pav:createdOn",
         "pav:createdBy",
         "pav:lastUpdatedOn",
-        "oslc:modifiedBy"
+        "oslc:modifiedBy",
+        "skos:notation"
       ],
       "additionalProperties": {
         "type": "string",
@@ -268,10 +290,17 @@
         "bibo": "http://purl.org/ontology/bibo/",
         "oslc": "http://open-services.net/ns/core#",
         "schema": "http://schema.org/",
+        "skos": "http://www.w3.org/2004/02/skos/core#",
         "schema:name": {
           "@type": "xsd:string"
         },
         "schema:description": {
+          "@type": "xsd:string"
+        },
+        "skos:prefLabel": {
+          "@type": "xsd:string"
+        },
+        "skos:altLabel": {
           "@type": "xsd:string"
         },
         "pav:createdOn": {
@@ -352,10 +381,17 @@
           "bibo": "http://purl.org/ontology/bibo/",
           "oslc": "http://open-services.net/ns/core#",
           "schema": "http://schema.org/",
+          "skos": "http://www.w3.org/2004/02/skos/core#",
           "schema:name": {
             "@type": "xsd:string"
           },
           "schema:description": {
+            "@type": "xsd:string"
+          },
+          "skos:prefLabel": {
+            "@type": "xsd:string"
+          },
+          "skos:altLabel": {
             "@type": "xsd:string"
           },
           "pav:createdOn": {
