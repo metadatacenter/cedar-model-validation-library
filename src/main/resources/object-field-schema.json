@@ -460,12 +460,17 @@
             "type": "object",
             "properties": {
                 "type": { "type": "string", "enum": [ "array" ] },
-                "minItems": { "type": "integer", "enum": [ 1 ] },
+                "minItems": { "type": "integer", "minimum": 0 },
                 "items": { "$ref": "#/definitions/uriEnumContent" },
                 "uniqueItems": { "type": "boolean", "enum": [ true ] }
             },
             "required": [ "type", "minItems", "items", "uniqueItems" ],
             "additionalProperties": false
+        },
+        "arrayOfURIs": {
+            "description": "Schema that describes an array of URIs",
+            "type": "array", "minItems": 1, "uniqueItems": true,
+            "items": { "type": "string", "format": "uri" }
         },
         "jsonLDValueFieldContent": {
             "description": "Schema that describes the schema for a '@value' field",
