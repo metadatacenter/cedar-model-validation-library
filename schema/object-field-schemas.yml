@@ -36,6 +36,7 @@ definitions:
   - arrayAndNullTypeContent.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
+  - arrayOfURIs.json
   - jsonLDValueFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsValueSetsFieldItemContent.json

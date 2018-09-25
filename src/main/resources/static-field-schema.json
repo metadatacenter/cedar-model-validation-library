@@ -282,7 +282,7 @@
             "type": "object",
             "properties": {
                 "type": { "type": "string", "enum": [ "array" ] },
-                "minItems": { "type": "integer", "enum": [ 1 ] },
+                "minItems": { "type": "integer", "minimum": 0 },
                 "items": { "$ref": "#/definitions/uriEnumContent" },
                 "uniqueItems": { "type": "boolean", "enum": [ true ] }
             },
