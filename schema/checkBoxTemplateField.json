@@ -77,6 +77,12 @@
     "oslc:modifiedBy": {
       "type": [ "string", "null" ], "format": "uri"
     },
+    "bibo:status": {
+      "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+    },
+    "pav:version": {
+      "type": "string", "minLength": 1
+    },
     "additionalProperties": {
       "type": "boolean", "enum": [ false ]
     },
@@ -86,5 +92,5 @@
   },
   "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
     "properties", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-    "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
+    "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description", "bibo:status", "pav:version" ]
 }

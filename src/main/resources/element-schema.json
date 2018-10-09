@@ -542,6 +542,12 @@
               ],
               "format": "uri"
             },
+            "bibo:status": {
+              "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+            },
+            "pav:version": {
+              "type": "string", "minLength": 1
+            },
             "additionalProperties": {
               "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
               "type": "boolean",
@@ -572,7 +578,9 @@
             "oslc:modifiedBy",
             "schema:schemaVersion",
             "schema:name",
-            "schema:description"
+            "schema:description",
+            "bibo:status",
+            "pav:version"
           ]
         },
         "literalFieldUIContent": {
@@ -737,6 +745,12 @@
               ],
               "format": "uri"
             },
+            "bibo:status": {
+              "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+            },
+            "pav:version": {
+              "type": "string", "minLength": 1
+            },
             "additionalProperties": {
               "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
               "type": "boolean",
@@ -767,7 +781,9 @@
             "oslc:modifiedBy",
             "schema:schemaVersion",
             "schema:name",
-            "schema:description"
+            "schema:description",
+            "bibo:status",
+            "pav:version"
           ]
         },
         "objectFieldUIContent": {
@@ -980,6 +996,12 @@
             "oslc:modifiedBy": {
               "type": [ "string", "null" ], "format": "uri"
             },
+            "bibo:status": {
+              "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+            },
+            "pav:version": {
+              "type": "string", "minLength": 1
+            },
             "additionalProperties": {
               "type": "boolean", "enum": [ false ]
             },
@@ -989,7 +1011,7 @@
           },
           "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
             "properties", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-            "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
+            "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description", "bibo:status", "pav:version" ]
         },
         "attributeValueTemplateField": {
           "$schema": "http://json-schema.org/draft-04/schema#",
@@ -1050,6 +1072,12 @@
             "oslc:modifiedBy": {
               "type": [ "string", "null" ], "format": "uri"
             },
+            "bibo:status": {
+              "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+            },
+            "pav:version": {
+              "type": "string", "minLength": 1
+            },
             "additionalProperties": {
               "type": "boolean", "enum": [ false ]
             },
@@ -1059,7 +1087,7 @@
           },
           "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type",
             "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-            "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
+            "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description", "bibo:status", "pav:version" ]
         },
         "multiEntriesFieldValueConstraintsContent": {
             "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-entries template field",

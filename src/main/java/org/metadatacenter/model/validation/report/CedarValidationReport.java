@@ -14,6 +14,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @JsonPropertyOrder({"validates", "warnings", "errors"})
 public class CedarValidationReport implements ValidationReport {
 
+  public static final String IS_INVALID = "false";
+  public static final String IS_VALID = "true";
+
   private final Set<WarningItem> warningDetails = Sets.newLinkedHashSet();
   private final Set<ErrorItem> errorDetails = Sets.newLinkedHashSet();
 
@@ -29,7 +32,7 @@ public class CedarValidationReport implements ValidationReport {
   @Override
   @JsonProperty("validates")
   public String getValidationStatus() {
-    return errorDetails.isEmpty() + "";
+    return errorDetails.isEmpty() ? IS_VALID : IS_INVALID;
   }
 
   public void addWarning(WarningItem warning) {

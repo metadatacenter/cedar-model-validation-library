@@ -46,7 +46,9 @@
     "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
     "pav:lastUpdatedOn": "2018-08-20T15:51:10-0700",
     "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-    "schema:schemaVersion": "1.4.0",
+    "schema:schemaVersion": "1.5.0",
+    "bibo:status": "bibo:draft",
+    "pav:version": "0.0.1",
     "additionalProperties": false,
     "@id": "https://repo.staging.metadatacenter.org/template-fields/96bafb52-d64f-4143-8e13-fb53e664ab8f",
     "$schema": "http://json-schema.org/draft-04/schema#"
