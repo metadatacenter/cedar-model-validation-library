@@ -1024,9 +1024,7 @@
             "oslc:modifiedBy",
             "schema:schemaVersion",
             "schema:name",
-            "schema:description",
-            "bibo:status",
-            "pav:version"
+            "schema:description"
           ]
         },
         "literalFieldUIContent": {
@@ -1227,9 +1225,7 @@
             "oslc:modifiedBy",
             "schema:schemaVersion",
             "schema:name",
-            "schema:description",
-            "bibo:status",
-            "pav:version"
+            "schema:description"
           ]
         },
         "objectFieldUIContent": {
@@ -1368,7 +1364,7 @@
           },
           "required": [ "$schema", "type", "title", "description", "_ui", "_valueConstraints", "@context", "@id", "@type",
             "properties", "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-            "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description", "bibo:status", "pav:version" ]
+            "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
         },
         "attributeValueTemplateField": {
           "$schema": "http://json-schema.org/draft-04/schema#",
@@ -1444,7 +1440,7 @@
           },
           "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type",
             "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-            "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description", "bibo:status", "pav:version" ]
+            "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
         },
         "multiEntriesFieldValueConstraintsContent": {
             "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-entries template field",
@@ -1649,6 +1645,7 @@
                 "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
                 "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] },
                 "skos": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2004/02/skos/core#" ] },
+                "bibo": { "type": "string", "format": "uri", "enum": [ "http://purl.org/ontology/bibo/" ] },
                 "schema:name": { "$ref": "#/definitions/schemaNameContextFieldContent" },
                 "schema:description": { "$ref": "#/definitions/schemaDescriptionContextFieldContent" },
                 "skos:prefLabel": { "$ref": "#/definitions/skosPrefLabelContextFieldContent" },

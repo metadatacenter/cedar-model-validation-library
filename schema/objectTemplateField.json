@@ -143,8 +143,6 @@
     "oslc:modifiedBy",
     "schema:schemaVersion",
     "schema:name",
-    "schema:description",
-    "bibo:status",
-    "pav:version"
+    "schema:description"
   ]
 }
