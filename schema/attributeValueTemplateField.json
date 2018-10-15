@@ -57,6 +57,12 @@
     "oslc:modifiedBy": {
       "type": [ "string", "null" ], "format": "uri"
     },
+    "bibo:status": {
+      "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+    },
+    "pav:version": {
+      "type": "string", "minLength": 1
+    },
     "additionalProperties": {
       "type": "boolean", "enum": [ false ]
     },

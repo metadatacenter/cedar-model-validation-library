@@ -68,8 +68,10 @@
   "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
   "pav:lastUpdatedOn": "2017-05-19T10:49:33-0700",
   "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
-  "schema:schemaVersion": "1.1.0",
+  "schema:schemaVersion": "1.5.0",
   "additionalProperties": false,
+  "bibo:status": "bibo:draft",
+  "pav:version": "0.0.1",
   "@id": "https://repo.metadatacenter.orgx/template-fields/90b6979e-ba6b-4e51-bad4-101b7e04ad4a",
   "$schema": "http://json-schema.org/draft-04/schema#"
 }

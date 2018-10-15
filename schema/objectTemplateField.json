@@ -107,6 +107,12 @@
       ],
       "format": "uri"
     },
+    "bibo:status": {
+      "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+    },
+    "pav:version": {
+      "type": "string", "minLength": 1
+    },
     "additionalProperties": {
       "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
       "type": "boolean",
