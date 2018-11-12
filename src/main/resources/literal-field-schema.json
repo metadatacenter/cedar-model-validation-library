@@ -179,6 +179,7 @@
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "multipleChoice": { "type": "boolean" },
+                "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
                 "defaultValue": { "type": "string" },
                 "numberType": {
                   "type": "string",
@@ -430,6 +431,11 @@
             "type": "array", "uniqueItems": true,
             "items": { "$ref": "#/definitions/valueConstraintsLiteralsFieldItemContent"}            
         },
+        "valueConstraintsActionsFieldContent": {
+            "description": "Schema that describes the schema of the 'actions' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": {  "$ref": "#/definitions/valueConstraintsActionsFieldItemContent"  }
+        },
         "jsonLDTypeFieldOneOfFieldContent": {
             "description": "Schema that describes the schema of a '@type.oneOf' field in a 'properties' field in a template, element or field",
             "type": "array", "minItems": 2, "maxItems": 2,
@@ -570,6 +576,19 @@
             },
             "required": [ "label" ],
             "additionalProperties": false
+        },
+        "valueConstraintsActionsFieldItemContent": {
+          "description": "Schema that describes the schema of each entry in the 'actions' field array in a '_valueConstraints' field",
+          "type": "object",
+          "properties": {
+            "action": { "type": "string", "enum": [ "move", "delete" ] },
+            "to": { "type": "integer" },
+            "type": { "type": "string", "enum": [ "Value", "OntologyClass" ] },
+            "sourceUri": { "type": "string", "format": "uri" },
+            "termUri": { "type": "string", "format": "uri" }
+          },
+          "required": [ "action", "termUri", "type", "sourceUri" ],
+          "additionalProperties": false
         },
         "valueConstraintsOntologiesExclusionsFieldContent": {
            "description": "Schema that describes the schema of the 'ontologies.exclusions' field in a '_valueConstraints' field",

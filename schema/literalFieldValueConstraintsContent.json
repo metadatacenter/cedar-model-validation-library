@@ -15,6 +15,7 @@
         "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
         "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
         "multipleChoice": { "type": "boolean" },
+        "actions": { "$ref": "file:valueConstraintsActionsFieldContent.json" },
         "defaultValue": { "type": "string" },
         "numberType": {
           "type": "string",

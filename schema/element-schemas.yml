@@ -59,12 +59,14 @@ definitions:
   - valueConstraintsClassesFieldContent.json
   - valueConstraintsBranchesFieldContent.json
   - valueConstraintsLiteralsFieldContent.json
+  - valueConstraintsActionsFieldContent.json
   - rdfsLabelFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json
   - valueConstraintsBranchesFieldItemContent.json
   - valueConstraintsLiteralsFieldItemContent.json
+  - valueConstraintsActionsFieldItemContent.json
   - valueConstraintsOntologiesExclusionsFieldContent.json
   - valueConstraintsValueSetsExclusionsFieldContent.json
   - falseOnlyAdditionalProperties.json

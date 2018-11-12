@@ -613,6 +613,7 @@
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "multipleChoice": { "type": "boolean" },
+                "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
                 "defaultValue": { "type": "string" },
                 "numberType": {
                   "type": "string",
@@ -798,7 +799,7 @@
             "additionalProperties": false
         },
         "objectFieldValueConstraintsContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
+            "description": "Schema that describes the schema of a '_valueConstraints' field in an object-typed template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -808,6 +809,7 @@
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean", "enum": [ false ] },
+                "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
                 "defaultValue": { "type": "string" }
             },
             "required": [ "requiredValue" ],
@@ -1321,6 +1323,11 @@
             "type": "array", "uniqueItems": true,
             "items": { "$ref": "#/definitions/valueConstraintsLiteralsFieldItemContent"}            
         },
+        "valueConstraintsActionsFieldContent": {
+            "description": "Schema that describes the schema of the 'actions' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": {  "$ref": "#/definitions/valueConstraintsActionsFieldItemContent"  }
+        },
         "rdfsLabelFieldContent": {
             "description": "Schema that describes the schema of a 'rdfs:label' field in a 'properties' field in a template field",
             "type": "object",
@@ -1395,6 +1402,19 @@
             },
             "required": [ "label" ],
             "additionalProperties": false
+        },
+        "valueConstraintsActionsFieldItemContent": {
+          "description": "Schema that describes the schema of each entry in the 'actions' field array in a '_valueConstraints' field",
+          "type": "object",
+          "properties": {
+            "action": { "type": "string", "enum": [ "move", "delete" ] },
+            "to": { "type": "integer" },
+            "type": { "type": "string", "enum": [ "Value", "OntologyClass" ] },
+            "sourceUri": { "type": "string", "format": "uri" },
+            "termUri": { "type": "string", "format": "uri" }
+          },
+          "required": [ "action", "termUri", "type", "sourceUri" ],
+          "additionalProperties": false
         },
         "valueConstraintsOntologiesExclusionsFieldContent": {
            "description": "Schema that describes the schema of the 'ontologies.exclusions' field in a '_valueConstraints' field",
