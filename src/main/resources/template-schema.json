@@ -1465,7 +1465,13 @@
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean", "enum": [ true ] },
-                "defaultValue": { "type": "string" }
+                "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
+                "defaultValue": {
+                  "oneOf": [
+                    { "$ref": "#/definitions/valueConstraintsStringDefaultValueContent" },
+                    { "$ref": "#/definitions/valueConstraintsUriDefaultValueContent" }
+                  ]
+                }
             },
             "required": [ "requiredValue", "multipleChoice" ],
             "additionalProperties": false

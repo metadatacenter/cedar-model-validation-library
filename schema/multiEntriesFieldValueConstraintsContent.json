@@ -9,7 +9,13 @@
         "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
         "requiredValue": { "type": "boolean" },
         "multipleChoice": { "type": "boolean", "enum": [ true ] },
-        "defaultValue": { "type": "string" }
+        "actions": { "$ref": "file:valueConstraintsActionsFieldContent.json" },
+        "defaultValue": {
+          "oneOf": [
+            { "$ref": "file:valueConstraintsStringDefaultValueContent.json" },
+            { "$ref": "file:valueConstraintsUriDefaultValueContent.json" }
+          ]
+        }
     },
     "required": [ "requiredValue", "multipleChoice" ],
     "additionalProperties": false

@@ -407,7 +407,8 @@
           "inputType": "textfield"
         },
         "_valueConstraints": {
-          "requiredValue": false
+          "requiredValue": false,
+          "defaultValue": "Biology"
         },
         "properties": {
           "@type": {
