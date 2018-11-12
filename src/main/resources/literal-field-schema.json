@@ -180,7 +180,12 @@
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "multipleChoice": { "type": "boolean" },
                 "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
-                "defaultValue": { "type": "string" },
+                "defaultValue": {
+                  "oneOf": [
+                    { "$ref": "#/definitions/valueConstraintsStringDefaultValueContent" },
+                    { "$ref": "#/definitions/valueConstraintsUriDefaultValueContent" }
+                  ]
+                },
                 "numberType": {
                   "type": "string",
                   "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
@@ -588,6 +593,21 @@
             "termUri": { "type": "string", "format": "uri" }
           },
           "required": [ "action", "termUri", "type", "sourceUri" ],
+          "additionalProperties": false
+        },
+        "valueConstraintsStringDefaultValueContent": {
+          "description": "Schema that describes a field's default value as a string",
+          "type": "string"
+        },
+        "valueConstraintsUriDefaultValueContent": {
+          "description": "Schema that describes a field's default value as a term object",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "Value", "OntologyClass" ] },
+            "termUri": { "type": "string", "format": "uri" },
+            "sourceUri": { "type": "string", "format": "uri" }
+          },
+          "required": [ "type", "termUri", "sourceUri" ],
           "additionalProperties": false
         },
         "valueConstraintsOntologiesExclusionsFieldContent": {

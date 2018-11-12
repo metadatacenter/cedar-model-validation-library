@@ -86,6 +86,8 @@ definitions:
   - valueConstraintsBranchesFieldItemContent.json
   - valueConstraintsLiteralsFieldItemContent.json
   - valueConstraintsActionsFieldItemContent.json
+  - valueConstraintsStringDefaultValueContent.json
+  - valueConstraintsUriDefaultValueContent.json
   - numberAndNullTypeContent.json
   - arrayAndNullTypeContent.json
   - valueConstraintsOntologiesExclusionsFieldContent.json

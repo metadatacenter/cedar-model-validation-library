@@ -500,7 +500,8 @@
                 "inputType": "textfield"
               },
               "_valueConstraints": {
-                "requiredValue": false
+                "requiredValue": false,
+                "defaultValue": "lbs"
               },
               "properties": {
                 "@type": {
@@ -1053,7 +1054,8 @@
                 "inputType": "textfield"
               },
               "_valueConstraints": {
-                "requiredValue": false
+                "requiredValue": false,
+                "defaultValue": "lbs"
               },
               "properties": {
                 "@type": {

@@ -10,7 +10,12 @@
         "requiredValue": { "type": "boolean" },
         "multipleChoice": { "type": "boolean", "enum": [ false ] },
         "actions": { "$ref": "file:valueConstraintsActionsFieldContent.json" },
-        "defaultValue": { "type": "string" }
+        "defaultValue": {
+            "oneOf": [
+                { "$ref": "file:valueConstraintsStringDefaultValueContent.json" },
+                { "$ref": "file:valueConstraintsUriDefaultValueContent.json" }
+            ]
+        }
     },
     "required": [ "requiredValue" ],
     "additionalProperties": false
