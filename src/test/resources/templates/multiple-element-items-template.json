@@ -818,7 +818,9 @@
               "actions": [
                 {
                   "termUri": "http://purl.obolibrary.org/obo/DOID_0050072",
-                  "action": "delete"
+                  "action": "delete",
+                  "type": "OntologyClass",
+                  "sourceUri": "http://purl.obolibrary.org/obo/DOID_4"
                 },
                 {
                   "to": 0,
