@@ -206,11 +206,11 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
   public void shouldFailMissingFields() {
     // Arrange
     String instanceString = TestResourcesUtils.getStringContent("instances/many-fields-instance.jsonld");
-    instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/studyName");
+    instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/Study Name");
     // Act
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['studyName'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['Study Name'])");
   }
 }

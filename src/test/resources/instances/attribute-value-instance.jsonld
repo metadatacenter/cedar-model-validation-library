@@ -33,29 +33,29 @@
     "skos:notation": {
       "@type": "xsd:string"
     },
-    "Name": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce55",
-    "Sample number": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce56",
-    "Study location": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce57"
+    "Name": "https://schema.staging.metadatacenter.org/properties/04236bcb-dbb7-48de-b22b-d8add8bb1280",
+    "Key1": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce56",
+    "Key2": "https://schema.metadatacenter.orgx/properties/52edba65-fd84-4355-95ff-cad04bf0ce57"
   },
   "Name": {
-    "@value": "Study Result"
+    "@value": "Lorem Ipsum"
   },
   "Additional Information": [
-    "Sample number",
-    "Study location"
+    "Key1",
+    "Key2"
   ],
-  "Sample number": {
-    "@value": "100"
+  "Key1": {
+    "@value": "Lorem Ipsum"
   },
-  "Study location": {
-    "@value": "USA"
+  "Key2": {
+    "@value": "Lorem Ipsum"
   },
-  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/5830ac43-64f2-4c0c-adf9-d45114401a22",
-  "schema:name": "Attribute Name metadata",
+  "schema:isBasedOn": "https://repo.staging.metadatacenter.org/templates/8b6fb416-701f-4429-856d-e247269737ca",
+  "schema:name": "Attribute Value Template metadata",
   "schema:description": "",
-  "pav:createdOn": "2018-08-21T15:25:00-0700",
+  "pav:createdOn": "2018-11-12T16:38:49-0800",
   "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-  "pav:lastUpdatedOn": "2018-08-21T15:25:00-0700",
+  "pav:lastUpdatedOn": "2018-11-12T16:38:49-0800",
   "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-  "@id": "https://repo.metadatacenter.orgx/template-instances/e5ef7626-02fc-4b36-aa05-b5e84725fdde"
+  "@id": "https://repo.staging.metadatacenter.org/template-instances/a823d53c-5f91-4919-ab26-bff21aba5820"
 }
