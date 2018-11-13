@@ -158,6 +158,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  @Ignore
   public void shouldPassMultiSelectionListField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/list-field-multi-selection.json");
