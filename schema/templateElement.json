@@ -86,5 +86,5 @@
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
         "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion", "schema:name",
-        "schema:description", "bibo:status", "pav:version" ]
+        "schema:description" ]
 }

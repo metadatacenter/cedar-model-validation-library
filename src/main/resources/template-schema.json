@@ -87,7 +87,7 @@
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
         "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion", "schema:name",
-        "schema:description", "bibo:status", "pav:version" ]
+        "schema:description" ]
     ,
     "definitions": {
         "templateJSONLDContextFieldContent": {
@@ -1578,7 +1578,7 @@
             },
             "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
                 "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion", "schema:name",
-                "schema:description", "bibo:status", "pav:version" ]
+                "schema:description" ]
         },
         "templateElementContextFieldContent": {
             "description": "Schema that describes the schema of a '@context' field in a 'properties' field in a template element",
