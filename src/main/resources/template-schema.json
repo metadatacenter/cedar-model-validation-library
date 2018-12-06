@@ -87,7 +87,7 @@
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
         "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion", "schema:name",
-        "schema:description", "bibo:status", "pav:version" ]
+        "schema:description" ]
     ,
     "definitions": {
         "templateJSONLDContextFieldContent": {
@@ -1059,7 +1059,13 @@
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "multipleChoice": { "type": "boolean" },
-                "defaultValue": { "type": "string" },
+                "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
+                "defaultValue": {
+                  "oneOf": [
+                    { "$ref": "#/definitions/valueConstraintsStringDefaultValueContent" },
+                    { "$ref": "#/definitions/valueConstraintsUriDefaultValueContent" }
+                  ]
+                },
                 "numberType": {
                   "type": "string",
                   "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
@@ -1244,7 +1250,7 @@
             "additionalProperties": false
         },
         "objectFieldValueConstraintsContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
+            "description": "Schema that describes the schema of a '_valueConstraints' field in an object-typed template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -1254,7 +1260,13 @@
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean", "enum": [ false ] },
-                "defaultValue": { "type": "string" }
+                "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
+                "defaultValue": {
+                    "oneOf": [
+                        { "$ref": "#/definitions/valueConstraintsStringDefaultValueContent" },
+                        { "$ref": "#/definitions/valueConstraintsUriDefaultValueContent" }
+                    ]
+                }
             },
             "required": [ "requiredValue" ],
             "additionalProperties": false
@@ -1453,7 +1465,13 @@
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
                 "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean", "enum": [ true ] },
-                "defaultValue": { "type": "string" }
+                "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
+                "defaultValue": {
+                  "oneOf": [
+                    { "$ref": "#/definitions/valueConstraintsStringDefaultValueContent" },
+                    { "$ref": "#/definitions/valueConstraintsUriDefaultValueContent" }
+                  ]
+                }
             },
             "required": [ "requiredValue", "multipleChoice" ],
             "additionalProperties": false
@@ -1560,7 +1578,7 @@
             },
             "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
                 "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "schema:schemaVersion", "schema:name",
-                "schema:description", "bibo:status", "pav:version" ]
+                "schema:description" ]
         },
         "templateElementContextFieldContent": {
             "description": "Schema that describes the schema of a '@context' field in a 'properties' field in a template element",
@@ -1734,6 +1752,11 @@
             "type": "array", "uniqueItems": true,
             "items": { "$ref": "#/definitions/valueConstraintsLiteralsFieldItemContent"}            
         },
+        "valueConstraintsActionsFieldContent": {
+            "description": "Schema that describes the schema of the 'actions' field in a '_valueConstraints' field",
+            "type": "array", "uniqueItems": true,
+            "items": {  "$ref": "#/definitions/valueConstraintsActionsFieldItemContent"  }
+        },
         "jsonLDValueFieldContent": {
             "description": "Schema that describes the schema for a '@value' field",
             "type": "object",
@@ -1823,6 +1846,34 @@
             },
             "required": [ "label" ],
             "additionalProperties": false
+        },
+        "valueConstraintsActionsFieldItemContent": {
+          "description": "Schema that describes the schema of each entry in the 'actions' field array in a '_valueConstraints' field",
+          "type": "object",
+          "properties": {
+            "action": { "type": "string", "enum": [ "move", "delete" ] },
+            "to": { "type": "integer" },
+            "type": { "type": "string", "enum": [ "Value", "OntologyClass" ] },
+            "sourceUri": { "type": "string", "format": "uri" },
+            "termUri": { "type": "string", "format": "uri" }
+          },
+          "required": [ "action", "termUri", "type", "sourceUri" ],
+          "additionalProperties": false
+        },
+        "valueConstraintsStringDefaultValueContent": {
+          "description": "Schema that describes a field's default value as a string",
+          "type": "string"
+        },
+        "valueConstraintsUriDefaultValueContent": {
+          "description": "Schema that describes a field's default value as a term object",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "Value", "OntologyClass" ] },
+            "termUri": { "type": "string", "format": "uri" },
+            "sourceUri": { "type": "string", "format": "uri" }
+          },
+          "required": [ "type", "termUri", "sourceUri" ],
+          "additionalProperties": false
         },
         "numberAndNullTypeContent": {
             "description": "Schema that describes the schema for an array containing strings 'number' and 'null'",

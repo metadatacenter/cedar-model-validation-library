@@ -1,0 +1,13 @@
+{
+  "description": "Schema that describes the schema of each entry in the 'actions' field array in a '_valueConstraints' field",
+  "type": "object",
+  "properties": {
+    "action": { "type": "string", "enum": [ "move", "delete" ] },
+    "to": { "type": "integer" },
+    "type": { "type": "string", "enum": [ "Value", "OntologyClass" ] },
+    "sourceUri": { "type": "string", "format": "uri" },
+    "termUri": { "type": "string", "format": "uri" }
+  },
+  "required": [ "action", "termUri", "type", "sourceUri" ],
+  "additionalProperties": false
+}

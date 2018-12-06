@@ -15,7 +15,13 @@
         "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
         "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
         "multipleChoice": { "type": "boolean" },
-        "defaultValue": { "type": "string" },
+        "actions": { "$ref": "file:valueConstraintsActionsFieldContent.json" },
+        "defaultValue": {
+          "oneOf": [
+            { "$ref": "file:valueConstraintsStringDefaultValueContent.json" },
+            { "$ref": "file:valueConstraintsUriDefaultValueContent.json" }
+          ]
+        },
         "numberType": {
           "type": "string",
           "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]

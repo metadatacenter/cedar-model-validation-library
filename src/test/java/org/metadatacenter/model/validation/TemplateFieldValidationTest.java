@@ -148,9 +148,20 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassListField() {
+  public void shouldPassSingleSelectionListField() {
     // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/list-field.json");
+    String fieldString = TestResourcesUtils.getStringContent("fields/list-field-single-selection.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  @Ignore
+  public void shouldPassMultiSelectionListField() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/list-field-multi-selection.json");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
@@ -228,9 +239,29 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassConstrainedTextField() {
+  public void shouldPassControlledTextField() {
     // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/constrained-text-field.json");
+    String fieldString = TestResourcesUtils.getStringContent("fields/controlled-text-field.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassControlledTextFieldWithDefaultValueConstraint() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/controlled-text-field-default-value.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassControlledTextFieldWithActions() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/controlled-text-field-actions.json");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert

@@ -490,7 +490,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Type() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/@type");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/@type");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -502,7 +502,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Context() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/@context");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/@context");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -514,7 +514,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_JsonType() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/type");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/type");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -526,7 +526,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Title() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/title");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/title");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -538,7 +538,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Description() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/description");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/description");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -551,7 +551,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Required() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/required");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/required");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -563,7 +563,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_CreatedOn() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/pav:createdOn");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/pav:createdOn");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -575,7 +575,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_CreatedBy() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/pav:createdBy");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/pav:createdBy");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -587,7 +587,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_LastUpdatedOn() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/pav:lastUpdatedOn");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/pav:lastUpdatedOn");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -599,7 +599,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_ModifiedBy() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/oslc:modifiedBy");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/oslc:modifiedBy");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -611,7 +611,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_AdditionalProperties() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/additionalProperties");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/additionalProperties");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -623,7 +623,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Id() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/@id");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/@id");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -635,7 +635,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Schema() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/$schema");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/$schema");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -647,7 +647,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Properties() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/properties");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/properties");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -659,7 +659,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Properties_Type() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/properties/@type");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/properties/@type");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
@@ -672,7 +672,7 @@ public class TemplateValidationTest extends BaseValidationTest {
   public void shouldFailMissingProperties_Field_Properties_Value() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/studyName/properties/@value");
+    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/properties/@value");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert

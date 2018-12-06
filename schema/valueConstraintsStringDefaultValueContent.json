@@ -1,0 +1,4 @@
+{
+  "description": "Schema that describes a field's default value as a string",
+  "type": "string"
+}

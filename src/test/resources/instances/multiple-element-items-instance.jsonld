@@ -33,83 +33,72 @@
     "skos:notation": {
       "@type": "xsd:string"
     },
-    "studyName": "https://schema.metadatacenter.orgx/properties/studyName",
-    "participants": "https://schema.metadatacenter.orgx/properties/participants"
+    "Participant": "https://schema.staging.metadatacenter.org/properties/d99e2d46-17a9-4d0d-864e-e9639af663d3",
+    "Study Name": "https://schema.staging.metadatacenter.org/properties/a2155cb8-6f9b-4f37-b041-7297b6f24be8"
   },
-  "studyName": {
-    "@value": "Probing Unicorn Stem Cells"
-  },
-  "participants": [
+  "Participant": [
     {
       "@context": {
-        "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
-        "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
-        "lastName": "https://schema.metadatacenter.orgx/properties/lastName",
-        "title": "https://schema.metadatacenter.orgx/properties/title"
+        "First Name": "https://schema.staging.metadatacenter.org/properties/5c573ce5-7109-43e4-b876-487cd275ae0a",
+        "Middle Name": "https://schema.staging.metadatacenter.org/properties/a189a558-d0ab-4fb1-bcf0-fde6efbabeeb",
+        "Last Name": "https://schema.staging.metadatacenter.org/properties/4f894f80-2f8c-438f-9bd4-9d6094807e9a",
+        "Title": "https://schema.staging.metadatacenter.org/properties/f1884068-53aa-48b0-8075-42abeac63b7a",
+        "Disease": "https://schema.staging.metadatacenter.org/properties/a8b21ef2-301c-4539-9336-0c876b904bee"
       },
-      "firstName": {
-        "@value": "Jim"
-      },
-      "middleName": {
-        "@value": null
-      },
-      "lastName": {
-        "@value": "Wayne"
-      },
-      "title": {
-        "@value": [ "Mr." ]
-      },
-      "@id": "https://repo.metadatacenter.orgx/template-element-instances/59051812-bc89-47a5-bc1c-0e35e68c45c3"
-    },
-    {
-      "@context": {
-        "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
-        "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
-        "lastName": "https://schema.metadatacenter.orgx/properties/lastName",
-        "title": "https://schema.metadatacenter.orgx/properties/title"
-      },
-      "firstName": {
-        "@value": "Amy"
-      },
-      "middleName": {
-        "@value": "Young"
-      },
-      "lastName": {
-        "@value": "Smith"
-      },
-      "title": {
-        "@value": null
-      },
-      "@id": "https://repo.metadatacenter.orgx/template-element-instances/12911d48-4cde-4bf0-9c44-01e2767d927d"
-    },
-    {
-      "@context": {
-        "firstName": "https://schema.metadatacenter.orgx/properties/firstName",
-        "middleName": "https://schema.metadatacenter.orgx/properties/middleName",
-        "lastName": "https://schema.metadatacenter.orgx/properties/lastName",
-        "title": "https://schema.metadatacenter.orgx/properties/title"
-      },
-      "firstName": {
+      "First Name": {
         "@value": "John"
       },
-      "middleName": {
-        "@value": null
+      "Middle Name": {
+        "@value": "Morgan"
       },
-      "lastName": {
-        "@value": "Doe"
+      "Last Name": {
+        "@value": "Smith"
       },
-      "title": {
-        "@value": null
+      "Title": {
+        "@value": "Mr."
       },
-      "@id": "https://repo.metadatacenter.orgx/template-element-instances/f874c41d-9bc3-4af5-a61e-ed8e172467e8"
+      "Disease": {
+        "@id": "http://purl.obolibrary.org/obo/DOID_0050140",
+        "rdfs:label": "acute diarrhea"
+      },
+      "@id": "https://repo.staging.metadatacenter.org/template-element-instances/9b0b5bdf-315f-4dd8-b389-b3e8ac3af3c5"
+    },
+    {
+      "@context": {
+        "First Name": "https://schema.staging.metadatacenter.org/properties/5c573ce5-7109-43e4-b876-487cd275ae0a",
+        "Middle Name": "https://schema.staging.metadatacenter.org/properties/a189a558-d0ab-4fb1-bcf0-fde6efbabeeb",
+        "Last Name": "https://schema.staging.metadatacenter.org/properties/4f894f80-2f8c-438f-9bd4-9d6094807e9a",
+        "Title": "https://schema.staging.metadatacenter.org/properties/f1884068-53aa-48b0-8075-42abeac63b7a",
+        "Disease": "https://schema.staging.metadatacenter.org/properties/a8b21ef2-301c-4539-9336-0c876b904bee"
+      },
+      "First Name": {
+        "@value": "Jane"
+      },
+      "Middle Name": {
+        "@value": ""
+      },
+      "Last Name": {
+        "@value": "Smith"
+      },
+      "Title": {
+        "@value": "Mrs."
+      },
+      "Disease": {
+        "@id": "http://purl.obolibrary.org/obo/DOID_0050140",
+        "rdfs:label": "acute diarrhea"
+      },
+      "@id": "https://repo.staging.metadatacenter.org/template-element-instances/9b0b5bdf-315f-4dd8-b389-b3e8ac3af3c6"
     }
   ],
-  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/afc9f669-9b3a-499d-b75a-2b143214fd42",
-  "schema:name": "Multivalued Element Template metadata",
-  "schema:description": "Description",
-  "pav:createdOn": "2017-05-19T11:50:39-0700",
-  "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
-  "pav:lastUpdatedOn": "2017-05-19T11:51:04-0700",
-  "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
-  "@id": "https://repo.metadatacenter.orgx/template-instances/de31fd6c-a21f-4d6e-802b-8ae37972b0cd"
+  "Study Name": {
+    "@value": "Lorem Ipsum"
+  },
+  "schema:isBasedOn": "https://repo.staging.metadatacenter.org/templates/c54aafdb-0379-4cde-b97e-173040d7b97c",
+  "schema:name": "Multiple Element Items Template metadata",
+  "schema:description": "",
+  "pav:createdOn": "2018-11-12T16:33:08-0800",
+  "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
+  "pav:lastUpdatedOn": "2018-11-12T16:33:08-0800",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
+  "@id": "https://repo.staging.metadatacenter.org/template-instances/94ae3a58-0955-4c73-9ca7-e55ca54f847d"
 }

@@ -31,6 +31,7 @@ definitions:
   - valueConstraintsClassesFieldContent.json
   - valueConstraintsBranchesFieldContent.json
   - valueConstraintsLiteralsFieldContent.json
+  - valueConstraintsActionsFieldContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
   - numberAndNullTypeContent.json
@@ -44,5 +45,8 @@ definitions:
   - valueConstraintsClassesFieldItemContent.json
   - valueConstraintsBranchesFieldItemContent.json
   - valueConstraintsLiteralsFieldItemContent.json
+  - valueConstraintsActionsFieldItemContent.json
+  - valueConstraintsStringDefaultValueContent.json
+  - valueConstraintsUriDefaultValueContent.json
   - valueConstraintsOntologiesExclusionsFieldContent.json
   - valueConstraintsValueSetsExclusionsFieldContent.json

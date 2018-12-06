@@ -33,17 +33,17 @@
     "skos:notation": {
       "@type": "xsd:string"
     },
-    "studyName": "https://schema.metadatacenter.orgx/properties/studyName"
+    "Study Name": "https://schema.staging.metadatacenter.org/properties/de3eece8-0bab-4eb7-b382-4b26a6a770d8"
   },
-  "studyName": {
-    "@value": "Probing Unicorn Stem Cells"
+  "Study Name": {
+    "@value": "Lorem Ipsum"
   },
-  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/82011b99-6784-458d-97ad-7438ca8f04c1",
-  "schema:name": "Single-Field Template metadata",
-  "schema:description": "Description",
-  "pav:createdOn": "2017-05-19T11:54:03-0700",
-  "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
-  "pav:lastUpdatedOn": "2017-05-19T11:54:03-0700",
-  "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
-  "@id": "https://repo.metadatacenter.orgx/template-instances/fdd5447b-22d7-4907-89d5-1329fea983a6"
+  "schema:isBasedOn": "https://repo.staging.metadatacenter.org/templates/dc898011-2742-41e9-9dae-9b57dbf2600f",
+  "schema:name": "Single Field Template metadata",
+  "schema:description": "",
+  "pav:createdOn": "2018-11-12T16:37:43-0800",
+  "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
+  "pav:lastUpdatedOn": "2018-11-12T16:37:43-0800",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
+  "@id": "https://repo.staging.metadatacenter.org/template-instances/e68980be-6583-4529-954a-edabceb29239"
 }

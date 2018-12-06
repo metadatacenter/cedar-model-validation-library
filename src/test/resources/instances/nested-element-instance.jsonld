@@ -33,65 +33,67 @@
     "skos:notation": {
       "@type": "xsd:string"
     },
-    "companyName": "https://schema.metadatacenter.orgx/properties/companyName",
-    "exportGood": "https://schema.metadatacenter.orgx/properties/exportGood",
-    "importGood": "https://schema.metadatacenter.orgx/properties/importGood"
+    "Trade Good": "https://schema.staging.metadatacenter.org/properties/60a02a6e-453d-4fdd-b58c-385723d9ef2d",
+    "Company Name": "https://schema.staging.metadatacenter.org/properties/fbd223e4-74c1-4419-a167-69c780a5529e",
+    "Trade Good1": "https://schema.staging.metadatacenter.org/properties/722d16ca-90f2-43fe-bf9e-9088edcfe85a"
   },
-  "companyName": {
-    "@value": "Cedar Inc."
-  },
-  "exportGood": {
+  "Trade Good": {
     "@context": {
-      "productName": "https://schema.metadatacenter.orgx/properties/productName",
-      "quantity": "https://schema.metadatacenter.orgx/properties/quantity"
+      "Quantity": "https://schema.staging.metadatacenter.org/properties/2ab7cbb1-1ba0-44dd-95c3-36f9533ce257",
+      "Product Name": "https://schema.staging.metadatacenter.org/properties/934413d4-78d6-4035-9117-b33ed23cea61"
     },
-    "productName": {
-      "@value": "Redwood plank"
-    },
-    "quantity": {
+    "Quantity": {
       "@context": {
-        "value": "https://schema.metadatacenter.orgx/properties/value",
-        "unitOfMeasurement": "https://schema.metadatacenter.orgx/properties/unitOfMeasurement"
+        "Unit of Measurement": "https://schema.staging.metadatacenter.org/properties/06be1a8d-23d2-4a14-b71b-225c7315bf3d",
+        "Value": "https://schema.staging.metadatacenter.org/properties/7e925600-02ef-45de-b01b-8d248edb4a10"
       },
-      "value": {
-        "@value": "100"
+      "Unit of Measurement": {
+        "@value": "lbs"
       },
-      "unitOfMeasurement": {
-        "@value": "Tonne"
+      "Value": {
+        "@value": "100",
+        "@type": "xsd:decimal"
       },
-      "@id": "https://repo.metadatacenter.orgx/template-element-instances/1b97ac34-4412-4d4c-b6b8-87cab45c1daf"
+      "@id": "https://repo.staging.metadatacenter.org/template-element-instances/7c3f066d-20e1-4a07-91c5-4646288b8672"
     },
-    "@id": "https://repo.metadatacenter.orgx/template-element-instances/608eaf81-fd10-45c7-8e11-a20cb005cca3"
+    "Product Name": {
+      "@value": "Lorem Ipsum"
+    },
+    "@id": "https://repo.staging.metadatacenter.org/template-element-instances/0382cd95-d37c-45b1-bc64-e3e2a4374583"
   },
-  "importGood": {
+  "Company Name": {
+    "@value": "Lorem Ipsum"
+  },
+  "Trade Good1": {
     "@context": {
-      "productName": "https://schema.metadatacenter.orgx/properties/productName",
-      "quantity": "https://schema.metadatacenter.orgx/properties/quantity"
+      "Quantity": "https://schema.staging.metadatacenter.org/properties/2ab7cbb1-1ba0-44dd-95c3-36f9533ce257",
+      "Product Name": "https://schema.staging.metadatacenter.org/properties/934413d4-78d6-4035-9117-b33ed23cea61"
     },
-    "productName": {
-      "@value": "Redwood"
-    },
-    "quantity": {
+    "Quantity": {
       "@context": {
-        "value": "https://schema.metadatacenter.orgx/properties/value",
-        "unitOfMeasurement": "https://schema.metadatacenter.orgx/properties/unitOfMeasurement"
+        "Unit of Measurement": "https://schema.staging.metadatacenter.org/properties/06be1a8d-23d2-4a14-b71b-225c7315bf3d",
+        "Value": "https://schema.staging.metadatacenter.org/properties/7e925600-02ef-45de-b01b-8d248edb4a10"
       },
-      "value": {
-        "@value": "200"
+      "Unit of Measurement": {
+        "@value": "lbs"
       },
-      "unitOfMeasurement": {
-        "@value": "Tonne"
+      "Value": {
+        "@value": "200",
+        "@type": "xsd:decimal"
       },
-      "@id": "https://repo.metadatacenter.orgx/template-element-instances/841946a7-a873-4666-905c-034b9693628e"
+      "@id": "https://repo.staging.metadatacenter.org/template-element-instances/5c27eb0d-2eae-47fc-9106-44caf8c63976"
     },
-    "@id": "https://repo.metadatacenter.orgx/template-element-instances/7d5e6847-b330-471a-833a-1ad07c12c16c"
+    "Product Name": {
+      "@value": "Lorem Ipsum"
+    },
+    "@id": "https://repo.staging.metadatacenter.org/template-element-instances/172ee915-36bf-4a54-bf52-20c531ff121e"
   },
-  "schema:isBasedOn": "https://repo.metadatacenter.orgx/templates/9846a049-d248-4800-bd2f-b24cffb27245",
-  "schema:name": "Nested Field Template metadata",
-  "schema:description": "Description",
-  "pav:createdOn": "2017-05-19T11:53:28-0700",
-  "pav:createdBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
-  "pav:lastUpdatedOn": "2017-05-19T11:53:28-0700",
-  "oslc:modifiedBy": "https://metadatacenter.org/users/67a894dc-e9df-42d0-bb6e-5dbb4aa9dd79",
-  "@id": "https://repo.metadatacenter.orgx/template-instances/7e4f1cba-ecd6-423a-b75e-bcd758154ce2"
+  "schema:isBasedOn": "https://repo.staging.metadatacenter.org/templates/be27e571-f838-43fa-98fc-d6a63e70876c",
+  "schema:name": "Nested Template metadata",
+  "schema:description": "",
+  "pav:createdOn": "2018-11-12T16:36:28-0800",
+  "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
+  "pav:lastUpdatedOn": "2018-11-12T16:36:28-0800",
+  "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
+  "@id": "https://repo.staging.metadatacenter.org/template-instances/df6553cc-b76c-4be9-b0d8-e45de9030773"
 }
