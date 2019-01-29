@@ -4,7 +4,7 @@
     "properties": {
         "@context": { "$ref": "#/definitions/templateContextFieldContent" },
         "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
-        "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
+        "@id": { "$ref": "#/definitions/jsonLDIDFieldContentWithNull" },
         "schema:name": { "$ref": "#/definitions/schemaNameFieldContent" },
         "schema:description": { "$ref": "#/definitions/schemaDescriptionFieldContent" },
         "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },

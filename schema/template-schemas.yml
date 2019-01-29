@@ -12,6 +12,7 @@ definitions:
   - templateContextFieldContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
+  - jsonLDIDFieldContentWithNull.json
   - schemaNameFieldContent.json
   - schemaNameContextFieldContent.json
   - schemaDescriptionFieldContent.json
