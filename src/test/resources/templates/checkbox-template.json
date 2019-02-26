@@ -186,6 +186,17 @@
             }
           }
         },
+        "pav:derivedFrom": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
+        },
         "Select multiple": {
           "enum": [
             "https://schema.staging.metadatacenter.org/properties/0126d064-1175-4b9f-ae9a-44e925924fba"
@@ -268,6 +279,10 @@
         "string",
         "null"
       ],
+      "format": "uri"
+    },
+    "pav:derivedFrom": {
+      "type": "string",
       "format": "uri"
     },
     "Select multiple": {

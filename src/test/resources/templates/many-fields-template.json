@@ -189,6 +189,17 @@
             }
           }
         },
+        "pav:derivedFrom": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
+        },
         "Study Name": {
           "enum": [
             "https://schema.staging.metadatacenter.org/properties/25fc3cdc-cee8-40c0-a65f-fcebe55e4e4f"
@@ -276,6 +287,10 @@
         "string",
         "null"
       ],
+      "format": "uri"
+    },
+    "pav:derivedFrom": {
+      "type": "string",
       "format": "uri"
     },
     "Study Name": {

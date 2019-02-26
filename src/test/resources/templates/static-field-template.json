@@ -185,6 +185,17 @@
               ]
             }
           }
+        },
+        "pav:derivedFrom": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
         }
       },
       "required": [
@@ -263,6 +274,10 @@
         "string",
         "null"
       ],
+      "format": "uri"
+    },
+    "pav:derivedFrom": {
+      "type": "string",
       "format": "uri"
     },
     "About Study Form": {

@@ -16,11 +16,14 @@
     "pav:createdBy": { "ref": "file:pavCreatedByContextPropertiesContent.json" },
     "pav:lastUpdatedOn": { "ref": "file:pavLastUpdatedOnContextPropertiesContent.json" },
     "oslc:modifiedBy": { "ref": "file:oslcModifiedByContextPropertiesContent.json" },
-    "skos:notation": { "ref": "file:skosNotationContextPropertiesContent.json" }
+    "skos:notation": { "ref": "file:skosNotationContextPropertiesContent.json" },
+    "pav:derivedFrom": { "ref": "file:pavDerivedFromContextPropertiesContent.json" }
   },
   "patternProperties": {
     "^(?!(schema|xsd|pav|oslc|rdfs|skos|\\$))[^.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
   },
   "additionalProperties": false,
-  "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "skos", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "skos:notation" ]
+  "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "skos", "rdfs:label", "schema:isBasedOn",
+    "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+    "oslc:modifiedBy", "skos:notation", "pav:derivedFrom" ]
 }

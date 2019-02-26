@@ -192,6 +192,17 @@
             }
           }
         },
+        "pav:derivedFrom": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
+        },
         "Trade Good": {
           "enum": [
             "https://schema.staging.metadatacenter.org/properties/60a02a6e-453d-4fdd-b58c-385723d9ef2d"
@@ -286,6 +297,10 @@
         "string",
         "null"
       ],
+      "format": "uri"
+    },
+    "pav:derivedFrom": {
+      "type": "string",
       "format": "uri"
     },
     "Trade Good": {

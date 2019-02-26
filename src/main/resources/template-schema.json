@@ -125,13 +125,15 @@
                 "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
                 "schema:isBasedOn": { "$ref": "#/definitions/schemaIsBasedOnFieldContent" },
                 "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
-                "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
+                "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
+                "pav:derivedFrom": { "$ref": "#/definitions/pavDerivedFromFieldContent" }
             },
             "patternProperties": {
-              "^(?!(@context|@type|@id|schema|xsd|pav|oslc|\\$))[^.]+$": { "$ref": "#/definitions/userSpecifiedFields" }
+              "^(?!(@context|@type|@id|schema|xsd|pav|oslc|\\$))[^\\.]+$": { "$ref": "#/definitions/userSpecifiedFields" }
             },
             "additionalProperties": false,
-            "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+            "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description",
+              "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "pav:derivedFrom" ]
         },
         "templateUIFieldContent": {
             "description": "Schema that describes the schema of a '_ui' field in a template",
@@ -414,13 +416,16 @@
             "pav:createdBy": { "ref": "#/definitions/pavCreatedByContextPropertiesContent" },
             "pav:lastUpdatedOn": { "ref": "#/definitions/pavLastUpdatedOnContextPropertiesContent" },
             "oslc:modifiedBy": { "ref": "#/definitions/oslcModifiedByContextPropertiesContent" },
-            "skos:notation": { "ref": "#/definitions/skosNotationContextPropertiesContent" }
+            "skos:notation": { "ref": "#/definitions/skosNotationContextPropertiesContent" },
+            "pav:derivedFrom": { "ref": "#/definitions/pavDerivedFromContextPropertiesContent" }
           },
           "patternProperties": {
             "^(?!(schema|xsd|pav|oslc|rdfs|skos|\\$))[^.]+$": { "$ref": "#/definitions/userFieldContextPropertiesContent" }
           },
           "additionalProperties": false,
-          "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "skos", "rdfs:label", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "skos:notation" ]
+          "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "skos", "rdfs:label", "schema:isBasedOn",
+            "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+            "oslc:modifiedBy", "skos:notation", "pav:derivedFrom" ]
         },
         "rdfsContextPropertiesContent": {
           "description": "Schema describing the 'rdfs' prefix in the '@context/properties' field",
@@ -702,6 +707,34 @@
                       "type": "array", "minItems": 1, "maxItems": 1,
                       "items": [
                         { "type": "string", "enum": [ "xsd:dateTime" ] }
+                      ]
+                    }
+                  },
+                  "required": [ "type", "enum" ]
+                }
+              },
+              "required": [ "@type" ]
+            }
+          },
+          "required": [ "type", "properties" ],
+          "additionalProperties": false
+        },
+        "pavDerivedFromContextPropertiesContent": {
+          "description": "Schema describing the 'pav:derivedFrom' in the '@context/properties' field",
+          "type": "object",
+          "properties": {
+            "type": { "type": "string", "enum": [ "object" ] },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "@type": {
+                  "type": "object",
+                  "properties": {
+                    "type": { "type": "string", "enum": [ "string" ]},
+                    "enum": {
+                      "type": "array", "minItems": 1, "maxItems": 1,
+                      "items": [
+                        { "type": "string", "enum": [ "@id" ] }
                       ]
                     }
                   },
@@ -1796,6 +1829,16 @@
           },
           "required": [ "type" ],
           "additionalProperties": false
+        },
+        "pavDerivedFromFieldContent": {
+            "description": "Schema that describes the schema of a 'pav:derivedFrom' field",
+            "type": "object",
+            "properties": {
+                "type": { "type": "string", "enum": [ "string" ] },
+                "format": { "type": "string", "enum": [ "uri" ] }
+            },
+            "required": [ "type", "format" ],
+            "additionalProperties": false
         },
         "valueConstraintsOntologiesFieldItemContent": {
             "description": "Schema that describes the schema of each entry in the 'ontologies' field array in a '_valueConstraints' field",

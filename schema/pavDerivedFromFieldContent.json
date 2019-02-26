@@ -1,0 +1,10 @@
+{
+    "description": "Schema that describes the schema of a 'pav:derivedFrom' field",
+    "type": "object",
+    "properties": {
+        "type": { "type": "string", "enum": [ "string" ] },
+        "format": { "type": "string", "enum": [ "uri" ] }
+    },
+    "required": [ "type", "format" ],
+    "additionalProperties": false
+}
