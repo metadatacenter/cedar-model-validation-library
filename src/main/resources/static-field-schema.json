@@ -93,7 +93,8 @@
               "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
               "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
               "@value": { "$ref": "#/definitions/jsonLDValueFieldContent" },
-              "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
+              "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" },
+              "skos:notation": { "$ref": "#/definitions/skosNotationFieldContent" }
             },
             "required": [ "@type" ],
             "additionalProperties": false

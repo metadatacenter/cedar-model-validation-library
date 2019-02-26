@@ -190,7 +190,8 @@
             "properties": {
                 "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
                 "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
-                "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" }
+                "rdfs:label": { "$ref": "#/definitions/rdfsLabelFieldContent" },
+                "skos:notation": { "$ref": "#/definitions/skosNotationFieldContent" }
             },
             "required": [ "@type", "@id", "rdfs:label" ],
             "additionalProperties": false
@@ -390,6 +391,15 @@
             },
             "required": [ "type" ],
             "additionalProperties": false
+        },
+        "skosNotationFieldContent": {
+          "description": "Schema that describes the schema of a 'skos:notation' field in a 'properties' field in a template field",
+          "type": "object",
+          "properties": {
+            "type": { "$ref": "#/definitions/stringAndNullTypeContent" }
+          },
+          "required": [ "type" ],
+          "additionalProperties": false
         },
         "valueConstraintsOntologiesFieldContent": {
             "description": "Schema that describes the schema of the 'ontologies' field in a '_valueConstraints' field",
