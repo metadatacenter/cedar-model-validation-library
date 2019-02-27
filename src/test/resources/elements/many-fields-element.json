@@ -537,9 +537,8 @@
         ],
         "multipleChoice": false,
         "defaultValue": {
-          "type": "OntologyClass",
           "termUri": "http://purl.obolibrary.org/obo/DOID_0050140",
-          "sourceUri": "http://purl.obolibrary.org/obo/DOID_4"
+          "rdfs:label": "acute diarrhea"
         },
         "actions": [
           {

@@ -1442,11 +1442,11 @@
           "description": "Schema that describes a field's default value as a term object",
           "type": "object",
           "properties": {
-            "type": { "type": "string", "enum": [ "Value", "OntologyClass" ] },
             "termUri": { "type": "string", "format": "uri" },
-            "sourceUri": { "type": "string", "format": "uri" }
+            "rdfs:label": { "type": "string" },
+            "skos:notation":  { "type": "string" }
           },
-          "required": [ "type", "termUri", "sourceUri" ],
+          "required": [ "termUri", "rdfs:label" ],
           "additionalProperties": false
         },
         "valueConstraintsOntologiesExclusionsFieldContent": {
