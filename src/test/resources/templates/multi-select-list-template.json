@@ -186,6 +186,17 @@
             }
           }
         },
+        "pav:derivedFrom": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
+        },
         "Pick multiple": {
           "enum": [
             "https://schema.staging.metadatacenter.org/properties/a469adc7-9785-4af0-adad-36a69c920a2b"
@@ -208,7 +219,10 @@
       "additionalProperties": false
     },
     "@id": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "uri"
     },
     "@type": {
@@ -265,6 +279,10 @@
         "string",
         "null"
       ],
+      "format": "uri"
+    },
+    "pav:derivedFrom": {
+      "type": "string",
       "format": "uri"
     },
     "Pick multiple": {

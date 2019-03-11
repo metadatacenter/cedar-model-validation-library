@@ -61,6 +61,7 @@ definitions:
   - valueConstraintsLiteralsFieldContent.json
   - valueConstraintsActionsFieldContent.json
   - rdfsLabelFieldContent.json
+  - skosNotationFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json

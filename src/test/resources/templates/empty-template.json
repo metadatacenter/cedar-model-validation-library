@@ -180,6 +180,17 @@
               ]
             }
           }
+        },
+        "pav:derivedFrom": {
+          "type": "object",
+          "properties": {
+            "@type": {
+              "type": "string",
+              "enum": [
+                "@id"
+              ]
+            }
+          }
         }
       },
       "required": [
@@ -198,7 +209,10 @@
       "additionalProperties": false
     },
     "@id": {
-      "type": "string",
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "uri"
     },
     "@type": {
@@ -219,6 +233,10 @@
       ]
     },
     "schema:isBasedOn": {
+      "type": "string",
+      "format": "uri"
+    },
+    "pav:derivedFrom": {
       "type": "string",
       "format": "uri"
     },

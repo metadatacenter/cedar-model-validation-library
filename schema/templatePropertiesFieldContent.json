@@ -4,18 +4,20 @@
     "properties": {
         "@context": { "$ref": "#/definitions/templateContextFieldContent" },
         "@type": { "$ref": "#/definitions/jsonLDTypeFieldContent" },
-        "@id": { "$ref": "#/definitions/jsonLDIDFieldContent" },
+        "@id": { "$ref": "#/definitions/jsonLDIDFieldContentWithNull" },
         "schema:name": { "$ref": "#/definitions/schemaNameFieldContent" },
         "schema:description": { "$ref": "#/definitions/schemaDescriptionFieldContent" },
         "pav:createdOn": { "$ref": "#/definitions/pavCreatedOnFieldContent" },
         "pav:createdBy": { "$ref": "#/definitions/pavCreatedByFieldContent" },
         "schema:isBasedOn": { "$ref": "#/definitions/schemaIsBasedOnFieldContent" },
         "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
-        "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" }
+        "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
+        "pav:derivedFrom": { "$ref": "#/definitions/pavDerivedFromFieldContent" }
     },
     "patternProperties": {
-      "^(?!(@context|@type|@id|schema|xsd|pav|oslc|\\$))[^.]+$": { "$ref": "file:userSpecifiedFields.json" }
+      "^(?!(@context|@type|@id|schema|xsd|pav|oslc|\\$))[^\\.]+$": { "$ref": "file:userSpecifiedFields.json" }
     },
     "additionalProperties": false,
-    "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]
+    "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description",
+      "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy", "pav:derivedFrom" ]
 }

@@ -25,6 +25,7 @@ definitions:
   - pavLastUpdatedOnFieldContent.json
   - oslcModifiedByFieldContent.json
   - rdfsLabelFieldContent.json
+  - skosNotationFieldContent.json
   - valueConstraintsOntologiesFieldContent.json
   - valueConstraintsValueSetsFieldContent.json
   - valueConstraintsClassesFieldContent.json

@@ -40,6 +40,7 @@ public class CedarModelVocabulary {
   public static final String PAV_CREATED_ON = "pav:createdOn";
   public static final String PAV_CREATED_BY = "pav:createdBy";
   public static final String PAV_LAST_UPDATED_ON = "pav:lastUpdatedOn";
+  public static final String PAV_DERIVED_FROM = "pav:derivedFrom";
   public static final String OSLC_MODIFIED_BY = "oslc:modifiedBy";
 
   public static final String SCHEMA_IS_BASED_ON = "schema:isBasedOn";
@@ -48,7 +49,7 @@ public class CedarModelVocabulary {
 
   public static final Set<String> CommonPropertiesInnerFields = new HashSet<>(
       Arrays.asList(JsonLdToken.CONTEXT, JsonLdToken.TYPE, JsonLdToken.ID, JsonLdToken.VALUE,
-          PAV_CREATED_ON, PAV_CREATED_BY, PAV_LAST_UPDATED_ON, OSLC_MODIFIED_BY, VALUE_LABEL,
+          PAV_CREATED_ON, PAV_CREATED_BY, PAV_LAST_UPDATED_ON, PAV_DERIVED_FROM, OSLC_MODIFIED_BY, VALUE_LABEL,
           SCHEMA_IS_BASED_ON, SCHEMA_NAME, SCHEMA_DESCRIPTION));
 
   public static final Set<String> CommonUIInnerFields = new HashSet<>(

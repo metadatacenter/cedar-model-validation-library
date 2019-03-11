@@ -5,7 +5,8 @@
       "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
       "@id": { "$ref": "file:jsonLDIDFieldContent.json" },
       "@value": { "$ref": "file:jsonLDValueFieldContent.json" },
-      "rdfs:label": { "$ref": "file:rdfsLabelFieldContent.json" }
+      "rdfs:label": { "$ref": "file:rdfsLabelFieldContent.json" },
+      "skos:notation": { "$ref": "file:skosNotationFieldContent.json" }
     },
     "required": [ "@type" ],
     "additionalProperties": false

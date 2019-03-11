@@ -269,6 +269,16 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassCdeField() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/controlled-text-cde-field.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassAttributeValueField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/attribute-value-field.json");
