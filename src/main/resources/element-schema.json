@@ -578,7 +578,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "textfield", "textarea", "radio", "date", "email", "list", "numeric", "phone-number" ]
+                    "enum": [ "textfield", "textarea", "radio", "date", "datetime", "time", "email", "list", "numeric", "phone-number" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
