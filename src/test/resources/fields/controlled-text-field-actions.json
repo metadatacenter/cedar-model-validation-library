@@ -60,14 +60,16 @@
         "termUri": "http://purl.obolibrary.org/obo/DOID_0050072",
         "action": "delete",
         "type": "OntologyClass",
-        "sourceUri": "http://purl.obolibrary.org/obo/DOID_4"
+        "sourceUri": "http://purl.obolibrary.org/obo/DOID_4",
+        "source": "DOID"
       },
       {
         "to": 0,
         "action": "move",
         "termUri": "http://purl.obolibrary.org/obo/DOID_0001816",
         "type": "OntologyClass",
-        "sourceUri": "http://purl.obolibrary.org/obo/DOID_4"
+        "sourceUri": "http://purl.obolibrary.org/obo/DOID_4",
+        "source": "DOID"
       }
     ]
   },
