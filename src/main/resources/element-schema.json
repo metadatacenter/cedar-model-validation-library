@@ -1428,10 +1428,11 @@
             "action": { "type": "string", "enum": [ "move", "delete" ] },
             "to": { "type": "integer" },
             "type": { "type": "string", "enum": [ "Value", "OntologyClass" ] },
+            "source": { "type": "string"},
             "sourceUri": { "type": "string", "format": "uri" },
             "termUri": { "type": "string", "format": "uri" }
           },
-          "required": [ "action", "termUri", "type", "sourceUri" ],
+          "required": [ "action", "termUri", "type", "source", "sourceUri"],
           "additionalProperties": false
         },
         "valueConstraintsStringDefaultValueContent": {
