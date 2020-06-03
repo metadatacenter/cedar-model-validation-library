@@ -25,6 +25,10 @@
         "numberType": {
           "type": "string",
           "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
+        },
+        "dateTimeType": {
+          "type": "string",
+          "enum": [ "xsd:dateTime", "xsd:date", "xsd:time" ]
         }
     },
     "required": [ "requiredValue" ],

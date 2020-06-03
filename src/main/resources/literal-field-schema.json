@@ -153,7 +153,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "textfield", "textarea", "radio", "date", "datetime", "time", "email", "list", "numeric", "phone-number" ]
+                    "enum": [ "textfield", "textarea", "radio", "datetime", "email", "list", "numeric", "phone-number" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
@@ -189,6 +189,10 @@
                 "numberType": {
                   "type": "string",
                   "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
+                },
+                "dateTimeType": {
+                  "type": "string",
+                  "enum": [ "xsd:dateTime", "xsd:date", "xsd:time" ]
                 }
             },
             "required": [ "requiredValue" ],
@@ -411,31 +415,6 @@
           },
           "required": [ "type" ],
           "additionalProperties": false
-        },
-        "valueConstraintsOntologiesFieldContent": {
-            "description": "Schema that describes the schema of the 'ontologies' field in a '_valueConstraints' field",
-            "type": "array", "uniqueItems": true,
-            "items": {  "$ref": "#/definitions/valueConstraintsOntologiesFieldItemContent" }
-        },
-        "valueConstraintsValueSetsFieldContent": {
-            "description": "Schema that describes the schema of 'valueSets' field in a '_valueConstraints' field",
-            "type": "array", "uniqueItems": true,
-            "items": { "$ref": "#/definitions/valueConstraintsValueSetsFieldItemContent" }
-        },
-        "valueConstraintsClassesFieldContent": {
-            "description": "Schema that describes the schema of the 'classes' field in a '_valueConstraints' field",
-            "type": "array", "uniqueItems": true,
-            "items": { "$ref": "#/definitions/valueConstraintsClassesFieldItemContent"}            
-        },
-        "valueConstraintsBranchesFieldContent": {
-            "description": "Schema that describes the schema of the 'branches' field in a '_valueConstraints' field",
-            "type": "array", "uniqueItems": true,
-            "items": {  "$ref": "#/definitions/valueConstraintsBranchesFieldItemContent"  }            
-        },
-        "valueConstraintsLiteralsFieldContent": {
-            "description": "Schema that describes the schema of the 'literals' field in a '_valueConstraints' field",
-            "type": "array", "uniqueItems": true,
-            "items": { "$ref": "#/definitions/valueConstraintsLiteralsFieldItemContent"}            
         },
         "valueConstraintsActionsFieldContent": {
             "description": "Schema that describes the schema of the 'actions' field in a '_valueConstraints' field",
