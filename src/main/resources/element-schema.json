@@ -578,7 +578,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "textfield", "textarea", "radio", "datetime", "email", "list", "numeric", "phone-number" ]
+                    "enum": [ "textfield", "textarea", "radio", "temporal", "email", "list", "numeric", "phone-number" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
@@ -615,7 +615,7 @@
                   "type": "string",
                   "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
                 },
-                "dateTimeType": {
+                "temporalType": {
                   "type": "string",
                   "enum": [ "xsd:dateTime", "xsd:date", "xsd:time" ]
                 }
