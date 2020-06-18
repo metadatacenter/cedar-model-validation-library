@@ -1106,7 +1106,7 @@
                 },
                 "numberType": {
                   "type": "string",
-                  "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
+                  "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float", "xsd:byte", "xsd:short"]
                 }
             },
             "required": [ "requiredValue" ],
