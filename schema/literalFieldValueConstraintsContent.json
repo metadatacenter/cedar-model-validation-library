@@ -24,12 +24,21 @@
         },
         "numberType": {
           "type": "string",
-          "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
+          "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float", "xsd:byte", "xsd:short"]
         },
         "temporalType": {
           "type": "string",
           "enum": [ "xsd:dateTime", "xsd:date", "xsd:time" ]
-        }
+        },
+        "xsdDateFinestGranularity": {
+          "type": "string",
+          "enum": [ "Day", "Month", "Year", "Century" ]
+        },
+        "xsdTimeFinestGranularity": {
+          "type": "string",
+          "enum": [ "Second", "DecimalSecond", "Minute", "Hour" ]
+        },
+        "xsdTimeZoneEnable": { "type": "boolean" }
     },
     "required": [ "requiredValue" ],
     "additionalProperties": false
