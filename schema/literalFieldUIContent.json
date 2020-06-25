@@ -4,11 +4,12 @@
     "properties": {
         "inputType": {
             "type": "string",
-            "enum": [ "textfield", "textarea", "radio", "date", "email", "list", "numeric", "phone-number" ]
+            "enum": [ "textfield", "textarea", "radio", "temporal", "email", "list", "numeric", "phone-number" ]
         },
         "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "valueRecommendationEnabled": { "type": "boolean" },
-        "hidden": { "type": "boolean" }
+        "hidden": { "type": "boolean" },
+        "inputTimeDisplayAmPm": { "type": "boolean" }
     },
     "required": [ "inputType" ],
     "additionalProperties": false
