@@ -118,9 +118,9 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassDateField() {
+  public void shouldPassTemporalField() {
     // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/date-field.json");
+    String fieldString = TestResourcesUtils.getStringContent("fields/temporal-field.json");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
