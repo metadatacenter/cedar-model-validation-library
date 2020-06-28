@@ -29,16 +29,7 @@
         "temporalType": {
           "type": "string",
           "enum": [ "xsd:dateTime", "xsd:date", "xsd:time" ]
-        },
-        "xsdDateFinestGranularity": {
-          "type": "string",
-          "enum": [ "Day", "Month", "Year", "Century" ]
-        },
-        "xsdTimeFinestGranularity": {
-          "type": "string",
-          "enum": [ "Second", "DecimalSecond", "Minute", "Hour" ]
-        },
-        "xsdTimeZoneEnable": { "type": "boolean" }
+        }
     },
     "required": [ "requiredValue" ],
     "additionalProperties": false
