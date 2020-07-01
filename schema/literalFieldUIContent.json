@@ -9,7 +9,7 @@
         "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "valueRecommendationEnabled": { "type": "boolean" },
         "hidden": { "type": "boolean" },
-        "displayTimeFormat": {
+        "inputTimeFormat": {
           "type": "string",
           "enum": ["24h", "12h"]
         },
