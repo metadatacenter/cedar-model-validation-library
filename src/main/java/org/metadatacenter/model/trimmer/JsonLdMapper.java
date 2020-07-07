@@ -12,9 +12,9 @@ import java.time.format.DateTimeFormatter;
 
 public final class JsonLdMapper {
 
-  public static final String xsdDateTimeFormatterString = "uuuu-MM-dd'T'HH:mm:ssZ";
-  public static final DateTimeFormatter xsdDateTimeFormatter = DateTimeFormatter.ofPattern(xsdDateTimeFormatterString)
-      .withZone(ZoneId.systemDefault());
+  public static final String xsdDateTimeFormatterString = "uuuu-MM-dd'T'HH:mm:ssZZZZZ";
+  public static final DateTimeFormatter xsdDateTimeFormatter =
+      DateTimeFormatter.ofPattern(xsdDateTimeFormatterString).withZone(ZoneId.systemDefault());
 
   private JsonLdMapper() {
   }
@@ -25,10 +25,8 @@ public final class JsonLdMapper {
     MAPPER = new ObjectMapper();
     MAPPER.registerModule(new JavaTimeModule());
     JavaTimeModule javaTimeModule = new JavaTimeModule();
-    javaTimeModule.addSerializer(LocalDateTime.class,
-        new LocalDateTimeSerializer(xsdDateTimeFormatter));
-    javaTimeModule.addDeserializer(LocalDateTime.class,
-        new LocalDateTimeDeserializer(xsdDateTimeFormatter));
+    javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(xsdDateTimeFormatter));
+    javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(xsdDateTimeFormatter));
     MAPPER.registerModule(javaTimeModule);
     MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }

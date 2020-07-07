@@ -578,11 +578,20 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "textfield", "textarea", "radio", "date", "email", "list", "numeric", "phone-number" ]
+                    "enum": [ "textfield", "textarea", "radio", "temporal", "email", "list", "numeric", "phone-number" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
-                "hidden": { "type": "boolean" }
+                "hidden": { "type": "boolean" },
+                "inputTimeFormat": {
+                  "type": "string",
+                  "enum": ["24h", "12h"]
+                },
+                "temporalGranularity": {
+                  "type": "string",
+                  "enum": [ "year", "month", "day", "hour", "minute", "second", "decimalSecond" ]
+                },
+                "timezoneEnabled": { "type": "boolean" }
             },
             "required": [ "inputType" ],
             "additionalProperties": false
@@ -613,7 +622,11 @@
                 },
                 "numberType": {
                   "type": "string",
-                  "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float" ]
+                  "enum": [ "xsd:decimal", "xsd:long", "xsd:int", "xsd:double", "xsd:float", "xsd:byte", "xsd:short"]
+                },
+                "temporalType": {
+                  "type": "string",
+                  "enum": [ "xsd:dateTime", "xsd:date", "xsd:time" ]
                 }
             },
             "required": [ "requiredValue" ],
