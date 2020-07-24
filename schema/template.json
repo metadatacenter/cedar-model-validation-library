@@ -83,6 +83,9 @@
         },
         "pav:derivedFrom": {
             "type": "string", "format": "uri"
+        },
+        "@nest": {
+          "$ref": "#/definitions/nestFieldContent.json"
         }
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",

@@ -113,6 +113,9 @@
     "pav:version": {
       "type": "string", "minLength": 1
     },
+    "@nest": {
+      "$ref": "#/definitions/nestFieldContent.json"
+    },
     "additionalProperties": {
       "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
       "type": "boolean",
