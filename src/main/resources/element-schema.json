@@ -82,6 +82,9 @@
         },
         "pav:derivedFrom": {
             "type": "string", "format": "uri"
+        },
+        "@nest": {
+          "$ref": "#/definitions/nestFieldContent"
         }
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
@@ -132,7 +135,9 @@
             "properties": {
                 "order": { "$ref": "#/definitions/stringArray" },
                 "propertyLabels": { "$ref": "#/definitions/propertyLabelContent" },
-                "propertyDescriptions": { "$ref": "#/definitions/propertyDescriptionContent" }
+                "propertyDescriptions": { "$ref": "#/definitions/propertyDescriptionContent" },
+                "header": { "type": "string" },
+                "footer": { "type": "string" }
             },
             "required": [ "order", "propertyLabels" ],
             "additionalProperties": false
@@ -538,6 +543,9 @@
             },
             "pav:version": {
               "type": "string", "minLength": 1
+            },
+            "@nest": {
+              "$ref": "#/definitions/nestFieldContent"
             },
             "additionalProperties": {
               "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
@@ -1223,6 +1231,9 @@
                 },
                 "pav:derivedFrom": {
                     "type": "string", "format": "uri"
+                },
+                "@nest": {
+                  "$ref": "#/definitions/nestFieldContent"
                 }
             },
             "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type", "properties", "required",
@@ -1528,6 +1539,9 @@
           },
           "required": [ "type", "properties", "required", "additionalProperties" ],
           "additionalProperties": false
+        },
+        "nestFieldContent": {
+            "type": "object"
         }
     }
 }

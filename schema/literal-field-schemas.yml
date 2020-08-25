@@ -45,3 +45,4 @@ definitions:
   - valueConstraintsUriDefaultValueContent.json
   - valueConstraintsOntologiesExclusionsFieldContent.json
   - valueConstraintsValueSetsExclusionsFieldContent.json
+  - nestFieldContent.json

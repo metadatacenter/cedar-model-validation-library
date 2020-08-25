@@ -75,3 +75,4 @@ definitions:
   - falseOnlyAdditionalProperties.json
   - uriOnlyAdditionalProperties.json
   - defaultObjectSchemaAdditionalProperties.json
+  - nestFieldContent.json
