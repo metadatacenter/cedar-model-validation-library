@@ -9,7 +9,6 @@
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>2.5.36-SNAPSHOT</version>
   <name>CEDAR Model Validation Library</name>
   <description>Library for validating CEDAR artifacts</description>
 
