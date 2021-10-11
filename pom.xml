@@ -10,7 +10,7 @@
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>2.6.13-SNAPSHOT</version>
+  <version>2.6.1</version>
 
   <name>CEDAR Model Validation Library</name>
   <description>Library for validating CEDAR artifacts</description>
@@ -22,7 +22,7 @@
     <connection>scm:git:https://github.com/metadatacenter/cedar-model-validation-library.git</connection>
     <developerConnection>scm:git:https://github.com/metadatacenter/cedar-model-validation-library.git</developerConnection>
     <url>https://github.com/metadatacenter/cedar-model-validation-library</url>
-    <tag>HEAD</tag>
+    <tag>release-2.6.1</tag>
   </scm>
 
   <dependencies>
