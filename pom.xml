@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.metadatacenter</groupId>
     <artifactId>cedar-parent</artifactId>
-    <version>2.6.21</version>
+    <version>2.6.22</version>
   </parent>
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>2.6.21</version>
+  <version>2.6.22</version>
 
   <name>CEDAR Model Validation Library</name>
   <description>Library for validating CEDAR artifacts</description>
@@ -22,23 +22,23 @@
     <connection>scm:git:https://github.com/metadatacenter/cedar-model-validation-library.git</connection>
     <developerConnection>scm:git:https://github.com/metadatacenter/cedar-model-validation-library.git</developerConnection>
     <url>https://github.com/metadatacenter/cedar-model-validation-library</url>
-    <tag>release-2.6.21</tag>
+    <tag>release-2.6.22</tag>
   </scm>
 
   <dependencies>
 
     <dependency>
-      <groupId>com.github.fge</groupId>
+      <groupId>com.github.java-json-tools</groupId>
       <artifactId>json-schema-validator</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>com.github.fge</groupId>
+      <groupId>com.github.java-json-tools</groupId>
       <artifactId>json-schema-core</artifactId>
     </dependency>
 
     <dependency>
-      <groupId>com.github.fge</groupId>
+      <groupId>com.github.java-json-tools</groupId>
       <artifactId>jackson-coreutils</artifactId>
     </dependency>
 
