@@ -1079,7 +1079,7 @@
             "properties": {
                 "inputType": {
                     "type": "string",
-                    "enum": [ "textfield", "textarea", "radio", "temporal", "email", "list", "numeric", "phone-number" ]
+                    "enum": [ "textfield", "textarea", "radio", "temporal", "email", "list", "numeric", "boolean", "phone-number" ]
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
@@ -1113,6 +1113,7 @@
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
+                "labels": {  "$ref": "#/definitions/valueConstraintsLabelsFieldContent" },
                 "multipleChoice": { "type": "boolean" },
                 "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
                 "defaultValue": {
@@ -1318,6 +1319,7 @@
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
+                "labels": {  "$ref": "#/definitions/valueConstraintsLabelsFieldContent" },
                 "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean", "enum": [ false ] },
                 "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
@@ -1524,6 +1526,7 @@
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
+                "labels": {  "$ref": "#/definitions/valueConstraintsLabelsFieldContent" },
                 "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean", "enum": [ true ] },
                 "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
@@ -1818,6 +1821,11 @@
             "type": "array", "uniqueItems": true,
             "items": { "$ref": "#/definitions/valueConstraintsLiteralsFieldItemContent"}            
         },
+        "valueConstraintsLabelsFieldContent": {
+          "description": "Schema that describes the schema of the 'labels' field in a '_valueConstraints' field",
+          "type": "object", "uniqueItems": true,
+          "items": { "$ref": "#/definitions/valueConstraintsLabelsFieldItemContent"}
+        },
         "valueConstraintsActionsFieldContent": {
             "description": "Schema that describes the schema of the 'actions' field in a '_valueConstraints' field",
             "type": "array", "uniqueItems": true,
@@ -1931,6 +1939,11 @@
             },
             "required": [ "label" ],
             "additionalProperties": false
+        },
+        "valueConstraintsLabelsFieldItemContent": {
+          "description": "Schema that describes the schema of each entry in the 'labels' field array in a '_valueConstraints' field",
+          "type": "string",
+          "additionalProperties": false
         },
         "valueConstraintsActionsFieldItemContent": {
           "description": "Schema that describes the schema of each entry in the 'actions' field array in a '_valueConstraints' field",
