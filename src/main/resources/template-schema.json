@@ -1104,6 +1104,7 @@
                 "requiredValue": { "type": "boolean" },
                 "minLength": { "type": "integer" },
                 "maxLength": { "type": "integer" },
+                "regex": { "type": "string" },
                 "minValue": { "type": "number" },
                 "maxValue": { "type": "number" },
                 "decimalPlace": { "type": "number" },
