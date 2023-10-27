@@ -167,12 +167,13 @@
             "description": "Schema that describes the schema of a '_valueConstraints' field in an object-typed template field",
             "type": "object",
             "properties": {
+                "requiredValue": { "type": "boolean" },
+                "recommendedValue": { "type": "boolean" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
-                "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean", "enum": [ false ] },
                 "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
                 "defaultValue": {

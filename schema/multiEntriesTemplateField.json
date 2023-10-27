@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a multi-entries template field",
+    "description": "Schema that describes a multi-entry template field",
     "type": "object",
     "properties": {
         "type": { "type": "string", "enum": [ "array" ] },

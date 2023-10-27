@@ -43,6 +43,7 @@
   },
   "_valueConstraints": {
     "requiredValue": false,
+    "recommendedValue": false,
     "ontologies": [],
     "valueSets": [],
     "classes": [],

@@ -41,6 +41,7 @@
   },
   "_valueConstraints": {
     "requiredValue": false,
+    "recommendedValue": false,
     "multipleChoice": false,
     "literals": [
       {

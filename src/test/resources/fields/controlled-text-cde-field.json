@@ -64,7 +64,8 @@
     "branches": [],
     "ontologies": [],
     "maxLength": 25,
-    "requiredValue": false
+    "requiredValue": false,
+    "recommendedValue": false
   },
   "schema:description": "The indicator that describes whether or not an abdomen injury occurred.",
   "oslc:modifiedBy": "https://metadatacenter.org/users/30449a1f-80a8-4b54-a3fa-92d4d6157116",

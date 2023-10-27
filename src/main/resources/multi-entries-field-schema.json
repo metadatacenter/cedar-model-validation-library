@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a multi-entries template field",
+    "description": "Schema that describes a multi-entry template field",
     "type": "object",
     "properties": {
         "type": { "type": "string", "enum": [ "array" ] },
@@ -189,15 +189,16 @@
             "oslc:modifiedBy", "schema:schemaVersion", "schema:name", "schema:description" ]
         },
         "multiEntriesFieldValueConstraintsContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-entries template field",
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a multi-entry template field",
             "type": "object",
             "properties": {
+                "requiredValue": { "type": "boolean" },
+                "recommendedValue": { "type": "boolean" },
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
                 "valueSets": {  "$ref": "#/definitions/valueConstraintsValueSetsFieldContent" },
                 "classes": {  "$ref": "#/definitions/valueConstraintsClassesFieldContent" },
                 "branches": {  "$ref": "#/definitions/valueConstraintsBranchesFieldContent" },
                 "literals": {  "$ref": "#/definitions/valueConstraintsLiteralsFieldContent" },
-                "requiredValue": { "type": "boolean" },
                 "multipleChoice": { "type": "boolean", "enum": [ true ] },
                 "actions": { "$ref": "#/definitions/valueConstraintsActionsFieldContent" },
                 "defaultValue": {

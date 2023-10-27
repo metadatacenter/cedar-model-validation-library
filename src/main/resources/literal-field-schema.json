@@ -176,10 +176,11 @@
             "additionalProperties": false
         },
         "literalFieldValueConstraintsContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in a single data template field",
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a template field",
             "type": "object",
             "properties": {
                 "requiredValue": { "type": "boolean" },
+                "recommendedValue": { "type": "boolean" },
                 "minLength": { "type": "integer" },
                 "maxLength": { "type": "integer" },
                 "regex": { "type": "string" },
