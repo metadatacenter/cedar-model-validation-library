@@ -48,7 +48,7 @@ public class CedarModelVocabulary {
   public static final String SCHEMA_DESCRIPTION = "schema:description";
 
   public static final Set<String> CommonPropertiesInnerFields = new HashSet<>(
-      Arrays.asList(JsonLdToken.CONTEXT, JsonLdToken.TYPE, JsonLdToken.ID, JsonLdToken.VALUE,
+      Arrays.asList(JsonLdToken.JSON_LD_CONTEXT, JsonLdToken.JSON_LD_TYPE, JsonLdToken.JSON_LD_ID, JsonLdToken.JSON_LD_VALUE,
           PAV_CREATED_ON, PAV_CREATED_BY, PAV_LAST_UPDATED_ON, PAV_DERIVED_FROM, OSLC_MODIFIED_BY, VALUE_LABEL,
           SCHEMA_IS_BASED_ON, SCHEMA_NAME, SCHEMA_DESCRIPTION));
 

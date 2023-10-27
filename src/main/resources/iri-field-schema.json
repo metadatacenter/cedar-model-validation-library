@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Schema that describes a single resource object template field",
+  "description": "Schema that describes a single IRI-valued template field",
   "type": "object",
   "properties": {
     "$schema": {

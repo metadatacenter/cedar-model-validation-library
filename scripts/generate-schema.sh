@@ -25,8 +25,8 @@ echo -n "Generating the element schema... "
 echo -n "Generating the literal field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/literal-field-schemas.yml ${RESOURCES_DIR}/literal-field-schema.json
 
-echo -n "Generating the object field schema... "
-./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/object-field-schemas.yml ${RESOURCES_DIR}/object-field-schema.json
+echo -n "Generating the IRI field schema... "
+./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/iri-field-schemas.yml ${RESOURCES_DIR}/iri-field-schema.json
 
 echo -n "Generating the multi-entry field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/multi-entries-field-schemas.yml ${RESOURCES_DIR}/multi-entries-field-schema.json

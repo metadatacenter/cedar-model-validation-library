@@ -211,7 +211,7 @@ public class CedarValidator implements ModelValidator {
   private void validateNonStaticTemplateField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
     if (isObjectType(fieldNode)) {
-      validateResource(SchemaResources.OBJECT_FIELD_SCHEMA, fieldNode, location);
+      validateResource(SchemaResources.IRI_FIELD_SCHEMA, fieldNode, location);
     } else {
       validateResource(SchemaResources.LITERAL_FIELD_SCHEMA, fieldNode, location);
     }
