@@ -1,8 +1,8 @@
-base: objectTemplateField.json
+base: iriTemplateField.json
 definitions:
-  - objectFieldUIContent.json
-  - objectFieldValueConstraintsContent.json
-  - objectFieldPropertiesContent.json
+  - iriFieldUIContent.json
+  - iriFieldValueConstraintsContent.json
+  - iriFieldPropertiesContent.json
   - templateFieldJSONLDContextFieldContent.json
   - stringArray.json
   - valueConstraintsOntologiesFieldContent.json

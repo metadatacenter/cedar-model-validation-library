@@ -35,10 +35,10 @@ definitions:
   - literalFieldUIContent.json
   - literalFieldValueConstraintsContent.json
   - literalFieldPropertiesContent.json
-  - objectTemplateField.json
-  - objectFieldUIContent.json
-  - objectFieldValueConstraintsContent.json
-  - objectFieldPropertiesContent.json
+  - iriTemplateField.json
+  - iriFieldUIContent.json
+  - iriFieldValueConstraintsContent.json
+  - iriFieldPropertiesContent.json
   - multiEntriesTemplateField.json
   - staticTemplateField.json
   - checkBoxTemplateField.json

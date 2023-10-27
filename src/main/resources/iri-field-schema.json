@@ -51,10 +51,10 @@
       "minLength": 1
     },
     "_ui": {
-      "$ref": "#/definitions/objectFieldUIContent"
+      "$ref": "#/definitions/iriFieldUIContent"
     },
     "_valueConstraints": {
-      "$ref": "#/definitions/objectFieldValueConstraintsContent"
+      "$ref": "#/definitions/iriFieldValueConstraintsContent"
     },
     "@context": {
       "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
@@ -74,7 +74,7 @@
       ]
     },
     "properties": {
-      "$ref": "#/definitions/objectFieldPropertiesContent"
+      "$ref": "#/definitions/iriFieldPropertiesContent"
     },
     "required": {
       "$ref": "#/definitions/stringArray"
@@ -147,7 +147,7 @@
   ]
     ,
     "definitions": {
-        "objectFieldUIContent": {
+        "iriFieldUIContent": {
             "description": "Schema that describes the schema of a '_ui' field of a template field",
             "type": "object",
             "properties": {
@@ -163,7 +163,7 @@
             "required": [ "inputType" ],
             "additionalProperties": false
         },
-        "objectFieldValueConstraintsContent": {
+        "iriFieldValueConstraintsContent": {
             "description": "Schema that describes the schema of a '_valueConstraints' field in an object-typed template field",
             "type": "object",
             "properties": {
@@ -186,7 +186,7 @@
             "required": [ "requiredValue" ],
             "additionalProperties": false
         },
-        "objectFieldPropertiesContent": {
+        "iriFieldPropertiesContent": {
             "description": "Schema that describes the schema of 'properties' in a single resource object template field",
             "type": "object",
             "properties": {

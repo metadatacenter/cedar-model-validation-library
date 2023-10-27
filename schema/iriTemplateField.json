@@ -51,13 +51,13 @@
       "minLength": 1
     },
     "_ui": {
-      "$ref": "#/definitions/objectFieldUIContent"
+      "$ref": "#/definitions/iriFieldUIContent"
     },
     "_valueConstraints": {
-      "$ref": "#/definitions/objectFieldValueConstraintsContent"
+      "$ref": "#/definitions/iriFieldValueConstraintsContent"
     },
     "@context": {
-      "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
+      "$ref": "#/definitions/iriFieldJSONLDContextFieldContent"
     },
     "@id": {
       "type": [
@@ -74,7 +74,7 @@
       ]
     },
     "properties": {
-      "$ref": "#/definitions/objectFieldPropertiesContent"
+      "$ref": "#/definitions/iriFieldPropertiesContent"
     },
     "required": {
       "$ref": "#/definitions/stringArray"

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Schema that describes a single data template field",
+  "description": "Schema that describes a literal-valued template field",
   "type": "object",
   "properties": {
     "$schema": {
