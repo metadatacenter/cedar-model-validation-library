@@ -1074,7 +1074,7 @@
           ]
         },
         "literalFieldUIContent": {
-            "description": "Schema that describes the schema of a '_ui' field of a single data template field",
+            "description": "Schema that describes the schema of a '_ui' field of a template field",
             "type": "object",
             "properties": {
                 "inputType": {
@@ -1084,6 +1084,7 @@
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
                 "hidden": { "type": "boolean" },
+                "continuePreviousLine": { "type": "boolean" },
                 "inputTimeFormat": {
                   "type": "string",
                   "enum": ["24h", "12h"]
@@ -1296,7 +1297,7 @@
           ]
         },
         "objectFieldUIContent": {
-            "description": "Schema that describes the schema of a '_ui' field of a single resource object template field",
+            "description": "Schema that describes the schema of a '_ui' field of a template field",
             "type": "object",
             "properties": {
                 "inputType": {
@@ -1305,13 +1306,14 @@
                 },
                 "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
                 "valueRecommendationEnabled": { "type": "boolean" },
-                "hidden": { "type": "boolean" }
+                "hidden": { "type": "boolean" },
+                "continuePreviousLine": { "type": "boolean" }
             },
             "required": [ "inputType" ],
             "additionalProperties": false
         },
         "objectFieldValueConstraintsContent": {
-            "description": "Schema that describes the schema of a '_valueConstraints' field in an object-typed template field",
+            "description": "Schema that describes the schema of a '_valueConstraints' field in a controlled term template field",
             "type": "object",
             "properties": {
                 "ontologies": { "$ref": "#/definitions/valueConstraintsOntologiesFieldContent" },
@@ -1382,7 +1384,8 @@
                   "enum": [ "checkbox" ]
                 },
                 "valueRecommendationEnabled": { "type": "boolean" },
-                "hidden": { "type": "boolean" }
+                "hidden": { "type": "boolean" },
+                "continuePreviousLine": { "type": "boolean" }
               },
               "required": [ "inputType" ],
               "additionalProperties": false

@@ -53,7 +53,8 @@
                   "enum": [ "checkbox" ]
                 },
                 "valueRecommendationEnabled": { "type": "boolean" },
-                "hidden": { "type": "boolean" }
+                "hidden": { "type": "boolean" },
+                "continuePreviousLine": { "type": "boolean" }
               },
               "required": [ "inputType" ],
               "additionalProperties": false

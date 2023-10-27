@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a '_ui' field of a single data template field",
+    "description": "Schema that describes the schema of a '_ui' field of a template field",
     "type": "object",
     "properties": {
         "inputType": {
@@ -9,6 +9,7 @@
         "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "valueRecommendationEnabled": { "type": "boolean" },
         "hidden": { "type": "boolean" },
+        "continuePreviousLine": { "type": "boolean" },
         "inputTimeFormat": {
           "type": "string",
           "enum": ["24h", "12h"]

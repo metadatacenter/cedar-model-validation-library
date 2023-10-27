@@ -47,7 +47,8 @@
   "pav:createdBy": "https://metadatacenter.org/users/30449a1f-80a8-4b54-a3fa-92d4d6157116",
   "skos:prefLabel": "Did an abdomen injury occur?",
   "_ui": {
-    "inputType": "textfield"
+    "inputType": "textfield",
+    "continuePreviousLine": false
   },
   "_valueConstraints": {
     "classes": [],
