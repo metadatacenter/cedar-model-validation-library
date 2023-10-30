@@ -46,7 +46,7 @@ definitions:
   - multiEntryFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json
-  - multipleTemplateFieldsOrElements.json
+  - multiInstanceTemplateFieldOrElement.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
   - numberAndNullTypeContent.json

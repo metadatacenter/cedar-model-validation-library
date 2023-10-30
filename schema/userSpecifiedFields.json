@@ -6,6 +6,6 @@
         { "$ref": "file:staticTemplateField.json" },
         { "$ref": "file:multiValuedTemplateField.json" },
         { "$ref": "file:templateElement.json" },
-        { "$ref": "file:multipleTemplateFieldsOrElements.json" }
+        { "$ref": "file:multiInstanceTemplateFieldOrElement.json" }
     ]
 }

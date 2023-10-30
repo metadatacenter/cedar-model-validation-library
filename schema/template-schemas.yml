@@ -65,7 +65,7 @@ definitions:
   - templateElement.json
   - templateElementContextFieldContent.json
   - templateElementContextPropertiesFieldContent.json
-  - multipleTemplateFieldsOrElements.json
+  - multiInstanceTemplateFieldOrElement.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
   - singleURIArray.json
