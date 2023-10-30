@@ -60,7 +60,7 @@ definitions:
   - iriFieldPropertiesContent.json
   - checkBoxTemplateField.json
   - attributeValueTemplateField.json
-  - multiEntryFieldValueConstraintsContent.json
+  - multiValuedFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json
   - templateElementContextFieldContent.json
