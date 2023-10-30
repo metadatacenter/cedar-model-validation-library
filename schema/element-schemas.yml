@@ -39,11 +39,11 @@ definitions:
   - iriFieldUIContent.json
   - iriFieldValueConstraintsContent.json
   - iriFieldPropertiesContent.json
-  - multiEntriesTemplateField.json
+  - multiEntryTemplateField.json
   - staticTemplateField.json
   - checkBoxTemplateField.json
   - attributeValueTemplateField.json
-  - multiEntriesFieldValueConstraintsContent.json
+  - multiEntryFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json
   - multipleTemplateFieldsOrElements.json

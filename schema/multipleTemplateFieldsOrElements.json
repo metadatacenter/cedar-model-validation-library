@@ -7,7 +7,7 @@
         "items": {
             "oneOf": [
                 { "$ref": "file:literalTemplateField.json" },
-                { "$ref": "file:objectTemplateField.json" },
+                { "$ref": "file:iriTemplateField.json" },
                 { "$ref": "file:templateElement.json" }
             ]
         }

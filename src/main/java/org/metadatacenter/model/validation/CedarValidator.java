@@ -219,7 +219,7 @@ public class CedarValidator implements ModelValidator {
 
   private void validateMultiEntriesTemplateField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.MULTI_ENTRIES_FIELD_SCHEMA, fieldNode, location);
+    validateResource(SchemaResources.MULTI_ENTRY_FIELD_SCHEMA, fieldNode, location);
   }
 
   private void validateStaticTemplateField(JsonNode fieldNode, JsonPointer location)

@@ -2,9 +2,9 @@
     "description": "Schema that describes user specified fields, which can be a template field, element, or a multiple fields or elements",
     "oneOf": [
         { "$ref": "file:literalTemplateField.json" },
-        { "$ref": "file:objectTemplateField.json" },
+        { "$ref": "file:iriTemplateField.json" },
         { "$ref": "file:staticTemplateField.json" },
-        { "$ref": "file:multiEntriesTemplateField.json" },
+        { "$ref": "file:multiEntryTemplateField.json" },
         { "$ref": "file:templateElement.json" },
         { "$ref": "file:multipleTemplateFieldsOrElements.json" }
     ]

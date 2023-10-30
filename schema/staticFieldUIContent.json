@@ -7,7 +7,7 @@
             "enum": [ "section-break", "page-break", "richtext", "image", "youtube" ]
         },
         "_content": { "type": [ "string", "null" ] },
-        "hidden": { "type": "boolean" },
+        "hidden": { "type": "boolean" }
     },
     "required": [ "inputType", "_content" ],
     "additionalProperties": false

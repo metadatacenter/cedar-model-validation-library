@@ -35,6 +35,7 @@
           "type": "string",
           "enum": [ "checkbox" ]
         },
+        "continuePreviousLine": { "type": "boolean" },
         "valueRecommendationEnabled": { "type": "boolean" },
         "hidden": { "type": "boolean" }
       },
@@ -57,7 +58,7 @@
       "uniqueItems": true
     },
     "_valueConstraints": {
-      "$ref": "#/definitions/multiEntriesFieldValueConstraintsContent"
+      "$ref": "#/definitions/multiEntryFieldValueConstraintsContent"
     },
     "properties": {
       "$ref": "#/definitions/literalFieldPropertiesContent"

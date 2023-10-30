@@ -98,7 +98,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassNumericFielddWithUnitOfMeasureConstraint() {
+  public void shouldPassNumericFieldWithUnitOfMeasureConstraint() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/numeric-field-unit-of-measure.json");
     // Act

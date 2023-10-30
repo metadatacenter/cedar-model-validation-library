@@ -29,7 +29,7 @@ echo -n "Generating the IRI field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/iri-field-schemas.yml ${RESOURCES_DIR}/iri-field-schema.json
 
 echo -n "Generating the multi-entry field schema... "
-./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/multi-entries-field-schemas.yml ${RESOURCES_DIR}/multi-entries-field-schema.json
+./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/multi-entry-field-schemas.yml ${RESOURCES_DIR}/multi-entry-field-schema.json
 
 echo -n "Generating the static field schema... "
 ./merge-schema.sh ${SCHEMA_DIR} ${SCHEMA_DIR}/static-field-schemas.yml ${RESOURCES_DIR}/static-field-schema.json

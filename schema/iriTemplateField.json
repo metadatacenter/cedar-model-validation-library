@@ -57,7 +57,7 @@
       "$ref": "#/definitions/iriFieldValueConstraintsContent"
     },
     "@context": {
-      "$ref": "#/definitions/iriFieldJSONLDContextFieldContent"
+      "$ref": "#/definitions/templateFieldJSONLDContextFieldContent"
     },
     "@id": {
       "type": [
