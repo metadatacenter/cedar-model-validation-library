@@ -6,10 +6,10 @@
             "type": "string",
             "enum": [ "textfield", "textarea", "radio", "temporal", "email", "list", "numeric", "phone-number" ]
         },
-        "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "valueRecommendationEnabled": { "type": "boolean" },
         "hidden": { "type": "boolean" },
         "continuePreviousLine": { "type": "boolean" },
+        "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "inputTimeFormat": {
           "type": "string",
           "enum": ["24h", "12h"]
