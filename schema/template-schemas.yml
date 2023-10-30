@@ -48,7 +48,7 @@ definitions:
   - userFieldContextPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
-  - multiEntryTemplateField.json
+  - multiValuedTemplateField.json
   - staticTemplateField.json
   - literalTemplateField.json
   - literalFieldUIContent.json

@@ -1,4 +1,4 @@
-base: multiEntryTemplateField.json
+base: multiValuedTemplateField.json
 definitions:
   - checkBoxTemplateField.json
   - attributeValueTemplateField.json

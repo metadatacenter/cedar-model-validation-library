@@ -39,7 +39,7 @@ definitions:
   - iriFieldUIContent.json
   - iriFieldValueConstraintsContent.json
   - iriFieldPropertiesContent.json
-  - multiEntryTemplateField.json
+  - multiValuedTemplateField.json
   - staticTemplateField.json
   - checkBoxTemplateField.json
   - attributeValueTemplateField.json
