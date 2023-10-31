@@ -1,22 +1,22 @@
 {
-    "description": "Schema that describes the schema of a '_valueConstraints' field in a controlled term template field",
+    "description": "Schema that describes the schema of a '_valueConstraints' field in an iri-valued template field",
     "type": "object",
     "properties": {
         "requiredValue": { "type": "boolean" },
         "recommendedValue": { "type": "boolean" },
-        "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
-        "valueSets": {  "$ref": "file:valueConstraintsValueSetsFieldContent.json" },
-        "classes": {  "$ref": "file:valueConstraintsClassesFieldContent.json" },
-        "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
-        "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
         "multipleChoice": { "type": "boolean", "enum": [ false ] },
-        "actions": { "$ref": "file:valueConstraintsActionsFieldContent.json" },
         "defaultValue": {
             "oneOf": [
                 { "$ref": "file:valueConstraintsStringDefaultValueContent.json" },
                 { "$ref": "file:valueConstraintsUriDefaultValueContent.json" }
             ]
-        }
+        },
+        "ontologies": { "$ref": "file:valueConstraintsOntologiesFieldContent.json" },
+        "valueSets": {  "$ref": "file:valueConstraintsValueSetsFieldContent.json" },
+        "classes": {  "$ref": "file:valueConstraintsClassesFieldContent.json" },
+        "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
+        "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
+        "actions": { "$ref": "file:valueConstraintsActionsFieldContent.json" }
     },
     "required": [ "requiredValue" ],
     "additionalProperties": false
