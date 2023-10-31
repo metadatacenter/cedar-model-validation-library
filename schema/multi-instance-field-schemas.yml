@@ -4,8 +4,13 @@ definitions:
   - attributeValueTemplateField.json
   - literalFieldValueConstraintsContent.json
   - templateFieldJSONLDContextFieldContent.json
+  - literalTemplateField.json
   - literalFieldPropertiesContent.json
   - literalFieldUIContent.json
+  - iriTemplateField.json
+  - iriFieldPropertiesContent.json
+  - iriFieldUIContent.json
+  - iriFieldValueConstraintsContent.json
   - stringArray.json
   - valueConstraintsOntologiesFieldContent.json
   - valueConstraintsValueSetsFieldContent.json

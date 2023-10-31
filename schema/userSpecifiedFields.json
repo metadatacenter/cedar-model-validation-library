@@ -4,7 +4,6 @@
         { "$ref": "file:literalTemplateField.json" },
         { "$ref": "file:iriTemplateField.json" },
         { "$ref": "file:staticTemplateField.json" },
-        { "$ref": "file:multiInstanceTemplateField.json" },
         { "$ref": "file:templateElement.json" },
         { "$ref": "file:multiInstanceTemplateFieldOrElement.json" }
     ]

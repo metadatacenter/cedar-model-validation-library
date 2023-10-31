@@ -7,8 +7,9 @@
         "minItems": { "type": "integer", "minimum": 0 },
         "items": {
           "oneOf": [
-            { "$ref": "file:checkBoxTemplateField.json" },
-            { "$ref": "file:attributeValueTemplateField.json" }
+                { "$ref": "file:literalTemplateField.json" },
+                { "$ref": "file:iriTemplateField.json" },
+                { "$ref": "file:attributeValueTemplateField.json" }
           ]
         }
     },

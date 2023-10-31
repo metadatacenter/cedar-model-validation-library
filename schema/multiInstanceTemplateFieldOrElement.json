@@ -8,6 +8,7 @@
             "oneOf": [
                 { "$ref": "file:literalTemplateField.json" },
                 { "$ref": "file:iriTemplateField.json" },
+                { "$ref": "file:attributeValueTemplateField.json" },
                 { "$ref": "file:templateElement.json" }
             ]
         }
