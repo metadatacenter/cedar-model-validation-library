@@ -6,7 +6,7 @@ Also provides command line Java- and Python-based validators
 
 ## Validation Library
 
-The library provides a interface <tt>org.metadatacenter.model.validation.ModelValidator</tt> that contains
+The library provides an interface <tt>org.metadatacenter.model.validation.ModelValidator</tt> that contains
 methods to validate CEDAR resources, such as, templates, elements, and fields. The libarary also provides its
 implementation <tt>org.metadatacenter.model.validation.CedarValidator</tt> that uses a third-party Java library
 called [JSON Schema Validator](https://github.com/java-json-tools/json-schema-validator).
@@ -17,14 +17,15 @@ The <tt>schema</tt> directory contains a collection of JSON Schema definitions w
 We designed the schema definitions to be modular for easy development and reuse.
 
 The <tt>CedarValidator</tt> requires the validation schema files stored in the Java <tt>resources</tt> directory. To get those files
-we need to merge some of the schemas in the <tt>schema</tt> directory and assemble them into a standalone self-contained schema file.
-We have already provided a script to perform the action in the <tt>scripts</tt> directory.
+we need to merge some of the schemas in the <tt>schema</tt> directory and assemble them into several standalone 
+self-contained schema files. We have already provided a script to perform the action in the <tt>scripts</tt> directory.
 
     cd scripts
     ./generate-schema.sh
 
-The script will generate four schema files, i.e., <tt>template-schema.json</tt>, <tt>element-schema.json</tt>, <tt>field-schema.json</tt>
-and <tt>static-field-schema.json</tt> in the <tt>src/main/resources</tt> directory.
+The script will generate six schema files (<tt>template-schema.json</tt>, <tt>element-schema.json</tt>, 
+<tt>literal-field-schema.json</tt>, <tt>iri-field-schema.json</tt>, <tt>static-field-schema.json</tt>, and
+<tt>multi-instance-field-schema.json</tt>) in the <tt>src/main/resources</tt> directory.
 
 The description about the components to generate each schema can be found in the YAML files in <tt>schema</tt> directory.
 
