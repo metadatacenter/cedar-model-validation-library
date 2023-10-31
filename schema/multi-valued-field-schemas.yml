@@ -2,7 +2,7 @@ base: multiValuedTemplateField.json
 definitions:
   - checkBoxTemplateField.json
   - attributeValueTemplateField.json
-  - multiValuedFieldValueConstraintsContent.json
+  - literalFieldValueConstraintsContent.json
   - templateFieldJSONLDContextFieldContent.json
   - literalFieldPropertiesContent.json
   - literalFieldUIContent.json

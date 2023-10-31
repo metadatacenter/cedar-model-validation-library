@@ -58,7 +58,7 @@
       "uniqueItems": true
     },
     "_valueConstraints": {
-      "$ref": "#/definitions/multiValuedFieldValueConstraintsContent"
+      "$ref": "#/definitions/literalFieldValueConstraintsContent"
     },
     "properties": {
       "$ref": "#/definitions/literalFieldPropertiesContent"

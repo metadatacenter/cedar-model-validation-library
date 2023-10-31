@@ -43,7 +43,6 @@ definitions:
   - staticTemplateField.json
   - checkBoxTemplateField.json
   - attributeValueTemplateField.json
-  - multiValuedFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json
   - multiInstanceTemplateFieldOrElement.json
