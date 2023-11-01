@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a '_ui' field of a single resource object template field",
+    "description": "Schema that describes the schema of a '_ui' field of an IRI-valued template field",
     "type": "object",
     "properties": {
         "inputType": {

@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a template element",
+    "description": "Meta-schema that describes the schema of a template element",
     "type": "object",
     "properties": {
         "$schema": {

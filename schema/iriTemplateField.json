@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Schema that describes an iri-valued template field",
+  "description": "Meta-schema that describes a the schema of an iri-valued template field",
   "type": "object",
   "properties": {
     "$schema": {
