@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of 'properties' in a single data template field",
+    "description": "Meta-schema that describes the schema of 'properties' in a literal-valued template field",
     "type": "object",
     "properties": {
       "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },

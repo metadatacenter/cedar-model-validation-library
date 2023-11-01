@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of the 'branches' field in a '_valueConstraints' field",
+    "description": "Schema that describes a 'branches' field in a '_valueConstraints' field",
     "type": "array", "uniqueItems": true,
     "items": {  "$ref": "file:valueConstraintsBranchesFieldItemContent.json"  }            
 }

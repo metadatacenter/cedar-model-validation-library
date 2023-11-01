@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of each entry in the 'ontologies' field array in a '_valueConstraints' field",
+    "description": "Schema that describes each entry in an 'ontologies' field array in a '_valueConstraints' field",
     "type": "object",
     "properties": {
         "uri": { "type": "string", "format": "uri" },

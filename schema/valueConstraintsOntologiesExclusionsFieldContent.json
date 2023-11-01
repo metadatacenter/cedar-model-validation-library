@@ -1,5 +1,5 @@
 {
-   "description": "Schema that describes the schema of the 'ontologies.exclusions' field in a '_valueConstraints' field",
+   "description": "Schema that describes the 'ontologies.exclusions' field in a '_valueConstraints' field",
    "type": "array", "uniqueItems": true,
    "items": { "type": "string", "format": "uri" }
 }

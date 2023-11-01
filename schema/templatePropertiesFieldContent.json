@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a 'properties' field in a template",
+    "description": "Schema that describes a 'properties' field in a template",
     "type": "object",
     "properties": {
         "@context": { "$ref": "#/definitions/templateContextFieldContent" },

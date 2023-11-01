@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of 'pav:createdBy' field content in a @context",
+    "description": "Schema that describes 'pav:createdBy' field content in a @context",
     "type": "object",
     "properties": {
         "@type": { "type": "string", "enum": [ "@id" ] }

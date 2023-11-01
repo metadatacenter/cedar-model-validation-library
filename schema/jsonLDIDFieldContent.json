@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema for a '@id' field",
+    "description": "Meta-schema that describes the schema for a '@id' field",
     "type": "object",
     "properties": {
         "type": { "type": "string", "enum": [ "string" ] },

@@ -1,5 +1,5 @@
 {
-  "description": "Schema that describes the schema of a property description in the _ui field in a template or element",
+  "description": "Schema that describes a property description in a _ui field in a template or element",
   "type": "object",
   "patternProperties": {
     "^[^.]+$": {

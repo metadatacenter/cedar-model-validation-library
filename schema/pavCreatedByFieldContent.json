@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a 'pav:createdBy' field in a 'properties' field in a template",
+    "description": "Schema that describes 'pav:createdBy' field content in a 'properties' field",
     "type": "object",
     "properties": {
         "type": { "$ref": "file:stringAndNullTypeContent.json" },

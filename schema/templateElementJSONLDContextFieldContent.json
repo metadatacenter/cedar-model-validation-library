@@ -1,5 +1,5 @@
 {
-    "description": "Schema describing the schema of the '@context' field in a template element",
+    "description": "Meta-schema describing the schema of a '@context' field in a template element",
     "type": "object",
     "properties": {
         "xsd": { "type": "string", "format": "uri", "enum": [ "http://www.w3.org/2001/XMLSchema#" ] },

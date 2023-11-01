@@ -1,6 +1,6 @@
 {
     "type": "object",
-    "description": "Schema that describes the schema of a '_ui' field in a template element",
+    "description": "Schema that describes a '_ui' field in a template element",
     "properties": {
         "order": { "$ref": "file:stringArray.json" },
         "propertyLabels": { "$ref": "file:propertyLabelContent.json" },

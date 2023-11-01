@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a '_valueConstraints' field in an iri-valued template field",
+    "description": "Meta-schema that describes the schema of a '_valueConstraints' field in an iri-valued template field",
     "type": "object",
     "properties": {
         "requiredValue": { "type": "boolean" },
