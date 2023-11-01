@@ -57,7 +57,6 @@ definitions:
   - iriFieldUIContent.json
   - iriFieldValueConstraintsContent.json
   - iriFieldPropertiesContent.json
-  - checkBoxTemplateField.json
   - attributeValueTemplateField.json
   - staticFieldUIContent.json
   - templateElement.json

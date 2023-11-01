@@ -1,6 +1,5 @@
 base: multiInstanceTemplateField.json
 definitions:
-  - checkBoxTemplateField.json
   - attributeValueTemplateField.json
   - literalFieldValueConstraintsContent.json
   - templateFieldJSONLDContextFieldContent.json
