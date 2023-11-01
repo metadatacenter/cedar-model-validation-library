@@ -1,5 +1,5 @@
 {
-  "description": "Meta-schema that describes a 'properties field in a '@context' field in a 'properties' field in a template",
+  "description": "Meta-schema that describes a 'properties' field in a 'properties/@context' field in a template",
   "type": "object",
   "properties": {
     "rdfs": { "ref": "file:rdfsContextPropertiesContent.json" },
@@ -17,10 +17,11 @@
     "pav:lastUpdatedOn": { "ref": "file:pavLastUpdatedOnContextPropertiesContent.json" },
     "oslc:modifiedBy": { "ref": "file:oslcModifiedByContextPropertiesContent.json" },
     "skos:notation": { "ref": "file:skosNotationContextPropertiesContent.json" },
-    "pav:derivedFrom": { "ref": "file:pavDerivedFromContextPropertiesContent.json" }
+    "pav:derivedFrom": { "ref": "file:pavDerivedFromContextPropertiesContent.json" },
+    "@language": { "ref": "file:jsonLDLanguageFieldContent.json" }
   },
   "patternProperties": {
-    "^(?!(schema|xsd|pav|oslc|rdfs|skos|\\$))[^.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
+    "^(?!(schema|xsd|pav|oslc|rdfs|skos|@language|\\$))[^.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
   },
   "additionalProperties": false,
   "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "skos", "rdfs:label", "schema:isBasedOn",

@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes an 'oslc:modifiedBy' field content in a 'properties' field",
+    "description": "Meta-schema that describes the schema of an 'oslc:modifiedBy' field content in a 'properties' field",
     "type": "object",
     "properties": {
         "type": { "$ref": "file:stringAndNullTypeContent.json" },

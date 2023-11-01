@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes an array containing strings 'string' and 'null'",
+    "description": "Meta-schema describing the schema of 'string' and 'null' values in an array",
     "type": "array",  "minItems": 2,  "maxItems": 2, 
     "items": [ 
         { "type": "string", "enum": [ "string" ] },

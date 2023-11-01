@@ -1,5 +1,5 @@
 {
-    "description": "Meta-schema that describes the schema for an '@value' field value",
+    "description": "Meta-schema that describes the schema for an '@value' field",
     "type": "object",
     "properties": {
         "type": {
