@@ -37,7 +37,8 @@
     "Study Name": "https://schema.staging.metadatacenter.org/properties/de3eece8-0bab-4eb7-b382-4b26a6a770d8"
   },
   "Study Name": {
-    "@value": "Lorem Ipsum"
+    "@value": "Lorem Ipsum",
+    "@language": "la"
   },
   "schema:isBasedOn": "https://repo.staging.metadatacenter.org/templates/dc898011-2742-41e9-9dae-9b57dbf2600f",
   "schema:name": "Single Field Template metadata",

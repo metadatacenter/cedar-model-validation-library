@@ -26,6 +26,7 @@ definitions:
   - oslcModifiedByContextFieldContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
+  - jsonLDLanguageFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json
