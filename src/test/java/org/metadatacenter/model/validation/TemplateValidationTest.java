@@ -128,6 +128,48 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassRADxMetadataTemplate() {
+    String templateString = TestResourcesUtils.getStringContent("templates/RADxMetadataSpecification.json");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassDataCiteTemplate() {
+    String templateString = TestResourcesUtils.getStringContent("templates/DataCiteTemplate.json");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassADVANCETemplate() {
+    String templateString = TestResourcesUtils.getStringContent("templates/ADVANCETemplate.json");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassSampleBlockTemplate() {
+    String templateString = TestResourcesUtils.getStringContent("templates/SampleBlock.json");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassSampleBlockSection() {
+    String templateString = TestResourcesUtils.getStringContent("templates/SampleSection.json");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassSampleBlockSuspension() {
+    String templateString = TestResourcesUtils.getStringContent("templates/SampleSuspension.json");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldFailMissingContext() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");

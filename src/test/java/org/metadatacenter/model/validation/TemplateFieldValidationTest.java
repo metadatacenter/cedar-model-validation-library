@@ -309,6 +309,13 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassFieldWithActions() {
+    String fieldString = TestResourcesUtils.getStringContent("fields/SampleFieldWithActions.json");
+    ValidationReport validationReport = runValidation(fieldString);
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldFailMissingContext() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
