@@ -1,4 +1,4 @@
-# CEDAR Model Library
+# CEDAR Model Validation Library
 
 Provides a Java-based CEDAR library to validate JSON Schema-encoded CEDAR model artifacts.
 
