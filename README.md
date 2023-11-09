@@ -7,31 +7,34 @@ Also provides command line Java- and Python-based validators
 ## Validation Library
 
 The library provides an interface <tt>org.metadatacenter.model.validation.ModelValidator</tt> that contains
-methods to validate CEDAR resources, such as, templates, elements, and fields. The libarary also provides its
-implementation <tt>org.metadatacenter.model.validation.CedarValidator</tt> that uses a third-party Java library
-called [JSON Schema Validator](https://github.com/java-json-tools/json-schema-validator).
+methods to validate CEDAR resources, such as, templates, elements, and fields. 
+
+We use a third-party Java library called [JSON Schema Validator](https://github.com/java-json-tools/json-schema-validator)
+to perform this validation.
 
 ### Generate Validation Schemas
 
 The <tt>schema</tt> directory contains a collection of JSON Schema definitions which collectively form the CEDAR Resource Validation Schema.
 We designed the schema definitions to be modular for easy development and reuse.
 
-The <tt>CedarValidator</tt> requires the validation schema files stored in the Java <tt>resources</tt> directory. To get those files
-we need to merge some of the schemas in the <tt>schema</tt> directory and assemble them into several standalone 
-self-contained schema files. We have already provided a script to perform the action in the <tt>scripts</tt> directory.
+These files are assembled into meta-sechemas to validate templates, elements and fields.
+
+The <tt>CedarValidator</tt> uses these validation meta-schemas. They are stored in the Java <tt>resources</tt> directory. 
+To generate these meta-schemas we need to merge  the invidiual schemas in the <tt>schema</tt> directory and assemble them into several standalone 
+self-contained meta-schemas. We have provided a script to do this assembly in the <tt>scripts</tt> directory.
 
     cd scripts
-    ./generate-schema.sh
+    ./generate-meta-schemas.sh
 
-The script will generate six schema files (<tt>template-schema.json</tt>, <tt>element-schema.json</tt>, 
-<tt>literal-field-schema.json</tt>, <tt>iri-field-schema.json</tt>, <tt>static-field-schema.json</tt>, and
-<tt>multi-instance-field-schema.json</tt>) in the <tt>src/main/resources</tt> directory.
+The script will generate six meta-schema files (<tt>template-meta-schema.json</tt>, <tt>element-meta-schema.json</tt>, 
+<tt>literal-field-meta-schema.json</tt>, <tt>iri-field-meta-schema.json</tt>, <tt>static-field-meta-schema.json</tt>, and
+<tt>multi-instance-field-meta-schema.json</tt>) in the <tt>src/main/resources</tt> directory.
 
-The description about the components to generate each schema can be found in the YAML files in <tt>schema</tt> directory.
+The description about the components to generate each meta-schema can be found in the YAML files in <tt>schema</tt> directory.
 
 ### Run Test in Java
 
-Below are some examples to test the <tt>CedarValidator</tt> implementation.
+Below are some command-line examples validate templates, elements and fields.
 
     mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/empty-template.json"
     mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/single-field-template.json"

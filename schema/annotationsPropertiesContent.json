@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "properties":  {
+      "type": { "type": "string", "enum": [ "object" ] },
+      "patternProperties": {
+        "type": "object",
+        "properties": {
+          "^.+$": {
+            "type": "object",
+            "properties": {
+              "oneOf": {
+                "type": "array", "minItems": 2, "maxItems": 2,
+                "items": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": { "type": "string", "enum": [ "object" ] },
+                      "properties": { 
+                        "type": "object",
+                        "properties": {
+                          "@id": { "$ref": "file:jsonLDIDFieldContent.json" }
+                         },
+                        "required": [ "@id" ],
+                        "additionalProperties": false           
+                      },
+                      "additionalProperties": { "type": "boolean", "enum": [ false ] }         
+                     },
+                    "required": [ "type", "properties", "additionalProperties" ],
+                    "additionalProperties": false                                  
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": { "type": "string", "enum": [ "object" ] },
+                      "properties": { 
+                        "type": "object",
+                        "properties": {
+                          "@value": { "$ref": "file:jsonLDValueFieldContent.json" }
+                        },
+                        "required": [ "@value" ],
+                        "additionalProperties": false           
+                      },
+                      "additionalProperties": { "type": "boolean", "enum": [ false ] }         
+                    },
+                    "required": [ "type", "properties", "additionalProperties" ],
+                    "additionalProperties": false                                  
+                  }
+                ]
+              }
+            },
+            "required": [ "oneOf" ],
+            "additionalProperties": false              
+          }
+        },
+        "required": [ "^.+$" ],
+        "additionalProperties": false
+      },
+      "additionalProperties": { "type": "boolean", "enum": [ false ] }
+  },
+  "required": [ "type", "patternProperties", "additionalProperties" ],
+  "additionalProperties": false
+}

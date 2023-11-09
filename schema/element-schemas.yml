@@ -15,6 +15,9 @@ definitions:
   - pavLastUpdatedOnContextFieldContent.json
   - oslcModifiedByContextFieldContent.json
   - jsonLDLanguageFieldContent.json
+  - annotationsContent.json
+  - annotationsPropertiesContent.json
+  - annotationsContextPropertiesFieldContent.json
   - stringArray.json
   - propertyLabelContent.json
   - propertyDescriptionContent.json

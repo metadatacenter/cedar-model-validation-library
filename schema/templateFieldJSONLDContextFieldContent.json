@@ -15,10 +15,11 @@
         "pav:createdOn": { "$ref": "file:pavCreatedOnContextFieldContent.json" },
         "pav:createdBy": { "$ref": "file:pavCreatedByContextFieldContent.json" },
         "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnContextFieldContent.json" },
-        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByContextFieldContent.json" }
+        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByContextFieldContent.json" },
+        "_annotations": { "type": "string", "enum": [ "@nest" ] }
     },
     "patternProperties": {
-        "^(?!(schema|xsd|pav|oslc|skos|\\$))[^.]+$": { "type": "string", "format": "uri" }
+        "^(?!(schema|xsd|pav|oslc|skos|_annotations|\\$))[^.]+$": { "type": "string", "format": "uri" }
     },
     "additionalProperties": false,
     "required": [ "xsd", "pav", "schema", "oslc", "skos", "schema:name", "schema:description",

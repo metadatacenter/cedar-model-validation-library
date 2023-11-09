@@ -27,6 +27,9 @@ definitions:
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
   - jsonLDLanguageFieldContent.json
+  - annotationsContent.json
+  - annotationsPropertiesContent.json
+  - annotationsContextPropertiesFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json

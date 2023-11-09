@@ -1,0 +1,25 @@
+{
+  "description": "Schema that describes an _annotations field in an artifact",
+  "type": "object",
+  "patternProperties": {
+    "^.+$": {
+      "oneOf": [
+         { 
+           "type": "object",
+           "properties": {
+             "@id": { "type": "string", "format": "uri" }
+           },
+           "additionalProperties": false
+         },
+         { 
+           "type": "object",
+           "properties": {
+             "@value": { "type": "string" }
+           },
+           "additionalProperties": false
+         }
+      ]
+    }
+  },
+  "additionalProperties": false
+}

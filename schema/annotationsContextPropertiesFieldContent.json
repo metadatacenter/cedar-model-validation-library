@@ -1,0 +1,15 @@
+{
+    "description": "Meta-schema that describes an '_annotations' field a @context/properties of a schema artifact",
+    "type": "object",
+    "properties": {
+      "type": { "type": "string", "enum": [ "string" ] },
+      "enum": {
+         "type": "array",  "minItems": 1,  "maxItems": 1,
+         "items": [ {
+            "type": "string", "enum": [ "@nest" ]
+         } ]
+      }
+    },
+    "required": [ "type", "enum" ],
+    "additionalProperties": false
+}

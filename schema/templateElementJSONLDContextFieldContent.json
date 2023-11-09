@@ -12,10 +12,11 @@
         "pav:createdOn": { "$ref": "file:pavCreatedOnContextFieldContent.json" },
         "pav:createdBy": { "$ref": "file:pavCreatedByContextFieldContent.json" },
         "pav:lastUpdatedOn": { "$ref": "file:pavLastUpdatedOnContextFieldContent.json" },
-        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByContextFieldContent.json" }
+        "oslc:modifiedBy": { "$ref": "file:oslcModifiedByContextFieldContent.json" },
+        "_annotations": { "type": "string", "enum": [ "@nest" ] }
     },
     "patternProperties": {
-        "^(?!(schema|xsd|pav|oslc|bibo|\\$))[^.]+$": { "type": "string", "format": "uri" }
+        "^(?!(schema|xsd|pav|oslc|bibo|_annotations|\\$))[^.]+$": { "type": "string", "format": "uri" }
     },
     "additionalProperties": false,
     "required": [ "xsd", "pav", "schema", "oslc", "bibo", "schema:name", "schema:description", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy" ]

@@ -10,6 +10,9 @@ definitions:
   - pavLastUpdatedOnContextFieldContent.json
   - oslcModifiedByContextFieldContent.json
   - jsonLDLanguageFieldContent.json
+  - annotationsContent.json
+  - annotationsPropertiesContent.json
+  - annotationsContextPropertiesFieldContent.json
   - templateContextFieldContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json

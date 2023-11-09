@@ -189,12 +189,12 @@ public class CedarValidator implements ModelValidator {
 
   private void validateTemplate(JsonNode templateNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.TEMPLATE_SCHEMA, templateNode, location);
+    validateResource(SchemaResources.TEMPLATE_META_SCHEMA, templateNode, location);
   }
 
   private void validateTemplateElement(JsonNode templateElementNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.ELEMENT_SCHEMA, templateElementNode, location);
+    validateResource(SchemaResources.ELEMENT_META_SCHEMA, templateElementNode, location);
   }
 
   private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer location)
@@ -211,15 +211,15 @@ public class CedarValidator implements ModelValidator {
   private void validateIRIorLiteralTemplateField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
     if (isIRIField(fieldNode)) {
-      validateResource(SchemaResources.IRI_FIELD_SCHEMA, fieldNode, location);
+      validateResource(SchemaResources.IRI_FIELD_META_SCHEMA, fieldNode, location);
     } else {
-      validateResource(SchemaResources.LITERAL_FIELD_SCHEMA, fieldNode, location);
+      validateResource(SchemaResources.LITERAL_FIELD_META_SCHEMA, fieldNode, location);
     }
   }
 
   private void validateMultiInstanceTemplateField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.MULTI_INSTANCE_FIELD_SCHEMA, fieldNode, location);
+    validateResource(SchemaResources.MULTI_INSTANCE_FIELD_META_SCHEMA, fieldNode, location);
   }
 
   private void validateStaticTemplateField(JsonNode fieldNode, JsonPointer location)

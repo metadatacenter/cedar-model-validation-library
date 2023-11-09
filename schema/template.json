@@ -63,12 +63,6 @@
         "oslc:modifiedBy": {
             "type": [ "string", "null" ], "format": "uri"
         },
-        "additionalProperties": {
-          "oneOf": [
-            { "$ref": "file:falseOnlyAdditionalProperties.json" },
-            { "$ref": "file:defaultObjectSchemaAdditionalProperties.json" }
-          ]
-        },
         "schema:schemaVersion": {
             "type": "string", "minLength": 1
         },
@@ -83,6 +77,12 @@
         },
         "pav:derivedFrom": {
             "type": "string", "format": "uri"
+        },
+        "additionalProperties": {
+          "oneOf": [
+            { "$ref": "#/definitions/falseOnlyAdditionalProperties.json" },
+            { "$ref": "#/definitions/defaultObjectSchemaAdditionalProperties.json" }
+          ]
         },
         "@nest": {
           "$ref": "#/definitions/nestFieldContent.json"

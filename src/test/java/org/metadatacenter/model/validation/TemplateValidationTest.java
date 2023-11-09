@@ -48,6 +48,13 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassTemplateWithAnnotations() {
+    String templateString = TestResourcesUtils.getStringContent("templates/template-allowing-annotations.json");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassTemplateWithCheckbox() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/checkbox-template.json");
