@@ -307,7 +307,7 @@
                          { 
                            "type": "object",
                            "properties": {
-                             "@value": { "type": [ "string", "number", "boolean","null" ] }
+                             "@value": { "type": [ "string", "number", "boolean", "null" ] }
                            },
                            "additionalProperties": false
                          }
