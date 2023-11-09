@@ -18,6 +18,7 @@ definitions:
   - annotationsContent.json
   - annotationsPropertiesContent.json
   - annotationsContextPropertiesFieldContent.json
+  - annotationsJsonLDValueFieldContent.json
   - stringArray.json
   - propertyLabelContent.json
   - propertyDescriptionContent.json

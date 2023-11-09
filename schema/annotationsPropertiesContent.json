@@ -36,7 +36,7 @@
                       "properties": { 
                         "type": "object",
                         "properties": {
-                          "@value": { "$ref": "file:jsonLDValueFieldContent.json" }
+                          "@value": { "$ref": "file:annotationsJsonLDValueFieldContent.json" }
                         },
                         "required": [ "@value" ],
                         "additionalProperties": false           

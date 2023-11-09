@@ -42,8 +42,10 @@
     "@language": "la"
   },
   "_annotations": {
-     "ddd": { "@value": "23" },
-     "bbb": { "@id": "https://example.com/B1" },
+     "aaa": { "@value": 23 },
+     "bbb": { "@value": false },
+     "ccc": { "@value": "vvv" },
+     "ddd": { "@id": "https://example.com/B1" },
      "https://datacite.com/doi": { "@id": "https://example.com/B2" }
   },
   "schema:isBasedOn": "https://repo.staging.metadatacenter.org/templates/dc898011-2742-41e9-9dae-9b57dbf2600f",

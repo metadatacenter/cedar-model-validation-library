@@ -13,6 +13,7 @@ definitions:
   - annotationsContent.json
   - annotationsPropertiesContent.json
   - annotationsContextPropertiesFieldContent.json
+  - annotationsJsonLDValueFieldContent.json
   - templateContextFieldContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
