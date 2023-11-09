@@ -1,5 +1,5 @@
 {
-    "description": "Meta-schema that describes an '_annotations' field a @context/properties of a schema artifact",
+    "description": "Meta-schema that describes an '_annotations' field in a @context/properties field in a schema artifact",
     "type": "object",
     "properties": {
       "type": { "type": "string", "enum": [ "string" ] },

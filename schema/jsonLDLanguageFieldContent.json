@@ -1,5 +1,5 @@
 {
-  "description": "Meta-schema describing the schema of an '@language' field in a '@context/properties' field",
+  "description": "Meta-schema specifying the schema of an '@language' field in a '@context/properties' field",
   "type": "object",
   "properties": {
             "type": {

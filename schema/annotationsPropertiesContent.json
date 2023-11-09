@@ -1,4 +1,5 @@
 {
+  "description": "Meta-schema that specifies the content of an '_annotations' field in an artifact",
   "type": "object",
   "properties":  {
       "type": { "type": "string", "enum": [ "object" ] },

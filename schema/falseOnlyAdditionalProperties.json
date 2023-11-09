@@ -1,4 +1,4 @@
 {
-  "description": "Meta-schema describing the restriction of 'additionalProperties' that must have a false value",
+  "description": "Schema describing the restriction of 'additionalProperties' that must have a false value",
   "type": "boolean", "enum": [ false ]
 }

@@ -1,5 +1,5 @@
 {
-    "description": "Meta-schema that describes the schema of 'properties' field in an IRI-valued template field",
+    "description": "Meta-schema that describes the schema of a 'properties' field in an IRI-valued template field",
     "type": "object",
     "properties": {
         "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
