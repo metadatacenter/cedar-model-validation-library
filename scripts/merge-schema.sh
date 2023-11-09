@@ -3,7 +3,7 @@
 # Takes all JSON schema files specified in the schema YAML file and merge them all
 # into a single schema file.
 #
-# merge-schema.sh /tmp/schemas template-schemas.txt template-schema.json
+# merge-schema.sh /tmp/schemas template-schemas.yml template-schema.json
 
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
