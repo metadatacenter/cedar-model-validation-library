@@ -296,23 +296,22 @@
     "_annotations": {
       "type": "object",
       "patternProperties": {
-             "^.+$": {
-               "oneOf": [ { 
-                            "type": "object",
-                            "properties": {
-                              "@id": { "type": "string", "format": "uri" }
-                            },
-                            "additionalProperties": false
-                          }, 
-                         { 
-                           "type": "object",
-                           "properties": {
-                             "@value": { "type": [ "string", "number", "boolean", "null" ] }
-                           },
-                           "additionalProperties": false
-                         }
-                       ]
-             }
+        "^.+$": {
+          "oneOf": [ {
+            "type": "object",
+            "properties": {
+             "@id": { "type": "string", "format": "uri" }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "@value": { "type": [ "string", "number", "boolean", "null" ] }
+            },
+            "additionalProperties": false
+          } ]
+        }
       },
       "additionalProperties": false
     },
