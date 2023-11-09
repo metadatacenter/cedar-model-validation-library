@@ -34,6 +34,7 @@
       "@type": "xsd:string"
     },
     "@language": "fr",
+    "_annotations": "@nest",
     "Study Name": "https://schema.staging.metadatacenter.org/properties/de3eece8-0bab-4eb7-b382-4b26a6a770d8"
   },
   "Study Name": {

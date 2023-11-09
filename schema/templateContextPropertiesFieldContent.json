@@ -18,10 +18,11 @@
     "oslc:modifiedBy": { "ref": "file:oslcModifiedByContextPropertiesContent.json" },
     "skos:notation": { "ref": "file:skosNotationContextPropertiesContent.json" },
     "pav:derivedFrom": { "ref": "file:pavDerivedFromContextPropertiesContent.json" },
-    "@language": { "ref": "file:jsonLDLanguageFieldContent.json" }
+    "@language": { "ref": "file:jsonLDLanguageFieldContent.json" },
+    "_annotations": { "ref": "file:templatePropertiesContextFieldContent.json" }
   },
   "patternProperties": {
-    "^(?!(schema|xsd|pav|oslc|rdfs|skos|@language|\\$))[^.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
+    "^(?!(schema|xsd|pav|oslc|rdfs|skos|@language|_annotations|\\$))[^.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }
   },
   "additionalProperties": false,
   "required": [ "rdfs", "xsd", "pav", "schema", "oslc", "skos", "rdfs:label", "schema:isBasedOn",

@@ -202,6 +202,9 @@
           "type": [ "string", "null"], 
           "minLength": 1
          },
+        "_annotations": {
+          "type": "string", "enum": [ "@nest" ]
+         },
         "Study Name": {
           "enum": [
             "https://schema.staging.metadatacenter.org/properties/de3eece8-0bab-4eb7-b382-4b26a6a770d8"
