@@ -35,7 +35,7 @@
                       "properties": { 
                         "type": "object",
                         "properties": {
-                          "@value": { "$ref": "file:jsonLDValueFieldContent.json" }
+                          "@value": { "$ref": "file:stringNumberBooleanTypeContent.json" }
                         },
                         "required": [ "@value" ],
                         "additionalProperties": false           
