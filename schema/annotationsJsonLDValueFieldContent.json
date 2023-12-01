@@ -1,0 +1,17 @@
+{
+  "description": "Meta-schema that specifies the schema for an '@value' field in an '_annotation' field",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "array", "minItems": 4, "maxItems": 4,
+      "items": [
+        { "type": "string", "enum":  [ "string" ] },
+        { "type": "string", "enum":  [ "number"] },
+        { "type": "string", "enum":  [ "boolean"] },
+        { "type": "string", "enum":  [ "null"] }
+      ]
+    }
+  },
+  "required": [ "type" ],
+  "additionalProperties": false
+}

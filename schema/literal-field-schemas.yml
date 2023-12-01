@@ -24,6 +24,7 @@ definitions:
   - annotationsContent.json
   - annotationsPropertiesContent.json
   - annotationsContextPropertiesFieldContent.json
+  - annotationsJsonLDValueFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
   - pavLastUpdatedOnFieldContent.json

@@ -32,7 +32,7 @@ The script will generate six meta-schema files (<tt>template-meta-schema.json</t
 
 The description about the components to generate each meta-schema can be found in the YAML files in <tt>schema</tt> directory.
 
-### Run Test in Java
+### Command Line Validation in Java
 
 Below are some command-line examples validate templates, elements and fields.
 
@@ -44,9 +44,9 @@ Below are some command-line examples validate templates, elements and fields.
     mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./src/test/resources/fields/text-field.json"
     mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./src/test/resources/fields/constrained-text-field.json"
 
-### Run Test in Python
+### Command Line Validation in Python
 
-Below are some examples to test Python <tt>jsonschema</tt> implementation (required Python 3.x).
+Below are some examples to validate using Python <tt>jsonschema</tt> implementation (required Python 3.x).
 
     cd scripts
     ./validate-template.sh ../src/test/resources/templates/empty-template.json

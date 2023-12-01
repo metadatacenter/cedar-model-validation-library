@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "Meta-schema that describes the schema on an attribute-value template field",
+  "description": "Meta-schema that specifies the schema of an attribute-value template field",
   "type": "object",
   "properties": {
     "$schema": {
