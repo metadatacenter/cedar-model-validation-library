@@ -34,15 +34,16 @@ The description about the components to generate each meta-schema can be found i
 
 ### Command Line Validation in Java
 
-Below are some command-line examples validate templates, elements and fields.
+Below are some command-line examples validate templates, elements, fields, and instances.
 
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/empty-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/single-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/multi-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./src/test/resources/elements/empty-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./src/test/resources/elements/many-fields-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./src/test/resources/fields/text-field.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./src/test/resources/fields/constrained-text-field.json"
+    mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/empty-template.json"
+    mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/single-field-template.json"
+    mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/multi-field-template.json"
+    mvn exec:java@validate-element -Dexec.args="./src/test/resources/elements/empty-element.json"
+    mvn exec:java@validate-element -Dexec.args="./src/test/resources/elements/many-fields-element.json"
+    mvn exec:java@validate-field -Dexec.args="./src/test/resources/fields/text-field.json"
+    mvn exec:java@validate-field -Dexec.args="./src/test/resources/fields/constrained-text-field.json"
+    mvn exec:java@validate-instance -Dexec.args="./src/test/resources/templates/template-allowing-annotations.json ./src/test/resources/instances/instance-with-annotations.jsonld"
 
 ### Command Line Validation in Python
 
