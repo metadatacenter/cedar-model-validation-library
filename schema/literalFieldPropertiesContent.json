@@ -1,12 +1,13 @@
 {
-    "description": "Schema that describes the schema of 'properties' in a single data template field",
+    "description": "Meta-schema that specifies the schema of a 'properties' field in a literal-valued template field",
     "type": "object",
     "properties": {
       "@type": { "$ref": "file:jsonLDTypeFieldContent.json" },
       "@id": { "$ref": "file:jsonLDIDFieldContent.json" },
       "@value": { "$ref": "file:jsonLDValueFieldContent.json" },
       "rdfs:label": { "$ref": "file:rdfsLabelFieldContent.json" },
-      "skos:notation": { "$ref": "file:skosNotationFieldContent.json" }
+      "skos:notation": { "$ref": "file:skosNotationFieldContent.json" },
+      "@language": { "$ref": "file:jsonLDLanguageFieldContent.json" }
     },
     "required": [ "@type" ],
     "additionalProperties": false

@@ -1,4 +1,4 @@
-# CEDAR Model Library
+# CEDAR Model Validation Library
 
 Provides a Java-based CEDAR library to validate JSON Schema-encoded CEDAR model artifacts.
 
@@ -6,43 +6,48 @@ Also provides command line Java- and Python-based validators
 
 ## Validation Library
 
-The library provides a interface <tt>org.metadatacenter.model.validation.ModelValidator</tt> that contains
-methods to validate CEDAR resources, such as, templates, elements, and fields. The libarary also provides its
-implementation <tt>org.metadatacenter.model.validation.CedarValidator</tt> that uses a third-party Java library
-called [JSON Schema Validator](https://github.com/java-json-tools/json-schema-validator).
+The library provides an interface <tt>org.metadatacenter.model.validation.ModelValidator</tt> that contains
+methods to validate CEDAR resources, such as, templates, elements, and fields. 
+
+We use a third-party Java library called [JSON Schema Validator](https://github.com/java-json-tools/json-schema-validator)
+to perform this validation.
 
 ### Generate Validation Schemas
 
 The <tt>schema</tt> directory contains a collection of JSON Schema definitions which collectively form the CEDAR Resource Validation Schema.
 We designed the schema definitions to be modular for easy development and reuse.
 
-The <tt>CedarValidator</tt> requires the validation schema files stored in the Java <tt>resources</tt> directory. To get those files
-we need to merge some of the schemas in the <tt>schema</tt> directory and assemble them into a standalone self-contained schema file.
-We have already provided a script to perform the action in the <tt>scripts</tt> directory.
+These files are assembled into meta-sechemas to validate templates, elements and fields.
+
+The <tt>CedarValidator</tt> uses these validation meta-schemas. They are stored in the Java <tt>resources</tt> directory. 
+To generate these meta-schemas we need to merge  the invidiual schemas in the <tt>schema</tt> directory and assemble them into several standalone 
+self-contained meta-schemas. We have provided a script to do this assembly in the <tt>scripts</tt> directory.
 
     cd scripts
-    ./generate-schema.sh
+    ./generate-meta-schemas.sh
 
-The script will generate four schema files, i.e., <tt>template-schema.json</tt>, <tt>element-schema.json</tt>, <tt>field-schema.json</tt>
-and <tt>static-field-schema.json</tt> in the <tt>src/main/resources</tt> directory.
+The script will generate six meta-schema files (<tt>template-meta-schema.json</tt>, <tt>element-meta-schema.json</tt>, 
+<tt>literal-field-meta-schema.json</tt>, <tt>iri-field-meta-schema.json</tt>, <tt>static-field-meta-schema.json</tt>, and
+<tt>multi-instance-field-meta-schema.json</tt>) in the <tt>src/main/resources</tt> directory.
 
-The description about the components to generate each schema can be found in the YAML files in <tt>schema</tt> directory.
+The description about the components to generate each meta-schema can be found in the YAML files in <tt>schema</tt> directory.
 
-### Run Test in Java
+### Command Line Validation in Java
 
-Below are some examples to test the <tt>CedarValidator</tt> implementation.
+Below are some command-line examples validate templates, elements, fields, and instances.
 
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/empty-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/single-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplate" -Dexec.args="./src/test/resources/templates/multi-field-template.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./src/test/resources/elements/empty-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateElement" -Dexec.args="./src/test/resources/elements/multi-field-element.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./src/test/resources/fields/text-field.json"
-    mvn exec:java -Dexec.mainClass="org.metadatacenter.model.validation.exec.ValidateTemplateField" -Dexec.args="./src/test/resources/fields/constrained-text-field.json"
+    mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/empty-template.json"
+    mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/single-field-template.json"
+    mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/multi-field-template.json"
+    mvn exec:java@validate-element -Dexec.args="./src/test/resources/elements/empty-element.json"
+    mvn exec:java@validate-element -Dexec.args="./src/test/resources/elements/many-fields-element.json"
+    mvn exec:java@validate-field -Dexec.args="./src/test/resources/fields/text-field.json"
+    mvn exec:java@validate-field -Dexec.args="./src/test/resources/fields/constrained-text-field.json"
+    mvn exec:java@validate-instance -Dexec.args="./src/test/resources/templates/template-allowing-annotations.json ./src/test/resources/instances/instance-with-annotations.jsonld"
 
-### Run Test in Python
+### Command Line Validation in Python
 
-Below are some examples to test Python <tt>jsonschema</tt> implementation (required Python 3.x).
+Below are some examples to validate using Python <tt>jsonschema</tt> implementation (required Python 3.x).
 
     cd scripts
     ./validate-template.sh ../src/test/resources/templates/empty-template.json

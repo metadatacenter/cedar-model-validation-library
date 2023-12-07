@@ -29,8 +29,8 @@ public class JsonLdDocument {
 
   public JsonNode asJson() {
     JsonNode jsonDocument = new JsonTrimmer(rootNode)
-        .collapse(at(JsonLdToken.ID), whenFound(IDENTIFIER_PATTERN))
-        .collapse(at(JsonLdToken.VALUE))
+        .collapse(at(JsonLdToken.JSON_LD_ID), whenFound(IDENTIFIER_PATTERN))
+        .collapse(at(JsonLdToken.JSON_LD_VALUE))
         .prune(at(JsonLdToken.AllTokensSpec10))
         .trim();
     return jsonDocument;

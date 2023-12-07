@@ -1,5 +1,5 @@
 {
-    "description": "Schema that specifies the schema for a date-time field",
+    "description": "Meta-schema that specifies the schema specification of a date-time field",
     "type": "object",
     "properties": {
         "type": { "type": "string", "enum": [ "string" ] },

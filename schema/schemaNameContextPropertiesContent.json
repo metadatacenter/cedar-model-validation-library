@@ -1,5 +1,5 @@
 {
-  "description": "Schema describing the 'schema:name' in the '@context/properties' field",
+  "description": "Meta-schema describing the schema of a 'schema:name' field in a '@context/properties' field",
   "type": "object",
   "properties": {
     "type": { "type": "string", "enum": [ "object" ] },

@@ -9,6 +9,11 @@ definitions:
   - pavCreatedByContextFieldContent.json
   - pavLastUpdatedOnContextFieldContent.json
   - oslcModifiedByContextFieldContent.json
+  - jsonLDLanguageFieldContent.json
+  - annotationsContent.json
+  - annotationsPropertiesContent.json
+  - annotationsContextPropertiesFieldContent.json
+  - annotationsJsonLDValueFieldContent.json
   - templateContextFieldContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
@@ -48,24 +53,21 @@ definitions:
   - userFieldContextPropertiesContent.json
   - jsonLDTypeFieldOneOfFieldContent.json
   - stringAndNullTypeContent.json
-  - multiEntriesTemplateField.json
   - staticTemplateField.json
   - literalTemplateField.json
   - literalFieldUIContent.json
   - literalFieldValueConstraintsContent.json
   - literalFieldPropertiesContent.json
-  - objectTemplateField.json
-  - objectFieldUIContent.json
-  - objectFieldValueConstraintsContent.json
-  - objectFieldPropertiesContent.json
-  - checkBoxTemplateField.json
+  - iriTemplateField.json
+  - iriFieldUIContent.json
+  - iriFieldValueConstraintsContent.json
+  - iriFieldPropertiesContent.json
   - attributeValueTemplateField.json
-  - multiEntriesFieldValueConstraintsContent.json
   - staticFieldUIContent.json
   - templateElement.json
   - templateElementContextFieldContent.json
   - templateElementContextPropertiesFieldContent.json
-  - multipleTemplateFieldsOrElements.json
+  - multiInstanceTemplateFieldOrElement.json
   - uriEnumContent.json
   - uriEnumArrayContent.json
   - singleURIArray.json

@@ -15,6 +15,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
   private static String manyFieldsTemplate;
   private static String multipleFieldItemsTemplate;
   private static String multipleElementItemsTemplate;
+  private static String allowingAnnotationsTemplate;
   private static String nestedElementTemplate;
   private static String attributeValueTemplate;
 
@@ -25,8 +26,8 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     singleFieldTemplate = TestResourcesUtils.getStringContent("templates/single-field-template.json");
     manyFieldsTemplate = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
     multipleFieldItemsTemplate = TestResourcesUtils.getStringContent("templates/multiple-field-items-template.json");
-    multipleElementItemsTemplate = TestResourcesUtils.getStringContent("templates/multiple-element-items-template" +
-        ".json");
+    multipleElementItemsTemplate = TestResourcesUtils.getStringContent("templates/multiple-element-items-template.json");
+    allowingAnnotationsTemplate = TestResourcesUtils.getStringContent("templates/template-allowing-annotations.json");
     nestedElementTemplate = TestResourcesUtils.getStringContent("templates/nested-element-template.json");
     attributeValueTemplate = TestResourcesUtils.getStringContent("templates/attribute-value-template.json");
   }
@@ -53,6 +54,13 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     // Act
     ValidationReport validationReport = runValidation(instanceString, singleFieldTemplate);
     // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassInstanceWithAnnotations() {
+    String instanceString = TestResourcesUtils.getStringContent("instances/instance-with-annotations.jsonld");
+    ValidationReport validationReport = runValidation(instanceString, allowingAnnotationsTemplate);
     assertValidationStatus(validationReport, "true");
   }
 

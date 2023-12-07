@@ -1,5 +1,5 @@
 {
-  "description": "Schema that describes a 'properties field in a '@context' field in a 'properties' field in a template element",
+  "description": "Schema that describes a 'properties field in a '/properties/@context' field in a template element",
   "type": "object",
   "patternProperties": {
     "^(?!(schema|xsd|pav|oslc|rdfs|\\$))[^\\.]+$": { "$ref": "file:userFieldContextPropertiesContent.json" }

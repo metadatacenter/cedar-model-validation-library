@@ -1,5 +1,5 @@
 {
-  "description": "Schema describing the restriction of 'additionalProperties' that must have a URI string",
+  "description": "Meta-schema describing the restriction of 'additionalProperties' that must have a URI string",
   "type": "object",
   "properties": {
     "type": {

@@ -1,5 +1,5 @@
 {
-  "description": "Schema that describes the schema of an 'additionalProperties' field that has attribute-value field",
+  "description": "Meta-schema that describes the schema of an 'additionalProperties' field that has attribute-value field",
   "type": "object",
   "properties": {
     "type": {

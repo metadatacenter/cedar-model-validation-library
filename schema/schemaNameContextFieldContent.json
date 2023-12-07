@@ -1,5 +1,5 @@
 {
-  "description": "Schema that describes the schema of a 'schema:name' field content in a @context",
+  "description": "Schema that describes a 'schema:name' field in a @context field",
   "type": "object",
   "properties": {
     "@type": { "type": "string", "enum": [ "xsd:string" ] }

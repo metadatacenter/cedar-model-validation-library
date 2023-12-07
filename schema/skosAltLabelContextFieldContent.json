@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of 'skos:prefLabel' field content in a @context",
+    "description": "Meta-schema that describes the schema of 'skos:prefLabel' field in a @context field",
     "type": "object",
     "properties": {
         "@type": { "type": "string", "enum": [ "xsd:string" ] }

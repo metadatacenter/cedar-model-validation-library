@@ -147,8 +147,8 @@ public class CedarValidator implements ModelValidator {
 
   private void validateUserSpecifiedField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    if (isMultiEntriesTemplateField(fieldNode)) {
-      validateMultiEntriesTemplateField(fieldNode, location);
+    if (isMultiInstanceTemplateField(fieldNode)) {
+      validateMultiInstanceTemplateField(fieldNode, location);
     } else {
       if (isUsingMultipleOption(fieldNode)) {
         validateFieldWithMultipleOption(fieldNode, location);
@@ -183,43 +183,43 @@ public class CedarValidator implements ModelValidator {
     if (isStaticTemplateField(fieldNode)) {
       validateStaticTemplateField(fieldNode, location);
     } else {
-      validateNonStaticTemplateField(fieldNode, location);
+      validateIRIorLiteralTemplateField(fieldNode, location);
     }
   }
 
   private void validateTemplate(JsonNode templateNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.TEMPLATE_SCHEMA, templateNode, location);
+    validateResource(SchemaResources.TEMPLATE_META_SCHEMA, templateNode, location);
   }
 
   private void validateTemplateElement(JsonNode templateElementNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.ELEMENT_SCHEMA, templateElementNode, location);
+    validateResource(SchemaResources.ELEMENT_META_SCHEMA, templateElementNode, location);
   }
 
   private void validateNodeStructureAgainstFieldSchema(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
     if (isStaticTemplateField(fieldNode)) {
       validateStaticTemplateField(fieldNode, location);
-    } else if (isMultiEntriesTemplateField(fieldNode)) {
-      validateMultiEntriesTemplateField(fieldNode, location);
+    } else if (isMultiInstanceTemplateField(fieldNode)) {
+      validateMultiInstanceTemplateField(fieldNode, location);
     } else {
-      validateNonStaticTemplateField(fieldNode, location);
+      validateIRIorLiteralTemplateField(fieldNode, location);
     }
   }
 
-  private void validateNonStaticTemplateField(JsonNode fieldNode, JsonPointer location)
+  private void validateIRIorLiteralTemplateField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    if (isObjectType(fieldNode)) {
-      validateResource(SchemaResources.OBJECT_FIELD_SCHEMA, fieldNode, location);
+    if (isIRIField(fieldNode)) {
+      validateResource(SchemaResources.IRI_FIELD_META_SCHEMA, fieldNode, location);
     } else {
-      validateResource(SchemaResources.LITERAL_FIELD_SCHEMA, fieldNode, location);
+      validateResource(SchemaResources.LITERAL_FIELD_META_SCHEMA, fieldNode, location);
     }
   }
 
-  private void validateMultiEntriesTemplateField(JsonNode fieldNode, JsonPointer location)
+  private void validateMultiInstanceTemplateField(JsonNode fieldNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
-    validateResource(SchemaResources.MULTI_ENTRIES_FIELD_SCHEMA, fieldNode, location);
+    validateResource(SchemaResources.MULTI_INSTANCE_FIELD_META_SCHEMA, fieldNode, location);
   }
 
   private void validateStaticTemplateField(JsonNode fieldNode, JsonPointer location)
@@ -312,7 +312,7 @@ public class CedarValidator implements ModelValidator {
     return resourceNode.path(JSON_LD_TYPE).asText().equals(CedarConstants.STATIC_TEMPLATE_FIELD_TYPE_URI);
   }
 
-  private static boolean isMultiEntriesTemplateField(JsonNode resourceNode) {
+  private static boolean isMultiInstanceTemplateField(JsonNode resourceNode) {
     if (isTypedArray(resourceNode)) {
       JsonNode fieldNode = resourceNode.get(JSON_SCHEMA_ITEMS);
       if (fieldNode.has(CedarModelVocabulary.UI)) {
@@ -336,7 +336,7 @@ public class CedarValidator implements ModelValidator {
     return String.format("/%s/%s", JSON_SCHEMA_PROPERTIES, fieldName);
   }
 
-  private static boolean isObjectType(JsonNode node) {
+  private static boolean isIRIField(JsonNode node) {
     if (node.has(CedarModelVocabulary.UI)) {
       JsonNode uiNode = node.get(CedarModelVocabulary.UI);
       String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();

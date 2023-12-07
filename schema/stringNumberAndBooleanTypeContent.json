@@ -1,0 +1,9 @@
+{
+    "description": "Meta-schema that describes the schema for an array containing strings 'string', 'number' and 'boolean'",
+    "type": "array",  "minItems": 3,  "maxItems": 3, 
+    "items": [ 
+        { "type": "string", "enum": [ "string" ] },
+        { "type": "string", "enum": [ "number" ] },
+        { "type": "string", "enum": [ "boolean" ] }
+    ] 
+}

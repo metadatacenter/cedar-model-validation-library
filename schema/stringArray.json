@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a possibly-empty string array",
+    "description": "Schema that describes a possibly empty string array",
     "type": "array", "uniqueItems": true,
     "items": { "type": "string", "minLength": 1 }            
 }
