@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of 'oslc:lastUpdatedOn' field content in a @context",
+    "description": "Schema that describes 'oslc:lastUpdatedOn' field content in a @context",
     "type": "object",
     "properties": {
         "@type": { "type": "string", "enum": [ "xsd:dateTime" ] }

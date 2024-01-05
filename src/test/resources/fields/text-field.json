@@ -41,7 +41,8 @@
     "inputType": "textfield"
   },
   "_valueConstraints": {
-    "requiredValue": false
+    "requiredValue": false,
+    "recommendedValue": false
   },
   "properties": {
     "@type": {

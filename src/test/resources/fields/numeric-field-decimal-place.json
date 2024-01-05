@@ -40,6 +40,7 @@
   },
   "_valueConstraints": {
     "requiredValue": false,
+    "recommendedValue": false,
     "numberType": "xsd:decimal",
     "decimalPlace": 2
   },

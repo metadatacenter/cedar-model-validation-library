@@ -1,0 +1,16 @@
+{
+  "description": "Meta-schema specifying the schema of an '@language' field in a '@context/properties' field",
+  "type": "object",
+  "properties": {
+            "type": {
+              "type": "array", "minItems": 2, "maxItems": 2,
+              "items": [
+                { "type": "string", "enum": [ "string" ] },
+                { "type": "string", "enum": [ "null" ] }
+              ]
+            },
+            "minLength": { "type": "number", "enum": [ 1 ] }
+  },
+  "required": [ "type", "minLength" ],
+  "additionalProperties": false
+}

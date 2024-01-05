@@ -39,7 +39,8 @@
     "inputType": "temporal"
   },
   "_valueConstraints": {
-    "requiredValue": false
+    "requiredValue": false,
+    "recommendedValue": false
   },
   "properties": {
     "@value": {

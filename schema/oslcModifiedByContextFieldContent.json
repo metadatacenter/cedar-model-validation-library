@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of 'oslc:modifiedBy' field content in a @context",
+    "description": "Schema that describes an 'oslc:modifiedBy' field in a @context",
     "type": "object",
     "properties": {
         "@type": { "type": "string", "enum": [ "@id" ] }

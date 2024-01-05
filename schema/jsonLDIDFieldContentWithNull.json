@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema for a '@id' field that allows a null value",
+    "description": "Meta-schema that specifies the schema for a '@id' field that allows a null value",
     "type": "object",
     "properties": {
         "type": {

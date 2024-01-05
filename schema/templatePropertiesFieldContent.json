@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of a 'properties' field in a template",
+    "description": "Schema that describes a 'properties' field in a template",
     "type": "object",
     "properties": {
         "@context": { "$ref": "#/definitions/templateContextFieldContent" },
@@ -12,10 +12,11 @@
         "schema:isBasedOn": { "$ref": "#/definitions/schemaIsBasedOnFieldContent" },
         "pav:lastUpdatedOn": { "$ref": "#/definitions/pavLastUpdatedOnFieldContent" },
         "oslc:modifiedBy": { "$ref": "#/definitions/oslcModifiedByFieldContent" },
-        "pav:derivedFrom": { "$ref": "#/definitions/pavDerivedFromFieldContent" }
+        "pav:derivedFrom": { "$ref": "#/definitions/pavDerivedFromFieldContent" },
+        "_annotations": { "$ref": "#/definitions/annotationsPropertiesContent" }
     },
     "patternProperties": {
-      "^(?!(@context|@type|@id|schema|xsd|pav|oslc|\\$))[^\\.]+$": { "$ref": "file:userSpecifiedFields.json" }
+      "^(?!(@context|@type|@id|schema|xsd|pav|oslc|_annotations|\\$))[^\\.]+$": { "$ref": "file:userSpecifiedFields.json" }
     },
     "additionalProperties": false,
     "required": [ "@type", "@id", "@context", "schema:isBasedOn", "schema:name", "schema:description",

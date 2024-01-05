@@ -1,5 +1,5 @@
 {
-    "description": "Schema that describes the schema of the 'valueSets.exclusions' field in a '_valueConstraints' field",
+    "description": "Schema that describes a 'valueSets.exclusions' field in a '_valueConstraints' field",
     "type": "array", "uniqueItems": true,
     "items": { "type": "string", "format": "uri" }
 }

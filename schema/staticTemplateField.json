@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Schema that describes a static template field",
+    "description": "Meta-schema that describes the schema of a static template field",
     "type": "object",
     "properties": {
         "$schema": {
