@@ -29,7 +29,7 @@ public class ValidateTemplate {
     } else {
       System.out.println("Template is invalid. Found " + validationReport.getErrors().size() + " error(s)");
       for (ErrorItem errorItem : validationReport.getErrors()) {
-        System.out.println("[ERROR]: " + errorItem.getMessage());
+        System.out.println("[ERROR]: " + errorItem.getMessage() + ", location: " + errorItem.getLocation());
       }
     }
   }
