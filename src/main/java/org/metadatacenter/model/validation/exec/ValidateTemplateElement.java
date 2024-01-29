@@ -34,7 +34,7 @@ public class ValidateTemplateElement {
   }
 
   private static void Usage() {
-    System.err.println("Usage: " + ValidateTemplateElement.class.getName() + " <templateElementFileName>");
+    System.err.println("Usage: " + ValidateTemplateElement.class.getName() + " <templateElementFilePath>");
     System.exit(1);
   }
 }

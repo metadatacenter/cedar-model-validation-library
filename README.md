@@ -1,23 +1,20 @@
 # CEDAR Model Validation Library
 
-Provides a Java-based CEDAR library to validate JSON Schema-encoded CEDAR model artifacts.
+Provides a Java-based CEDAR library to validate JSON Schema-encoded CEDAR schema artifacts (templates, elements, and fields) and JSON-LD-encoded instance artifacts (template instances).
 
 Also provides command line Java- and Python-based validators 
 
 ## Validation Library
 
 The library provides an interface <tt>org.metadatacenter.model.validation.ModelValidator</tt> that contains
-methods to validate CEDAR resources, such as, templates, elements, and fields. 
-
-We use a third-party Java library called [JSON Schema Validator](https://github.com/java-json-tools/json-schema-validator)
-to perform this validation.
+methods to validate CEDAR artifacts, such as, templates, elements, fields, and template instances. 
 
 ### Generate Validation Schemas
 
-The <tt>schema</tt> directory contains a collection of JSON Schema definitions which collectively form the CEDAR Resource Validation Schema.
+The <tt>schema</tt> directory contains a collection of JSON Schema-encoded specifications, which collectively form the CEDAR Metamodel Schema.
 We designed the schema definitions to be modular for easy development and reuse.
 
-These files are assembled into meta-sechemas to validate templates, elements and fields.
+These specificartions are assembled into meta-sechemas to validate templates, elements and fields.
 
 The <tt>CedarValidator</tt> uses these validation meta-schemas. They are stored in the Java <tt>resources</tt> directory. 
 To generate these meta-schemas we need to merge  the invidiual schemas in the <tt>schema</tt> directory and assemble them into several standalone 

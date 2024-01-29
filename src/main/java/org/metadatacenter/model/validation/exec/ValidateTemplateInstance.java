@@ -36,7 +36,7 @@ public class ValidateTemplateInstance {
   }
 
   private static void Usage() {
-    System.err.println("Usage: " + ValidateTemplateInstance.class.getName() + " <templateFileName> <instanceFileName>");
+    System.err.println("Usage: " + ValidateTemplateInstance.class.getName() + " <templateFilePath> <instanceFilePath>");
     System.exit(1);
   }
 }

@@ -34,7 +34,7 @@ public class ValidateTemplateField {
   }
 
   private static void Usage() {
-    System.err.println("Usage: " + ValidateTemplateField.class.getName() + " <templateFieldFileName>");
+    System.err.println("Usage: " + ValidateTemplateField.class.getName() + " <templateFieldFilePath>");
     System.exit(1);
   }
 }

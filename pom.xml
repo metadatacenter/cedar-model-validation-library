@@ -149,6 +149,7 @@
             </goals>
             <configuration>
               <mainClass>org.metadatacenter.model.validation.exec.ValidateTemplate</mainClass>
+              <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
           </execution>
       
@@ -159,6 +160,7 @@
             </goals>
             <configuration>
               <mainClass>org.metadatacenter.model.validation.exec.ValidateElement</mainClass>
+              <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
           </execution>
       
@@ -169,6 +171,7 @@
             </goals>
             <configuration>
               <mainClass>org.metadatacenter.model.validation.exec.ValidateField</mainClass>
+              <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
           </execution>
       
@@ -179,6 +182,7 @@
             </goals>
             <configuration>
               <mainClass>org.metadatacenter.model.validation.exec.ValidateTemplateInstance</mainClass>
+              <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
           </execution>
       
