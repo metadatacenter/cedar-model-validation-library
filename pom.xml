@@ -159,7 +159,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>org.metadatacenter.model.validation.exec.ValidateElement</mainClass>
+              <mainClass>org.metadatacenter.model.validation.exec.ValidateTemplateElement</mainClass>
               <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
           </execution>
@@ -170,7 +170,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>org.metadatacenter.model.validation.exec.ValidateField</mainClass>
+              <mainClass>org.metadatacenter.model.validation.exec.ValidateTemplateField</mainClass>
               <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
           </execution>
