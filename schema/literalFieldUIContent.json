@@ -4,7 +4,7 @@
     "properties": {
         "inputType": {
             "type": "string",
-            "enum": [ "textfield", "textarea", "radio", "checkbox", "boolean", "temporal", "email", "list", "numeric", "phone-number" ]
+            "enum": [ "textfield", "textarea", "radio", "checkbox", "temporal", "email", "list", "numeric", "phone-number", "boolean" ]
         },
         "valueRecommendationEnabled": { "type": "boolean" },
         "hidden": { "type": "boolean" },
