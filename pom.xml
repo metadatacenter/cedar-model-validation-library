@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.metadatacenter</groupId>
     <artifactId>cedar-parent</artifactId>
-    <version>2.6.56</version>
+    <version>2.6.57</version>
   </parent>
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>2.6.56</version>
+  <version>2.6.57</version>
   <packaging>jar</packaging>
 
   <name>CEDAR Model Validation Library</name>
@@ -159,7 +159,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>org.metadatacenter.model.validation.exec.ValidateElement</mainClass>
+              <mainClass>org.metadatacenter.model.validation.exec.ValidateTemplateElement</mainClass>
               <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
           </execution>
@@ -170,7 +170,7 @@
               <goal>java</goal>
             </goals>
             <configuration>
-              <mainClass>org.metadatacenter.model.validation.exec.ValidateField</mainClass>
+              <mainClass>org.metadatacenter.model.validation.exec.ValidateTemplateField</mainClass>
               <cleanupDaemonThreads>false</cleanupDaemonThreads>
             </configuration>
           </execution>
