@@ -17,7 +17,6 @@ public class CedarModelVocabulary {
   public static final String TITLE = "title";
   public static final String DESCRIPTION = "description";
   public static final String ORDER = "order";
-  public static final String PAGES = "pages";
   public static final String INPUT_TYPE = "inputType";
   public static final String PROPERTY_LABELS = "propertyLabels";
   public static final String DATE_TYPE = "dateType";
@@ -55,6 +54,6 @@ public class CedarModelVocabulary {
           SCHEMA_IS_BASED_ON, SCHEMA_NAME, SCHEMA_DESCRIPTION, ANNOTATIONS));
 
   public static final Set<String> CommonUIInnerFields = new HashSet<>(
-      Arrays.asList(TITLE, DESCRIPTION, ORDER, PAGES, INPUT_TYPE, PROPERTY_LABELS, DATE_TYPE,
+      Arrays.asList(TITLE, DESCRIPTION, ORDER, INPUT_TYPE, PROPERTY_LABELS, DATE_TYPE,
           VALUE_RECOMMENDATION_ENABLED));
 }

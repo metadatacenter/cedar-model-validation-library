@@ -285,18 +285,6 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldFailMissingUi_Pages() {
-    // Arrange
-    String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/_ui/pages");
-    // Act
-    ValidationReport validationReport = runValidation(templateString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pages'])");
-  }
-
-  @Test
   public void shouldFailMissingUi_Order() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");

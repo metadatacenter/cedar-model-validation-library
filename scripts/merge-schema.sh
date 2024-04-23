@@ -75,3 +75,5 @@ printf "    %s\n" "}" >> ${output_file}
 
 # End of the schema object
 printf "%s" "}" >> ${output_file}
+
+jq '.' ${output_file} | sponge ${output_file}
