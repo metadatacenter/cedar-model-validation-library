@@ -2874,6 +2874,9 @@
             "null"
           ]
         },
+        "_size": {
+          "$ref": "#/definitions/staticFieldUISizeContent"
+        },
         "hidden": {
           "type": "boolean"
         }
