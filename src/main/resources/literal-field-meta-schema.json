@@ -171,7 +171,8 @@
             "email",
             "list",
             "numeric",
-            "phone-number"
+            "phone-number",
+            "attribute-value"
           ]
         },
         "valueRecommendationEnabled": {
