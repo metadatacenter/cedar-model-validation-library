@@ -173,6 +173,19 @@
       ],
       "additionalProperties": false
     },
+    "staticFieldUISizeContent": {
+      "description": "Meta-schema that specifies the schema of a '_ui/_size' field in a static template field",
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
     "literalFieldPropertiesContent": {
       "description": "Meta-schema that specifies the schema of a 'properties' field in a literal-valued template field",
       "type": "object",

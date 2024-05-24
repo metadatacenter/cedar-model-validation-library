@@ -47,6 +47,7 @@ definitions:
   - staticTemplateField.json
   - attributeValueTemplateField.json
   - staticFieldUIContent.json
+  - staticFieldUISizeContent.json
   - templateElement.json
   - multiInstanceTemplateFieldOrElement.json
   - uriEnumContent.json
