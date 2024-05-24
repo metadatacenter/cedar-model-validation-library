@@ -2015,6 +2015,9 @@
             "null"
           ]
         },
+        "_size": {
+          "$ref": "#/definitions/staticFieldUISizeContent"
+        },
         "hidden": {
           "type": "boolean"
         }
@@ -2023,6 +2026,19 @@
         "inputType",
         "_content"
       ],
+      "additionalProperties": false
+    },
+    "staticFieldUISizeContent": {
+      "description": "Meta-schema that specifies the schema of a '_ui/_size' field in a static template field",
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
       "additionalProperties": false
     },
     "templateElement": {

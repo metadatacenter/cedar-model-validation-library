@@ -7,6 +7,9 @@
             "enum": [ "section-break", "page-break", "richtext", "image", "youtube" ]
         },
         "_content": { "type": [ "string", "null" ] },
+        "_size": {
+            "$ref": "#/definitions/staticFieldUISizeContent"
+        },
         "hidden": { "type": "boolean" }
     },
     "required": [ "inputType", "_content" ],
