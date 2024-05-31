@@ -64,6 +64,7 @@ definitions:
   - iriFieldPropertiesContent.json
   - attributeValueTemplateField.json
   - staticFieldUIContent.json
+  - staticFieldUISizeContent.json
   - templateElement.json
   - templateElementContextFieldContent.json
   - templateElementContextPropertiesFieldContent.json
