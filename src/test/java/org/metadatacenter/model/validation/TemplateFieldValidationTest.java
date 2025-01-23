@@ -239,6 +239,26 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldPassRorField() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/ror-field.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldPassOrcidField() {
+    // Arrange
+    String fieldString = TestResourcesUtils.getStringContent("fields/orcid-field.json");
+    // Act
+    ValidationReport validationReport = runValidation(fieldString);
+    // Assert
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassControlledTextField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/controlled-text-field.json");

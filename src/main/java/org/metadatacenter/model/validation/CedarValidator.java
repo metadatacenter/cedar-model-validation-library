@@ -40,8 +40,10 @@ public class CedarValidator implements ModelValidator {
 
   private static final String JSON_LD_TYPE = "@type";
 
-  private static final String INPUT_TYPE_LINK = "link";
   private static final String INPUT_TYPE_CONTROLLED_TERM = "controlled-term";
+  private static final String INPUT_TYPE_LINK = "link";
+  private static final String INPUT_TYPE_EXT_ROR = "ext-ror";
+  private static final String INPUT_TYPE_EXT_ORCID = "ext-orcid";
   private static final String INPUT_TYPE_ATTRIBUTE_VALUE = "attribute-value";
   private static final String INPUT_TYPE_CHECK_BOX = "checkbox";
 
@@ -340,7 +342,8 @@ public class CedarValidator implements ModelValidator {
     if (node.has(CedarModelVocabulary.UI)) {
       JsonNode uiNode = node.get(CedarModelVocabulary.UI);
       String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();
-      return inputType.equals(INPUT_TYPE_LINK) || inputType.equals(INPUT_TYPE_CONTROLLED_TERM);
+      return inputType.equals(INPUT_TYPE_LINK) || inputType.equals(INPUT_TYPE_CONTROLLED_TERM)
+              || inputType.equals(INPUT_TYPE_EXT_ROR) || inputType.equals(INPUT_TYPE_EXT_ORCID);
     }
     return false;
   }

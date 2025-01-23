@@ -4,9 +4,8 @@
     "properties": {
         "inputType": {
             "type": "string",
-            "enum": [ "link", "controlled-term" ]
+            "enum": [ "link", "controlled-term", "ext-ror", "ext-orcid" ]
         },
-        "dateType": { "type": "string", "enum": [ "single-date", "date-range" ] },
         "valueRecommendationEnabled": { "type": "boolean" },
         "hidden": { "type": "boolean" },
         "continuePreviousLine": { "type": "boolean" }
