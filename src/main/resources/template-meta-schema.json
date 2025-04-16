@@ -2622,14 +2622,9 @@
           "type": "string",
           "enum": [
             "link",
-            "controlled-term"
-          ]
-        },
-        "dateType": {
-          "type": "string",
-          "enum": [
-            "single-date",
-            "date-range"
+            "controlled-term",
+            "ext-ror",
+            "ext-orcid"
           ]
         },
         "valueRecommendationEnabled": {

@@ -159,15 +159,10 @@
         "inputType": {
           "type": "string",
           "enum": [
+            "controlled-term",
             "link",
-            "controlled-term"
-          ]
-        },
-        "dateType": {
-          "type": "string",
-          "enum": [
-            "single-date",
-            "date-range"
+            "ext-ror",
+            "ext-orcid"
           ]
         },
         "valueRecommendationEnabled": {
