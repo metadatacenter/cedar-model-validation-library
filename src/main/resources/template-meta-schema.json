@@ -2624,7 +2624,8 @@
             "link",
             "controlled-term",
             "ext-ror",
-            "ext-orcid"
+            "ext-orcid",
+            "ext-pfas"
           ]
         },
         "valueRecommendationEnabled": {
