@@ -344,7 +344,8 @@ public class CedarValidator implements ModelValidator {
       JsonNode uiNode = node.get(CedarModelVocabulary.UI);
       String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();
       return inputType.equals(INPUT_TYPE_LINK) || inputType.equals(INPUT_TYPE_CONTROLLED_TERM)
-              || inputType.equals(INPUT_TYPE_EXT_ROR) || inputType.equals(INPUT_TYPE_EXT_ORCID);
+              || inputType.equals(INPUT_TYPE_EXT_ROR) || inputType.equals(INPUT_TYPE_EXT_ORCID)
+              || inputType.equals(INPUT_TYPE_EXT_PFAS);
     }
     return false;
   }
