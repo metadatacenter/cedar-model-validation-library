@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -45,6 +46,12 @@ public class CedarValidator implements ModelValidator {
   private static final String INPUT_TYPE_EXT_ROR = "ext-ror";
   private static final String INPUT_TYPE_EXT_ORCID = "ext-orcid";
   private static final String INPUT_TYPE_EXT_PFAS = "ext-pfas";
+  private static final String INPUT_TYPE_EXT_RRID = "ext-rrid";
+  private static final String INPUT_TYPE_EXT_PUBMED = "ext-pubmed";
+
+  private static Set<String> IRI_INPUT_TYPES = Set.of(INPUT_TYPE_CONTROLLED_TERM, INPUT_TYPE_LINK, INPUT_TYPE_EXT_ROR,
+      INPUT_TYPE_EXT_ORCID, INPUT_TYPE_EXT_PFAS, INPUT_TYPE_EXT_RRID, INPUT_TYPE_EXT_PUBMED);
+
   private static final String INPUT_TYPE_ATTRIBUTE_VALUE = "attribute-value";
   private static final String INPUT_TYPE_CHECK_BOX = "checkbox";
 
@@ -343,9 +350,7 @@ public class CedarValidator implements ModelValidator {
     if (node.has(CedarModelVocabulary.UI)) {
       JsonNode uiNode = node.get(CedarModelVocabulary.UI);
       String inputType = uiNode.path(CedarModelVocabulary.INPUT_TYPE).asText();
-      return inputType.equals(INPUT_TYPE_LINK) || inputType.equals(INPUT_TYPE_CONTROLLED_TERM)
-              || inputType.equals(INPUT_TYPE_EXT_ROR) || inputType.equals(INPUT_TYPE_EXT_ORCID)
-              || inputType.equals(INPUT_TYPE_EXT_PFAS);
+      return IRI_INPUT_TYPES.contains(inputType);
     }
     return false;
   }

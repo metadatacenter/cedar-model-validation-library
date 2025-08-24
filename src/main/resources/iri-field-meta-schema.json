@@ -163,7 +163,9 @@
             "controlled-term",
             "ext-ror",
             "ext-orcid",
-            "ext-pfas"
+            "ext-pfas",
+            "ext-rrid",
+            "ext-pubmed"
           ]
         },
         "valueRecommendationEnabled": {
