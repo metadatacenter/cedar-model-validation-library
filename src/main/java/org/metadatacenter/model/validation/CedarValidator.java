@@ -48,9 +48,10 @@ public class CedarValidator implements ModelValidator {
   private static final String INPUT_TYPE_EXT_PFAS = "ext-pfas";
   private static final String INPUT_TYPE_EXT_RRID = "ext-rrid";
   private static final String INPUT_TYPE_EXT_PUBMED = "ext-pubmed";
+  private static final String INPUT_TYPE_EXT_DOI = "ext-doi";
 
   private static Set<String> IRI_INPUT_TYPES = Set.of(INPUT_TYPE_CONTROLLED_TERM, INPUT_TYPE_LINK, INPUT_TYPE_EXT_ROR,
-      INPUT_TYPE_EXT_ORCID, INPUT_TYPE_EXT_PFAS, INPUT_TYPE_EXT_RRID, INPUT_TYPE_EXT_PUBMED);
+      INPUT_TYPE_EXT_ORCID, INPUT_TYPE_EXT_PFAS, INPUT_TYPE_EXT_RRID, INPUT_TYPE_EXT_PUBMED, INPUT_TYPE_EXT_DOI);
 
   private static final String INPUT_TYPE_ATTRIBUTE_VALUE = "attribute-value";
   private static final String INPUT_TYPE_CHECK_BOX = "checkbox";
