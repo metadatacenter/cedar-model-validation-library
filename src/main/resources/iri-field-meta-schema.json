@@ -165,7 +165,8 @@
             "ext-orcid",
             "ext-pfas",
             "ext-rrid",
-            "ext-pubmed"
+            "ext-pubmed",
+            "ext-doi"
           ]
         },
         "valueRecommendationEnabled": {
