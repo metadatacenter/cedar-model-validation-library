@@ -48,7 +48,7 @@ public class CedarValidator implements ModelValidator {
   private static final String INPUT_TYPE_EXT_PFAS = "ext-pfas";
   private static final String INPUT_TYPE_EXT_RRID = "ext-rrid";
   private static final String INPUT_TYPE_EXT_PUBMED = "ext-pubmed";
-  private static final String INPUT_TYPE_EXT_NIH_GRANT_ID = "ext-nih-grant_id";
+  private static final String INPUT_TYPE_EXT_NIH_GRANT_ID = "ext-nih-grant-id";
   private static final String INPUT_TYPE_EXT_DOI = "ext-doi";
 
   private static Set<String> IRI_INPUT_TYPES = Set.of(INPUT_TYPE_CONTROLLED_TERM, INPUT_TYPE_LINK, INPUT_TYPE_EXT_ROR,
