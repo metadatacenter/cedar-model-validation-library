@@ -4,7 +4,7 @@
     "properties": {
         "inputType": {
             "type": "string",
-            "enum": [ "link", "controlled-term", "ext-ror", "ext-orcid", "ext-pfas", "ext-rrid", "ext-pubmed", "ext-nih-grant" ,"ext-doi" ]
+            "enum": [ "link", "controlled-term", "ext-ror", "ext-orcid", "ext-pfas", "ext-rrid", "ext-pubmed", "ext-nih-grant-id" ,"ext-doi" ]
         },
         "valueRecommendationEnabled": { "type": "boolean" },
         "hidden": { "type": "boolean" },
