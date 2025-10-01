@@ -166,7 +166,7 @@
             "ext-pfas",
             "ext-rrid",
             "ext-pubmed",
-            "ext-nih-grant",
+            "ext-nih-grant-id",
             "ext-doi"
           ]
         },
