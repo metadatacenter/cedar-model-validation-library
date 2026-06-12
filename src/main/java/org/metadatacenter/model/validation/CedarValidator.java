@@ -110,6 +110,17 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
+  public ValidationReport validateElementInstance(JsonNode elementInstance, JsonNode elementSchema)
+      throws IOException {
+    CedarValidationReport report = CedarValidationReport.newEmptyReport();
+    try {
+      doInstanceValidation(elementInstance, elementSchema, startingLocation);
+    } catch (CedarModelValidationException thrownException) {
+      collectErrorMessages(thrownException, report);
+    }
+    return report;
+  }
+
   private static void doValidation(JsonNode schemaNode, JsonNode instanceNode, JsonPointer location) throws
       CedarModelValidationException {
     try {
