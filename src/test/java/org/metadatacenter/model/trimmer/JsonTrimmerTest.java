@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ValueNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.metadatacenter.model.trimmer.JsonTrimmer;
 
 public class JsonTrimmerTest {
