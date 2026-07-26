@@ -3,16 +3,15 @@ package org.metadatacenter.model.validation;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.fge.jackson.JacksonUtils;
-import com.github.fge.jsonschema.core.exceptions.ProcessingException;
-import com.github.fge.jsonschema.core.report.LogLevel;
-import com.github.fge.jsonschema.core.report.ProcessingMessage;
-import com.github.fge.jsonschema.core.report.ProcessingReport;
-import com.github.fge.jsonschema.main.JsonSchema;
-import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
+import com.networknt.schema.JsonSchema;
+import com.networknt.schema.JsonSchemaFactory;
+import com.networknt.schema.PathType;
+import com.networknt.schema.SchemaValidatorsConfig;
+import com.networknt.schema.ValidationMessage;
 import org.metadatacenter.model.core.CedarConstants;
+import org.metadatacenter.model.validation.internal.FgeCompatFormats;
 import org.metadatacenter.model.core.CedarModelVocabulary;
 import org.metadatacenter.model.validation.internal.ParsedProcessingMessage;
 import org.metadatacenter.model.validation.internal.SchemaResources;
@@ -30,7 +29,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class CedarValidator implements ModelValidator {
 
-  private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
+  private static final ObjectMapper MAPPER = new ObjectMapper();
+
+  // CEDAR meta-schemas and template-derived instance schemas are JSON Schema Draft-04. Format
+  // assertion is enabled explicitly so that the `uri` and `date-time` formats the meta-schemas
+  // declare are enforced; the factory supplies FGE-compatible checkers for those two formats so
+  // that assertion accepts exactly what the former engine accepted.
+  private static final JsonSchemaFactory SCHEMA_FACTORY = FgeCompatFormats.FACTORY;
+
+  private static final SchemaValidatorsConfig VALIDATOR_CONFIG = SchemaValidatorsConfig.builder()
+      .pathType(PathType.JSON_POINTER)
+      .formatAssertionsEnabled(true)
+      .build();
 
   private static final String JSON_SCHEMA_PROPERTIES = "properties";
   private static final String JSON_SCHEMA_TYPE = "type";
@@ -121,16 +131,17 @@ public class CedarValidator implements ModelValidator {
     return report;
   }
 
-  private static void doValidation(JsonNode schemaNode, JsonNode instanceNode, JsonPointer location) throws
-      CedarModelValidationException {
-    try {
-      JsonSchema schema = JsonSchemaFactory.byDefault().getJsonSchema(schemaNode);
-      ProcessingReport processingReport = schema.validate(instanceNode, false);
-      if (!processingReport.isSuccess()) {
-        throw newCedarModelValidationException(processingReport, location);
-      }
-    } catch (ProcessingException e) {
-      throw newCedarModelValidationException(e.getProcessingMessage());
+  private static void doValidation(JsonNode schemaNode, JsonNode instanceNode, JsonPointer location)
+      throws CedarModelValidationException {
+    doValidation(schemaNode, instanceNode, location, null);
+  }
+
+  private static void doValidation(JsonNode schemaNode, JsonNode instanceNode, JsonPointer location,
+                                   String schemaResourceName) throws CedarModelValidationException {
+    JsonSchema schema = SCHEMA_FACTORY.getSchema(schemaNode, VALIDATOR_CONFIG);
+    Set<ValidationMessage> messages = schema.validate(instanceNode);
+    if (!messages.isEmpty()) {
+      throw newCedarModelValidationException(messages, location, schemaResourceName);
     }
   }
 
@@ -254,26 +265,24 @@ public class CedarValidator implements ModelValidator {
   private void validateResource(String schemaFile, JsonNode resourceNode, JsonPointer location)
       throws CedarModelValidationException, IOException {
     final JsonNode schemaNode = loadSchemaFromFile(schemaFile);
-    doValidation(schemaNode, resourceNode, location);
+    doValidation(schemaNode, resourceNode, location, schemaFile);
   }
 
   private void collectErrorMessages(CedarModelValidationException exception, final CedarValidationReport report) {
-    Multimap<JsonPointer, ProcessingMessage> errorDetails = exception.getDetails();
+    Multimap<JsonPointer, ValidationMessage> errorDetails = exception.getDetails();
+    String schemaResourceName = exception.getSchemaResourceName();
     for (JsonPointer errorLocation : errorDetails.keySet()) {
-      Collection<ProcessingMessage> processingMessages = errorDetails.get(errorLocation);
-      for (ProcessingMessage processingMessage : processingMessages) {
-        final LogLevel messageLevel = processingMessage.getLogLevel();
-        if (messageLevel == LogLevel.ERROR || messageLevel == LogLevel.FATAL) {
-          ParsedProcessingMessage parsedMessage = new ParsedProcessingMessage(processingMessage);
-          for (ParsedProcessingMessage.ReportItem reportItem : parsedMessage.getReportItems()) {
-            String errorAbsoluteLocation = createLocation(errorLocation.toString(), reportItem.getLocation());
-            ErrorItem errorItem = createErrorItem(
-                reportItem.getMessage(),
-                errorAbsoluteLocation,
-                reportItem.getSchemaResource(),
-                reportItem.getSchemaPointer());
-            report.addError(errorItem);
-          }
+      Collection<ValidationMessage> validationMessages = errorDetails.get(errorLocation);
+      for (ValidationMessage validationMessage : validationMessages) {
+        ParsedProcessingMessage parsedMessage = new ParsedProcessingMessage(validationMessage, schemaResourceName);
+        for (ParsedProcessingMessage.ReportItem reportItem : parsedMessage.getReportItems()) {
+          String errorAbsoluteLocation = createLocation(errorLocation.toString(), reportItem.getLocation());
+          ErrorItem errorItem = createErrorItem(
+              reportItem.getMessage(),
+              errorAbsoluteLocation,
+              reportItem.getSchemaResource(),
+              reportItem.getSchemaPointer());
+          report.addError(errorItem);
         }
       }
     }
@@ -306,15 +315,10 @@ public class CedarValidator implements ModelValidator {
   }
 
   private static CedarModelValidationException newCedarModelValidationException(
-      ProcessingReport report, JsonPointer location) {
+      Set<ValidationMessage> messages, JsonPointer location, String schemaResourceName) {
     CedarModelValidationException exception = new CedarModelValidationException();
-    exception.addProcessingReport(report, location);
-    return exception;
-  }
-
-  private static CedarModelValidationException newCedarModelValidationException(ProcessingMessage message) {
-    CedarModelValidationException exception = new CedarModelValidationException();
-    exception.addProcessingMessage(message);
+    exception.setSchemaResourceName(schemaResourceName);
+    exception.addValidationMessages(messages, location);
     return exception;
   }
 
