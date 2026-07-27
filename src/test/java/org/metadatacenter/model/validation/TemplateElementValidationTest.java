@@ -2,9 +2,9 @@ package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 public class TemplateElementValidationTest extends BaseValidationTest {
@@ -13,7 +13,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
 
   private ModelValidator modelValidator;
 
-  @Before
+  @BeforeEach
   public void createNewValidator() {
     modelValidator = new CedarValidator();
   }
@@ -390,7 +390,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['description'])");
   }
 
-  @Ignore
+  @Disabled
   @Test
   public void shouldFailMissingProperties_Field_Required() {
     // Arrange
@@ -511,7 +511,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
   }
 
-  @Ignore
+  @Disabled
   @Test
   public void shouldFailMissingProperties_Field_Properties_Value() {
     // Arrange

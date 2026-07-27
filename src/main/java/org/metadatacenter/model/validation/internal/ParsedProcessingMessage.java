@@ -1,98 +1,92 @@
 package org.metadatacenter.model.validation.internal;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.github.fge.jsonschema.core.report.ProcessingMessage;
-import com.google.common.collect.Sets;
+import com.networknt.schema.ValidationMessage;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.Collections;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Adapts a single networknt {@link ValidationMessage} into the {@link ReportItem} shape the
+ * validator reports. It also reproduces, for the two keywords whose wording the public API has
+ * historically exposed, the exact English strings the former FGE engine emitted:
+ *
+ * <ul>
+ *   <li>{@code required} &rarr; {@code object has missing required properties (['<field>'])}</li>
+ *   <li>{@code additionalProperties} &rarr;
+ *       {@code object instance has properties which are not allowed by the schema: ['<field>']}</li>
+ * </ul>
+ *
+ * networknt reports one message per missing or disallowed property, so each adapted item names a
+ * single property. For every other keyword the underlying networknt message is passed through, with
+ * its doubled single-quote escaping normalised to single quotes.
+ */
 public class ParsedProcessingMessage {
 
-  private final JsonNode parsedMessage;
+  private static final String KEYWORD_REQUIRED = "required";
+  private static final String KEYWORD_ADDITIONAL_PROPERTIES = "additionalProperties";
 
-  public ParsedProcessingMessage(ProcessingMessage processingMessage) {
-    checkNotNull(processingMessage);
-    this.parsedMessage = processingMessage.asJson();
+  private final ValidationMessage message;
+  private final String schemaResourceName;
+
+  public ParsedProcessingMessage(ValidationMessage message, String schemaResourceName) {
+    checkNotNull(message);
+    this.message = message;
+    this.schemaResourceName = schemaResourceName;
   }
 
   public Collection<ReportItem> getReportItems() {
-    JsonNode rootNode = parsedMessage;
-    JsonNode reportNode = rootNode.path("reports");
-    Set<ReportItem> reportItems = Sets.newHashSet();
-    if (!reportNode.isMissingNode()) {
-      iterateReport(reportItems, reportNode);
-    } else {
-      collectReportItem(reportItems, rootNode);
-    }
-    return reportItems;
-  }
-
-  private void iterateReport(Set<ReportItem> reportItems, JsonNode reportNode) {
-    for (JsonNode reportItemNode : reportNode) {
-      JsonNode rootNode = reportItemNode.path(0);
-      JsonNode subReportNode = rootNode.path("reports");
-      if (!subReportNode.isMissingNode()) {
-        iterateSubReport(reportItems, subReportNode);
-      } else {
-        collectReportItem(reportItems, rootNode);
-      }
-    }
-  }
-
-  private void iterateSubReport(Set<ReportItem> reportItems, JsonNode subReportNode) {
-    for (JsonNode subReportItemNode : subReportNode) {
-      JsonNode subReportDetails = subReportItemNode.path(0);
-      if (!subReportDetails.isMissingNode()) {
-        collectReportItem(reportItems, subReportDetails);
-      }
-    }
-  }
-
-  private void collectReportItem(Set<ReportItem> reportItems, JsonNode reportDetails) {
     ReportItem reportItem = new ReportItem(
-        getMessage(reportDetails),
-        getLocation(reportDetails),
-        getSchemaResource(reportDetails),
-        getSchemaPointer(reportDetails));
-    reportItems.add(reportItem);
+        getMessage(),
+        getLocation(),
+        schemaResourceName,
+        getSchemaPointer());
+    return Collections.singletonList(reportItem);
   }
 
-  public static String getMessage(JsonNode node) {
-    JsonNode messageNode = node.path("message");
-    return (!messageNode.isMissingNode()) ? prettyText(messageNode.asText()) : null;
+  private String getMessage() {
+    String keyword = message.getType();
+    if (KEYWORD_REQUIRED.equals(keyword)) {
+      return String.format("object has missing required properties (['%s'])", getSubjectProperty());
+    }
+    if (KEYWORD_ADDITIONAL_PROPERTIES.equals(keyword)) {
+      return String.format("object instance has properties which are not allowed by the schema: ['%s']",
+          getSubjectProperty());
+    }
+    return prettyText(message.getMessage());
+  }
+
+  /**
+   * The property that a {@code required} or {@code additionalProperties} violation is about. Prefer
+   * the explicit property carried on the message; fall back to the first message argument.
+   */
+  private String getSubjectProperty() {
+    String property = message.getProperty();
+    if (property != null && !property.isEmpty()) {
+      return property;
+    }
+    Object[] arguments = message.getArguments();
+    if (arguments != null && arguments.length > 0 && arguments[0] != null) {
+      return String.valueOf(arguments[0]);
+    }
+    return property;
   }
 
   private static String prettyText(String s) {
-    return s.replace("\"", "'");
+    return (s == null) ? null : s.replace("\"", "'");
   }
 
-  public static String getLocation(JsonNode node) {
-    JsonNode locationNode = node.path("instance").path("pointer");
-    if (!locationNode.isMissingNode()) {
-      String location = locationNode.asText();
-      if (location.isEmpty()) {
-        location = "/";
-      }
-      return location;
-    }
-    return null;
+  private String getLocation() {
+    String location = message.getInstanceLocation().toString();
+    return location.isEmpty() ? "/" : location;
   }
 
-  public static String getSchemaResource(JsonNode node) {
-    JsonNode schemaResourceNode = node.path("schema").path("loadingURI");
-    return (!schemaResourceNode.isMissingNode()) ? schemaResourceNode.asText() : null;
-
+  private String getSchemaPointer() {
+    return (message.getSchemaLocation() != null) ? message.getSchemaLocation().toString() : null;
   }
 
-  public static String getSchemaPointer(JsonNode node) {
-    JsonNode schemaPointerNode = node.path("schema").path("pointer");
-    return (!schemaPointerNode.isMissingNode()) ? schemaPointerNode.asText() : null;
-  }
-
-  public class ReportItem {
+  public static class ReportItem {
 
     private final String message;
     private final String location;

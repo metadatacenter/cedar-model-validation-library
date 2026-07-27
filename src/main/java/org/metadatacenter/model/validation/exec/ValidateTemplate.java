@@ -2,7 +2,6 @@ package org.metadatacenter.model.validation.exec;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.fge.jackson.JacksonUtils;
 import org.metadatacenter.model.validation.CedarValidator;
 import org.metadatacenter.model.validation.ModelValidator;
 import org.metadatacenter.model.validation.report.ErrorItem;
@@ -12,7 +11,7 @@ import java.io.File;
 
 public class ValidateTemplate {
 
-  private static final ObjectMapper MAPPER = JacksonUtils.newMapper();
+  private static final ObjectMapper MAPPER = new ObjectMapper();
 
   public static void main(String[] args) throws Exception {
     if (args.length != 1) {

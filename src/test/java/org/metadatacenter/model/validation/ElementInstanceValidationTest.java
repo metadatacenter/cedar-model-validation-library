@@ -3,9 +3,9 @@ package org.metadatacenter.model.validation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 /**
@@ -20,7 +20,7 @@ public class ElementInstanceValidationTest extends BaseValidationTest {
   private static JsonNode tradeGoodInstance;
   private ModelValidator modelValidator;
 
-  @BeforeClass
+  @BeforeAll
   public static void loadExamples() throws Exception {
     // The element schema and the element-instance object must be a real pair — the schema
     // pins each child's property IRI as an enum inside @context, so an element authored
@@ -32,7 +32,7 @@ public class ElementInstanceValidationTest extends BaseValidationTest {
     tradeGoodInstance = jsonObjectMapper.readTree(instanceString).get("Trade Good");
   }
 
-  @Before
+  @BeforeEach
   public void createNewValidator() {
     modelValidator = new CedarValidator();
   }

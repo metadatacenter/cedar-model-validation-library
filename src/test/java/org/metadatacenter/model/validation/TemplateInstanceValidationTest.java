@@ -2,9 +2,9 @@ package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 public class TemplateInstanceValidationTest extends BaseValidationTest {
@@ -18,7 +18,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
   private static String attributeValueTemplate;
   private ModelValidator modelValidator;
 
-  @BeforeClass
+  @BeforeAll
   public static void loadTemplateExamples() {
     singleFieldTemplate = TestResourcesUtils.getStringContent("templates/single-field-template.json");
     manyFieldsTemplate = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
@@ -29,7 +29,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     attributeValueTemplate = TestResourcesUtils.getStringContent("templates/attribute-value-template.json");
   }
 
-  @Before
+  @BeforeEach
   public void createNewValidator() {
     modelValidator = new CedarValidator();
   }

@@ -2,9 +2,9 @@ package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 public class TemplateFieldValidationTest extends BaseValidationTest {
@@ -13,7 +13,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
 
   private ModelValidator modelValidator;
 
-  @Before
+  @BeforeEach
   public void createNewValidator() {
     modelValidator = new CedarValidator();
   }
@@ -158,7 +158,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  @Ignore
+  @Disabled
   public void shouldPassMultiSelectionListField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/list-field-multi-selection.json");
@@ -467,7 +467,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['properties'])");
   }
 
-  @Ignore
+  @Disabled
   @Test
   public void shouldFailMissingRequired() {
     // Arrange
@@ -564,7 +564,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['$schema'])");
   }
 
-  @Ignore
+  @Disabled
   @Test
   public void shouldFailMissingProperties_Value() {
     // Arrange
