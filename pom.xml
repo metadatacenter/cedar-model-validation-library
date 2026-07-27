@@ -43,6 +43,20 @@
       <artifactId>jsonld-java</artifactId>
     </dependency>
 
+    <!-- Supplies the HttpClient 4 classes jsonld-java reaches for when it fetches a remote JSON-LD
+         context. It used to get them from the httpclient-osgi bundle, which the parent now excludes
+         because that bundle duplicates the copy the OpenSearch client brings. httpclient-cache is
+         separate from httpclient and carries the CachingHttpClientBuilder that JsonUtils builds. -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient-cache</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
