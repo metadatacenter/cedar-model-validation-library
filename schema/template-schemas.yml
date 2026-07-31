@@ -88,6 +88,7 @@ definitions:
   - skosNotationFieldContent.json
   - pavDerivedFromFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
+  - valueConstraintsVersionFieldContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json
   - valueConstraintsBranchesFieldItemContent.json

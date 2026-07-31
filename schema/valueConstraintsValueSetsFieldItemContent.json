@@ -7,7 +7,10 @@
         "vsCollection": { "type": "string", "format": "uri" },
         "exclusions": { "$ref": "file:valueConstraintsValueSetsExclusionsFieldContent.json" },
         "selectedByDefault": { "type": "boolean" },
-        "numTerms": { "type": "integer", "minimum": 0 }
+        "numTerms": { "type": "integer", "minimum": 0 },
+        "iri": { "type": "string", "format": "uri" },
+        "sourceSystem": { "type": "string", "minLength": 1 },
+        "version": { "$ref": "file:valueConstraintsVersionFieldContent.json" }
     },
     "required": [ "uri" ],
     "additionalProperties": false

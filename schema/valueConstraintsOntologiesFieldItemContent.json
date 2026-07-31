@@ -6,6 +6,9 @@
         "acronym": { "type": "string", "minLength": 1 },
         "name": { "type": "string", "minLength": 1 },
         "numTerms": { "type": "integer", "minimum": 1 },
+        "iri": { "type": "string", "format": "uri" },
+        "sourceSystem": { "type": "string", "minLength": 1 },
+        "version": { "$ref": "file:valueConstraintsVersionFieldContent.json" },
         "exclusions": { "$ref": "file:valueConstraintsOntologiesExclusionsFieldContent.json" },
         "selectedByDefault": { "type": "boolean" }
     },

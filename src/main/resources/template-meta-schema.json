@@ -3594,6 +3594,17 @@
           "type": "integer",
           "minimum": 1
         },
+        "iri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/definitions/valueConstraintsVersionFieldContent"
+        },
         "exclusions": {
           "$ref": "#/definitions/valueConstraintsOntologiesExclusionsFieldContent"
         },
@@ -3605,6 +3616,33 @@
         "uri"
       ],
       "additionalProperties": false
+    },
+    "valueConstraintsVersionFieldContent": {
+      "description": "Version pin for a value-constraint entry: the string \"latest\" or a version triple {id, effectiveDate, declaredVersion}. Absent means latest.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "effectiveDate": {
+              "type": "string"
+            },
+            "declaredVersion": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "additionalProperties": false
+        }
+      ]
     },
     "valueConstraintsValueSetsFieldItemContent": {
       "description": "Schema that describes each entry in the 'valueSets' field array in a '_valueConstraints' field",
@@ -3631,6 +3669,17 @@
         "numTerms": {
           "type": "integer",
           "minimum": 0
+        },
+        "iri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/definitions/valueConstraintsVersionFieldContent"
         }
       },
       "required": [
@@ -3661,6 +3710,17 @@
         "source": {
           "type": "string",
           "minLength": 1
+        },
+        "iri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/definitions/valueConstraintsVersionFieldContent"
         },
         "selectedByDefault": {
           "type": "boolean"
@@ -3698,6 +3758,17 @@
         "maxDepth": {
           "type": "integer",
           "minimum": 0
+        },
+        "iri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sourceSystem": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/definitions/valueConstraintsVersionFieldContent"
         },
         "selectedByDefault": {
           "type": "boolean"
