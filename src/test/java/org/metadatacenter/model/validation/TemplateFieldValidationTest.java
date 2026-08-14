@@ -67,25 +67,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "true");
   }
 
-  @Test
-  public void shouldPassBooleanField() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/boolean-field.json");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "true");
-  }
 
-  @Test
-  public void shouldPassBooleanFieldWithNullDefault() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/boolean-field-null-default.json");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "true");
-  }
 
   @Test
   public void shouldPassNumericFielddWithDecimalPlaceConstraint() {

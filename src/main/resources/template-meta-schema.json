@@ -2291,7 +2291,6 @@
             "textarea",
             "radio",
             "checkbox",
-            "boolean",
             "temporal",
             "email",
             "list",
