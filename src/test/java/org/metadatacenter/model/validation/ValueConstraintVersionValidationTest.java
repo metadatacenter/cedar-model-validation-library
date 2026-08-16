@@ -9,7 +9,7 @@ import org.metadatacenter.model.validation.report.ValidationReport;
 
 /**
  * Validates that the additive, source-explicit value-constraint fields (iri/sourceSystem/version,
- * VERSIONING-DESIGN §6) pass the template meta-schema, while {@code additionalProperties:false} is
+ * VERSIONING-ROADMAP "The Model" §6) pass the template meta-schema, while {@code additionalProperties:false} is
  * still enforced for genuinely unknown fields. Uses DataCiteTemplate (a passing fixture with an
  * ontology constraint) and injects the fields into its first ontologies entry.
  */
