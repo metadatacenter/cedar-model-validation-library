@@ -296,7 +296,15 @@
           "$ref": "#/definitions/jsonLDTypeFieldContent"
         },
         "@id": {
-          "$ref": "#/definitions/jsonLDIDFieldContent"
+          "description": "Meta-schema for the '@id' of an element occurrence, which an artifact may type either way: a stored template types it as a string, and one rendered since the server took over assigning it may also allow null, which is what a document carries for an occurrence that has no identity yet.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/jsonLDIDFieldContent"
+            },
+            {
+              "$ref": "#/definitions/jsonLDIDFieldContentWithNull"
+            }
+          ]
         },
         "@context": {
           "$ref": "#/definitions/templateElementContextFieldContent"
@@ -853,6 +861,37 @@
         "format"
       ],
       "additionalProperties": false
+    },
+    "jsonLDIDFieldContentWithNull": {
+      "description": "Meta-schema that specifies the schema for a '@id' field that allows a null value",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": [
+            {
+              "type": "string",
+              "enum": [
+                "string"
+              ]
+            },
+            {
+              "type": "string",
+              "enum": [
+                "null"
+              ]
+            }
+          ]
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "uri"
+          ]
+        }
+      }
     },
     "templateElementContextFieldContent": {
       "description": "Meta-schema that describes the schema of a '@context' field in a 'properties' field in a template element",

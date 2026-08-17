@@ -3450,7 +3450,15 @@
           "$ref": "#/definitions/jsonLDTypeFieldContent"
         },
         "@id": {
-          "$ref": "#/definitions/jsonLDIDFieldContent"
+          "description": "Meta-schema for the '@id' of an element occurrence, which an artifact may type either way: a stored template types it as a string, and one rendered since the server took over assigning it may also allow null, which is what a document carries for an occurrence that has no identity yet.",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/jsonLDIDFieldContent"
+            },
+            {
+              "$ref": "#/definitions/jsonLDIDFieldContentWithNull"
+            }
+          ]
         },
         "@context": {
           "$ref": "#/definitions/templateElementContextFieldContent"
