@@ -2,6 +2,7 @@ package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,20 @@ public class TemplateValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(templateString);
     // Assert
     assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldFailEmptyChildPropertyIri() throws Exception {
+    JsonNode template = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("templates/single-field-template.json"));
+    ArrayNode mapping = (ArrayNode) template.path("properties").path("@context").path("properties")
+        .path("Study Name").path("enum");
+    mapping.removeAll().add("");
+
+    ValidationReport validationReport = modelValidator.validateTemplate(template);
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "Property IRI for child 'Study Name' must be an absolute IRI");
   }
 
   @Test

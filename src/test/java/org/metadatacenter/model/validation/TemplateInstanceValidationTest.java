@@ -2,6 +2,7 @@ package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,6 +81,19 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldFailEmptyElementOccurrenceId() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance.path("Participant").get(0)).put("@id", "");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "Element occurrence @id must be an absolute IRI or null");
+  }
+
+  @Test
   public void shouldPassNestedElementInstance() {
     String instanceString = TestResourcesUtils.getStringContent("instances/nested-element-instance.jsonld");
     ValidationReport validationReport = runValidation(instanceString, nestedElementTemplate);
@@ -91,6 +105,61 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     String instanceString = TestResourcesUtils.getStringContent("instances/attribute-value-instance.jsonld");
     ValidationReport validationReport = runValidation(instanceString, attributeValueTemplate);
     assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldFailReservedAttributeValueName() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/attribute-value-instance.jsonld"));
+    ((ArrayNode) instance.get("Additional Information")).removeAll().add("@context");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(attributeValueTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport,
+        "Attribute-value name '@context' is reserved for instance metadata");
+  }
+
+  @Test
+  public void shouldFailAttributeValueNameCollidingWithTemplateChild() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/attribute-value-instance.jsonld"));
+    ((ArrayNode) instance.get("Additional Information")).removeAll().add("Name");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(attributeValueTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport,
+        "Attribute-value name 'Name' collides with a template child in the same object");
+  }
+
+  @Test
+  public void shouldFailDuplicateAttributeValueName() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/attribute-value-instance.jsonld"));
+    ((ArrayNode) instance.get("Additional Information")).removeAll().add("Key1").add("Key1");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(attributeValueTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport,
+        "Attribute-value name 'Key1' occurs more than once in field 'Additional Information'");
+  }
+
+  @Test
+  public void shouldFailBlankAttributeValueName() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/attribute-value-instance.jsonld"));
+    ((ArrayNode) instance.get("Additional Information")).removeAll().add("   ");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(attributeValueTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "Attribute-value names must not be blank");
   }
 
   @Test
