@@ -110,6 +110,7 @@ public class CedarValidator implements ModelValidator {
       collectErrorMessages(thrownException, report);
     }
     collectSchemaPropertyIriErrors(templateNode, "", report);
+    collectDerivedFromErrors(templateNode, "", report);
     return report;
   }
 
@@ -121,6 +122,7 @@ public class CedarValidator implements ModelValidator {
       collectErrorMessages(thrownException, report);
     }
     collectSchemaPropertyIriErrors(elementNode, "", report);
+    collectDerivedFromErrors(elementNode, "", report);
     return report;
   }
 
@@ -131,6 +133,7 @@ public class CedarValidator implements ModelValidator {
     } catch (CedarModelValidationException thrownException) {
       collectErrorMessages(thrownException, report);
     }
+    collectDerivedFromErrors(fieldNode, "", report);
     return report;
   }
 
@@ -143,6 +146,7 @@ public class CedarValidator implements ModelValidator {
       collectErrorMessages(thrownException, report);
     }
     collectAttributeValueNameErrors(templateInstance, instanceSchema, "", report);
+    collectDerivedFromErrors(templateInstance, "", report);
     return report;
   }
 
@@ -154,6 +158,7 @@ public class CedarValidator implements ModelValidator {
     } catch (CedarModelValidationException thrownException) {
       collectErrorMessages(thrownException, report);
     }
+    collectDerivedFromErrors(elementInstance, "", report);
     return report;
   }
 
@@ -455,6 +460,34 @@ public class CedarValidator implements ModelValidator {
       }
       collectSchemaPropertyIriErrors(child, childPath, report);
     });
+  }
+
+  /**
+   * {@code format: uri} accepts relative URI references, including the empty
+   * string. Provenance, when stated, names another artifact and must therefore
+   * be an absolute IRI. This explicit walk also reaches embedded fields and
+   * elements whose provenance is validated by a nested meta-schema.
+   */
+  private void collectDerivedFromErrors(JsonNode node, String path, CedarValidationReport report) {
+    if (node == null) {
+      return;
+    }
+    if (node.isArray()) {
+      for (int index = 0; index < node.size(); index++) {
+        collectDerivedFromErrors(node.get(index), path + "/" + index, report);
+      }
+      return;
+    }
+    if (!node.isObject()) {
+      return;
+    }
+    JsonNode derivedFrom = node.get(CedarModelVocabulary.PAV_DERIVED_FROM);
+    if (derivedFrom != null && derivedFrom.isTextual() && !isAbsoluteIri(derivedFrom.asText())) {
+      report.addError(new ErrorItem("pav:derivedFrom must be an absolute IRI when present",
+          path + "/" + CedarModelVocabulary.PAV_DERIVED_FROM));
+    }
+    node.fields().forEachRemaining(entry -> collectDerivedFromErrors(entry.getValue(),
+        path + "/" + escapePointer(entry.getKey()), report));
   }
 
   private static JsonNode childDefinition(JsonNode declared) {
