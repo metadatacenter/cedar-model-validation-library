@@ -2,6 +2,7 @@ package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,21 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldRejectNestedObjectShapedMultiSelectList() throws Exception {
+    ObjectNode element = (ObjectNode) jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("elements/many-fields-element.json"));
+    JsonNode arrayField = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("fields/list-field-multi-selection.json"));
+    ((ObjectNode) element.path("properties")).set("Title", arrayField.path("items").deepCopy());
+
+    ValidationReport validationReport = modelValidator.validateTemplateElement(element);
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport,
+        "Checkbox, attribute-value, and multiple-choice list fields must be declared as arrays");
   }
 
   @Test

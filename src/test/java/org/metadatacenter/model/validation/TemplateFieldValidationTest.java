@@ -2,6 +2,7 @@ package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
@@ -25,6 +26,17 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     } catch (Exception e) {
       throw new RuntimeException("Programming error", e);
     }
+  }
+
+  @Test
+  public void shouldAcceptObjectShapedStandaloneMultiSelectList() throws Exception {
+    JsonNode arrayField = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("fields/list-field-multi-selection.json"));
+    ObjectNode objectField = (ObjectNode) arrayField.path("items").deepCopy();
+
+    ValidationReport validationReport = modelValidator.validateTemplateField(objectField);
+
+    assertValidationStatus(validationReport, "true");
   }
 
   @Test

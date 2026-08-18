@@ -74,6 +74,9 @@ public class CedarValidator implements ModelValidator {
 
   private static final String INPUT_TYPE_ATTRIBUTE_VALUE = "attribute-value";
   private static final String INPUT_TYPE_CHECK_BOX = "checkbox";
+  private static final String INPUT_TYPE_LIST = "list";
+  private static final String VALUE_CONSTRAINTS = "_valueConstraints";
+  private static final String MULTIPLE_CHOICE = "multipleChoice";
 
   /**
    * Attribute-value names are promoted to keys of the object that contains the
@@ -110,6 +113,7 @@ public class CedarValidator implements ModelValidator {
       collectErrorMessages(thrownException, report);
     }
     collectSchemaPropertyIriErrors(templateNode, "", report);
+    collectInherentlyMultipleFieldErrors(templateNode, "", report);
     collectDerivedFromErrors(templateNode, "", report);
     return report;
   }
@@ -122,6 +126,7 @@ public class CedarValidator implements ModelValidator {
       collectErrorMessages(thrownException, report);
     }
     collectSchemaPropertyIriErrors(elementNode, "", report);
+    collectInherentlyMultipleFieldErrors(elementNode, "", report);
     collectDerivedFromErrors(elementNode, "", report);
     return report;
   }
@@ -460,6 +465,59 @@ public class CedarValidator implements ModelValidator {
       }
       collectSchemaPropertyIriErrors(child, childPath, report);
     });
+  }
+
+  /**
+   * Some field kinds are arrays whenever they are deployed in a template or
+   * element, rather than because an optional deployment flag made them
+   * repeatable. Their editor discriminator and their instance JSON Schema must
+   * describe the same cardinality. A standalone field artifact is the reusable
+   * inner field definition and is therefore legitimately object-shaped.
+   *
+   * <p>The meta-schema historically accepted an object-shaped list field with
+   * {@code multipleChoice: true}.  Editors correctly serialize its selected
+   * values as an array, so such a template cannot have a populated valid
+   * instance.  Check the relationship explicitly at every nesting depth.
+   */
+  private void collectInherentlyMultipleFieldErrors(JsonNode declaredNode, String path,
+                                                     CedarValidationReport report) {
+    if (declaredNode == null || !declaredNode.isObject()) {
+      return;
+    }
+
+    JsonNode fieldNode = childDefinition(declaredNode);
+    if (fieldNode == null) {
+      return;
+    }
+    JsonNode ui = fieldNode.path(CedarModelVocabulary.UI);
+    if (ui.isObject() && isInherentlyMultipleField(fieldNode)
+        && !JSON_SCHEMA_ARRAY.equals(declaredNode.path(JSON_SCHEMA_TYPE).asText())) {
+      report.addError(new ErrorItem(
+          "Checkbox, attribute-value, and multiple-choice list fields must be declared as arrays",
+          path + "/type"));
+    }
+
+    JsonNode properties = fieldNode.get(JSON_SCHEMA_PROPERTIES);
+    if (properties == null || !properties.isObject()) {
+      return;
+    }
+    properties.fields().forEachRemaining(entry -> {
+      JsonNode child = childDefinition(entry.getValue());
+      if (child != null && child.path(CedarModelVocabulary.UI).isObject()) {
+        collectInherentlyMultipleFieldErrors(entry.getValue(),
+            path + "/properties/" + escapePointer(entry.getKey()), report);
+      }
+    });
+  }
+
+  private static boolean isInherentlyMultipleField(JsonNode fieldNode) {
+    String inputType = fieldNode.path(CedarModelVocabulary.UI)
+        .path(CedarModelVocabulary.INPUT_TYPE).asText();
+    if (INPUT_TYPE_CHECK_BOX.equals(inputType) || INPUT_TYPE_ATTRIBUTE_VALUE.equals(inputType)) {
+      return true;
+    }
+    return INPUT_TYPE_LIST.equals(inputType)
+        && fieldNode.path(VALUE_CONSTRAINTS).path(MULTIPLE_CHOICE).asBoolean(false);
   }
 
   /**
