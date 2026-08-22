@@ -20,9 +20,16 @@ import org.metadatacenter.model.validation.report.ErrorItem;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -67,6 +74,25 @@ public class CedarValidator implements ModelValidator {
 
   private static final String INPUT_TYPE_ATTRIBUTE_VALUE = "attribute-value";
   private static final String INPUT_TYPE_CHECK_BOX = "checkbox";
+  private static final String INPUT_TYPE_LIST = "list";
+  private static final String VALUE_CONSTRAINTS = "_valueConstraints";
+  private static final String MULTIPLE_CHOICE = "multipleChoice";
+
+  /**
+   * Attribute-value names are promoted to keys of the object that contains the
+   * field. They therefore share a namespace with JSON-LD metadata and normal
+   * template children; JSON Schema alone cannot express those cross-property
+   * constraints.
+   */
+  private static final Set<String> RESERVED_ATTRIBUTE_VALUE_NAMES = Set.of(
+      "@context", "@id", "@type", "@value", "@language",
+      "schema:isBasedOn", "schema:name", "schema:description",
+      "pav:derivedFrom", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
+      "oslc:modifiedBy", "rdfs:label", "skos:prefLabel", "skos:altLabel",
+      "skos:notation", "_annotations");
+
+  private static final Set<String> NON_SERIALIZING_INPUT_TYPES = Set.of(
+      "page-break", "section-break", "richtext", "image", "youtube", "attribute-value");
 
   private final JsonPointer startingLocation;
 
@@ -86,6 +112,9 @@ public class CedarValidator implements ModelValidator {
     } catch (CedarModelValidationException thrownException) {
       collectErrorMessages(thrownException, report);
     }
+    collectSchemaPropertyIriErrors(templateNode, "", report);
+    collectInherentlyMultipleFieldErrors(templateNode, "", report);
+    collectDerivedFromErrors(templateNode, "", report);
     return report;
   }
 
@@ -96,6 +125,9 @@ public class CedarValidator implements ModelValidator {
     } catch (CedarModelValidationException thrownException) {
       collectErrorMessages(thrownException, report);
     }
+    collectSchemaPropertyIriErrors(elementNode, "", report);
+    collectInherentlyMultipleFieldErrors(elementNode, "", report);
+    collectDerivedFromErrors(elementNode, "", report);
     return report;
   }
 
@@ -106,6 +138,7 @@ public class CedarValidator implements ModelValidator {
     } catch (CedarModelValidationException thrownException) {
       collectErrorMessages(thrownException, report);
     }
+    collectDerivedFromErrors(fieldNode, "", report);
     return report;
   }
 
@@ -117,6 +150,8 @@ public class CedarValidator implements ModelValidator {
     } catch (CedarModelValidationException thrownException) {
       collectErrorMessages(thrownException, report);
     }
+    collectAttributeValueNameErrors(templateInstance, instanceSchema, "", report);
+    collectDerivedFromErrors(templateInstance, "", report);
     return report;
   }
 
@@ -128,6 +163,7 @@ public class CedarValidator implements ModelValidator {
     } catch (CedarModelValidationException thrownException) {
       collectErrorMessages(thrownException, report);
     }
+    collectDerivedFromErrors(elementInstance, "", report);
     return report;
   }
 
@@ -285,6 +321,253 @@ public class CedarValidator implements ModelValidator {
           report.addError(errorItem);
         }
       }
+    }
+  }
+
+  /**
+   * Enforces the namespace rules for attribute-value fields at every instance
+   * container. The template identifies the string arrays that are really
+   * attribute-value fields, avoiding the false positive of treating every
+   * textual array as one.
+   */
+  private void collectAttributeValueNameErrors(JsonNode instanceNode, JsonNode schemaNode, String path,
+                                               CedarValidationReport report) {
+    if (instanceNode == null || !instanceNode.isObject() || schemaNode == null || !schemaNode.isObject()) {
+      return;
+    }
+    JsonNode schemaProperties = schemaNode.get(JSON_SCHEMA_PROPERTIES);
+    if (schemaProperties == null || !schemaProperties.isObject()) {
+      return;
+    }
+
+    Map<String, JsonNode> declaredChildren = new LinkedHashMap<>();
+    Set<String> attributeValueGroups = new LinkedHashSet<>();
+    Set<String> serializingChildren = new LinkedHashSet<>();
+    schemaProperties.fields().forEachRemaining(entry -> {
+      JsonNode child = childDefinition(entry.getValue());
+      if (child == null || !child.path(CedarModelVocabulary.UI).isObject()) {
+        return;
+      }
+      declaredChildren.put(entry.getKey(), child);
+      String inputType = child.path(CedarModelVocabulary.UI).path(CedarModelVocabulary.INPUT_TYPE).asText();
+      if (INPUT_TYPE_ATTRIBUTE_VALUE.equals(inputType)) {
+        attributeValueGroups.add(entry.getKey());
+      } else if (!NON_SERIALIZING_INPUT_TYPES.contains(inputType)) {
+        serializingChildren.add(entry.getKey());
+      }
+    });
+
+    Map<String, String> firstGroupForName = new HashMap<>();
+    for (String groupName : attributeValueGroups) {
+      JsonNode names = instanceNode.get(groupName);
+      if (names == null || !names.isArray()) {
+        continue;
+      }
+      Set<String> namesInGroup = new HashSet<>();
+      for (JsonNode nameNode : names) {
+        if (!nameNode.isTextual()) {
+          continue; // The JSON Schema report owns the type error.
+        }
+        String name = nameNode.asText();
+        String location = path + "/" + escapePointer(groupName) + "/" + escapePointer(name);
+        if (name.isBlank()) {
+          report.addError(new ErrorItem("Attribute-value names must not be blank", location));
+          continue;
+        }
+        if (name.startsWith("@") || RESERVED_ATTRIBUTE_VALUE_NAMES.contains(name)) {
+          report.addError(new ErrorItem("Attribute-value name '" + name + "' is reserved for instance metadata",
+              location));
+        } else if (attributeValueGroups.contains(name) || serializingChildren.contains(name)) {
+          report.addError(new ErrorItem("Attribute-value name '" + name
+              + "' collides with a template child in the same object", location));
+        }
+        if (!namesInGroup.add(name)) {
+          report.addError(new ErrorItem("Attribute-value name '" + name
+              + "' occurs more than once in field '" + groupName + "'", location));
+        }
+        String firstGroup = firstGroupForName.putIfAbsent(name, groupName);
+        if (firstGroup != null && !firstGroup.equals(groupName)) {
+          report.addError(new ErrorItem("Attribute-value name '" + name + "' is also used by field '"
+              + firstGroup + "'", location));
+        }
+      }
+    }
+
+    for (Map.Entry<String, JsonNode> child : declaredChildren.entrySet()) {
+      if (attributeValueGroups.contains(child.getKey())) {
+        continue;
+      }
+      JsonNode childInstance = instanceNode.get(child.getKey());
+      if (childInstance == null) {
+        continue;
+      }
+      String childPath = path + "/" + escapePointer(child.getKey());
+      if (isTemplateElement(child.getValue())) {
+        collectElementOccurrenceIdErrors(childInstance, childPath, report);
+      }
+      if (childInstance.isArray()) {
+        for (int index = 0; index < childInstance.size(); index++) {
+          collectAttributeValueNameErrors(childInstance.get(index), child.getValue(), childPath + "/" + index,
+              report);
+        }
+      } else {
+        collectAttributeValueNameErrors(childInstance, child.getValue(), childPath, report);
+      }
+    }
+  }
+
+  private void collectElementOccurrenceIdErrors(JsonNode occurrence, String path, CedarValidationReport report) {
+    if (occurrence == null) {
+      return;
+    }
+    if (occurrence.isArray()) {
+      for (int index = 0; index < occurrence.size(); index++) {
+        collectElementOccurrenceIdErrors(occurrence.get(index), path + "/" + index, report);
+      }
+      return;
+    }
+    if (!occurrence.isObject()) {
+      return;
+    }
+    JsonNode id = occurrence.get("@id");
+    // Null is the intentional draft spelling. The artifact server replaces it
+    // before calling this validator on a write; a stated non-null value must be
+    // an actual absolute IRI, not the empty relative URI accepted by format:uri.
+    if (id != null && !id.isNull() && id.isTextual() && !isAbsoluteIri(id.asText())) {
+      report.addError(new ErrorItem("Element occurrence @id must be an absolute IRI or null", path + "/@id"));
+    }
+  }
+
+  private void collectSchemaPropertyIriErrors(JsonNode container, String path, CedarValidationReport report) {
+    if (container == null || !container.isObject()) {
+      return;
+    }
+    JsonNode properties = container.get(JSON_SCHEMA_PROPERTIES);
+    if (properties == null || !properties.isObject()) {
+      return;
+    }
+    JsonNode contextProperties = properties.path("@context").path(JSON_SCHEMA_PROPERTIES);
+    properties.fields().forEachRemaining(entry -> {
+      JsonNode child = childDefinition(entry.getValue());
+      if (child == null || !child.path(CedarModelVocabulary.UI).isObject()) {
+        return;
+      }
+      String childPath = path + "/properties/" + escapePointer(entry.getKey());
+      JsonNode mapping = contextProperties.path(entry.getKey()).path("enum");
+      if (mapping.isArray()) {
+        for (JsonNode iri : mapping) {
+          if (iri.isTextual() && !isAbsoluteIri(iri.asText())) {
+            report.addError(new ErrorItem("Property IRI for child '" + entry.getKey()
+                + "' must be an absolute IRI", path + "/properties/@context/properties/"
+                + escapePointer(entry.getKey()) + "/enum"));
+          }
+        }
+      }
+      collectSchemaPropertyIriErrors(child, childPath, report);
+    });
+  }
+
+  /**
+   * Some field kinds are arrays whenever they are deployed in a template or
+   * element, rather than because an optional deployment flag made them
+   * repeatable. Their editor discriminator and their instance JSON Schema must
+   * describe the same cardinality. A standalone field artifact is the reusable
+   * inner field definition and is therefore legitimately object-shaped.
+   *
+   * <p>The meta-schema historically accepted an object-shaped list field with
+   * {@code multipleChoice: true}.  Editors correctly serialize its selected
+   * values as an array, so such a template cannot have a populated valid
+   * instance.  Check the relationship explicitly at every nesting depth.
+   */
+  private void collectInherentlyMultipleFieldErrors(JsonNode declaredNode, String path,
+                                                     CedarValidationReport report) {
+    if (declaredNode == null || !declaredNode.isObject()) {
+      return;
+    }
+
+    JsonNode fieldNode = childDefinition(declaredNode);
+    if (fieldNode == null) {
+      return;
+    }
+    JsonNode ui = fieldNode.path(CedarModelVocabulary.UI);
+    if (ui.isObject() && isInherentlyMultipleField(fieldNode)
+        && !JSON_SCHEMA_ARRAY.equals(declaredNode.path(JSON_SCHEMA_TYPE).asText())) {
+      report.addError(new ErrorItem(
+          "Checkbox, attribute-value, and multiple-choice list fields must be declared as arrays",
+          path + "/type"));
+    }
+
+    JsonNode properties = fieldNode.get(JSON_SCHEMA_PROPERTIES);
+    if (properties == null || !properties.isObject()) {
+      return;
+    }
+    properties.fields().forEachRemaining(entry -> {
+      JsonNode child = childDefinition(entry.getValue());
+      if (child != null && child.path(CedarModelVocabulary.UI).isObject()) {
+        collectInherentlyMultipleFieldErrors(entry.getValue(),
+            path + "/properties/" + escapePointer(entry.getKey()), report);
+      }
+    });
+  }
+
+  private static boolean isInherentlyMultipleField(JsonNode fieldNode) {
+    String inputType = fieldNode.path(CedarModelVocabulary.UI)
+        .path(CedarModelVocabulary.INPUT_TYPE).asText();
+    if (INPUT_TYPE_CHECK_BOX.equals(inputType) || INPUT_TYPE_ATTRIBUTE_VALUE.equals(inputType)) {
+      return true;
+    }
+    return INPUT_TYPE_LIST.equals(inputType)
+        && fieldNode.path(VALUE_CONSTRAINTS).path(MULTIPLE_CHOICE).asBoolean(false);
+  }
+
+  /**
+   * {@code format: uri} accepts relative URI references, including the empty
+   * string. Provenance, when stated, names another artifact and must therefore
+   * be an absolute IRI. This explicit walk also reaches embedded fields and
+   * elements whose provenance is validated by a nested meta-schema.
+   */
+  private void collectDerivedFromErrors(JsonNode node, String path, CedarValidationReport report) {
+    if (node == null) {
+      return;
+    }
+    if (node.isArray()) {
+      for (int index = 0; index < node.size(); index++) {
+        collectDerivedFromErrors(node.get(index), path + "/" + index, report);
+      }
+      return;
+    }
+    if (!node.isObject()) {
+      return;
+    }
+    JsonNode derivedFrom = node.get(CedarModelVocabulary.PAV_DERIVED_FROM);
+    if (derivedFrom != null && derivedFrom.isTextual() && !isAbsoluteIri(derivedFrom.asText())) {
+      report.addError(new ErrorItem("pav:derivedFrom must be an absolute IRI when present",
+          path + "/" + CedarModelVocabulary.PAV_DERIVED_FROM));
+    }
+    node.fields().forEachRemaining(entry -> collectDerivedFromErrors(entry.getValue(),
+        path + "/" + escapePointer(entry.getKey()), report));
+  }
+
+  private static JsonNode childDefinition(JsonNode declared) {
+    if (declared == null || !declared.isObject()) {
+      return null;
+    }
+    JsonNode items = declared.get(JSON_SCHEMA_ITEMS);
+    return items != null && items.isObject() ? items : declared;
+  }
+
+  private static String escapePointer(String component) {
+    return component.replace("~", "~0").replace("/", "~1");
+  }
+
+  private static boolean isAbsoluteIri(String value) {
+    if (value == null || value.isBlank()) {
+      return false;
+    }
+    try {
+      return new URI(value).isAbsolute();
+    } catch (URISyntaxException e) {
+      return false;
     }
   }
 

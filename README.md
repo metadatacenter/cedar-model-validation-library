@@ -1,5 +1,7 @@
 # CEDAR Model Validation Library
 
+[![CI](https://github.com/metadatacenter/cedar-model-validation-library/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/metadatacenter/cedar-model-validation-library/actions/workflows/ci.yml)
+
 Provides a Java-based CEDAR library to validate JSON Schema-encoded CEDAR schema artifacts (templates, elements, and fields) and JSON-LD-encoded instance artifacts (template instances).
 
 Also provides command line Java- and Python-based validators 

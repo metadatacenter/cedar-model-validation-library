@@ -1,0 +1,16 @@
+{
+    "description": "Version pin for a value-constraint entry: the string \"latest\" or a version triple {id, effectiveDate, declaredVersion}. Absent means latest.",
+    "oneOf": [
+        { "type": "string" },
+        {
+            "type": "object",
+            "properties": {
+                "id": { "type": "string", "minLength": 1 },
+                "effectiveDate": { "type": "string" },
+                "declaredVersion": { "type": "string" }
+            },
+            "required": [ "id" ],
+            "additionalProperties": false
+        }
+    ]
+}

@@ -24,6 +24,7 @@ definitions:
   - propertyDescriptionContent.json
   - jsonLDTypeFieldContent.json
   - jsonLDIDFieldContent.json
+  - jsonLDIDFieldContentWithNull.json
   - templateElementContextFieldContent.json
   - pavCreatedOnFieldContent.json
   - pavCreatedByFieldContent.json
@@ -66,6 +67,7 @@ definitions:
   - rdfsLabelFieldContent.json
   - skosNotationFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
+  - valueConstraintsVersionFieldContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json
   - valueConstraintsBranchesFieldItemContent.json

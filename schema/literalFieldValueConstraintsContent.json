@@ -15,7 +15,9 @@
         "defaultValue": {
           "oneOf": [
             { "$ref": "file:valueConstraintsStringDefaultValueContent.json" },
-            { "$ref": "file:valueConstraintsUriDefaultValueContent.json" }
+            { "$ref": "file:valueConstraintsUriDefaultValueContent.json" },
+            { "type": "boolean" },
+            { "type": "null" }
           ]
         },
         "numberType": {
@@ -31,7 +33,9 @@
         "classes": {  "$ref": "file:valueConstraintsClassesFieldContent.json" },
         "branches": {  "$ref": "file:valueConstraintsBranchesFieldContent.json" },
         "literals": {  "$ref": "file:valueConstraintsLiteralsFieldContent.json" },
-        "actions": { "$ref": "file:valueConstraintsActionsFieldContent.json" }
+        "actions": { "$ref": "file:valueConstraintsActionsFieldContent.json" },
+        "nullEnabled": { "type": "boolean" },
+        "labels": { "type": "object", "additionalProperties": { "type": "string" } }
     },
     "required": [ "requiredValue" ],
     "additionalProperties": false

@@ -7,6 +7,9 @@
         "name": { "type": "string", "minLength": 1 },
         "uri": { "type": "string", "format": "uri" },
         "maxDepth": { "type": "integer", "minimum": 0 },
+        "iri": { "type": "string", "format": "uri" },
+        "sourceSystem": { "type": "string", "minLength": 1 },
+        "version": { "$ref": "file:valueConstraintsVersionFieldContent.json" },
         "selectedByDefault": { "type": "boolean" }
     },
     "required": [ "source", "acronym", "name", "uri", "maxDepth" ],

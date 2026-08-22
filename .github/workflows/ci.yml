@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  # A push to develop publishes, so only ever cancel superseded
+  # pull-request and manual runs.
+  cancel-in-progress: ${{ github.event_name != 'push' }}
+
+jobs:
+  test:
+    name: Maven tests (Java 17)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BMIR_NEXUS_USERNAME: ${{ secrets.BMIR_NEXUS_USERNAME }}
+      BMIR_NEXUS_PASSWORD: ${{ secrets.BMIR_NEXUS_PASSWORD }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Run Maven verification
+        run: ./mvnw --batch-mode --no-transfer-progress --update-snapshots verify --settings .m2/nexus-settings.xml
+
+      # Other repositories resolve this artifact from Nexus, so a merged change
+      # is invisible to their builds until the snapshot is republished. Tests have
+      # already run in the step above; this only uploads what they verified.
+      - name: Publish the snapshot
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+        run: ./mvnw --batch-mode --no-transfer-progress deploy -DskipTests --settings .m2/nexus-settings.xml
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: surefire-reports
+          path: "**/target/surefire-reports/**"
+          if-no-files-found: warn

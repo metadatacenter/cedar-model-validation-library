@@ -2,6 +2,8 @@ package org.metadatacenter.model.validation;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -48,6 +50,46 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldFailEmptyChildPropertyIri() throws Exception {
+    JsonNode template = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("templates/single-field-template.json"));
+    ArrayNode mapping = (ArrayNode) template.path("properties").path("@context").path("properties")
+        .path("Study Name").path("enum");
+    mapping.removeAll().add("");
+
+    ValidationReport validationReport = modelValidator.validateTemplate(template);
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "Property IRI for child 'Study Name' must be an absolute IRI");
+  }
+
+  @Test
+  public void shouldFailEmptyDerivedFromAtRootAndInAChild() throws Exception {
+    JsonNode template = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("templates/single-field-template.json"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) template).put("pav:derivedFrom", "");
+    ((com.fasterxml.jackson.databind.node.ObjectNode) template.path("properties").path("Study Name"))
+        .put("pav:derivedFrom", "");
+
+    ValidationReport validationReport = modelValidator.validateTemplate(template);
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "pav:derivedFrom must be an absolute IRI when present");
+  }
+
+  @Test
+  public void shouldPassAbsoluteDerivedFrom() throws Exception {
+    JsonNode template = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("templates/single-field-template.json"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) template).put("pav:derivedFrom",
+        "https://repo.metadatacenter.org/templates/source");
+
+    ValidationReport validationReport = modelValidator.validateTemplate(template);
+
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassTemplateWithAnnotations() {
     String templateString = TestResourcesUtils.getStringContent("templates/template-allowing-annotations.json");
     ValidationReport validationReport = runValidation(templateString);
@@ -72,6 +114,21 @@ public class TemplateValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(templateString);
     // Assert
     assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldRejectObjectShapedMultiSelectList() throws Exception {
+    ObjectNode template = (ObjectNode) jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("templates/multi-select-list-template.json"));
+    ObjectNode properties = (ObjectNode) template.path("properties");
+    JsonNode arrayField = properties.path("Pick multiple");
+    properties.set("Pick multiple", arrayField.path("items").deepCopy());
+
+    ValidationReport validationReport = modelValidator.validateTemplate(template);
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport,
+        "Checkbox, attribute-value, and multiple-choice list fields must be declared as arrays");
   }
 
   @Test
@@ -135,10 +192,11 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassRADxMetadataTemplate() {
+  public void shouldRejectLegacyEmptyDerivedFromInRADxMetadataTemplate() {
     String templateString = TestResourcesUtils.getStringContent("templates/RADxMetadataSpecification.json");
     ValidationReport validationReport = runValidation(templateString);
-    assertValidationStatus(validationReport, "true");
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "pav:derivedFrom must be an absolute IRI when present");
   }
 
   @Test
