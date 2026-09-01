@@ -406,7 +406,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['description'])");
   }
 
-  @Disabled
+  @Disabled("Known validation gap: nested field required arrays are currently accepted when absent")
   @Test
   public void shouldFailMissingProperties_Field_Required() {
     // Arrange
@@ -527,7 +527,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
   }
 
-  @Disabled
+  @Disabled("Known validation gap: nested field value slots are currently accepted when absent")
   @Test
   public void shouldFailMissingProperties_Field_Properties_Value() {
     // Arrange

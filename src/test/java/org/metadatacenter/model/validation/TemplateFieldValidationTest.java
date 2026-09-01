@@ -172,7 +172,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
-  @Disabled
+  @Disabled("Known validation gap: the multi-selection list fixture does not satisfy the current meta-schema")
   public void shouldPassMultiSelectionListField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/list-field-multi-selection.json");
@@ -481,7 +481,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['properties'])");
   }
 
-  @Disabled
+  @Disabled("Known validation gap: field required arrays are currently accepted when absent")
   @Test
   public void shouldFailMissingRequired() {
     // Arrange
@@ -578,7 +578,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['$schema'])");
   }
 
-  @Disabled
+  @Disabled("Known validation gap: field value slots are currently accepted when absent")
   @Test
   public void shouldFailMissingProperties_Value() {
     // Arrange
