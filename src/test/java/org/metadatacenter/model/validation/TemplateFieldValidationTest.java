@@ -590,4 +590,66 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport, "object has missing required properties (['@value'])");
   }
+  // The boolean field was removed from the model, and with it the only shapes that ever needed a
+  // null or bare-boolean defaultValue, a nullEnabled flag, or a labels map. A literal field's
+  // defaultValue is a string or a term object, and nothing else.
+
+  @Test
+  public void shouldPassTextFieldWithStringDefaultValue() throws Exception {
+    ObjectNode field = readTextField();
+    valueConstraintsOf(field).put("defaultValue", "a default");
+
+    ValidationReport validationReport = modelValidator.validateTemplateField(field);
+
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldFailNullDefaultValue() throws Exception {
+    ObjectNode field = readTextField();
+    valueConstraintsOf(field).putNull("defaultValue");
+
+    ValidationReport validationReport = modelValidator.validateTemplateField(field);
+
+    assertValidationStatus(validationReport, "false");
+  }
+
+  @Test
+  public void shouldFailBooleanDefaultValue() throws Exception {
+    ObjectNode field = readTextField();
+    valueConstraintsOf(field).put("defaultValue", true);
+
+    ValidationReport validationReport = modelValidator.validateTemplateField(field);
+
+    assertValidationStatus(validationReport, "false");
+  }
+
+  @Test
+  public void shouldFailNullEnabledConstraint() throws Exception {
+    ObjectNode field = readTextField();
+    valueConstraintsOf(field).put("nullEnabled", true);
+
+    ValidationReport validationReport = modelValidator.validateTemplateField(field);
+
+    assertValidationStatus(validationReport, "false");
+  }
+
+  @Test
+  public void shouldFailLabelsConstraint() throws Exception {
+    ObjectNode field = readTextField();
+    valueConstraintsOf(field).putObject("labels").put("true", "Yes").put("false", "No");
+
+    ValidationReport validationReport = modelValidator.validateTemplateField(field);
+
+    assertValidationStatus(validationReport, "false");
+  }
+
+  private ObjectNode readTextField() throws Exception {
+    return (ObjectNode) jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("fields/text-field.json"));
+  }
+
+  private ObjectNode valueConstraintsOf(ObjectNode field) {
+    return (ObjectNode) field.path("_valueConstraints");
+  }
 }
