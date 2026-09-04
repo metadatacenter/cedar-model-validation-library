@@ -1421,12 +1421,6 @@
             },
             {
               "$ref": "#/definitions/valueConstraintsUriDefaultValueContent"
-            },
-            {
-              "type": "boolean"
-            },
-            {
-              "type": "null"
             }
           ]
         },
@@ -1467,15 +1461,6 @@
         },
         "actions": {
           "$ref": "#/definitions/valueConstraintsActionsFieldContent"
-        },
-        "nullEnabled": {
-          "type": "boolean"
-        },
-        "labels": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
