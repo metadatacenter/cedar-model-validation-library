@@ -3,18 +3,13 @@ package org.metadatacenter.model.trimmer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-
+/**
+ * The mapper the trimmer converts documents with. It handles {@code java.time} values through one
+ * {@link JavaTimeModule}; Jackson ignores a second module with the same type id, so a customised copy
+ * registered after a stock one would never take effect.
+ */
 public final class JsonLdMapper {
-
-  public static final String xsdDateTimeFormatterString = "uuuu-MM-dd'T'HH:mm:ssZZZZZ";
-  public static final DateTimeFormatter xsdDateTimeFormatter =
-      DateTimeFormatter.ofPattern(xsdDateTimeFormatterString).withZone(ZoneId.systemDefault());
 
   private JsonLdMapper() {
   }
@@ -24,10 +19,6 @@ public final class JsonLdMapper {
   static {
     MAPPER = new ObjectMapper();
     MAPPER.registerModule(new JavaTimeModule());
-    JavaTimeModule javaTimeModule = new JavaTimeModule();
-    javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(xsdDateTimeFormatter));
-    javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(xsdDateTimeFormatter));
-    MAPPER.registerModule(javaTimeModule);
     MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
   }
 }
