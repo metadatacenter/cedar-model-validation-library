@@ -38,6 +38,15 @@
       <artifactId>slf4j-api</artifactId>
     </dependency>
 
+    <!-- Swagger v3 annotations, so the validation report describes itself once for every service
+         that answers with it. The report is serialized by two services, and a schema hand-written
+         in either one drifted from the wire keys Jackson actually emits. Documentation only: no
+         runtime code reads them. -->
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations-jakarta</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>com.github.jsonld-java</groupId>
       <artifactId>jsonld-java</artifactId>
