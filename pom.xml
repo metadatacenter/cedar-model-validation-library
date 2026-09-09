@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.metadatacenter</groupId>
     <artifactId>cedar-parent</artifactId>
-    <version>2.9.9</version>
+    <version>2.9.10</version>
   </parent>
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>2.9.9</version>
+  <version>2.9.10</version>
   <packaging>jar</packaging>
 
   <name>CEDAR Model Validation Library</name>
@@ -36,6 +36,15 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+    </dependency>
+
+    <!-- Swagger v3 annotations, so the validation report describes itself once for every service
+         that answers with it. The report is serialized by two services, and a schema hand-written
+         in either one drifted from the wire keys Jackson actually emits. Documentation only: no
+         runtime code reads them. -->
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations-jakarta</artifactId>
     </dependency>
 
     <dependency>

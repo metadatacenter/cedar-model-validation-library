@@ -6,12 +6,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @JsonPropertyOrder({"validates", "warnings", "errors"})
+@Schema(name = "ValidationReport",
+    description = "What validating an artifact against the CEDAR model found. Returned with 200 "
+        + "whether or not the artifact is valid: an invalid artifact is an answer, not a failed "
+        + "request. The artifact server produces it, and the resource server hands the same "
+        + "document back unchanged.")
 public class CedarValidationReport implements ValidationReport {
 
   public static final String IS_INVALID = "false";
@@ -31,6 +37,10 @@ public class CedarValidationReport implements ValidationReport {
 
   @Override
   @JsonProperty("validates")
+  @Schema(name = "validates", requiredMode = Schema.RequiredMode.REQUIRED,
+      allowableValues = {IS_VALID, IS_INVALID},
+      description = "Whether the artifact validates, as a string. One error makes it false; "
+          + "warnings alone still validate.")
   public String getValidationStatus() {
     return errorDetails.isEmpty() ? IS_VALID : IS_INVALID;
   }
@@ -42,6 +52,8 @@ public class CedarValidationReport implements ValidationReport {
 
   @Override
   @JsonProperty("warnings")
+  @Schema(name = "warnings", requiredMode = Schema.RequiredMode.REQUIRED,
+      description = "Everything the artifact should change but need not, in the order found.")
   public Set<WarningItem> getWarnings() {
     return warningDetails;
   }
@@ -53,6 +65,8 @@ public class CedarValidationReport implements ValidationReport {
 
   @Override
   @JsonProperty("errors")
+  @Schema(name = "errors", requiredMode = Schema.RequiredMode.REQUIRED,
+      description = "Everything that makes the artifact invalid, in the order found.")
   public Set<ErrorItem> getErrors() {
     return errorDetails;
   }
