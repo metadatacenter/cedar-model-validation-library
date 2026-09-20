@@ -156,6 +156,19 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldFailAFieldNamingControlledTermAsItsInputType() {
+    // A controlled term is not an input type. It is a text field whose value is an IRI — properties
+    // of @id, rdfs:label and @type — carrying an ontology, value set, class or branch constraint,
+    // which is how cedar-artifact-library recognises one and renders it as controlled-term-field.
+    // The IRI enum listed it beside genuine input types, and only a retired editor path wrote it;
+    // four production templates were unreadable as a result.
+    String templateString = TestResourcesUtils.getStringContent("templates/single-field-template.json")
+        .replace("\"inputType\": \"textfield\"", "\"inputType\": \"controlled-term\"");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "false");
+  }
+
+  @Test
   public void shouldFailAPermittedValueWithNoLabel() {
     // A literal's label is the value an instance stores, so a blank one offers a choice whose answer
     // cannot be told from no answer. Optionality is requiredValue's to express, not the value set's.

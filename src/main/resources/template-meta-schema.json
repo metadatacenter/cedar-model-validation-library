@@ -2634,7 +2634,6 @@
           "type": "string",
           "enum": [
             "link",
-            "controlled-term",
             "ext-ror",
             "ext-orcid",
             "ext-pfas",
