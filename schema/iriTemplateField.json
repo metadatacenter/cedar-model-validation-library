@@ -111,7 +111,7 @@
       "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
     },
     "pav:version": {
-      "type": "string", "minLength": 1
+      "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "additionalProperties": {
       "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
@@ -122,7 +122,7 @@
     },
     "schema:schemaVersion": {
       "type": "string",
-      "minLength": 1
+      "enum": [ "1.6.0" ]
     }
   },
   "required": [

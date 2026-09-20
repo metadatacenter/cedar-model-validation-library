@@ -170,7 +170,7 @@
       "pav:createdBy": null,
       "pav:lastUpdatedOn": null,
       "oslc:modifiedBy": null,
-      "schema:schemaVersion": "1.5.0",
+      "schema:schemaVersion": "1.6.0",
       "additionalProperties": false
     },
     "Quantity": {
@@ -344,7 +344,7 @@
           "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
           "pav:lastUpdatedOn": "2018-11-12T10:18:32-0800",
           "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-          "schema:schemaVersion": "1.5.0",
+          "schema:schemaVersion": "1.6.0",
           "additionalProperties": false,
           "@id": "https://repo.staging.metadatacenter.org/template-fields/42368954-5aa1-4708-a40e-62c8e8c58bf9",
           "$schema": "http://json-schema.org/draft-04/schema#"
@@ -421,7 +421,7 @@
           "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
           "pav:lastUpdatedOn": "2018-11-12T10:18:32-0800",
           "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-          "schema:schemaVersion": "1.5.0",
+          "schema:schemaVersion": "1.6.0",
           "additionalProperties": false,
           "@id": "https://repo.staging.metadatacenter.org/template-fields/55a3ef11-1eab-4a8b-9a65-cd8d6ad559c2",
           "$schema": "http://json-schema.org/draft-04/schema#"
@@ -439,7 +439,7 @@
       "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
       "pav:lastUpdatedOn": "2018-11-12T10:18:32-0800",
       "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-      "schema:schemaVersion": "1.5.0",
+      "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
       "pav:version": "0.0.1",
       "bibo:status": "bibo:draft",
@@ -458,7 +458,7 @@
   "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
   "pav:lastUpdatedOn": "2018-11-12T10:18:44-0800",
   "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-  "schema:schemaVersion": "1.5.0",
+  "schema:schemaVersion": "1.6.0",
   "additionalProperties": false,
   "pav:version": "0.0.1",
   "bibo:status": "bibo:draft",

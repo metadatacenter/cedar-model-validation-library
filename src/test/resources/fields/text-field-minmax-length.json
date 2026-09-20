@@ -83,7 +83,7 @@
   "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
   "pav:lastUpdatedOn": "2018-11-12T13:23:17-0800",
   "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-  "schema:schemaVersion": "1.5.0",
+  "schema:schemaVersion": "1.6.0",
   "additionalProperties": false,
   "@id": "https://repo.staging.metadatacenter.org/template-fields/3740d10c-38a3-49b0-a9f8-79452876cef1",
   "$schema": "http://json-schema.org/draft-04/schema#"

@@ -142,6 +142,68 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldFailStaticFieldWithoutModelVersion() {
+    // A static field is a model specification like any other definition, so it answers for the model
+    // it was written against. The meta-schema did not ask it to until the property was declared there.
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/static-field-template.json");
+    templateString = JsonUtils.removeFieldFromDocument(templateString,
+        "/properties/About Study Form/schema:schemaVersion");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "false");
+  }
+
+  @Test
+  public void shouldFailAPermittedValueWithNoLabel() {
+    // A literal's label is the value an instance stores, so a blank one offers a choice whose answer
+    // cannot be told from no answer. Optionality is requiredValue's to express, not the value set's.
+    String templateString = TestResourcesUtils.getStringContent("templates/multi-select-list-template.json")
+        .replace("\"literals\": [", "\"literals\": [ { \"label\": \"\" }, ");
+    ValidationReport validationReport = runValidation(templateString);
+    assertValidationStatus(validationReport, "false");
+  }
+
+  @Test
+  public void shouldFailTemplateWithAVersionTheLibraryCannotParse() {
+    // pav:version is held as three integers, so a value with fewer parts has no YAML representation
+    // at all: a JSON read returns the stored bytes unexamined and a YAML read transcodes them and
+    // fails. A bare non-empty string let every such artifact through.
+    for (String stated : new String[] { "0.9", "1", "1.0.0-rc1", "requestJson", "" }) {
+      String templateString = TestResourcesUtils.getStringContent("templates/empty-template.json")
+          .replace("\"pav:version\": \"0.0.1\"", "\"pav:version\": \"" + stated + "\"");
+      ValidationReport validationReport = runValidation(templateString);
+      assertValidationStatus(validationReport, "false");
+    }
+  }
+
+  @Test
+  public void shouldPassTemplateWithAThreePartVersion() {
+    for (String stated : new String[] { "0.0.1", "1.0.0", "12.34.56" }) {
+      String templateString = TestResourcesUtils.getStringContent("templates/empty-template.json")
+          .replace("\"pav:version\": \"0.0.1\"", "\"pav:version\": \"" + stated + "\"");
+      ValidationReport validationReport = runValidation(templateString);
+      assertValidationStatus(validationReport, "true");
+    }
+  }
+
+  @Test
+  public void shouldFailTemplateDeclaringAnotherModelVersion() {
+    // The meta-schemas define one model, so an artifact naming another is answering for a model they
+    // do not describe. A bare non-empty string let every such artifact through.
+    // Arrange
+    String templateString = TestResourcesUtils.getStringContent("templates/static-field-template.json")
+        .replace("\"schema:schemaVersion\": \"1.6.0\"", "\"schema:schemaVersion\": \"1.5.0\"");
+    // Act
+    ValidationReport validationReport = runValidation(templateString);
+    // Assert
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport,
+        "/schema:schemaVersion: does not have a value in the enumeration ['1.6.0']");
+  }
+
+  @Test
   public void shouldPassManyFieldsTemplate() {
     // Arrange
     String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");

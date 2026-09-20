@@ -61,13 +61,13 @@
       "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
     },
     "pav:version": {
-      "type": "string", "minLength": 1
+      "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "additionalProperties": {
       "type": "boolean", "enum": [ false ]
     },
     "schema:schemaVersion": {
-      "type": "string", "minLength": 1
+      "type": "string", "enum": [ "1.6.0" ]
     }
   },
   "required": [ "$schema", "type", "title", "description", "_ui", "@context", "@id", "@type",

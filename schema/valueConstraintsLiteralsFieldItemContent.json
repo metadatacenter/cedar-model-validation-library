@@ -2,7 +2,7 @@
     "description": "Schema that describes teach entry in a 'literals' field array in a '_valueConstraints' field",
     "type": "object",
     "properties": {
-        "label": { "type": "string" },
+        "label": { "type": "string", "minLength": 1 },
         "selectedByDefault": { "type": "boolean" }
     },
     "required": [ "label" ],

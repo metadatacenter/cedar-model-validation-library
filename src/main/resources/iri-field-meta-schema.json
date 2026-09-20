@@ -117,7 +117,7 @@
     },
     "pav:version": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "additionalProperties": {
       "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
@@ -128,7 +128,9 @@
     },
     "schema:schemaVersion": {
       "type": "string",
-      "minLength": 1
+      "enum": [
+        "1.6.0"
+      ]
     }
   },
   "required": [
@@ -1073,7 +1075,8 @@
       "type": "object",
       "properties": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "selectedByDefault": {
           "type": "boolean"

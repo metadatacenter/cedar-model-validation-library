@@ -109,7 +109,9 @@
     },
     "schema:schemaVersion": {
       "type": "string",
-      "minLength": 1
+      "enum": [
+        "1.6.0"
+      ]
     },
     "bibo:status": {
       "type": "string",
@@ -120,7 +122,7 @@
     },
     "pav:version": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "pav:previousVersion": {
       "type": "string",
@@ -1279,7 +1281,7 @@
         },
         "pav:version": {
           "type": "string",
-          "minLength": 1
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
         "@nest": {
           "$ref": "#/definitions/nestFieldContent"
@@ -1293,7 +1295,9 @@
         },
         "schema:schemaVersion": {
           "type": "string",
-          "minLength": 1
+          "enum": [
+            "1.6.0"
+          ]
         }
       },
       "required": [
@@ -1615,7 +1619,7 @@
         },
         "pav:version": {
           "type": "string",
-          "minLength": 1
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
         "additionalProperties": {
           "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
@@ -1626,7 +1630,9 @@
         },
         "schema:schemaVersion": {
           "type": "string",
-          "minLength": 1
+          "enum": [
+            "1.6.0"
+          ]
         }
       },
       "required": [
@@ -1874,6 +1880,12 @@
           ],
           "format": "uri"
         },
+        "schema:schemaVersion": {
+          "type": "string",
+          "enum": [
+            "1.6.0"
+          ]
+        },
         "additionalProperties": {
           "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
           "type": "boolean",
@@ -1896,7 +1908,8 @@
         "pav:lastUpdatedOn",
         "oslc:modifiedBy",
         "schema:name",
-        "schema:description"
+        "schema:description",
+        "schema:schemaVersion"
       ]
     },
     "attributeValueTemplateField": {
@@ -2001,7 +2014,7 @@
         },
         "pav:version": {
           "type": "string",
-          "minLength": 1
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
         "additionalProperties": {
           "type": "boolean",
@@ -2011,7 +2024,9 @@
         },
         "schema:schemaVersion": {
           "type": "string",
-          "minLength": 1
+          "enum": [
+            "1.6.0"
+          ]
         }
       },
       "required": [
@@ -2190,7 +2205,9 @@
         },
         "schema:schemaVersion": {
           "type": "string",
-          "minLength": 1
+          "enum": [
+            "1.6.0"
+          ]
         },
         "bibo:status": {
           "type": "string",
@@ -2201,7 +2218,7 @@
         },
         "pav:version": {
           "type": "string",
-          "minLength": 1
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
         "pav:previousVersion": {
           "type": "string",
@@ -2779,7 +2796,8 @@
       "type": "object",
       "properties": {
         "label": {
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "selectedByDefault": {
           "type": "boolean"
