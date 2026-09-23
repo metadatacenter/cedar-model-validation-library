@@ -62,6 +62,9 @@
         "oslc:modifiedBy": {
             "type": [ "string", "null" ], "format": "uri"
         },
+        "schema:schemaVersion": {
+            "type": "string", "enum": [ "1.6.0" ]
+        },
         "additionalProperties": {
             "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
             "type": "boolean", "enum": [ false ]
@@ -69,5 +72,5 @@
     },
     "required": [ "$schema", "type", "title", "description", "_ui", "@id", "@type",
         "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy",
-        "schema:name", "schema:description"  ]
+        "schema:name", "schema:description", "schema:schemaVersion"  ]
 }

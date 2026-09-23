@@ -378,7 +378,7 @@
       "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
       "pav:lastUpdatedOn": "2018-11-12T10:55:10-0800",
       "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-      "schema:schemaVersion": "1.5.0",
+      "schema:schemaVersion": "1.6.0",
       "additionalProperties": false,
       "@id": "https://repo.staging.metadatacenter.org/template-fields/be28b404-1d8f-427c-8db6-5ebb6ab253ac",
       "$schema": "http://json-schema.org/draft-04/schema#"
@@ -432,7 +432,7 @@
         "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
         "pav:lastUpdatedOn": "2018-11-12T10:55:10-0800",
         "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-        "schema:schemaVersion": "1.5.0",
+        "schema:schemaVersion": "1.6.0",
         "additionalProperties": false,
         "@id": "https://repo.staging.metadatacenter.org/template-fields/9faf378c-545c-416c-907a-3f5db2436823",
         "$schema": "http://json-schema.org/draft-04/schema#"
@@ -457,7 +457,7 @@
   "pav:createdBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
   "pav:lastUpdatedOn": "2018-11-12T10:55:10-0800",
   "oslc:modifiedBy": "https://metadatacenter.org/users/018bbf94-f8e4-4e0e-946d-341698f70245",
-  "schema:schemaVersion": "1.5.0",
+  "schema:schemaVersion": "1.6.0",
   "additionalProperties": {
     "type": "object",
     "properties": {
