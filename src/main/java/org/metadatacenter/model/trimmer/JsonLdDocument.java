@@ -4,10 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.jsonldjava.core.JsonLdError;
-import com.github.jsonldjava.core.JsonLdProcessor;
-import com.github.jsonldjava.impl.NQuadTripleCallback;
+import org.metadatacenter.model.rdf.RdfConverter;
 
-import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.metadatacenter.model.trimmer.MatchingPattern.whenFound;
@@ -37,12 +35,11 @@ public class JsonLdDocument {
   }
 
   public String asRdf() throws JsonLdError {
-    Map<String, Object> jsonMap = createJsonMap(rootNode);
-    return JsonLdProcessor.toRDF(jsonMap, new NQuadTripleCallback()).toString();
-  }
-
-  private Map createJsonMap(JsonNode jsonNode) {
-    return JsonLdMapper.MAPPER.convertValue(jsonNode, Map.class);
+    try {
+      return RdfConverter.toNQuads(rootNode);
+    } catch (IllegalArgumentException error) {
+      throw new JsonLdError(JsonLdError.Error.INVALID_VALUE_OBJECT, error.getMessage());
+    }
   }
 
   private static ObjectNode createTypeIdNode() {

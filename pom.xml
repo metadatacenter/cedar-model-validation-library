@@ -27,6 +27,15 @@
   </scm>
 
   <dependencies>
+    <dependency>
+      <groupId>com.apicatalog</groupId>
+      <artifactId>titanium-json-ld</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>jakarta.json</artifactId>
+    </dependency>
+
 
     <dependency>
       <groupId>com.networknt</groupId>
