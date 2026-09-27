@@ -11,6 +11,17 @@ Also provides command line Java- and Python-based validators
 The library provides an interface <tt>org.metadatacenter.model.validation.ModelValidator</tt> that contains
 methods to validate CEDAR artifacts, such as, templates, elements, fields, and template instances. 
 
+### CEDAR URI and IRI compatibility
+
+CEDAR's Draft-04 `format: uri` checker accepts RFC 3987 Unicode IRI references as well as the
+historical URI references used for unsaved artifacts. It checks a transport representation without
+rewriting the document. In particular, a controlled term containing U+00A0 keeps that character;
+percent-encoding it in storage would change RDF identifier identity. ASCII spaces, controls,
+malformed escapes, lone surrogates and noncharacters remain invalid. Private-use Unicode is
+allowed only in query components. This is CEDAR's compatibility format behavior; generic
+Draft-04 validators may have a narrower acceptance set. Existing stricter rules for artifact and
+element occurrence identifiers still apply.
+
 ### Generate Validation Schemas
 
 The <tt>schema</tt> directory contains a collection of JSON Schema-encoded specifications, which collectively form the CEDAR Metamodel Schema.

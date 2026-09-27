@@ -5,16 +5,15 @@ import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
 import com.networknt.schema.format.AbstractFormat;
 
-import java.net.URI;
+import org.metadatacenter.model.validation.IriReference;
 import java.net.URISyntaxException;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
 /**
- * Draft-04 {@code uri} and {@code date-time} format checkers that reproduce the acceptance set of
- * the former FGE engine, so that swapping in networknt does not change which artifacts the API
- * accepts or rejects.
+ * Draft-04 {@code uri} and {@code date-time} format checkers retaining CEDAR's FGE compatibility rules. The legacy
+ * {@code uri} format additionally accepts RFC 3987 Unicode IRI characters without rewriting values.
  *
  * <p>FGE's formats are more permissive than networknt's strict RFC 3986 / RFC 3339 built-ins:
  * <ul>
@@ -35,7 +34,7 @@ public final class FgeCompatFormats {
 
   /**
    * A networknt {@link JsonSchemaFactory} for JSON Schema Draft-04 whose {@code uri} and
-   * {@code date-time} format checkers reproduce FGE's acceptance set.
+   * {@code date-time} format checkers retain FGE compatibility and accept Unicode IRI references.
    */
   public static final JsonSchemaFactory FACTORY = buildFactory();
 
@@ -50,7 +49,7 @@ public final class FgeCompatFormats {
   private static final class UriFormat extends AbstractFormat {
 
     private UriFormat() {
-      super("uri", "must be a valid URI");
+      super("uri", "must be a valid URI or IRI");
     }
 
     @Override
@@ -59,7 +58,7 @@ public final class FgeCompatFormats {
         return true;
       }
       try {
-        new URI(value);
+        IriReference.toUri(value);
         return true;
       } catch (URISyntaxException e) {
         return false;
