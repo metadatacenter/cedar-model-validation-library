@@ -39,6 +39,18 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "true");
   }
 
+  // The fixture holds the array a multiple-choice list takes inside a parent. A standalone field is
+  // never declared that way, so the same document read as a standalone field is refused.
+  @Test
+  public void shouldRejectArrayShapedStandaloneMultiSelectList() {
+    String fieldString = TestResourcesUtils.getStringContent("fields/list-field-multi-selection.json");
+
+    ValidationReport validationReport = runValidation(fieldString);
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "/type: does not have a value in the enumeration ['object']");
+  }
+
   @Test
   public void shouldPassTextField() {
     // Arrange
@@ -165,17 +177,6 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   public void shouldPassSingleSelectionListField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/list-field-single-selection.json");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "true");
-  }
-
-  @Test
-  @Disabled("Known validation gap: the multi-selection list fixture does not satisfy the current meta-schema")
-  public void shouldPassMultiSelectionListField() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/list-field-multi-selection.json");
     // Act
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
