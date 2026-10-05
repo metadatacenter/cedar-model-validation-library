@@ -121,6 +121,10 @@
         "1.6.0"
       ]
     },
+    "pav:version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
     "additionalProperties": {
       "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
       "type": "boolean",
