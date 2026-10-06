@@ -915,12 +915,12 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassFieldNameUsingAt() {
-    // Arrange
+  public void shouldFailFieldNameUsingAt() {
+    // Arrange: a child key JSON-LD reserves, which no reader opens.
     String templateString = TestResourcesUtils.getStringContent("templates/check-characters/using-at.json");
     // Act
     ValidationReport validationReport = runValidation(templateString);
     // Assert
-    assertValidationStatus(validationReport, "true");
+    assertValidationStatus(validationReport, "false");
   }
 }

@@ -78,19 +78,6 @@ public class CedarValidator implements ModelValidator {
   private static final String VALUE_CONSTRAINTS = "_valueConstraints";
   private static final String MULTIPLE_CHOICE = "multipleChoice";
 
-  /**
-   * Attribute-value names are promoted to keys of the object that contains the
-   * field. They therefore share a namespace with JSON-LD metadata and normal
-   * template children; JSON Schema alone cannot express those cross-property
-   * constraints.
-   */
-  private static final Set<String> RESERVED_ATTRIBUTE_VALUE_NAMES = Set.of(
-      "@context", "@id", "@type", "@value", "@language",
-      "schema:isBasedOn", "schema:name", "schema:description",
-      "pav:derivedFrom", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn",
-      "oslc:modifiedBy", "rdfs:label", "skos:prefLabel", "skos:altLabel",
-      "skos:notation", "_annotations");
-
   private static final Set<String> NON_SERIALIZING_INPUT_TYPES = Set.of(
       "page-break", "section-break", "richtext", "image", "youtube", "attribute-value");
 
@@ -115,6 +102,8 @@ public class CedarValidator implements ModelValidator {
     collectSchemaPropertyIriErrors(templateNode, "", report);
     collectInherentlyMultipleFieldErrors(templateNode, "", report);
     collectDerivedFromErrors(templateNode, "", report);
+    collectChildKeyErrors(templateNode, ReservedNames.Parent.TEMPLATE, "", report);
+    collectLinkDefaultErrors(templateNode, "", report);
     return report;
   }
 
@@ -128,6 +117,8 @@ public class CedarValidator implements ModelValidator {
     collectSchemaPropertyIriErrors(elementNode, "", report);
     collectInherentlyMultipleFieldErrors(elementNode, "", report);
     collectDerivedFromErrors(elementNode, "", report);
+    collectChildKeyErrors(elementNode, ReservedNames.Parent.ELEMENT, "", report);
+    collectLinkDefaultErrors(elementNode, "", report);
     return report;
   }
 
@@ -139,6 +130,7 @@ public class CedarValidator implements ModelValidator {
       collectErrorMessages(thrownException, report);
     }
     collectDerivedFromErrors(fieldNode, "", report);
+    collectLinkDefaultErrors(fieldNode, "", report);
     return report;
   }
 
@@ -163,6 +155,8 @@ public class CedarValidator implements ModelValidator {
     } catch (CedarModelValidationException thrownException) {
       collectErrorMessages(thrownException, report);
     }
+    collectElementOccurrenceIdErrors(elementInstance, "", report);
+    collectAttributeValueNameErrors(elementInstance, elementSchema, "", report);
     collectDerivedFromErrors(elementInstance, "", report);
     return report;
   }
@@ -374,7 +368,7 @@ public class CedarValidator implements ModelValidator {
           report.addError(new ErrorItem("Attribute-value names must not be blank", location));
           continue;
         }
-        if (name.startsWith("@") || RESERVED_ATTRIBUTE_VALUE_NAMES.contains(name)) {
+        if (ReservedNames.isReservedName(name)) {
           report.addError(new ErrorItem("Attribute-value name '" + name + "' is reserved for instance metadata",
               location));
         } else if (attributeValueGroups.contains(name) || serializingChildren.contains(name)) {
@@ -414,6 +408,72 @@ public class CedarValidator implements ModelValidator {
         collectAttributeValueNameErrors(childInstance, child.getValue(), childPath, report);
       }
     }
+  }
+
+  /**
+   * Enforces the names a child may take, which become property names of every instance and so share
+   * a namespace with JSON-LD keywords, CEDAR's instance properties and JavaScript object internals.
+   * The meta-schema's pattern keeps a child key off a few prefixes only, so a template it accepts
+   * could hold a child no reader can open. An attribute-value field's key also stays off the YAML
+   * metadata keys of its parent, beside which the YAML form writes it.
+   */
+  private void collectChildKeyErrors(JsonNode container, ReservedNames.Parent parent, String path,
+                                     CedarValidationReport report) {
+    if (container == null || !container.isObject()) {
+      return;
+    }
+    JsonNode properties = container.get(JSON_SCHEMA_PROPERTIES);
+    if (properties == null || !properties.isObject()) {
+      return;
+    }
+    properties.fields().forEachRemaining(entry -> {
+      JsonNode child = childDefinition(entry.getValue());
+      if (child == null || !child.path(CedarModelVocabulary.UI).isObject()) {
+        return;
+      }
+      String key = entry.getKey();
+      String location = path + "/properties/" + escapePointer(key);
+      boolean attributeValue = INPUT_TYPE_ATTRIBUTE_VALUE.equals(
+          child.path(CedarModelVocabulary.UI).path(CedarModelVocabulary.INPUT_TYPE).asText());
+      if (key.isEmpty()) {
+        report.addError(new ErrorItem("Child keys must not be empty", location));
+      } else if (ReservedNames.isReservedName(key)) {
+        report.addError(new ErrorItem("Child key '" + key + "' is reserved for instance metadata", location));
+      } else if (attributeValue && ReservedNames.yamlKeys(parent).contains(key)) {
+        report.addError(new ErrorItem("Attribute-value field key '" + key
+            + "' is reserved for the YAML metadata of its parent", location));
+      }
+      if (isTemplateElement(child)) {
+        collectChildKeyErrors(child, ReservedNames.Parent.ELEMENT, location, report);
+      }
+    });
+  }
+
+  /**
+   * A link field's default is stored as a string, which the meta-schema cannot tell from a text
+   * field's, so only its input type says that it must be an IRI.
+   */
+  private void collectLinkDefaultErrors(JsonNode declaredNode, String path, CedarValidationReport report) {
+    JsonNode node = childDefinition(declaredNode);
+    if (node == null) {
+      return;
+    }
+    JsonNode defaultValue = node.path(VALUE_CONSTRAINTS).path("defaultValue");
+    if (INPUT_TYPE_LINK.equals(node.path(CedarModelVocabulary.UI).path(CedarModelVocabulary.INPUT_TYPE).asText())
+        && defaultValue.isTextual() && !isIri(defaultValue.asText())) {
+      report.addError(new ErrorItem("A link field's default value must be an IRI",
+          path + "/" + VALUE_CONSTRAINTS + "/defaultValue"));
+    }
+    JsonNode properties = node.get(JSON_SCHEMA_PROPERTIES);
+    if (properties == null || !properties.isObject()) {
+      return;
+    }
+    properties.fields().forEachRemaining(entry -> {
+      JsonNode child = childDefinition(entry.getValue());
+      if (child != null && child.path(CedarModelVocabulary.UI).isObject()) {
+        collectLinkDefaultErrors(entry.getValue(), path + "/properties/" + escapePointer(entry.getKey()), report);
+      }
+    });
   }
 
   private void collectElementOccurrenceIdErrors(JsonNode occurrence, String path, CedarValidationReport report) {
@@ -558,6 +618,16 @@ public class CedarValidator implements ModelValidator {
 
   private static String escapePointer(String component) {
     return component.replace("~", "~0").replace("/", "~1");
+  }
+
+  /** An IRI as {@code format: uri} reads one: RFC 3987 characters, relative references included. */
+  private static boolean isIri(String value) {
+    try {
+      IriReference.toUri(value);
+      return true;
+    } catch (URISyntaxException e) {
+      return false;
+    }
   }
 
   private static boolean isAbsoluteIri(String value) {
