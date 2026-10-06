@@ -77,6 +77,8 @@ public class CedarValidator implements ModelValidator {
   private static final String INPUT_TYPE_LIST = "list";
   private static final String VALUE_CONSTRAINTS = "_valueConstraints";
   private static final String MULTIPLE_CHOICE = "multipleChoice";
+  private static final String PAV_VERSION = "pav:version";
+  private static final String PAV_PREVIOUS_VERSION = "pav:previousVersion";
 
   private static final Set<String> NON_SERIALIZING_INPUT_TYPES = Set.of(
       "page-break", "section-break", "richtext", "image", "youtube", "attribute-value");
@@ -104,6 +106,8 @@ public class CedarValidator implements ModelValidator {
     collectDerivedFromErrors(templateNode, "", report);
     collectChildKeyErrors(templateNode, ReservedNames.Parent.TEMPLATE, "", report);
     collectLinkDefaultErrors(templateNode, "", report);
+    collectSchemaIdentifierErrors(templateNode, "", true, report);
+    collectVersionErrors(templateNode, "", report);
     return report;
   }
 
@@ -119,6 +123,8 @@ public class CedarValidator implements ModelValidator {
     collectDerivedFromErrors(elementNode, "", report);
     collectChildKeyErrors(elementNode, ReservedNames.Parent.ELEMENT, "", report);
     collectLinkDefaultErrors(elementNode, "", report);
+    collectSchemaIdentifierErrors(elementNode, "", true, report);
+    collectVersionErrors(elementNode, "", report);
     return report;
   }
 
@@ -131,6 +137,8 @@ public class CedarValidator implements ModelValidator {
     }
     collectDerivedFromErrors(fieldNode, "", report);
     collectLinkDefaultErrors(fieldNode, "", report);
+    collectSchemaIdentifierErrors(fieldNode, "", true, report);
+    collectVersionErrors(fieldNode, "", report);
     return report;
   }
 
@@ -144,6 +152,7 @@ public class CedarValidator implements ModelValidator {
     }
     collectAttributeValueNameErrors(templateInstance, instanceSchema, "", report);
     collectDerivedFromErrors(templateInstance, "", report);
+    collectInstanceIdentifierErrors(templateInstance, report);
     return report;
   }
 
@@ -435,8 +444,8 @@ public class CedarValidator implements ModelValidator {
       String location = path + "/properties/" + escapePointer(key);
       boolean attributeValue = INPUT_TYPE_ATTRIBUTE_VALUE.equals(
           child.path(CedarModelVocabulary.UI).path(CedarModelVocabulary.INPUT_TYPE).asText());
-      if (key.isEmpty()) {
-        report.addError(new ErrorItem("Child keys must not be empty", location));
+      if (key.isBlank()) {
+        report.addError(new ErrorItem("Child keys must not be blank", location));
       } else if (ReservedNames.isReservedName(key)) {
         report.addError(new ErrorItem("Child key '" + key + "' is reserved for instance metadata", location));
       } else if (attributeValue && ReservedNames.yamlKeys(parent).contains(key)) {
@@ -451,7 +460,9 @@ public class CedarValidator implements ModelValidator {
 
   /**
    * A link field's default is stored as a string, which the meta-schema cannot tell from a text
-   * field's, so only its input type says that it must be an IRI.
+   * field's, so only its input type says that it must be an IRI. The readers take an empty default
+   * as no default, which is how production stores one, so only a stated default must be an
+   * identifier.
    */
   private void collectLinkDefaultErrors(JsonNode declaredNode, String path, CedarValidationReport report) {
     JsonNode node = childDefinition(declaredNode);
@@ -459,8 +470,8 @@ public class CedarValidator implements ModelValidator {
       return;
     }
     JsonNode defaultValue = node.path(VALUE_CONSTRAINTS).path("defaultValue");
-    if (INPUT_TYPE_LINK.equals(node.path(CedarModelVocabulary.UI).path(CedarModelVocabulary.INPUT_TYPE).asText())
-        && defaultValue.isTextual() && !isIri(defaultValue.asText())) {
+    if (IRI_INPUT_TYPES.contains(node.path(CedarModelVocabulary.UI).path(CedarModelVocabulary.INPUT_TYPE).asText())
+        && defaultValue.isTextual() && !defaultValue.asText().isEmpty() && !isIdentifierIri(defaultValue.asText())) {
       report.addError(new ErrorItem("A link field's default value must be an IRI",
           path + "/" + VALUE_CONSTRAINTS + "/defaultValue"));
     }
@@ -493,7 +504,7 @@ public class CedarValidator implements ModelValidator {
     // Null is the intentional draft spelling. The artifact server replaces it
     // before calling this validator on a write; a stated non-null value must be
     // an actual absolute IRI, not the empty relative URI accepted by format:uri.
-    if (id != null && !id.isNull() && id.isTextual() && !isAbsoluteIri(id.asText())) {
+    if (id != null && !id.isNull() && id.isTextual() && !isIdentifierIri(id.asText())) {
       report.addError(new ErrorItem("Element occurrence @id must be an absolute IRI or null", path + "/@id"));
     }
   }
@@ -516,7 +527,7 @@ public class CedarValidator implements ModelValidator {
       JsonNode mapping = contextProperties.path(entry.getKey()).path("enum");
       if (mapping.isArray()) {
         for (JsonNode iri : mapping) {
-          if (iri.isTextual() && !isAbsoluteIri(iri.asText())) {
+          if (iri.isTextual() && !isIdentifierIri(iri.asText())) {
             report.addError(new ErrorItem("Property IRI for child '" + entry.getKey()
                 + "' must be an absolute IRI", path + "/properties/@context/properties/"
                 + escapePointer(entry.getKey()) + "/enum"));
@@ -600,11 +611,120 @@ public class CedarValidator implements ModelValidator {
       return;
     }
     JsonNode derivedFrom = node.get(CedarModelVocabulary.PAV_DERIVED_FROM);
-    if (derivedFrom != null && derivedFrom.isTextual() && !isAbsoluteIri(derivedFrom.asText())) {
+    if (derivedFrom != null && derivedFrom.isTextual() && !isIdentifierIri(derivedFrom.asText())) {
       report.addError(new ErrorItem("pav:derivedFrom must be an absolute IRI when present",
           path + "/" + CedarModelVocabulary.PAV_DERIVED_FROM));
     }
     node.fields().forEachRemaining(entry -> collectDerivedFromErrors(entry.getValue(),
+        path + "/" + escapePointer(entry.getKey()), report));
+  }
+
+  /**
+   * The identifiers a schema artifact states outside its children's values: its own {@code @id}, a
+   * previous version, the terms its constraints name and an IRI default. Each names something and
+   * so must be an absolute IRI, which {@code format: uri} does not require.
+   *
+   * <p>A nested child's {@code @id} is left alone. The Template Designer writes a temporary,
+   * relative one for a child it has just added, and the server replaces it after validating a
+   * write. An action's {@code sourceUri} is left alone too: the legacy editor writes
+   * {@code "template"} there for one of the template's own classes.
+   */
+  private void collectSchemaIdentifierErrors(JsonNode declaredNode, String path, boolean root,
+                                             CedarValidationReport report) {
+    JsonNode node = childDefinition(declaredNode);
+    if (node == null) {
+      return;
+    }
+    if (root) {
+      requireIdentifier(node.get("@id"), path + "/@id", "@id", report);
+    }
+    requireIdentifier(node.get(PAV_PREVIOUS_VERSION),
+        path + "/" + PAV_PREVIOUS_VERSION, PAV_PREVIOUS_VERSION, report);
+    JsonNode constraints = node.path(VALUE_CONSTRAINTS);
+    String constraintsPath = path + "/" + VALUE_CONSTRAINTS;
+    for (String group : new String[] {"ontologies", "classes", "branches", "valueSets"}) {
+      JsonNode entries = constraints.path(group);
+      for (int index = 0; index < entries.size(); index++) {
+        requireIdentifier(entries.get(index).get("uri"), constraintsPath + "/" + group + "/" + index + "/uri",
+            "A " + group + " constraint's uri", report);
+      }
+    }
+    JsonNode actions = constraints.path("actions");
+    for (int index = 0; index < actions.size(); index++) {
+      requireIdentifier(actions.get(index).get("termUri"), constraintsPath + "/actions/" + index + "/termUri",
+          "An action's termUri", report);
+    }
+    JsonNode defaultValue = constraints.path("defaultValue");
+    if (defaultValue.isObject()) {
+      requireIdentifier(defaultValue.get("termUri"), constraintsPath + "/defaultValue/termUri",
+          "A default value's termUri", report);
+    }
+    JsonNode properties = node.get(JSON_SCHEMA_PROPERTIES);
+    if (properties == null || !properties.isObject()) {
+      return;
+    }
+    properties.fields().forEachRemaining(entry -> {
+      JsonNode child = childDefinition(entry.getValue());
+      if (child != null && child.path(CedarModelVocabulary.UI).isObject()) {
+        collectSchemaIdentifierErrors(entry.getValue(), path + "/properties/" + escapePointer(entry.getKey()), false,
+            report);
+      }
+    });
+  }
+
+  /**
+   * An instance's own {@code @id} and the template it is based on. Null asks the server for an
+   * identifier and the meta-schema decides whether one may be missing; a stated one must be an
+   * absolute IRI.
+   */
+  private void collectInstanceIdentifierErrors(JsonNode instance, CedarValidationReport report) {
+    if (instance == null || !instance.isObject()) {
+      return;
+    }
+    requireIdentifier(instance.get("@id"), "/@id", "@id", report);
+    requireIdentifier(instance.get(CedarModelVocabulary.SCHEMA_IS_BASED_ON),
+        "/" + CedarModelVocabulary.SCHEMA_IS_BASED_ON, CedarModelVocabulary.SCHEMA_IS_BASED_ON, report);
+  }
+
+  private static void requireIdentifier(JsonNode value, String location, String what, CedarValidationReport report) {
+    if (value != null && value.isTextual() && !isIdentifierIri(value.asText())) {
+      report.addError(new ErrorItem(what + " must be an absolute IRI", location));
+    }
+  }
+
+  /**
+   * A version is three numbers without leading zeros, each of which fits an int, and is not
+   * {@code 0.0.0}. The meta-schemas' pattern refuses a leading zero; it cannot state the other two,
+   * which the readers and the server's {@code ResourceVersion} both hold.
+   */
+  private void collectVersionErrors(JsonNode node, String path, CedarValidationReport report) {
+    if (node == null) {
+      return;
+    }
+    if (node.isArray()) {
+      for (int index = 0; index < node.size(); index++) {
+        collectVersionErrors(node.get(index), path + "/" + index, report);
+      }
+      return;
+    }
+    if (!node.isObject()) {
+      return;
+    }
+    JsonNode version = node.get(PAV_VERSION);
+    if (version != null && version.isTextual() && version.asText().matches("\\d+\\.\\d+\\.\\d+")) {
+      String location = path + "/" + PAV_VERSION;
+      String[] parts = version.asText().split("\\.");
+      boolean fits = true;
+      for (String part : parts) {
+        fits &= part.length() < 10 || part.length() == 10 && part.compareTo(String.valueOf(Integer.MAX_VALUE)) <= 0;
+      }
+      if (!fits) {
+        report.addError(new ErrorItem("Each part of pav:version must fit an int", location));
+      } else if (version.asText().equals("0.0.0")) {
+        report.addError(new ErrorItem("pav:version must not be 0.0.0", location));
+      }
+    }
+    node.fields().forEachRemaining(entry -> collectVersionErrors(entry.getValue(),
         path + "/" + escapePointer(entry.getKey()), report));
   }
 
@@ -628,6 +748,14 @@ public class CedarValidator implements ModelValidator {
     } catch (URISyntaxException e) {
       return false;
     }
+  }
+
+  /**
+   * An identifier: an absolute RFC 3987 IRI that java.net.URI can hold as spelled, which refuses a
+   * no-break space and the other space separators RFC 3987 allows.
+   */
+  private static boolean isIdentifierIri(String value) {
+    return isIri(value) && isAbsoluteIri(value);
   }
 
   private static boolean isAbsoluteIri(String value) {
