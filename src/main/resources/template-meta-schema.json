@@ -112,7 +112,7 @@
     },
     "pav:version": {
       "type": "string",
-      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
     },
     "pav:previousVersion": {
       "type": "string",
@@ -2251,7 +2251,7 @@
         },
         "pav:version": {
           "type": "string",
-          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
         "@nest": {
           "$ref": "#/definitions/nestFieldContent"
@@ -2589,7 +2589,7 @@
         },
         "pav:version": {
           "type": "string",
-          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
         "additionalProperties": {
           "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
@@ -2834,7 +2834,7 @@
         },
         "pav:version": {
           "type": "string",
-          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
         "additionalProperties": {
           "type": "boolean",
@@ -3038,7 +3038,7 @@
         },
         "pav:version": {
           "type": "string",
-          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
         "pav:previousVersion": {
           "type": "string",
