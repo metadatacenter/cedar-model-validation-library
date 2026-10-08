@@ -52,6 +52,7 @@ public class CedarValidator implements ModelValidator {
   private static final String JSON_SCHEMA_PROPERTIES = "properties";
   private static final String JSON_SCHEMA_TYPE = "type";
   private static final String JSON_SCHEMA_ITEMS = "items";
+  private static final String JSON_SCHEMA_MIN_ITEMS = "minItems";
 
   private static final String JSON_SCHEMA_OBJECT = "object";
   private static final String JSON_SCHEMA_ARRAY = "array";
@@ -136,6 +137,7 @@ public class CedarValidator implements ModelValidator {
       collectErrorMessages(thrownException, report);
     }
     collectDerivedFromErrors(fieldNode, "", report);
+    collectAttributeValueMinimumError(fieldNode, "", report);
     collectLinkDefaultErrors(fieldNode, "", report);
     collectSchemaIdentifierErrors(fieldNode, "", true, report);
     collectVersionErrors(fieldNode, "", report);
@@ -567,6 +569,7 @@ public class CedarValidator implements ModelValidator {
           "Checkbox, attribute-value, and multiple-choice list fields must be declared as arrays",
           path + "/type"));
     }
+    collectAttributeValueMinimumError(declaredNode, path, report);
 
     JsonNode properties = fieldNode.get(JSON_SCHEMA_PROPERTIES);
     if (properties == null || !properties.isObject()) {
@@ -579,6 +582,27 @@ public class CedarValidator implements ModelValidator {
             path + "/properties/" + escapePointer(entry.getKey()), report);
       }
     });
+  }
+
+  /**
+   * An attribute-value field's minimum must be 0, as the artifact libraries require. Whoever fills in
+   * an instance names its attributes, so no template can require some and no inflater can supply
+   * them. The field's key is never required either, so a higher minimum would accept an instance with
+   * no attributes and refuse one with fewer than the minimum.
+   */
+  private void collectAttributeValueMinimumError(JsonNode declaredNode, String path,
+                                                 CedarValidationReport report) {
+    JsonNode fieldNode = childDefinition(declaredNode);
+    if (fieldNode == null || fieldNode == declaredNode
+        || !INPUT_TYPE_ATTRIBUTE_VALUE.equals(fieldNode.path(CedarModelVocabulary.UI)
+            .path(CedarModelVocabulary.INPUT_TYPE).asText())) {
+      return;
+    }
+    JsonNode minItems = declaredNode.get(JSON_SCHEMA_MIN_ITEMS);
+    if (minItems != null && minItems.isNumber() && minItems.asLong() > 0) {
+      report.addError(new ErrorItem("An attribute-value field's minItems must be 0",
+          path + "/" + JSON_SCHEMA_MIN_ITEMS));
+    }
   }
 
   private static boolean isInherentlyMultipleField(JsonNode fieldNode) {
