@@ -33,6 +33,15 @@
       "description": "Schema describing the template element description",
       "type": "string"
     },
+    "skos:prefLabel": {
+      "description": "Schema describing the preferred label, if any",
+      "type": "string"
+    },
+    "skos:altLabel": {
+      "description": "Schema describing the alternative labels, if any",
+      "type": "array",
+      "uniqueItems": true
+    },
     "title": {
       "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
       "type": "string",
@@ -1283,6 +1292,14 @@
           "type": "string",
           "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
+        "pav:previousVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pav:derivedFrom": {
+          "type": "string",
+          "format": "uri"
+        },
         "@nest": {
           "$ref": "#/definitions/nestFieldContent"
         },
@@ -1621,6 +1638,14 @@
           "type": "string",
           "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
+        "pav:previousVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pav:derivedFrom": {
+          "type": "string",
+          "format": "uri"
+        },
         "additionalProperties": {
           "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
           "type": "boolean",
@@ -1791,6 +1816,10 @@
           "description": "Schema describing the template field description",
           "type": "string"
         },
+        "skos:prefLabel": {
+          "description": "Schema describing the preferred label, if any",
+          "type": "string"
+        },
         "title": {
           "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
           "type": "string",
@@ -1883,6 +1912,13 @@
           "type": "string",
           "enum": [
             "1.6.0"
+          ]
+        },
+        "bibo:status": {
+          "type": "string",
+          "enum": [
+            "bibo:published",
+            "bibo:draft"
           ]
         },
         "additionalProperties": {
@@ -2015,6 +2051,14 @@
           "type": "string",
           "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
+        "pav:previousVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pav:derivedFrom": {
+          "type": "string",
+          "format": "uri"
+        },
         "additionalProperties": {
           "type": "boolean",
           "enum": [
@@ -2127,6 +2171,15 @@
         "schema:description": {
           "description": "Schema describing the template element description",
           "type": "string"
+        },
+        "skos:prefLabel": {
+          "description": "Schema describing the preferred label, if any",
+          "type": "string"
+        },
+        "skos:altLabel": {
+          "description": "Schema describing the alternative labels, if any",
+          "type": "array",
+          "uniqueItems": true
         },
         "title": {
           "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",

@@ -137,6 +137,14 @@
           "type": "string",
           "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
+        "pav:previousVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pav:derivedFrom": {
+          "type": "string",
+          "format": "uri"
+        },
         "additionalProperties": {
           "type": "boolean",
           "enum": [
@@ -478,6 +486,14 @@
           "type": "string",
           "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
         },
+        "pav:previousVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pav:derivedFrom": {
+          "type": "string",
+          "format": "uri"
+        },
         "@nest": {
           "$ref": "#/definitions/nestFieldContent"
         },
@@ -727,6 +743,14 @@
         "pav:version": {
           "type": "string",
           "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "pav:previousVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pav:derivedFrom": {
+          "type": "string",
+          "format": "uri"
         },
         "additionalProperties": {
           "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",

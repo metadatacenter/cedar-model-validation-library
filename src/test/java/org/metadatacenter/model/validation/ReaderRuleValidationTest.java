@@ -16,9 +16,10 @@ import org.metadatacenter.model.validation.report.ValidationReport;
  * <p>The validator gates what the server stores, and a reader opens what was stored. Where only the
  * reader held a rule, the server stored artifacts that nothing could open afterwards: a child keyed
  * as a JSON-LD keyword or an object internal, an attribute-value field keyed as YAML metadata of its
- * parent, a link default that is not an IRI, and a static field whose version is not one. An
- * identifier outside a field's value is an absolute IRI with no space separator, a version has no
- * leading zero and is not 0.0.0, and a child key has a visible character.
+ * parent, a link default that is not an IRI, a static field whose version is not one, and an
+ * attribute-value field whose minimum is above 0. An identifier outside a field's value is an
+ * absolute IRI with no space separator, a version has no leading zero and is not 0.0.0, and a child
+ * key has a visible character.
  */
 public class ReaderRuleValidationTest extends BaseValidationTest {
   private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -68,6 +69,43 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
   public void shouldPassOrdinaryChildKeyNamedLikeYamlMetadata() throws Exception {
     // Only an attribute-value field is written beside its parent's metadata.
     JsonNode template = rename(resource("templates/attribute-value-template.json"), "Name", "name");
+    assertValidationStatus(validator.validateTemplate(template), "true");
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = {1, 2})
+  public void shouldFailAttributeValueMinimumAboveZeroInATemplate(int minimum) throws Exception {
+    ObjectNode template = (ObjectNode) resource("templates/attribute-value-template.json");
+    ((ObjectNode) template.path("properties").path("Additional Information")).put("minItems", minimum);
+    ValidationReport report = validator.validateTemplate(template);
+    assertValidationStatus(report, "false");
+    assertValidationMessage(report, "An attribute-value field's minItems must be 0");
+  }
+
+  @Test
+  public void shouldFailAttributeValueMinimumAboveZeroInAnElement() throws Exception {
+    ObjectNode element = (ObjectNode) resource("elements/attribute-value-element.json");
+    ((ObjectNode) element.path("properties").path("Additional Information")).put("minItems", 1);
+    ValidationReport report = validator.validateTemplateElement(element);
+    assertValidationStatus(report, "false");
+    assertValidationMessage(report, "An attribute-value field's minItems must be 0");
+  }
+
+  @Test
+  public void shouldFailAttributeValueMinimumAboveZeroInAStandaloneField() throws Exception {
+    ObjectNode field = (ObjectNode) resource("fields/attribute-value-field.json");
+    assertValidationStatus(validator.validateTemplateField(field), "true");
+    field.put("minItems", 1);
+    ValidationReport report = validator.validateTemplateField(field);
+    assertValidationStatus(report, "false");
+    assertValidationMessage(report, "An attribute-value field's minItems must be 0");
+  }
+
+  @Test
+  public void shouldPassMinimumAboveZeroOnARepeatedField() throws Exception {
+    // Only an attribute-value field's attributes need names nobody has supplied yet.
+    ObjectNode template = (ObjectNode) resource("templates/checkbox-template.json");
+    ((ObjectNode) template.path("properties").path("Select multiple")).put("minItems", 2);
     assertValidationStatus(validator.validateTemplate(template), "true");
   }
 
