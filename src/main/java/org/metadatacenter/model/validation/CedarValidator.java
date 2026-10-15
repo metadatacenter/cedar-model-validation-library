@@ -159,6 +159,7 @@ public class CedarValidator implements ModelValidator {
     collectDerivedFromErrors(templateInstance, "", report);
     collectInstanceIdentifierErrors(templateInstance, report);
     FieldRegexValidation.validateInstance(templateInstance, instanceSchema, "", report);
+    NumericRangeValidation.validateInstance(templateInstance, instanceSchema, "", report);
     return report;
   }
 
@@ -173,6 +174,7 @@ public class CedarValidator implements ModelValidator {
     collectElementOccurrenceIdErrors(elementInstance, "", report);
     collectAttributeValueNameErrors(elementInstance, elementSchema, "", report);
     FieldRegexValidation.validateInstance(elementInstance, elementSchema, "", report);
+    NumericRangeValidation.validateInstance(elementInstance, elementSchema, "", report);
     collectDerivedFromErrors(elementInstance, "", report);
     return report;
   }
