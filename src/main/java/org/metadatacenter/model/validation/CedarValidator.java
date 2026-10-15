@@ -109,6 +109,7 @@ public class CedarValidator implements ModelValidator {
     collectLinkDefaultErrors(templateNode, "", report);
     collectSchemaIdentifierErrors(templateNode, "", true, report);
     collectVersionErrors(templateNode, "", report);
+    FieldRegexValidation.validateSchema(templateNode, "", report);
     return report;
   }
 
@@ -126,6 +127,7 @@ public class CedarValidator implements ModelValidator {
     collectLinkDefaultErrors(elementNode, "", report);
     collectSchemaIdentifierErrors(elementNode, "", true, report);
     collectVersionErrors(elementNode, "", report);
+    FieldRegexValidation.validateSchema(elementNode, "", report);
     return report;
   }
 
@@ -141,6 +143,7 @@ public class CedarValidator implements ModelValidator {
     collectLinkDefaultErrors(fieldNode, "", report);
     collectSchemaIdentifierErrors(fieldNode, "", true, report);
     collectVersionErrors(fieldNode, "", report);
+    FieldRegexValidation.validateSchema(fieldNode, "", report);
     return report;
   }
 
@@ -155,6 +158,7 @@ public class CedarValidator implements ModelValidator {
     collectAttributeValueNameErrors(templateInstance, instanceSchema, "", report);
     collectDerivedFromErrors(templateInstance, "", report);
     collectInstanceIdentifierErrors(templateInstance, report);
+    FieldRegexValidation.validateInstance(templateInstance, instanceSchema, "", report);
     return report;
   }
 
@@ -168,6 +172,7 @@ public class CedarValidator implements ModelValidator {
     }
     collectElementOccurrenceIdErrors(elementInstance, "", report);
     collectAttributeValueNameErrors(elementInstance, elementSchema, "", report);
+    FieldRegexValidation.validateInstance(elementInstance, elementSchema, "", report);
     collectDerivedFromErrors(elementInstance, "", report);
     return report;
   }

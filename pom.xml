@@ -41,6 +41,11 @@
       <groupId>com.networknt</groupId>
       <artifactId>json-schema-validator</artifactId>
     </dependency>
+    <!-- JavaScript regex semantics for the same field constraints the browser enforces. -->
+    <dependency>
+      <groupId>org.mozilla</groupId>
+      <artifactId>rhino</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.slf4j</groupId>
