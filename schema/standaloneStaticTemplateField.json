@@ -1,0 +1,86 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "Meta-schema that describes the schema of a static template field",
+    "type": "object",
+    "properties": {
+        "$schema": {
+            "description": "Schema describing the JSON Schema '$schema' field in a template, element, and field",
+            "type": "string", "format": "uri",
+            "enum": [ "http://json-schema.org/draft-04/schema#" ]
+        },
+        "type": {
+            "description": "Schema describing the JSON Schema 'type' field in a template, element, and field",
+            "type": "string", "enum": [ "object" ]
+        },
+        "schema:name": {
+            "description": "Schema describing the template field name",
+            "type": "string", "minLength": 1
+        },
+        "schema:description": {
+            "description": "Schema describing the template field description",
+            "type": "string"
+        },
+        "skos:prefLabel": {
+            "description": "Schema describing the preferred label, if any",
+            "type": "string"
+        },
+        "title": {
+            "description": "Schema describing the JSON Schema 'title' field in a template, element, and field",
+            "type": "string", "minLength": 1
+        },
+        "description": {
+            "description": "Schema describing the JSON Schema 'description' field in a template, element, and field",
+            "type": "string", "minLength": 1
+        },
+        "_ui": {
+            "$ref": "#/definitions/staticFieldUIContent"
+        },
+        "@context": {
+            "description": "Schema describing the '@context' of a static template field",
+            "type": "object",
+            "properties": {
+                "schema": { "type": "string", "format": "uri", "enum": [ "http://schema.org/" ] },
+                "pav": { "type": "string", "format": "uri", "enum": [ "http://purl.org/pav/" ] },
+                "oslc": { "type": "string", "format": "uri", "enum": [ "http://open-services.net/ns/core#" ] }
+            },
+            "required": [ "schema", "pav", "oslc" ]
+        },
+        "@id": {
+            "type": [ "string", "null" ], "format": "uri"
+        },
+        "@type": {
+            "type": "string",
+            "format": "uri",
+            "enum": [ "https://schema.metadatacenter.org/core/StaticTemplateField" ]
+        },
+        "properties": {},
+        "pav:createdOn": {
+            "type": [ "string", "null" ], "format": "date-time"
+        },
+        "pav:createdBy":  {
+            "type": [ "string", "null" ], "format": "uri"
+        },
+        "pav:lastUpdatedOn":  {
+            "type": [ "string", "null" ], "format": "date-time"
+        },
+        "oslc:modifiedBy": {
+            "type": [ "string", "null" ], "format": "uri"
+        },
+        "schema:schemaVersion": {
+            "type": "string", "enum": [ "1.6.0" ]
+        },
+        "bibo:status": {
+            "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
+        },
+        "pav:version": {
+            "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+        },
+        "additionalProperties": {
+            "description": "Schema describing the JSON Schema 'additionalProperties' field in a template, element, and field",
+            "type": "boolean", "enum": [ false ]
+        }
+    },
+    "required": [ "$schema", "type", "title", "description", "_ui", "@id", "@type",
+        "additionalProperties", "pav:createdOn", "pav:createdBy", "pav:lastUpdatedOn", "oslc:modifiedBy",
+        "schema:name", "schema:description", "schema:schemaVersion"  ]
+}

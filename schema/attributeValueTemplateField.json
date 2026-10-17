@@ -61,7 +61,13 @@
       "type": "string", "enum": [ "bibo:published", "bibo:draft" ]
     },
     "pav:version": {
-      "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"
+      "type": "string", "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "pav:previousVersion": {
+      "type": "string", "minLength": 1
+    },
+    "pav:derivedFrom": {
+      "type": "string", "format": "uri"
     },
     "additionalProperties": {
       "type": "boolean", "enum": [ false ]
