@@ -2687,10 +2687,8 @@
           "type": "object",
           "properties": {
             "id": {
-              "description": "The content hash of the pinned release. It must hold a character that is not whitespace. The pattern lists every character Java's Character.isWhitespace counts as whitespace, so a validator refuses exactly the ids the model libraries refuse, whatever its regular-expression engine.",
               "type": "string",
-              "minLength": 1,
-              "pattern": "[^\\u0009-\\u000D\\u001C-\\u0020\\u1680\\u2000-\\u2006\\u2008-\\u200A\\u2028\\u2029\\u205F\\u3000]"
+              "minLength": 1
             },
             "effectiveDate": {
               "type": "string"
