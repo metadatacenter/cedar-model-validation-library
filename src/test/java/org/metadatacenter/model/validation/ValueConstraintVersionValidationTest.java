@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 /**
@@ -89,5 +91,37 @@ public class ValueConstraintVersionValidationTest extends BaseValidationTest {
     ObjectNode version = firstOntologyEntry(template).putObject("version");
     version.put("effectiveDate", "2026-07-01"); // no id
     assertValidationStatus(validate(template), "false");
+  }
+
+  /** Where DataCiteTemplate's first ontology constraint keeps its version id. */
+  private static final String VERSION_ID_LOCATION = "/properties/language/_valueConstraints/ontologies/0/version/id";
+
+  /** The meta-schema's rule for a version id: a character that Java's Character.isWhitespace does not count as whitespace. */
+  private static final String VERSION_ID_PATTERN =
+      "[^\\u0009-\\u000D\\u001C-\\u0020\\u1680\\u2000-\\u2006\\u2008-\\u200A\\u2028\\u2029\\u205F\\u3000]";
+
+  // Four cases: a space, the five whitespace controls, two information separators, and two Unicode spaces.
+  @ParameterizedTest
+  @ValueSource(strings = {" ", "\t\n\u000B\f\r", "\u001C\u001F", "\u2003\u3000"})
+  public void blankVersionIdFailsValidation(String id) {
+    // A blank id identifies no release any more than an empty one does, and the model libraries refuse both.
+    JsonNode template = dataCiteTemplate();
+    firstOntologyEntry(template).putObject("version").put("id", id);
+
+    ValidationReport report = validate(template);
+
+    assertValidationStatus(report, "false");
+    assertValidationMessage(report, VERSION_ID_LOCATION + ": does not match the regex pattern " + VERSION_ID_PATTERN);
+  }
+
+  // Two cases: whitespace around the hash, and the three no-break spaces Java does not count as whitespace.
+  @ParameterizedTest
+  @ValueSource(strings = {" 63ef56dff672 ", "\u00A0\u2007\u202F"})
+  public void versionIdNotBlankInJavaPassesValidation(String id) {
+    // The meta-schema refuses an id only where String.isBlank is true of it, so an id the libraries read is valid.
+    JsonNode template = dataCiteTemplate();
+    firstOntologyEntry(template).putObject("version").put("id", id);
+
+    assertValidationStatus(validate(template), "true");
   }
 }
