@@ -50,7 +50,7 @@ final class FieldRegexValidation {
       if (!compiled.containsKey(regex)) {
         try {
           // Pass the pattern as data, never as executable JavaScript. No flags, as in CEE.
-          compiled.put(regex, context.newObject(scope, "RegExp", new Object[]{"^(?:" + regex + ")$"}));
+          compiled.put(regex, context.newObject(scope, "RegExp", new Object[]{"^(?:" + browserPattern(regex) + ")$"}));
         } catch (EcmaError invalidPattern) {
           compiled.put(regex, null);
         }
@@ -68,6 +68,20 @@ final class FieldRegexValidation {
     @Override public void close() {
       if (context != null) context.close();
     }
+  }
+
+  /** Rhino 1.9.1 interprets property escapes without the u flag; ECMAScript treats p/P as literals. */
+  private static String browserPattern(String pattern) {
+    var result = new StringBuilder(pattern.length());
+    for (int i = 0; i < pattern.length(); i++) {
+      char c = pattern.charAt(i);
+      if (c == '\\' && i + 1 < pattern.length()) {
+        char next = pattern.charAt(++i);
+        if (next != 'p' && next != 'P') result.append(c);
+        result.append(next);
+      } else result.append(c);
+    }
+    return result.toString();
   }
 
   static void validateSchema(JsonNode schema, String path, CedarValidationReport report) {

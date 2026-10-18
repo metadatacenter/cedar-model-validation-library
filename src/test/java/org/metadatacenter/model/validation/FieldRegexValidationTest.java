@@ -58,6 +58,26 @@ class FieldRegexValidationTest extends BaseValidationTest {
     assertEquals(originalInstance, instance);
   }
 
+  @Test void normativeRegexCorpus() throws Exception {
+    try (var input = getClass().getResourceAsStream("/concordance/regex-policy.json")) {
+      for (var row : MAPPER.readTree(input).get("cases")) {
+        var schema = MAPPER.createObjectNode();
+        schema.putObject("_valueConstraints").put("regex", row.get("pattern").asText());
+        var report = CedarValidationReport.newEmptyReport();
+        if (row.get("value").isNull()) FieldRegexValidation.validateSchema(schema, "", report);
+        else {
+          var instance = MAPPER.createObjectNode().put("@value", row.get("value").asText());
+          FieldRegexValidation.validateInstance(instance, schema, "", report);
+        }
+        String expected = row.get("expected").asText();
+        assertEquals(expected.equals("match") || expected.equals("valid"), report.getErrors().isEmpty(),
+            row.get("id").asText() + ": " + report);
+        if (expected.equals("invalid")) assertTrue(report.getErrors().stream()
+            .anyMatch(error -> error.getMessage().contains("invalid regular expression")));
+      }
+    }
+  }
+
   @Test void validatesAgainstTheCurrentTemplateWithoutCachingAnOldConstraint() throws Exception {
     ObjectNode template = resource("templates/single-field-template.json");
     ObjectNode instance = resource("instances/single-field-instance.jsonld");
