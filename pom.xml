@@ -28,6 +28,10 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.metadatacenter</groupId>
+      <artifactId>cedar-model-library</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.apicatalog</groupId>
       <artifactId>titanium-json-ld</artifactId>
     </dependency>
