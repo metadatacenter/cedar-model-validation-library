@@ -84,6 +84,43 @@ final class FieldRegexValidation {
     return result.toString();
   }
 
+  static void validateConfiguration(JsonNode field, String path, java.util.List<ValidationFinding> out) {
+    JsonNode pattern = field.path("_valueConstraints").path("regex");
+    if (pattern.isMissingNode()) return;
+    if (!pattern.isTextual()) {
+      out.add(new ValidationFinding("templateConstraint", ValidationFinding.Category.STRUCTURAL,
+          path + "/_valueConstraints/regex", "A regular expression must be a string."));
+      return;
+    }
+    if (pattern.textValue().isEmpty()) return;
+    try (Expressions expressions = new Expressions()) {
+      if (expressions.compile(pattern.textValue()) == null)
+        out.add(new ValidationFinding("templateConstraint", ValidationFinding.Category.STRUCTURAL,
+            path + "/_valueConstraints/regex", "The template contains an invalid regular expression."));
+    }
+  }
+
+  static void validateValue(String value, JsonNode field, String path, java.util.List<ValidationFinding> out) {
+    String regex = field.path("_valueConstraints").path("regex").asText("");
+    if (regex.isEmpty() || value.isEmpty()) return;
+    try (Expressions expressions = new Expressions()) {
+      Scriptable expression = expressions.compile(regex);
+      if (expression == null) out.add(new ValidationFinding("templateConstraint", ValidationFinding.Category.STRUCTURAL,
+          path, "The template contains an invalid regular expression."));
+      else {
+        try {
+          if (!expressions.matches(expression, value))
+            out.add(new ValidationFinding("regex", ValidationFinding.Category.CONSTRAINT, path,
+                "Does not match " + regex + "."));
+        } catch (RegexWorkLimit exceeded) {
+          out.add(new ValidationFinding("regexEvaluation", ValidationFinding.Category.VERIFICATION, path,
+              "The regular expression exceeds the validation work limit; ask the template author to simplify it.",
+              ValidationFinding.VerificationStatus.UNAVAILABLE));
+        }
+      }
+    }
+  }
+
   static void validateSchema(JsonNode schema, String path, CedarValidationReport report) {
     try (Expressions expressions = new Expressions()) {
       validateSchema(schema, path, report, expressions);
@@ -102,6 +139,20 @@ final class FieldRegexValidation {
       if (expressions.compile(regex) == null) {
         report.addError(new ErrorItem("The template contains an invalid regular expression.",
             path + "/_valueConstraints/regex"));
+      }
+    }
+    JsonNode defaultValue = schema.path("_valueConstraints").path("defaultValue");
+    if (!regex.isEmpty() && defaultValue.isTextual() && !defaultValue.textValue().isEmpty()) {
+      Scriptable expression = expressions.compile(regex);
+      if (expression != null) {
+        try {
+          if (!expressions.matches(expression, defaultValue.textValue()))
+            report.addFinding(new ValidationFinding("regex", ValidationFinding.Category.CONSTRAINT,
+                path + "/_valueConstraints/defaultValue", "Does not match " + regex + "."));
+        } catch (RegexWorkLimit exceeded) {
+          report.addError(new ErrorItem("The regular expression exceeds the validation work limit; "
+              + "ask the template author to simplify it.", path + "/_valueConstraints/defaultValue"));
+        }
       }
     }
     schema.path("properties").fields().forEachRemaining(child -> {
@@ -137,7 +188,8 @@ final class FieldRegexValidation {
         // Missing/null/empty answers remain saveable; required-value warnings are separate.
         try {
           if (!expressions.matches(expression, value.textValue()))
-            report.addError(new ErrorItem("Does not match " + regex + ".", path + "/@value"));
+            report.addFinding(new ValidationFinding("regex", ValidationFinding.Category.CONSTRAINT,
+                path + "/@value", "Does not match " + regex + "."));
         } catch (RegexWorkLimit exceeded) {
           report.addError(new ErrorItem("The regular expression exceeds the validation work limit; "
               + "ask the template author to simplify it.", path + "/@value"));

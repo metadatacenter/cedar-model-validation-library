@@ -29,7 +29,7 @@ class ValidationReportSchemaTest {
 
     Set<String> written = new LinkedHashSet<>();
     serialized.fieldNames().forEachRemaining(written::add);
-    assertEquals(Set.of("validates", "warnings", "errors"), written);
+    assertEquals(Set.of("validates", "canSave", "isValid", "findings", "warnings", "errors"), written);
 
     for (String key : written) {
       assertTrue(documentedNames().contains(key), key + " is written but not documented");

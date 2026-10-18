@@ -1,0 +1,878 @@
+{
+  "contractVersion": 1,
+  "cases": [
+    {
+      "id": "integer-within-bounds",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "minValue": 0,
+          "maxValue": 10
+        }
+      },
+      "value": "5",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "integer-above-bound",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "minValue": 0,
+          "maxValue": 10
+        }
+      },
+      "value": "11",
+      "defaultValue": false,
+      "codes": [
+        "maxValue"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "integer-below-bound",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "minValue": 0,
+          "maxValue": 10
+        }
+      },
+      "value": "-1",
+      "defaultValue": false,
+      "codes": [
+        "minValue"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "integer-fraction",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int"
+        }
+      },
+      "value": "1.1",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "integer-text",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int"
+        }
+      },
+      "value": "bad",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "integer-exponent",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int"
+        }
+      },
+      "value": "1e1",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "integer-leading-zero",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int"
+        }
+      },
+      "value": "01",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "integer-whitespace",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int"
+        }
+      },
+      "value": " 1",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "integer-overflow",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int"
+        }
+      },
+      "value": "2147483648",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "large-long-within-range",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:long"
+        }
+      },
+      "value": "9223372036854775807",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "large-long-overflow",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:long"
+        }
+      },
+      "value": "9223372036854775808",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "exact-bound",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:long",
+          "maxValue": 9007199254740992
+        }
+      },
+      "value": "9007199254740993",
+      "defaultValue": false,
+      "codes": [
+        "maxValue"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "decimal-trailing-precision",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "decimalPlace": 1
+        }
+      },
+      "value": "1.00",
+      "defaultValue": false,
+      "codes": [
+        "decimalPlace"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "decimal-default-value-precision",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "decimalPlace": 1
+        }
+      },
+      "value": "1.00",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "numeric-default-outside-range",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "minValue": 0,
+          "maxValue": 10
+        }
+      },
+      "value": "11",
+      "defaultValue": true,
+      "codes": [
+        "maxValue"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "numeric-default-exponent",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "minValue": 0,
+          "maxValue": 10
+        }
+      },
+      "value": "1e1",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "empty-integer",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "minValue": 0,
+          "maxValue": 10
+        }
+      },
+      "value": "",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "emoji-codepoint",
+      "field": {
+        "_ui": {
+          "inputType": "textfield"
+        },
+        "_valueConstraints": {
+          "minLength": 1,
+          "maxLength": 1
+        }
+      },
+      "value": "😀",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "combining-sequence-length",
+      "field": {
+        "_ui": {
+          "inputType": "textfield"
+        },
+        "_valueConstraints": {
+          "maxLength": 1
+        }
+      },
+      "value": "é",
+      "defaultValue": false,
+      "codes": [
+        "maxLength"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "short-text",
+      "field": {
+        "_ui": {
+          "inputType": "textfield"
+        },
+        "_valueConstraints": {
+          "minLength": 2
+        }
+      },
+      "value": "a",
+      "defaultValue": false,
+      "codes": [
+        "minLength"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "choice-member",
+      "field": {
+        "_ui": {
+          "inputType": "list"
+        },
+        "_valueConstraints": {
+          "literals": [
+            {
+              "label": "one"
+            }
+          ]
+        }
+      },
+      "value": "one",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "choice-nonmember",
+      "field": {
+        "_ui": {
+          "inputType": "list"
+        },
+        "_valueConstraints": {
+          "literals": [
+            {
+              "label": "one"
+            }
+          ]
+        }
+      },
+      "value": "two",
+      "defaultValue": false,
+      "codes": [
+        "choiceMembership"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "choice-default-nonmember",
+      "field": {
+        "_ui": {
+          "inputType": "list"
+        },
+        "_valueConstraints": {
+          "literals": [
+            {
+              "label": "one"
+            }
+          ]
+        }
+      },
+      "value": "two",
+      "defaultValue": true,
+      "codes": [
+        "choiceMembership"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "malformed-iri",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "bad iri",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "absolute-iri",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/é",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "invalid-calendar",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2023-02-29",
+      "defaultValue": false,
+      "codes": [
+        "temporalCalendar"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "leap-day",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-29",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "wrong-temporal-type",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "12:30:00",
+      "defaultValue": false,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "invalid-time",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "24:01:00",
+      "defaultValue": false,
+      "codes": [
+        "temporalCalendar"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "valid-offset",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:00+14:00",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "invalid-offset",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:00+14:01",
+      "defaultValue": false,
+      "codes": [
+        "timezoneOffset"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "disabled-offset",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:00Z",
+      "defaultValue": false,
+      "codes": [
+        "timezone"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "year-granularity",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "year"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-01",
+      "defaultValue": false,
+      "codes": [
+        "temporalGranularity"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "partial-date-default",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "partial-date-instance",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024",
+      "defaultValue": false,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "float-default-overflow",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:float"
+        }
+      },
+      "value": "3.5e38",
+      "defaultValue": true,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "float-default-underflow",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:float"
+        }
+      },
+      "value": "1e-50",
+      "defaultValue": true,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "double-default-overflow",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:double"
+        }
+      },
+      "value": "1e400",
+      "defaultValue": true,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "email-localhost",
+      "field": {
+        "_ui": {
+          "inputType": "email"
+        },
+        "_valueConstraints": {}
+      },
+      "value": "root@localhost",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "email-default-localhost",
+      "field": {
+        "_ui": {
+          "inputType": "email"
+        },
+        "_valueConstraints": {}
+      },
+      "value": "root@localhost",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "email-invalid-local",
+      "field": {
+        "_ui": {
+          "inputType": "email"
+        },
+        "_valueConstraints": {}
+      },
+      "value": "invalid(local)@example.com",
+      "defaultValue": false,
+      "codes": [
+        "email"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "email-valid-punctuation",
+      "field": {
+        "_ui": {
+          "inputType": "email"
+        },
+        "_valueConstraints": {}
+      },
+      "value": "first.last+tag@mail.example.co.uk",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "phone-valid",
+      "field": {
+        "_ui": {
+          "inputType": "phone-number"
+        },
+        "_valueConstraints": {}
+      },
+      "value": "+1 (555) 123-4567",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "phone-invalid",
+      "field": {
+        "_ui": {
+          "inputType": "phone-number"
+        },
+        "_valueConstraints": {}
+      },
+      "value": "1.2",
+      "defaultValue": false,
+      "codes": [
+        "phoneNumber"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "default-date-year-precision",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "year"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-01-01",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-dateTime-hour",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "hour"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "temporal-default-offset-disabled",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "timezoneEnabled": false
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:30:00Z",
+      "defaultValue": true,
+      "codes": [
+        "timezone"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "temporal-default-offset-enabled",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:30:00Z",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    }
+  ]
+}

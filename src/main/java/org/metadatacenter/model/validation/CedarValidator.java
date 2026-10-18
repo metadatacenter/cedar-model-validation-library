@@ -109,7 +109,7 @@ public class CedarValidator implements ModelValidator {
     collectLinkDefaultErrors(templateNode, "", report);
     collectSchemaIdentifierErrors(templateNode, "", true, report);
     collectVersionErrors(templateNode, "", report);
-    FieldRegexValidation.validateSchema(templateNode, "", report);
+    FieldValueValidation.validateSchema(templateNode, "", report);
     return report;
   }
 
@@ -127,7 +127,7 @@ public class CedarValidator implements ModelValidator {
     collectLinkDefaultErrors(elementNode, "", report);
     collectSchemaIdentifierErrors(elementNode, "", true, report);
     collectVersionErrors(elementNode, "", report);
-    FieldRegexValidation.validateSchema(elementNode, "", report);
+    FieldValueValidation.validateSchema(elementNode, "", report);
     return report;
   }
 
@@ -143,38 +143,36 @@ public class CedarValidator implements ModelValidator {
     collectLinkDefaultErrors(fieldNode, "", report);
     collectSchemaIdentifierErrors(fieldNode, "", true, report);
     collectVersionErrors(fieldNode, "", report);
-    FieldRegexValidation.validateSchema(fieldNode, "", report);
+    FieldValueValidation.validateSchema(fieldNode, "", report);
     return report;
   }
 
   public ValidationReport validateTemplateInstance(JsonNode templateInstance, JsonNode instanceSchema)
       throws IOException {
-    CedarValidationReport report = CedarValidationReport.newEmptyReport();
+    CedarValidationReport report = CedarValidationReport.newInstanceReport();
     try {
       doInstanceValidation(templateInstance, instanceSchema, startingLocation);
     } catch (CedarModelValidationException thrownException) {
-      collectErrorMessages(thrownException, report);
+      collectInstanceErrors(thrownException, instanceSchema, report);
     }
     collectAttributeValueNameErrors(templateInstance, instanceSchema, "", report);
     collectDerivedFromErrors(templateInstance, "", report);
     collectInstanceIdentifierErrors(templateInstance, report);
-    FieldRegexValidation.validateInstance(templateInstance, instanceSchema, "", report);
-    NumericRangeValidation.validateInstance(templateInstance, instanceSchema, "", report);
+    FieldValueValidation.validateInstance(templateInstance, instanceSchema, "", report);
     return report;
   }
 
   public ValidationReport validateElementInstance(JsonNode elementInstance, JsonNode elementSchema)
       throws IOException {
-    CedarValidationReport report = CedarValidationReport.newEmptyReport();
+    CedarValidationReport report = CedarValidationReport.newInstanceReport();
     try {
       doInstanceValidation(elementInstance, elementSchema, startingLocation);
     } catch (CedarModelValidationException thrownException) {
-      collectErrorMessages(thrownException, report);
+      collectInstanceErrors(thrownException, elementSchema, report);
     }
     collectElementOccurrenceIdErrors(elementInstance, "", report);
     collectAttributeValueNameErrors(elementInstance, elementSchema, "", report);
-    FieldRegexValidation.validateInstance(elementInstance, elementSchema, "", report);
-    NumericRangeValidation.validateInstance(elementInstance, elementSchema, "", report);
+    FieldValueValidation.validateInstance(elementInstance, elementSchema, "", report);
     collectDerivedFromErrors(elementInstance, "", report);
     return report;
   }
@@ -330,10 +328,53 @@ public class CedarValidator implements ModelValidator {
               errorAbsoluteLocation,
               reportItem.getSchemaResource(),
               reportItem.getSchemaPointer());
-          report.addError(errorItem);
+          report.addFinding(new ValidationFinding(validationMessage.getType().equals("required") ? "missingProperty" : "valueShape",
+              ValidationFinding.Category.STRUCTURAL, errorAbsoluteLocation, reportItem.getMessage()), errorItem);
         }
       }
     }
+  }
+
+  private void collectInstanceErrors(CedarModelValidationException exception, JsonNode schema,
+                                      CedarValidationReport report) {
+    for (JsonPointer base : exception.getDetails().keySet()) {
+      for (ValidationMessage message : exception.getDetails().get(base)) {
+        for (var item : new ParsedProcessingMessage(message, exception.getSchemaResourceName()).getReportItems()) {
+          String path = createLocation(base.toString(), item.getLocation());
+          String keyword = message.getType();
+          JsonNode position = schemaAtInstancePath(schema, message.getInstanceLocation().toString());
+          var category = ValidationFinding.Category.STRUCTURAL;
+          String code = keyword.equals("required") ? "missingProperty" : "valueShape";
+          // Only declared field answers and child occurrence arrays can carry value-quality keywords.
+          // A required property or @type array remains structural even beside a quality violation.
+          if ((keyword.equals("minItems") || keyword.equals("maxItems"))
+              && FieldValueValidation.isChild(position) && position.path("items").isObject()) {
+            code = keyword;
+            category = keyword.equals("minItems") ? ValidationFinding.Category.COMPLETENESS
+                : ValidationFinding.Category.CONSTRAINT;
+          } else if (message.getInstanceLocation().toString().endsWith("/@value")) {
+            JsonNode owner = schemaAtInstancePath(schema, message.getInstanceLocation().toString()
+                .substring(0, message.getInstanceLocation().toString().length() - 7));
+            if (FieldValueValidation.isChild(owner) && Set.of("minLength", "maxLength", "pattern", "enum").contains(keyword)) {
+              code = keyword.equals("pattern") ? "regex" : keyword.equals("enum") ? "choiceMembership" : keyword;
+              category = ValidationFinding.Category.CONSTRAINT;
+            }
+          }
+          report.addFinding(new ValidationFinding(code, category, path, item.getMessage()),
+              createErrorItem(item.getMessage(), path, item.getSchemaResource(), item.getSchemaPointer()));
+        }
+      }
+    }
+  }
+
+  private static JsonNode schemaAtInstancePath(JsonNode schema, String path) {
+    if (path.isEmpty()) return schema;
+    for (String segment : path.substring(1).split("/", -1)) {
+      String key = segment.replace("~1", "/").replace("~0", "~");
+      if (schema.path("items").isObject() && key.matches("[0-9]+")) schema = schema.path("items");
+      else schema = schema.path("properties").path(key);
+    }
+    return schema;
   }
 
   /**
