@@ -382,7 +382,7 @@ public class CedarValidator implements ModelValidator {
         }
         String name = nameNode.asText();
         String location = path + "/" + escapePointer(groupName) + "/" + escapePointer(name);
-        if (name.isBlank()) {
+        if (TextPolicy.isBlank(name)) {
           report.addError(new ErrorItem("Attribute-value names must not be blank", location));
           continue;
         }
@@ -453,7 +453,7 @@ public class CedarValidator implements ModelValidator {
       String location = path + "/properties/" + escapePointer(key);
       boolean attributeValue = INPUT_TYPE_ATTRIBUTE_VALUE.equals(
           child.path(CedarModelVocabulary.UI).path(CedarModelVocabulary.INPUT_TYPE).asText());
-      if (key.isBlank()) {
+      if (TextPolicy.isBlank(key)) {
         report.addError(new ErrorItem("Child keys must not be blank", location));
       } else if (ReservedNames.isReservedName(key)) {
         report.addError(new ErrorItem("Child key '" + key + "' is reserved for instance metadata", location));
@@ -790,7 +790,7 @@ public class CedarValidator implements ModelValidator {
   }
 
   private static boolean isAbsoluteIri(String value) {
-    if (value == null || value.isBlank()) {
+    if (value == null || TextPolicy.isBlank(value)) {
       return false;
     }
     try {
