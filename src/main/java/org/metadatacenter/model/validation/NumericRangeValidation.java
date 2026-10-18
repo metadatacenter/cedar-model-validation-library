@@ -49,7 +49,7 @@ final class NumericRangeValidation {
     BigDecimal number;
     try {
       // Compare exact decimal values: converting through double loses integer and boundary precision.
-      number = new BigDecimal(value.textValue());
+      number = NumericPolicy.parse(value.textValue());
     } catch (NumberFormatException invalidNumber) {
       report.addError(new ErrorItem("Not a valid number.", path));
       return;
