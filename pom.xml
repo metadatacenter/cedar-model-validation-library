@@ -5,12 +5,12 @@
   <parent>
     <groupId>org.metadatacenter</groupId>
     <artifactId>cedar-parent</artifactId>
-    <version>2.9.24</version>
+    <version>2.9.25</version>
   </parent>
 
   <groupId>org.metadatacenter</groupId>
   <artifactId>cedar-model-validation-library</artifactId>
-  <version>2.9.24</version>
+  <version>2.9.25</version>
   <packaging>jar</packaging>
 
   <name>CEDAR Model Validation Library</name>
@@ -28,6 +28,10 @@
 
   <dependencies>
     <dependency>
+      <groupId>org.metadatacenter</groupId>
+      <artifactId>cedar-model-library</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.apicatalog</groupId>
       <artifactId>titanium-json-ld</artifactId>
     </dependency>
@@ -40,6 +44,11 @@
     <dependency>
       <groupId>com.networknt</groupId>
       <artifactId>json-schema-validator</artifactId>
+    </dependency>
+    <!-- JavaScript regex semantics for the same field constraints the browser enforces. -->
+    <dependency>
+      <groupId>org.mozilla</groupId>
+      <artifactId>rhino</artifactId>
     </dependency>
 
     <dependency>

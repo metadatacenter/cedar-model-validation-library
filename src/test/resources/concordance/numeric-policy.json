@@ -1,0 +1,196 @@
+{
+  "contract": "ASCII decimal grammar without implicit trimming; exact finite decimal values and comparisons; BigDecimal exponent/scale range.",
+  "cases": [
+    {
+      "value": "0",
+      "valid": true
+    },
+    {
+      "value": "-0",
+      "valid": true
+    },
+    {
+      "value": "+0",
+      "valid": true
+    },
+    {
+      "value": "+1",
+      "valid": true
+    },
+    {
+      "value": "01",
+      "valid": true
+    },
+    {
+      "value": "1.",
+      "valid": true
+    },
+    {
+      "value": ".1",
+      "valid": true
+    },
+    {
+      "value": "1e3",
+      "valid": true
+    },
+    {
+      "value": "1E-300",
+      "valid": true
+    },
+    {
+      "value": "9007199254740993",
+      "valid": true
+    },
+    {
+      "value": "9223372036854775807",
+      "valid": true
+    },
+    {
+      "value": "9223372036854775808",
+      "valid": true
+    },
+    {
+      "value": "0.10000000000000001",
+      "valid": true
+    },
+    {
+      "value": "1.0000000000000001",
+      "valid": true
+    },
+    {
+      "value": "1e9999",
+      "valid": true
+    },
+    {
+      "value": "1e-9999",
+      "valid": true
+    },
+    {
+      "value": "-0.0000000000000000001",
+      "valid": true
+    },
+    {
+      "value": "",
+      "valid": false
+    },
+    {
+      "value": " ",
+      "valid": false
+    },
+    {
+      "value": " 1",
+      "valid": false
+    },
+    {
+      "value": "1 ",
+      "valid": false
+    },
+    {
+      "value": "\u001c1",
+      "valid": false
+    },
+    {
+      "value": "\u00a01",
+      "valid": false
+    },
+    {
+      "value": "1\ufeff",
+      "valid": false
+    },
+    {
+      "value": "NaN",
+      "valid": false
+    },
+    {
+      "value": "Infinity",
+      "valid": false
+    },
+    {
+      "value": "-Infinity",
+      "valid": false
+    },
+    {
+      "value": "0x1.0p0",
+      "valid": false
+    },
+    {
+      "value": "1f",
+      "valid": false
+    },
+    {
+      "value": "1d",
+      "valid": false
+    },
+    {
+      "value": "1_000",
+      "valid": false
+    },
+    {
+      "value": "1,5",
+      "valid": false
+    },
+    {
+      "value": "\u0661",
+      "valid": false
+    },
+    {
+      "value": "\uff11",
+      "valid": false
+    },
+    {
+      "value": "1e",
+      "valid": false
+    },
+    {
+      "value": "1e2147483648",
+      "valid": false
+    }
+  ],
+  "comparisons": [
+    {
+      "left": "9007199254740993",
+      "right": "9007199254740992",
+      "order": 1
+    },
+    {
+      "left": "0.10000000000000001",
+      "right": ".1",
+      "order": 1
+    },
+    {
+      "left": "1.0000000000000001",
+      "right": "1",
+      "order": 1
+    },
+    {
+      "left": "-0",
+      "right": "0",
+      "order": 0
+    },
+    {
+      "left": "1e3",
+      "right": "1000",
+      "order": 0
+    },
+    {
+      "left": "1e9999",
+      "right": "9e9998",
+      "order": 1
+    },
+    {
+      "left": "-1e-9999",
+      "right": "0",
+      "order": -1
+    },
+    {
+      "left": "1e-9999",
+      "right": "2e-9999",
+      "order": -1
+    },
+    {
+      "left": "001.2300",
+      "right": "1.23",
+      "order": 0
+    }
+  ]
+}

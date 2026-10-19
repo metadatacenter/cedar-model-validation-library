@@ -1,4 +1,4 @@
-base: staticTemplateField.json
+base: standaloneStaticTemplateField.json
 definitions:
   - staticFieldUIContent.json
   - staticFieldUISizeContent.json

@@ -1,0 +1,398 @@
+{
+  "contractVersion": 1,
+  "cases": [
+    {
+      "id": "numeric-known-type",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal"
+        }
+      },
+      "codes": [],
+      "categories": [],
+      "paths": []
+    },
+    {
+      "id": "numeric-type-missing",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {}
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/numberType"
+      ]
+    },
+    {
+      "id": "numeric-type-unknown",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:integer"
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/numberType"
+      ]
+    },
+    {
+      "id": "numeric-type-null",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": null
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/numberType"
+      ]
+    },
+    {
+      "id": "integer-precision-zero",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "decimalPlace": 0
+        }
+      },
+      "codes": [],
+      "categories": [],
+      "paths": []
+    },
+    {
+      "id": "integer-precision-positive",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "decimalPlace": 2
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/decimalPlace"
+      ]
+    },
+    {
+      "id": "integer-bound-fractional",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:int",
+          "minValue": 1.5
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/minValue"
+      ]
+    },
+    {
+      "id": "byte-bound-too-large",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:byte",
+          "maxValue": 128
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/maxValue"
+      ]
+    },
+    {
+      "id": "byte-bound-range",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:byte",
+          "minValue": -128,
+          "maxValue": 127
+        }
+      },
+      "codes": [],
+      "categories": [],
+      "paths": []
+    },
+    {
+      "id": "float-bound-too-large",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:float",
+          "maxValue": 3.5e+38
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/maxValue"
+      ]
+    },
+    {
+      "id": "float-bound-underflow",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:float",
+          "minValue": 1e-46
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/minValue"
+      ]
+    },
+    {
+      "id": "float-zero-bound",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:float",
+          "minValue": 0
+        }
+      },
+      "codes": [],
+      "categories": [],
+      "paths": []
+    },
+    {
+      "id": "decimal-bound-precision",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "minValue": 0.125,
+          "maxValue": 0.875,
+          "decimalPlace": 2
+        }
+      },
+      "codes": [
+        "templateConstraint",
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural",
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/minValue",
+        "/_valueConstraints/maxValue"
+      ]
+    },
+    {
+      "id": "decimal-bound-exact-precision",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "minValue": 0.12,
+          "maxValue": 0.87,
+          "decimalPlace": 2
+        }
+      },
+      "codes": [],
+      "categories": [],
+      "paths": []
+    },
+    {
+      "id": "numeric-reversed-bounds",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "minValue": 3,
+          "maxValue": 2
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/maxValue"
+      ]
+    },
+    {
+      "id": "numeric-bound-null",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "minValue": null
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/minValue"
+      ]
+    },
+    {
+      "id": "numeric-bound-string",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "maxValue": "12"
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/maxValue"
+      ]
+    },
+    {
+      "id": "numeric-precision-null",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "decimalPlace": null
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/decimalPlace"
+      ]
+    },
+    {
+      "id": "numeric-precision-negative",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "decimalPlace": -1
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/decimalPlace"
+      ]
+    },
+    {
+      "id": "numeric-precision-fractional",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "decimalPlace": 1.5
+        }
+      },
+      "codes": [
+        "templateConstraint"
+      ],
+      "categories": [
+        "structural"
+      ],
+      "paths": [
+        "/_valueConstraints/decimalPlace"
+      ]
+    }
+  ]
+}

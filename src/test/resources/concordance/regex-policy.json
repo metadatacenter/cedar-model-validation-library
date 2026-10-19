@@ -1,0 +1,161 @@
+{
+  "contract": "ECMAScript RegExp with no flags, wrapped as ^(?:pattern)$. No trimming or Unicode normalization. Empty/missing instance answers are skipped by callers. Execution limits are operational failures, never a successful match.",
+  "cases": [
+    {
+      "id": "letters",
+      "pattern": "[A-Z]+",
+      "value": "ABC",
+      "expected": "match"
+    },
+    {
+      "id": "full-match",
+      "pattern": "[A-Z]+",
+      "value": "xABCx",
+      "expected": "mismatch"
+    },
+    {
+      "id": "final-newline",
+      "pattern": "[A-Z]+",
+      "value": "ABC\n",
+      "expected": "mismatch"
+    },
+    {
+      "id": "alternation",
+      "pattern": "A|BC",
+      "value": "BC",
+      "expected": "match"
+    },
+    {
+      "id": "grouped-alternation",
+      "pattern": "A|BC",
+      "value": "ABC",
+      "expected": "mismatch"
+    },
+    {
+      "id": "nbsp-space",
+      "pattern": "\\s+",
+      "value": " ",
+      "expected": "match"
+    },
+    {
+      "id": "file-separator-not-space",
+      "pattern": "\\s+",
+      "value": "\u001c",
+      "expected": "mismatch"
+    },
+    {
+      "id": "bom-space",
+      "pattern": "\\s+",
+      "value": "﻿",
+      "expected": "match"
+    },
+    {
+      "id": "ascii-word",
+      "pattern": "\\w+",
+      "value": "é",
+      "expected": "mismatch"
+    },
+    {
+      "id": "utf16-dot",
+      "pattern": ".",
+      "value": "😀",
+      "expected": "mismatch"
+    },
+    {
+      "id": "utf16-pair",
+      "pattern": "..",
+      "value": "😀",
+      "expected": "match"
+    },
+    {
+      "id": "newline-any",
+      "pattern": "[^]",
+      "value": "\n",
+      "expected": "match"
+    },
+    {
+      "id": "lookahead",
+      "pattern": "(?=A)A",
+      "value": "A",
+      "expected": "match"
+    },
+    {
+      "id": "lookbehind",
+      "pattern": "A(?<=A)B",
+      "value": "AB",
+      "expected": "match"
+    },
+    {
+      "id": "backreference",
+      "pattern": "(A)\\1",
+      "value": "AA",
+      "expected": "match"
+    },
+    {
+      "id": "named-backreference",
+      "pattern": "(?<part>A)\\k<part>",
+      "value": "AA",
+      "expected": "match"
+    },
+    {
+      "id": "no-unicode-flag",
+      "pattern": "\\p{L}+",
+      "value": "é",
+      "expected": "mismatch"
+    },
+    {
+      "id": "invalid-bracket",
+      "pattern": "[",
+      "value": "x",
+      "expected": "invalid"
+    },
+    {
+      "id": "invalid-group",
+      "pattern": "(?",
+      "value": "x",
+      "expected": "invalid"
+    },
+    {
+      "id": "literal-script",
+      "pattern": ".*",
+      "value": "\";throw new Error();",
+      "expected": "match"
+    },
+    {
+      "id": "compile-only",
+      "pattern": "a+",
+      "value": null,
+      "expected": "valid"
+    },
+    {
+      "id": "property-literal",
+      "pattern": "\\p{L}+",
+      "value": "p{L}",
+      "expected": "match"
+    },
+    {
+      "id": "property-in-class",
+      "pattern": "[\\p{L}]",
+      "value": "p",
+      "expected": "match"
+    },
+    {
+      "id": "escaped-property",
+      "pattern": "\\\\p{L}",
+      "value": "\\p{L}",
+      "expected": "match"
+    },
+    {
+      "id": "nonunicode-codepoint",
+      "pattern": "\\u{1F600}",
+      "value": "😀",
+      "expected": "mismatch"
+    },
+    {
+      "id": "literal-codepoint",
+      "pattern": "\\u{1F600}",
+      "value": "u{1F600}",
+      "expected": "match"
+    }
+  ]
+}

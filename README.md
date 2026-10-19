@@ -24,23 +24,45 @@ element occurrence identifiers still apply.
 
 ### Generate Validation Schemas
 
-The <tt>schema</tt> directory contains a collection of JSON Schema-encoded specifications, which collectively form the CEDAR Metamodel Schema.
-We designed the schema definitions to be modular for easy development and reuse.
+`CedarValidator` validates each schema artifact against one of six meta-schemas in `src/main/resources`.
+They are `template-meta-schema.json`, `element-meta-schema.json`, `literal-field-meta-schema.json`,
+`iri-field-meta-schema.json`, `static-field-meta-schema.json` and `multi-instance-field-meta-schema.json`.
+Each meta-schema is self-contained, so a definition that several of them need, such as a field's value
+constraints, is repeated in each. The repeated definitions stay identical because all six meta-schemas
+are generated from one set of JSON Schema fragments in the `schema` directory.
 
-These specificartions are assembled into meta-sechemas to validate templates, elements and fields.
+The generated meta-schemas must never be edited by hand. A change made only to a meta-schema is lost at
+the next regeneration, and a change made only to a fragment has no effect until then. To change a
+meta-schema, edit the fragments, regenerate, and commit the fragments and the regenerated meta-schemas
+together. CI regenerates the meta-schemas from the committed fragments and fails if the result differs
+from the committed meta-schemas in any byte.
 
-The <tt>CedarValidator</tt> uses these validation meta-schemas. They are stored in the Java <tt>resources</tt> directory. 
-To generate these meta-schemas we need to merge  the invidiual schemas in the <tt>schema</tt> directory and assemble them into several standalone 
-self-contained meta-schemas. We have provided a script to do this assembly in the <tt>scripts</tt> directory.
+Each meta-schema has a YAML file in the `schema` directory that lists its fragments, such as
+`template-schemas.yml` for the template meta-schema. The fragment named as `base` supplies the
+meta-schema's top level. Each fragment listed under `definitions` becomes an entry in the meta-schema's
+`definitions`, named after the fragment's file without `.json`. A reference to a fragment, written
+`file:X.json` or `#/definitions/X.json`, becomes `#/definitions/X`. The generator removes the first and
+last line of every fragment, so a fragment's opening and closing braces must each stand on a line of
+their own. It rewrites only the first reference on each line, so no line may hold two.
+
+A fragment can be both a base and a definition. `templateElement.json`, for example, is the base of the
+element meta-schema and a definition in the template and element meta-schemas, with the same content in
+each place. Only the static field needs two fragments. Its standalone meta-schema declares `pav:version`,
+which the definition of a static field inside a template or element does not, so the standalone
+meta-schema's base is `standaloneStaticTemplateField.json` and the definition comes from
+`staticTemplateField.json`. The two fragments differ only in that declaration, and a change to either
+must be made to both.
+
+The generator needs Bash, sed, awk, `jq` and `sponge`, which comes from moreutils (`brew install moreutils`
+on macOS). It locates the fragments and its helper scripts relative to the working directory, so run it
+from `scripts`:
 
     cd scripts
     ./generate-meta-schemas.sh
 
-The script will generate six meta-schema files (<tt>template-meta-schema.json</tt>, <tt>element-meta-schema.json</tt>, 
-<tt>literal-field-meta-schema.json</tt>, <tt>iri-field-meta-schema.json</tt>, <tt>static-field-meta-schema.json</tt>, and
-<tt>multi-instance-field-meta-schema.json</tt>) in the <tt>src/main/resources</tt> directory.
-
-The description about the components to generate each meta-schema can be found in the YAML files in <tt>schema</tt> directory.
+It rewrites the six meta-schemas in place and formats them with `jq`. Regenerating from unchanged
+fragments reproduces the committed meta-schemas exactly, so after a fragment change
+`git diff src/main/resources` shows how each meta-schema changes.
 
 ### Command Line Validation in Java
 

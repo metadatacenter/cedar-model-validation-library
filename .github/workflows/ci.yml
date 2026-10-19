@@ -31,6 +31,18 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
+      # The meta-schemas in src/main/resources are generated from the fragments in schema/, and
+      # regenerating them must reproduce the committed files byte for byte. Otherwise a meta-schema
+      # edited by hand loses its edit at the next regeneration, and a fragment edited alone changes
+      # nothing until then. The generator needs jq, which the runner image has, and sponge, which
+      # comes from moreutils.
+      - name: Check the meta-schemas against their fragments
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq moreutils
+          (cd scripts && ./generate-meta-schemas.sh)
+          git diff --exit-code -- src/main/resources
+
       - name: Set up Java 17
         uses: actions/setup-java@v5
         with:

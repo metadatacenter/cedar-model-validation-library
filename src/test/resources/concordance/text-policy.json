@@ -1,0 +1,406 @@
+{
+  "contractVersion": 1,
+  "description": "Normative CEDAR policy cases. Expectations are contract decisions, never generated Java or TypeScript verdicts. Identity is always preserved.",
+  "cases": [
+    {
+      "id": "empty",
+      "value": "",
+      "blank": true,
+      "codePointLength": 0,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+0000",
+      "value": "\u0000",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+0008",
+      "value": "\b",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+0009",
+      "value": "\t",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+000D",
+      "value": "\r",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+000E",
+      "value": "\u000e",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+001B",
+      "value": "\u001b",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+001C",
+      "value": "\u001c",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+001D",
+      "value": "\u001d",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+001E",
+      "value": "\u001e",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+001F",
+      "value": "\u001f",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+0020",
+      "value": " ",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+0021",
+      "value": "!",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+007F",
+      "value": "\u007f",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+0085",
+      "value": "\u0085",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "text-U+00A0",
+      "value": "\u00a0",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+1680",
+      "value": "\u1680",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+180E",
+      "value": "\u180e",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+2000",
+      "value": "\u2000",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+2006",
+      "value": "\u2006",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+2007",
+      "value": "\u2007",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+2008",
+      "value": "\u2008",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+200A",
+      "value": "\u200a",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+200B",
+      "value": "\u200b",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+2028",
+      "value": "\u2028",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+2029",
+      "value": "\u2029",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+202F",
+      "value": "\u202f",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+205F",
+      "value": "\u205f",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+2060",
+      "value": "\u2060",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+3000",
+      "value": "\u3000",
+      "blank": true,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "text-U+FEFF",
+      "value": "\ufeff",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "emoji",
+      "value": "\ud83d\ude00",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "nfc",
+      "value": "\u00e9",
+      "blank": false,
+      "codePointLength": 1,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "nfd",
+      "value": "e\u0301",
+      "blank": false,
+      "codePointLength": 2,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "zwj",
+      "value": "\ud83d\udc69\u200d\ud83d\udcbb",
+      "blank": false,
+      "codePointLength": 3,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "iri-urn",
+      "value": "urn:x",
+      "blank": false,
+      "codePointLength": 5,
+      "identifier": true,
+      "fieldIri": true
+    },
+    {
+      "id": "iri-unicode",
+      "value": "urn:caf\u00e9",
+      "blank": false,
+      "codePointLength": 8,
+      "identifier": true,
+      "fieldIri": true
+    },
+    {
+      "id": "iri-nbsp",
+      "value": "urn:x\u00a0",
+      "blank": false,
+      "codePointLength": 6,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "iri-feff",
+      "value": "urn:x\ufeff",
+      "blank": false,
+      "codePointLength": 6,
+      "identifier": true,
+      "fieldIri": true
+    },
+    {
+      "id": "iri-nel",
+      "value": "urn:x\u0085",
+      "blank": false,
+      "codePointLength": 6,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "iri-surrogate",
+      "value": "urn:x\ud800",
+      "blank": false,
+      "codePointLength": 6,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "iri-noncharacter",
+      "value": "urn:x\ufffe",
+      "blank": false,
+      "codePointLength": 6,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "iri-private-path",
+      "value": "urn:x\ue000",
+      "blank": false,
+      "codePointLength": 6,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "iri-private-query",
+      "value": "urn:x?q=\ue000",
+      "blank": false,
+      "codePointLength": 9,
+      "identifier": true,
+      "fieldIri": true
+    },
+    {
+      "id": "iri-private-fragment",
+      "value": "urn:x#\ue000",
+      "blank": false,
+      "codePointLength": 7,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "iri-two-fragments",
+      "value": "urn:x#a#b",
+      "blank": false,
+      "codePointLength": 9,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "iri-bad-escape",
+      "value": "urn:x%xx",
+      "blank": false,
+      "codePointLength": 8,
+      "identifier": false,
+      "fieldIri": false
+    },
+    {
+      "id": "iri-escaped",
+      "value": "urn:x%C2%A0",
+      "blank": false,
+      "codePointLength": 11,
+      "identifier": true,
+      "fieldIri": true
+    },
+    {
+      "id": "iri-relative",
+      "value": "tmp-123",
+      "blank": false,
+      "codePointLength": 7,
+      "identifier": false,
+      "fieldIri": true
+    },
+    {
+      "id": "iri-bad-scheme",
+      "value": "1:x",
+      "blank": false,
+      "codePointLength": 3,
+      "identifier": false,
+      "fieldIri": false
+    }
+  ]
+}

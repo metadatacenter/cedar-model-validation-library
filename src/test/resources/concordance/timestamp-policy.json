@@ -1,0 +1,160 @@
+{
+  "contract": "Provenance ISO offset timestamps: strict calendar; explicit offset; at most nine fractional digits; colonless offset compatibility; no inferred UTC.",
+  "cases": [
+    {
+      "id": "zulu",
+      "value": "2026-01-02T03:04:05Z",
+      "canonical": "2026-01-02T03:04:05Z"
+    },
+    {
+      "id": "nanos",
+      "value": "2026-01-02T03:04:05.123456789+01:00",
+      "canonical": "2026-01-02T03:04:05.123456789+01:00"
+    },
+    {
+      "id": "small-year",
+      "value": "0001-01-02T03:04:05-04:00",
+      "canonical": "0001-01-02T03:04:05-04:00"
+    },
+    {
+      "id": "leap-year",
+      "value": "2000-02-29T23:59:59Z",
+      "canonical": "2000-02-29T23:59:59Z"
+    },
+    {
+      "id": "year-zero",
+      "value": "0000-02-29T00:00:00Z",
+      "canonical": "0000-02-29T00:00:00Z"
+    },
+    {
+      "id": "negative-year",
+      "value": "-0001-01-01T00:00:00Z",
+      "canonical": "-0001-01-01T00:00:00Z"
+    },
+    {
+      "id": "large-year",
+      "value": "+10000-01-01T00:00:00Z",
+      "canonical": "+10000-01-01T00:00:00Z"
+    },
+    {
+      "id": "max-year",
+      "value": "+999999999-12-31T23:59:59Z",
+      "canonical": "+999999999-12-31T23:59:59Z"
+    },
+    {
+      "id": "colonless",
+      "value": "2026-01-02T03:04:05+0130",
+      "canonical": "2026-01-02T03:04:05+01:30"
+    },
+    {
+      "id": "zero-offset",
+      "value": "2026-01-02T03:04:05-00:00",
+      "canonical": "2026-01-02T03:04:05Z"
+    },
+    {
+      "id": "fraction-zeros",
+      "value": "2026-01-02T03:04:05.120000000Z",
+      "canonical": "2026-01-02T03:04:05.12Z"
+    },
+    {
+      "id": "fraction-zero",
+      "value": "2026-01-02T03:04:05.000Z",
+      "canonical": "2026-01-02T03:04:05Z"
+    },
+    {
+      "id": "minutes-only",
+      "value": "2026-01-02T03:04Z",
+      "canonical": "2026-01-02T03:04:00Z"
+    },
+    {
+      "id": "lowercase",
+      "value": "2026-01-02t03:04:05z",
+      "canonical": "2026-01-02T03:04:05Z"
+    },
+    {
+      "id": "offset-seconds",
+      "value": "2026-01-02T03:04:05+01:02:03",
+      "canonical": "2026-01-02T03:04:05+01:02:03"
+    },
+    {
+      "id": "offset-limit",
+      "value": "2026-01-02T03:04:05+18:00",
+      "canonical": "2026-01-02T03:04:05+18:00"
+    },
+    {
+      "id": "missing-zone",
+      "value": "2026-01-02T03:04:05",
+      "canonical": null
+    },
+    {
+      "id": "date-only",
+      "value": "2026-01-02",
+      "canonical": null
+    },
+    {
+      "id": "february-30",
+      "value": "2026-02-30T03:04:05Z",
+      "canonical": null
+    },
+    {
+      "id": "non-leap-century",
+      "value": "1900-02-29T00:00:00Z",
+      "canonical": null
+    },
+    {
+      "id": "hour-24",
+      "value": "2026-01-02T24:00:00Z",
+      "canonical": null
+    },
+    {
+      "id": "leap-second",
+      "value": "2026-01-02T23:59:60Z",
+      "canonical": null
+    },
+    {
+      "id": "offset-19",
+      "value": "2026-01-02T03:04:05+19:00",
+      "canonical": null
+    },
+    {
+      "id": "offset-over-limit",
+      "value": "2026-01-02T03:04:05+18:00:01",
+      "canonical": null
+    },
+    {
+      "id": "offset-minutes",
+      "value": "2026-01-02T03:04:05+01:60",
+      "canonical": null
+    },
+    {
+      "id": "too-precise",
+      "value": "2026-01-02T03:04:05.1234567890Z",
+      "canonical": null
+    },
+    {
+      "id": "empty-fraction",
+      "value": "2026-01-02T03:04:05.Z",
+      "canonical": null
+    },
+    {
+      "id": "space-separated",
+      "value": "2026-01-02 03:04:05Z",
+      "canonical": null
+    },
+    {
+      "id": "padding",
+      "value": " 2026-01-02T03:04:05Z",
+      "canonical": null
+    },
+    {
+      "id": "negative-zero-year",
+      "value": "-0000-01-02T03:04:05Z",
+      "canonical": null
+    },
+    {
+      "id": "empty",
+      "value": "",
+      "canonical": null
+    }
+  ]
+}
