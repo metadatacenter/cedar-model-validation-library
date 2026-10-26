@@ -17,8 +17,8 @@
   <description>Library for validating CEDAR artifacts</description>
 
   <properties>
-    <!-- Line coverage measured on 2026-10-19: 82.7%. The build fails below this floor. -->
-    <cedar.coverage.line.minimum>0.80</cedar.coverage.line.minimum>
+    <!-- Line coverage measured on 2026-10-26: 85.2%. The build fails below this floor. -->
+    <cedar.coverage.line.minimum>0.83</cedar.coverage.line.minimum>
   </properties>
 
   <scm>

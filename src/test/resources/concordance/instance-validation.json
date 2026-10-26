@@ -873,6 +873,1529 @@
       "defaultValue": true,
       "codes": [],
       "categories": []
+    },
+    {
+      "id": "datetime-complete",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:30:00",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "datetime-without-time",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29",
+      "defaultValue": false,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "datetime-two-separators",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:30:00T01",
+      "defaultValue": false,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "date-with-time",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-29T12:30:00",
+      "defaultValue": false,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "time-with-fraction",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:00.5",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "time-without-seconds",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "unsupported-temporal-type",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:gYear"
+        }
+      },
+      "value": "2024",
+      "defaultValue": false,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "time-minute-out-of-range",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:60:00",
+      "defaultValue": false,
+      "codes": [
+        "temporalCalendar"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "time-second-out-of-range",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:60",
+      "defaultValue": false,
+      "codes": [
+        "temporalCalendar"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "datetime-impossible-date",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2023-02-29T12:30:00",
+      "defaultValue": false,
+      "codes": [
+        "temporalCalendar"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "offset-hour-too-large",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:00+15:00",
+      "defaultValue": false,
+      "codes": [
+        "timezoneOffset"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "offset-minute-too-large",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:00+05:60",
+      "defaultValue": false,
+      "codes": [
+        "timezoneOffset"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "negative-offset",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:30:00-14:00",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "utc-offset-enabled",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:30:00Z",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "invalid-offset-disabled",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:00+15:00",
+      "defaultValue": false,
+      "codes": [
+        "timezoneOffset",
+        "timezone"
+      ],
+      "categories": [
+        "structural",
+        "constraint"
+      ]
+    },
+    {
+      "id": "month-granularity-first",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "month"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-01",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "month-granularity-mid-month",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "month"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-15",
+      "defaultValue": false,
+      "codes": [
+        "temporalGranularity"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "year-granularity-first",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "year"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-01-01",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "day-granularity-midnight",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "day"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T00:00:00",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "day-granularity-with-hour",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "day"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T01:00:00",
+      "defaultValue": false,
+      "codes": [
+        "temporalGranularity"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "hour-granularity-on-the-hour",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "hour"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:00:00",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "hour-granularity-with-minutes",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "hour"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:30:00",
+      "defaultValue": false,
+      "codes": [
+        "temporalGranularity"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "minute-granularity-whole-minute",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "minute"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:00",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "minute-granularity-with-seconds",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "minute"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:15",
+      "defaultValue": false,
+      "codes": [
+        "temporalGranularity"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "second-granularity-whole-second",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "second"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:15",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "second-granularity-without-seconds",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "second"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30",
+      "defaultValue": false,
+      "codes": [
+        "temporalGranularity"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "second-granularity-with-fraction",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "second"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:15.5",
+      "defaultValue": false,
+      "codes": [
+        "temporalGranularity"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "decimal-second-granularity-fraction",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "decimalSecond"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:15.25",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "decimal-second-granularity-whole-second",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "decimalSecond"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:15",
+      "defaultValue": false,
+      "codes": [
+        "temporalGranularity"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "default-date-month",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-date-bad-month",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-13",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-date-impossible-day",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-30",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-date-month-granularity",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "month"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-date-month-granularity-full-date",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "month"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-01",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-date-day-granularity",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "day"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-29",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-date-time-granularity",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "hour"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:date"
+        }
+      },
+      "value": "2024-02-29",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-time-hour",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "hour"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-time-minute",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "minute"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-time-second",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "second"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:15",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-time-decimal-second",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "decimalSecond"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:15.5",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-time-decimal-second-whole",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "decimalSecond"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30:15",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-time-partial",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-time-bad-hour",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "25",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-time-day-granularity",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "day"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-time-utc-enabled",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "minute",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30Z",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-time-offset-too-large",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "minute",
+          "timezoneEnabled": true
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:time"
+        }
+      },
+      "value": "12:30+14:30",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-datetime-day",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "day"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-datetime-date-only",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-datetime-minute",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024-02-29T12:30",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "default-datetime-year-granularity",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "year"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2024",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-datetime-impossible-day",
+      "field": {
+        "_ui": {
+          "inputType": "temporal",
+          "temporalGranularity": "hour"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:dateTime"
+        }
+      },
+      "value": "2023-02-29T12",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "default-unsupported-type",
+      "field": {
+        "_ui": {
+          "inputType": "temporal"
+        },
+        "_valueConstraints": {
+          "temporalType": "xsd:gYear"
+        }
+      },
+      "value": "2024",
+      "defaultValue": true,
+      "codes": [
+        "temporalType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "relative-iri",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "/path/only",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "http-iri-without-authority",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "http:/path",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "https-iri-empty-authority",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "urn-iri",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "urn:isbn:0451450523",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "upper-case-scheme",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "HTTPS://example.org/a",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "authority-field-iri",
+      "field": {
+        "_ui": {
+          "inputType": "ext-orcid"
+        },
+        "_valueConstraints": {}
+      },
+      "value": "0000-0001-5109-3700",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "controlled-term-iri",
+      "field": {
+        "_ui": {
+          "inputType": "textfield"
+        },
+        "_valueConstraints": {
+          "ontologies": [
+            {
+              "acronym": "X"
+            }
+          ]
+        },
+        "properties": {
+          "@id": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "value": "not an iri",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "empty-choice-list",
+      "field": {
+        "_ui": {
+          "inputType": "list"
+        },
+        "_valueConstraints": {
+          "literals": []
+        }
+      },
+      "value": "anything",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "long-text",
+      "field": {
+        "_ui": {
+          "inputType": "textarea"
+        },
+        "_valueConstraints": {
+          "maxLength": 2
+        }
+      },
+      "value": "abc",
+      "defaultValue": false,
+      "codes": [
+        "maxLength"
+      ],
+      "categories": [
+        "constraint"
+      ]
+    },
+    {
+      "id": "numeric-without-datatype",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {}
+      },
+      "value": "1.5",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "numeric-unsupported-datatype",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:integer"
+        }
+      },
+      "value": "1",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "decimal-leading-point",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal"
+        }
+      },
+      "value": ".5",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "decimal-trailing-point",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal"
+        }
+      },
+      "value": "5.",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "float-instance-exponent",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:float"
+        }
+      },
+      "value": "1e3",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "float-default-exponent",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:float"
+        }
+      },
+      "value": "1e3",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "byte-overflow",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:byte"
+        }
+      },
+      "value": "128",
+      "defaultValue": false,
+      "codes": [
+        "numberType"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "short-within-range",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:short"
+        }
+      },
+      "value": "-32768",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "integer-default-places",
+      "field": {
+        "_ui": {
+          "inputType": "numeric"
+        },
+        "_valueConstraints": {
+          "numberType": "xsd:decimal",
+          "decimalPlace": 0
+        }
+      },
+      "value": "2.0",
+      "defaultValue": true,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "iri-private-use-in-query",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/a?q=\ue000",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "iri-private-use-in-path",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/\ue000",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "iri-private-use-in-fragment",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/a#\ue000",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "iri-private-use-after-query-in-fragment",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/a?q#\ue000",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "iri-supplementary-private-use-in-query",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/a?q=\udb80\udc00\udbc0\udc00",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "iri-bmp-noncharacter",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/\ufdd0",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "iri-bmp-final-noncharacter",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/\ufffe",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "iri-supplementary-letter",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/😀",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "iri-supplementary-noncharacter",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/\ud83f\udffe",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "iri-tag-character",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/\udb40\udc01",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
+    },
+    {
+      "id": "iri-compatibility-ideograph",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/豈",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "iri-last-bmp-letter-before-surrogates",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/\ud7ff",
+      "defaultValue": false,
+      "codes": [],
+      "categories": []
+    },
+    {
+      "id": "iri-c1-control",
+      "field": {
+        "_ui": {
+          "inputType": "link"
+        },
+        "_valueConstraints": {},
+        "properties": {
+          "@id": {
+            "type": "string"
+          }
+        }
+      },
+      "value": "https://example.org/\u009f",
+      "defaultValue": false,
+      "codes": [
+        "iriMalformed"
+      ],
+      "categories": [
+        "structural"
+      ]
     }
   ]
 }
