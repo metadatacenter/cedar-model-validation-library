@@ -83,6 +83,8 @@ public class CedarValidator implements ModelValidator {
   private static final String PAV_PREVIOUS_VERSION = "pav:previousVersion";
 
   private static final Set<String> PROVENANCE_TIMESTAMPS = Set.of("pav:createdOn", "pav:lastUpdatedOn");
+  private static final String ANNOTATIONS = "_annotations";
+  private static final String JSON_LD_CONTEXT = "@context";
 
   private static final Set<String> NON_SERIALIZING_INPUT_TYPES = Set.of(
       "page-break", "section-break", "richtext", "image", "youtube", "attribute-value");
@@ -114,6 +116,7 @@ public class CedarValidator implements ModelValidator {
     collectVersionErrors(templateNode, "", report);
     FieldValueValidation.validateSchema(templateNode, "", report);
     collectTimestampErrors(templateNode, "", report);
+    collectAnnotationErrors(templateNode, "", report);
     return report;
   }
 
@@ -133,6 +136,7 @@ public class CedarValidator implements ModelValidator {
     collectVersionErrors(elementNode, "", report);
     FieldValueValidation.validateSchema(elementNode, "", report);
     collectTimestampErrors(elementNode, "", report);
+    collectAnnotationErrors(elementNode, "", report);
     return report;
   }
 
@@ -150,6 +154,7 @@ public class CedarValidator implements ModelValidator {
     collectVersionErrors(fieldNode, "", report);
     FieldValueValidation.validateSchema(fieldNode, "", report);
     collectTimestampErrors(fieldNode, "", report);
+    collectAnnotationErrors(fieldNode, "", report);
     return report;
   }
 
@@ -166,6 +171,8 @@ public class CedarValidator implements ModelValidator {
     collectInstanceIdentifierErrors(templateInstance, report);
     FieldValueValidation.validateInstance(templateInstance, instanceSchema, "", report);
     collectTimestampErrors(templateInstance, "", report);
+    collectAnnotationErrors(templateInstance, "", report);
+    collectInstanceTypeErrors(templateInstance, "", report);
     return report;
   }
 
@@ -182,6 +189,8 @@ public class CedarValidator implements ModelValidator {
     FieldValueValidation.validateInstance(elementInstance, elementSchema, "", report);
     collectDerivedFromErrors(elementInstance, "", report);
     collectTimestampErrors(elementInstance, "", report);
+    collectAnnotationErrors(elementInstance, "", report);
+    collectInstanceTypeErrors(elementInstance, "", report);
     return report;
   }
 
@@ -598,6 +607,83 @@ public class CedarValidator implements ModelValidator {
         }
       } else {
         collectTimestampErrors(value, childPath, report);
+      }
+    });
+  }
+
+  /**
+   * Every annotation, at any depth, as the model reads it: an IRI annotation's `@id` is an absolute
+   * IRI, and a literal annotation's `@value` is a string. The schema a template gives `_annotations`
+   * admits a relative reference, a number, a boolean and null there, none of which the model reads.
+   * The `_annotations` a template declares among its `properties` is that schema, not annotations, and
+   * is passed over.
+   */
+  private static void collectAnnotationErrors(JsonNode node, String path, CedarValidationReport report) {
+    if (node == null) {
+      return;
+    }
+    if (node.isArray()) {
+      for (int index = 0; index < node.size(); index++) {
+        collectAnnotationErrors(node.get(index), path + "/" + index, report);
+      }
+      return;
+    }
+    if (!node.isObject()) {
+      return;
+    }
+    boolean declarations = path.endsWith("/" + JSON_SCHEMA_PROPERTIES);
+    node.fields().forEachRemaining(entry -> {
+      String childPath = path + "/" + escapePointer(entry.getKey());
+      JsonNode value = entry.getValue();
+      if (ANNOTATIONS.equals(entry.getKey()) && !declarations && value.isObject()) {
+        value.fields().forEachRemaining(annotation -> {
+          String annotationPath = childPath + "/" + escapePointer(annotation.getKey());
+          JsonNode id = annotation.getValue().get("@id");
+          JsonNode literal = annotation.getValue().get("@value");
+          if (id != null && id.isTextual() && !isIdentifierIri(id.asText())) {
+            report.addError(new ErrorItem("An annotation's @id must be an absolute IRI", annotationPath + "/@id"));
+          }
+          if (literal != null && !literal.isTextual()) {
+            report.addError(new ErrorItem("An annotation's @value must be a string", annotationPath + "/@value"));
+          }
+        });
+      } else {
+        collectAnnotationErrors(value, childPath, report);
+      }
+    });
+  }
+
+  /**
+   * The classes an instance and each of its element occurrences state as their `@type`, as the model
+   * reads them: each an absolute IRI. The schema admits a relative reference there.
+   */
+  private static void collectInstanceTypeErrors(JsonNode node, String path, CedarValidationReport report) {
+    if (node == null) {
+      return;
+    }
+    if (node.isArray()) {
+      for (int index = 0; index < node.size(); index++) {
+        collectInstanceTypeErrors(node.get(index), path + "/" + index, report);
+      }
+      return;
+    }
+    if (!node.isObject()) {
+      return;
+    }
+    JsonNode types = node.has(JSON_LD_CONTEXT) ? node.get(JSON_LD_TYPE) : null;
+    if (types != null && types.isTextual() && !isIdentifierIri(types.asText())) {
+      report.addError(new ErrorItem("@type must be an absolute IRI", path + "/" + JSON_LD_TYPE));
+    } else if (types != null && types.isArray()) {
+      for (int index = 0; index < types.size(); index++) {
+        JsonNode type = types.get(index);
+        if (type.isTextual() && !isIdentifierIri(type.asText())) {
+          report.addError(new ErrorItem("@type must be an absolute IRI", path + "/" + JSON_LD_TYPE + "/" + index));
+        }
+      }
+    }
+    node.fields().forEachRemaining(entry -> {
+      if (!JSON_LD_CONTEXT.equals(entry.getKey())) {
+        collectInstanceTypeErrors(entry.getValue(), path + "/" + escapePointer(entry.getKey()), report);
       }
     });
   }

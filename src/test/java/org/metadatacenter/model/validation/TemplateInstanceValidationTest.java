@@ -53,10 +53,56 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassInstanceWithAnnotations() {
+  public void shouldPassInstanceWithAnnotations() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/instance-with-annotations.jsonld"));
+    com.fasterxml.jackson.databind.node.ObjectNode annotations =
+        (com.fasterxml.jackson.databind.node.ObjectNode) instance.path("_annotations");
+    annotations.putObject("aaa").put("@value", "23");
+    annotations.putObject("bbb").put("@value", "false");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(allowingAnnotationsTemplate));
+
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldFailAnnotationLiteralThatIsNoString() {
     String instanceString = TestResourcesUtils.getStringContent("instances/instance-with-annotations.jsonld");
     ValidationReport validationReport = runValidation(instanceString, allowingAnnotationsTemplate);
-    assertValidationStatus(validationReport, "true");
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "An annotation's @value must be a string");
+  }
+
+  @Test
+  public void shouldFailRelativeAnnotationIdentifier() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/instance-with-annotations.jsonld"));
+    com.fasterxml.jackson.databind.node.ObjectNode annotations =
+        (com.fasterxml.jackson.databind.node.ObjectNode) instance.path("_annotations");
+    annotations.remove("aaa");
+    annotations.remove("bbb");
+    annotations.putObject("ddd").put("@id", "B1");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(allowingAnnotationsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "An annotation's @id must be an absolute IRI");
+  }
+
+  @Test
+  public void shouldFailRelativeInstanceType() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance.path("Participant").get(0)).put("@type", "Person");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "@type must be an absolute IRI");
   }
 
   @Test
