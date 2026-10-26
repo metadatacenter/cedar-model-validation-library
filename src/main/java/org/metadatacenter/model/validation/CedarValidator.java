@@ -13,6 +13,7 @@ import com.networknt.schema.ValidationMessage;
 import org.metadatacenter.model.core.CedarConstants;
 import org.metadatacenter.model.validation.internal.FgeCompatFormats;
 import org.metadatacenter.model.core.CedarModelVocabulary;
+import org.metadatacenter.model.validation.internal.ChildShapeReport;
 import org.metadatacenter.model.validation.internal.ParsedProcessingMessage;
 import org.metadatacenter.model.validation.internal.SchemaResources;
 import org.metadatacenter.model.validation.report.CedarValidationReport;
@@ -24,12 +25,14 @@ import java.time.DateTimeException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -105,7 +108,7 @@ public class CedarValidator implements ModelValidator {
     try {
       doTemplateValidation(templateNode, startingLocation);
     } catch (CedarModelValidationException thrownException) {
-      collectErrorMessages(thrownException, report);
+      collectErrorMessages(thrownException, templateNode, report);
     }
     collectSchemaPropertyIriErrors(templateNode, "", report);
     collectInherentlyMultipleFieldErrors(templateNode, "", report);
@@ -125,7 +128,7 @@ public class CedarValidator implements ModelValidator {
     try {
       doElementValidation(elementNode, startingLocation);
     } catch (CedarModelValidationException thrownException) {
-      collectErrorMessages(thrownException, report);
+      collectErrorMessages(thrownException, elementNode, report);
     }
     collectSchemaPropertyIriErrors(elementNode, "", report);
     collectInherentlyMultipleFieldErrors(elementNode, "", report);
@@ -145,7 +148,7 @@ public class CedarValidator implements ModelValidator {
     try {
       doFieldValidation(fieldNode, startingLocation);
     } catch (CedarModelValidationException thrownException) {
-      collectErrorMessages(thrownException, report);
+      collectErrorMessages(thrownException, fieldNode, report);
     }
     collectDerivedFromErrors(fieldNode, "", report);
     collectAttributeValueMinimumError(fieldNode, "", report);
@@ -331,24 +334,35 @@ public class CedarValidator implements ModelValidator {
     doValidation(schemaNode, resourceNode, location, schemaFile);
   }
 
-  private void collectErrorMessages(CedarModelValidationException exception, final CedarValidationReport report) {
+  /**
+   * The meta-schema's errors, with each defective child of a template or element reported on its own
+   * terms rather than as the failure of every shape a child may take. {@link ChildShapeReport} says how.
+   */
+  private void collectErrorMessages(CedarModelValidationException exception, JsonNode artifact,
+                                    final CedarValidationReport report) throws IOException {
     Multimap<JsonPointer, ValidationMessage> errorDetails = exception.getDetails();
     String schemaResourceName = exception.getSchemaResourceName();
+    List<ChildShapeReport.Located> located = new ArrayList<>();
     for (JsonPointer errorLocation : errorDetails.keySet()) {
-      Collection<ValidationMessage> validationMessages = errorDetails.get(errorLocation);
-      for (ValidationMessage validationMessage : validationMessages) {
+      for (ValidationMessage validationMessage : errorDetails.get(errorLocation)) {
         ParsedProcessingMessage parsedMessage = new ParsedProcessingMessage(validationMessage, schemaResourceName);
         for (ParsedProcessingMessage.ReportItem reportItem : parsedMessage.getReportItems()) {
-          String errorAbsoluteLocation = createLocation(errorLocation.toString(), reportItem.getLocation());
-          ErrorItem errorItem = createErrorItem(
-              reportItem.getMessage(),
-              errorAbsoluteLocation,
-              reportItem.getSchemaResource(),
-              reportItem.getSchemaPointer());
-          report.addFinding(new ValidationFinding(validationMessage.getType().equals("required") ? "missingProperty" : "valueShape",
-              ValidationFinding.Category.STRUCTURAL, errorAbsoluteLocation, reportItem.getMessage()), errorItem);
+          located.add(new ChildShapeReport.Located(createLocation(errorLocation.toString(), reportItem.getLocation()),
+              validationMessage.getType(), reportItem.getMessage(), reportItem.getSchemaPointer()));
         }
       }
+    }
+    if (schemaResourceName != null && artifact != null) {
+      located = new ChildShapeReport(loadSchemaFromFile(schemaResourceName), schemaResourceName, SCHEMA_FACTORY,
+          VALIDATOR_CONFIG, CedarValidator::isUserSpecifiedField)
+          .report(artifact, startingLocation.toString().equals("/") ? "" : startingLocation.toString(), located);
+    }
+    for (ChildShapeReport.Located error : located) {
+      ErrorItem errorItem = createErrorItem(error.message(), error.location(), schemaResourceName, error.schemaPointer());
+      String code = error.keyword().equals("childShape") ? "childShape"
+          : error.keyword().equals("required") ? "missingProperty" : "valueShape";
+      report.addFinding(new ValidationFinding(code, ValidationFinding.Category.STRUCTURAL, error.location(),
+          error.message()), errorItem);
     }
   }
 

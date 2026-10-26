@@ -665,7 +665,7 @@ public class TemplateValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(templateString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
+    assertValidationMessage(validationReport, "'Study Name' is not a field or element: it has no @type.");
   }
 
   @Test
