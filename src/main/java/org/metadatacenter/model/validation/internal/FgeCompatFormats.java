@@ -38,6 +38,13 @@ public final class FgeCompatFormats {
    */
   public static final JsonSchemaFactory FACTORY = buildFactory();
 
+  private static final DateTimeFormat DATE_TIME = new DateTimeFormat();
+
+  /** Whether the {@code date-time} format admits a value, as the meta-schemas check it. */
+  public static boolean acceptsDateTime(String value) {
+    return DATE_TIME.matches(value);
+  }
+
   private static JsonSchemaFactory buildFactory() {
     JsonMetaSchema v4 = JsonMetaSchema.builder(JsonMetaSchema.getV4())
         .addFormat(new UriFormat())

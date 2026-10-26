@@ -1951,6 +1951,9 @@
         "format": "uri"
       }
     },
+    "nestFieldContent": {
+      "type": "object"
+    },
     "valueConstraintsValueSetsExclusionsFieldContent": {
       "description": "Schema that describes a 'valueSets.exclusions' field in a '_valueConstraints' field",
       "type": "array",

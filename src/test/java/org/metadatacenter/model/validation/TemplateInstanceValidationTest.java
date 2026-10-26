@@ -53,10 +53,56 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldPassInstanceWithAnnotations() {
+  public void shouldPassInstanceWithAnnotations() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/instance-with-annotations.jsonld"));
+    com.fasterxml.jackson.databind.node.ObjectNode annotations =
+        (com.fasterxml.jackson.databind.node.ObjectNode) instance.path("_annotations");
+    annotations.putObject("aaa").put("@value", "23");
+    annotations.putObject("bbb").put("@value", "false");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(allowingAnnotationsTemplate));
+
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldFailAnnotationLiteralThatIsNoString() {
     String instanceString = TestResourcesUtils.getStringContent("instances/instance-with-annotations.jsonld");
     ValidationReport validationReport = runValidation(instanceString, allowingAnnotationsTemplate);
-    assertValidationStatus(validationReport, "true");
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "An annotation's @value must be a string");
+  }
+
+  @Test
+  public void shouldFailRelativeAnnotationIdentifier() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/instance-with-annotations.jsonld"));
+    com.fasterxml.jackson.databind.node.ObjectNode annotations =
+        (com.fasterxml.jackson.databind.node.ObjectNode) instance.path("_annotations");
+    annotations.remove("aaa");
+    annotations.remove("bbb");
+    annotations.putObject("ddd").put("@id", "B1");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(allowingAnnotationsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "An annotation's @id must be an absolute IRI");
+  }
+
+  @Test
+  public void shouldFailRelativeInstanceType() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance.path("Participant").get(0)).put("@type", "Person");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "@type must be an absolute IRI");
   }
 
   @Test
@@ -91,6 +137,44 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
 
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport, "Element occurrence @id must be an absolute IRI or null");
+  }
+
+  @Test
+  public void shouldFailProvenanceTimestampThatIsNoRealDate() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance).put("pav:createdOn", "2026-02-30T00:00:00-08:00");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "Not a real calendar date and time");
+  }
+
+  @Test
+  public void shouldFailProvenanceTimestampAtTheEndOfTheDay() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance).put("pav:lastUpdatedOn", "2026-01-15T24:00:00-0800");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "Not a real calendar date and time");
+  }
+
+  @Test
+  public void shouldPassProvenanceTimestampOnTheLastDayOfAMonth() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance).put("pav:createdOn", "2024-02-29T23:59:59.5Z");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "true");
   }
 
   @Test

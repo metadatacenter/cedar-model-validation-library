@@ -56,4 +56,5 @@ definitions:
   - valueConstraintsStringDefaultValueContent.json
   - valueConstraintsUriDefaultValueContent.json
   - valueConstraintsOntologiesExclusionsFieldContent.json
+  - nestFieldContent.json
   - valueConstraintsValueSetsExclusionsFieldContent.json

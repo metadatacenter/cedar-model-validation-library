@@ -134,6 +134,17 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldValidateNestOnMultiInstanceField() throws Exception {
+    ObjectNode field = (ObjectNode) jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("fields/checkbox-field.json"));
+    ObjectNode item = (ObjectNode) field.path("items");
+    item.putObject("@nest").put("extension", "retained");
+    assertValidationStatus(modelValidator.validateTemplateField(field), "true");
+    item.put("@nest", "not an object");
+    assertValidationStatus(modelValidator.validateTemplateField(field), "false");
+  }
+
+  @Test
   public void shouldPassCheckboxField() {
     // Arrange
     String fieldString = TestResourcesUtils.getStringContent("fields/checkbox-field.json");
