@@ -94,6 +94,44 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
   }
 
   @Test
+  public void shouldFailProvenanceTimestampThatIsNoRealDate() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance).put("pav:createdOn", "2026-02-30T00:00:00-08:00");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "Not a real calendar date and time");
+  }
+
+  @Test
+  public void shouldFailProvenanceTimestampAtTheEndOfTheDay() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance).put("pav:lastUpdatedOn", "2026-01-15T24:00:00-0800");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport, "Not a real calendar date and time");
+  }
+
+  @Test
+  public void shouldPassProvenanceTimestampOnTheLastDayOfAMonth() throws Exception {
+    JsonNode instance = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/multiple-element-items-instance.jsonld"));
+    ((com.fasterxml.jackson.databind.node.ObjectNode) instance).put("pav:createdOn", "2024-02-29T23:59:59.5Z");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance,
+        jsonObjectMapper.readTree(multipleElementItemsTemplate));
+
+    assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
   public void shouldPassNestedElementInstance() {
     String instanceString = TestResourcesUtils.getStringContent("instances/nested-element-instance.jsonld");
     ValidationReport validationReport = runValidation(instanceString, nestedElementTemplate);

@@ -20,6 +20,7 @@ import org.metadatacenter.model.validation.report.ErrorItem;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -81,6 +82,8 @@ public class CedarValidator implements ModelValidator {
   private static final String PAV_VERSION = "pav:version";
   private static final String PAV_PREVIOUS_VERSION = "pav:previousVersion";
 
+  private static final Set<String> PROVENANCE_TIMESTAMPS = Set.of("pav:createdOn", "pav:lastUpdatedOn");
+
   private static final Set<String> NON_SERIALIZING_INPUT_TYPES = Set.of(
       "page-break", "section-break", "richtext", "image", "youtube", "attribute-value");
 
@@ -110,6 +113,7 @@ public class CedarValidator implements ModelValidator {
     collectSchemaIdentifierErrors(templateNode, "", true, report);
     collectVersionErrors(templateNode, "", report);
     FieldValueValidation.validateSchema(templateNode, "", report);
+    collectTimestampErrors(templateNode, "", report);
     return report;
   }
 
@@ -128,6 +132,7 @@ public class CedarValidator implements ModelValidator {
     collectSchemaIdentifierErrors(elementNode, "", true, report);
     collectVersionErrors(elementNode, "", report);
     FieldValueValidation.validateSchema(elementNode, "", report);
+    collectTimestampErrors(elementNode, "", report);
     return report;
   }
 
@@ -144,6 +149,7 @@ public class CedarValidator implements ModelValidator {
     collectSchemaIdentifierErrors(fieldNode, "", true, report);
     collectVersionErrors(fieldNode, "", report);
     FieldValueValidation.validateSchema(fieldNode, "", report);
+    collectTimestampErrors(fieldNode, "", report);
     return report;
   }
 
@@ -159,6 +165,7 @@ public class CedarValidator implements ModelValidator {
     collectDerivedFromErrors(templateInstance, "", report);
     collectInstanceIdentifierErrors(templateInstance, report);
     FieldValueValidation.validateInstance(templateInstance, instanceSchema, "", report);
+    collectTimestampErrors(templateInstance, "", report);
     return report;
   }
 
@@ -174,6 +181,7 @@ public class CedarValidator implements ModelValidator {
     collectAttributeValueNameErrors(elementInstance, elementSchema, "", report);
     FieldValueValidation.validateInstance(elementInstance, elementSchema, "", report);
     collectDerivedFromErrors(elementInstance, "", report);
+    collectTimestampErrors(elementInstance, "", report);
     return report;
   }
 
@@ -557,6 +565,41 @@ public class CedarValidator implements ModelValidator {
     if (id != null && !id.isNull() && id.isTextual() && !isIdentifierIri(id.asText())) {
       report.addError(new ErrorItem("Element occurrence @id must be an absolute IRI or null", path + "/@id"));
     }
+  }
+
+  /**
+   * Every provenance timestamp, at any depth, as the model reads it. The meta-schemas' `date-time`
+   * format resolves a value leniently, so it admits the 30th of February and 24:00:00, which
+   * `TimestampPolicy` and both libraries' readers refuse. A value the format already refuses is left
+   * to its own error.
+   */
+  private static void collectTimestampErrors(JsonNode node, String path, CedarValidationReport report) {
+    if (node == null) {
+      return;
+    }
+    if (node.isArray()) {
+      for (int index = 0; index < node.size(); index++) {
+        collectTimestampErrors(node.get(index), path + "/" + index, report);
+      }
+      return;
+    }
+    if (!node.isObject()) {
+      return;
+    }
+    node.fields().forEachRemaining(entry -> {
+      String childPath = path + "/" + escapePointer(entry.getKey());
+      JsonNode value = entry.getValue();
+      if (PROVENANCE_TIMESTAMPS.contains(entry.getKey()) && value.isTextual()
+          && FgeCompatFormats.acceptsDateTime(value.asText())) {
+        try {
+          TimestampPolicy.parse(value.asText());
+        } catch (DateTimeException notReal) {
+          report.addError(new ErrorItem("Not a real calendar date and time", childPath));
+        }
+      } else {
+        collectTimestampErrors(value, childPath, report);
+      }
+    });
   }
 
   private void collectSchemaPropertyIriErrors(JsonNode container, String path, CedarValidationReport report) {
