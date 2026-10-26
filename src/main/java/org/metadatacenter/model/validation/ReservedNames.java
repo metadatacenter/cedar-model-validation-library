@@ -33,14 +33,15 @@ public final class ReservedNames {
 
   /** The metadata keys of a template instance's YAML mapping. */
   public static final Set<String> TEMPLATE_INSTANCE_YAML_KEYS = Set.of("type", "name", "description", "id",
-      "isBasedOn", "derivedFrom", "createdBy", "modifiedBy", "createdOn", "modifiedOn", "children", "annotations");
+      "instanceType", "isBasedOn", "derivedFrom", "createdBy", "modifiedBy", "createdOn", "modifiedOn", "children",
+      "annotations");
 
   /** The metadata keys of an element instance's YAML mapping when it is written inside its parent. */
-  public static final Set<String> NESTED_ELEMENT_INSTANCE_YAML_KEYS = Set.of("type", "id", "children");
+  public static final Set<String> NESTED_ELEMENT_INSTANCE_YAML_KEYS = Set.of("type", "id", "instanceType", "children");
 
   /** The metadata keys of an element instance's YAML mapping when it is written on its own. */
   public static final Set<String> STANDALONE_ELEMENT_INSTANCE_YAML_KEYS = Set.of("type", "name", "description",
-      "id", "createdBy", "modifiedBy", "createdOn", "modifiedOn", "children");
+      "id", "instanceType", "createdBy", "modifiedBy", "createdOn", "modifiedOn", "children");
 
   private ReservedNames() {}
 
