@@ -130,6 +130,20 @@ class ChildShapeReportTest {
         "'Product Name' is not a field or element");
   }
 
+  @Test void aPropertyTheSchemaDoesNotAllowIsReportedWhereItIs() throws Exception {
+    ObjectNode template = resource("templates/single-field-template.json");
+    at(template, "/properties/Study Name/_ui").put("futureRule", true);
+    ValidationReport report = validator.validateTemplate(template);
+    assertTrue(errors(report).stream().anyMatch(error ->
+        error.getLocation().equals("/properties/Study Name/_ui/futureRule")
+            && error.getMessage().contains("['futureRule']")), errors(report).toString());
+    // A key holding a slash or a tilde is escaped, as in a JSON Pointer.
+    ObjectNode keyed = resource("templates/single-field-template.json");
+    at(keyed, "/_ui").put("a/b~c", true);
+    assertTrue(errors(validator.validateTemplate(keyed)).stream()
+        .anyMatch(error -> error.getLocation().equals("/_ui/a~1b~0c")), errors(validator.validateTemplate(keyed)).toString());
+  }
+
   @Test void aSoundTemplateStillValidates() throws Exception {
     for (String name : List.of("templates/single-field-template.json", "templates/nested-element-template.json",
         "templates/multiple-field-items-template.json", "templates/static-field-template.json")) {

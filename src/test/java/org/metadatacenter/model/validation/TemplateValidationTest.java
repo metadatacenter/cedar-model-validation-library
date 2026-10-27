@@ -870,6 +870,10 @@ public class TemplateValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
         "['study.name']");
+    // The property is reported where it is, not at the object holding it.
+    org.junit.jupiter.api.Assertions.assertTrue(validationReport.getErrors().stream()
+        .anyMatch(error -> error.getLocation().endsWith("/study.name")
+        && error.getMessage().contains("'study.name'")), validationReport.getErrors().toString());
   }
 
   @Test
