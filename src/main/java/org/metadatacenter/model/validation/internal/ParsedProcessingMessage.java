@@ -77,8 +77,18 @@ public class ParsedProcessingMessage {
     return (s == null) ? null : s.replace("\"", "'");
   }
 
+  /**
+   * Where the violation is. A property the schema does not allow is reported where it is, below the
+   * object holding it, so an author is taken to the key itself; networknt reports the object.
+   */
   private String getLocation() {
     String location = message.getInstanceLocation().toString();
+    if (KEYWORD_ADDITIONAL_PROPERTIES.equals(message.getType())) {
+      String property = getSubjectProperty();
+      if (property != null && !property.isEmpty()) {
+        return location + "/" + property.replace("~", "~0").replace("/", "~1");
+      }
+    }
     return location.isEmpty() ? "/" : location;
   }
 

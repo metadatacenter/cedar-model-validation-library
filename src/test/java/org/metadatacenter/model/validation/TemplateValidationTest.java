@@ -665,7 +665,7 @@ public class TemplateValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(templateString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
+    assertValidationMessage(validationReport, "'Study Name' is not a field or element: it has no @type.");
   }
 
   @Test
@@ -870,6 +870,10 @@ public class TemplateValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport, "object instance has properties which are not allowed by the schema: " +
         "['study.name']");
+    // The property is reported where it is, not at the object holding it.
+    org.junit.jupiter.api.Assertions.assertTrue(validationReport.getErrors().stream()
+        .anyMatch(error -> error.getLocation().endsWith("/study.name")
+        && error.getMessage().contains("'study.name'")), validationReport.getErrors().toString());
   }
 
   @Test
