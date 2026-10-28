@@ -9,6 +9,7 @@
         "maxDepth": { "type": "integer", "minimum": 0 },
         "iri": { "type": "string", "format": "uri" },
         "sourceSystem": { "type": "string", "minLength": 1 },
+        "links": { "$ref": "file:valueConstraintsLinksFieldContent.json" },
         "version": { "$ref": "file:valueConstraintsVersionFieldContent.json" },
         "selectedByDefault": { "type": "boolean" }
     },
