@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class TemplateValidationTest extends BaseValidationTest {
 
   private static ObjectMapper jsonObjectMapper = new ObjectMapper();
@@ -87,6 +89,38 @@ public class TemplateValidationTest extends BaseValidationTest {
     ValidationReport validationReport = modelValidator.validateTemplate(template);
 
     assertValidationStatus(validationReport, "true");
+  }
+
+  @Test
+  public void shouldFailAContextTermThatDoesNotDeclareItsObjectType() throws Exception {
+    JsonNode template = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("templates/single-field-template.json"));
+    ((ObjectNode) template.path("properties").path("@context").path("properties").path("schema:name"))
+        .remove("type");
+
+    ValidationReport validationReport = modelValidator.validateTemplate(template);
+
+    assertValidationStatus(validationReport, "false");
+    assertErrorAt(validationReport, "/properties/@context/properties/schema:name");
+  }
+
+  @Test
+  public void shouldFailAnAnnotationsContextTermThatDoesNotNest() throws Exception {
+    JsonNode template = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("templates/template-allowing-annotations.json"));
+    ((ObjectNode) template.path("properties").path("@context").path("properties").path("_annotations"))
+        .putArray("enum").add("@id");
+
+    ValidationReport validationReport = modelValidator.validateTemplate(template);
+
+    assertValidationStatus(validationReport, "false");
+    assertErrorAt(validationReport, "/properties/@context/properties/_annotations");
+  }
+
+  private static void assertErrorAt(ValidationReport validationReport, String location) {
+    boolean found = validationReport.getErrors().stream()
+        .anyMatch(error -> error.getLocation() != null && error.getLocation().contains(location));
+    assertThat(printReason(validationReport), found);
   }
 
   @Test
