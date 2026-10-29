@@ -1102,58 +1102,58 @@
       "type": "object",
       "properties": {
         "rdfs": {
-          "ref": "#/definitions/rdfsContextPropertiesContent"
+          "$ref": "#/definitions/rdfsContextPropertiesContent"
         },
         "xsd": {
-          "ref": "#/definitions/xsdContextPropertiesContent"
+          "$ref": "#/definitions/xsdContextPropertiesContent"
         },
         "pav": {
-          "ref": "#/definitions/pavContextPropertiesContent"
+          "$ref": "#/definitions/pavContextPropertiesContent"
         },
         "schema": {
-          "ref": "#/definitions/schemaContextPropertiesContent"
+          "$ref": "#/definitions/schemaContextPropertiesContent"
         },
         "oslc": {
-          "ref": "#/definitions/oslcContextPropertiesContent"
+          "$ref": "#/definitions/oslcContextPropertiesContent"
         },
         "skos": {
-          "ref": "#/definitions/skosContextPropertiesContent"
+          "$ref": "#/definitions/skosContextPropertiesContent"
         },
         "rdfs:label": {
-          "ref": "#/definitions/rdfsLabelContextPropertiesContent"
+          "$ref": "#/definitions/rdfsLabelContextPropertiesContent"
         },
         "schema:isBasedOn": {
-          "ref": "#/definitions/schemaIsBasedOnContextPropertiesContent"
+          "$ref": "#/definitions/schemaIsBasedOnContextPropertiesContent"
         },
         "schema:name": {
-          "ref": "#/definitions/schemaNameContextPropertiesContent"
+          "$ref": "#/definitions/schemaNameContextPropertiesContent"
         },
         "schema:description": {
-          "ref": "#/definitions/schemaDescriptionContextPropertiesContent"
+          "$ref": "#/definitions/schemaDescriptionContextPropertiesContent"
         },
         "pav:createdOn": {
-          "ref": "#/definitions/pavCreatedOnContextPropertiesContent"
+          "$ref": "#/definitions/pavCreatedOnContextPropertiesContent"
         },
         "pav:createdBy": {
-          "ref": "#/definitions/pavCreatedByContextPropertiesContent"
+          "$ref": "#/definitions/pavCreatedByContextPropertiesContent"
         },
         "pav:lastUpdatedOn": {
-          "ref": "#/definitions/pavLastUpdatedOnContextPropertiesContent"
+          "$ref": "#/definitions/pavLastUpdatedOnContextPropertiesContent"
         },
         "oslc:modifiedBy": {
-          "ref": "#/definitions/oslcModifiedByContextPropertiesContent"
+          "$ref": "#/definitions/oslcModifiedByContextPropertiesContent"
         },
         "skos:notation": {
-          "ref": "#/definitions/skosNotationContextPropertiesContent"
+          "$ref": "#/definitions/skosNotationContextPropertiesContent"
         },
         "pav:derivedFrom": {
-          "ref": "#/definitions/pavDerivedFromContextPropertiesContent"
+          "$ref": "#/definitions/pavDerivedFromContextPropertiesContent"
         },
         "@language": {
-          "ref": "#/definitions/jsonLDLanguageFieldContent"
+          "$ref": "#/definitions/jsonLDLanguageFieldContent"
         },
         "_annotations": {
-          "ref": "#/definitions/templatePropertiesContextFieldContent"
+          "$ref": "#/definitions/annotationsContextPropertiesFieldContent"
         }
       },
       "patternProperties": {
@@ -3672,6 +3672,9 @@
           "type": "string",
           "minLength": 1
         },
+        "links": {
+          "$ref": "#/definitions/valueConstraintsLinksFieldContent"
+        },
         "version": {
           "$ref": "#/definitions/valueConstraintsVersionFieldContent"
         },
@@ -3714,6 +3717,24 @@
         }
       ]
     },
+    "valueConstraintsLinksFieldContent": {
+      "description": "Optional public navigation links for any controlled-term constraint. Version remains on the constraint.",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "landingPage": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://[^/?#@\\s\\\\]+(?:[/?#][^\\s\\\\]*)?$"
+        },
+        "icon": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://[^/?#@\\s\\\\]+(?:[/?#][^\\s\\\\]*)?$"
+        }
+      },
+      "additionalProperties": false
+    },
     "valueConstraintsValueSetsFieldItemContent": {
       "description": "Schema that describes each entry in the 'valueSets' field array in a '_valueConstraints' field",
       "type": "object",
@@ -3747,6 +3768,9 @@
         "sourceSystem": {
           "type": "string",
           "minLength": 1
+        },
+        "links": {
+          "$ref": "#/definitions/valueConstraintsLinksFieldContent"
         },
         "version": {
           "$ref": "#/definitions/valueConstraintsVersionFieldContent"
@@ -3788,6 +3812,9 @@
         "sourceSystem": {
           "type": "string",
           "minLength": 1
+        },
+        "links": {
+          "$ref": "#/definitions/valueConstraintsLinksFieldContent"
         },
         "version": {
           "$ref": "#/definitions/valueConstraintsVersionFieldContent"
@@ -3836,6 +3863,9 @@
         "sourceSystem": {
           "type": "string",
           "minLength": 1
+        },
+        "links": {
+          "$ref": "#/definitions/valueConstraintsLinksFieldContent"
         },
         "version": {
           "$ref": "#/definitions/valueConstraintsVersionFieldContent"

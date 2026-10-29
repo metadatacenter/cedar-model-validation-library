@@ -48,6 +48,7 @@ definitions:
   - jsonLDValueFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsVersionFieldContent.json
+  - valueConstraintsLinksFieldContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json
   - valueConstraintsBranchesFieldItemContent.json

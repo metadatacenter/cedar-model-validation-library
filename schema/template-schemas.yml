@@ -89,6 +89,7 @@ definitions:
   - pavDerivedFromFieldContent.json
   - valueConstraintsOntologiesFieldItemContent.json
   - valueConstraintsVersionFieldContent.json
+  - valueConstraintsLinksFieldContent.json
   - valueConstraintsValueSetsFieldItemContent.json
   - valueConstraintsClassesFieldItemContent.json
   - valueConstraintsBranchesFieldItemContent.json

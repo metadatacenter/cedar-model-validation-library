@@ -55,6 +55,39 @@ public class ValueConstraintVersionValidationTest extends BaseValidationTest {
     return null;
   }
 
+  @Test public void linksValidateInsideEveryCoreConstraintKind() throws Exception {
+    String[] kinds = {"ontologies", "branches", "classes", "valueSets"};
+    String[] entries = {
+        "{\"uri\":\"https://example.org/source\",\"acronym\":\"X\",\"name\":\"Source\"}",
+        "{\"uri\":\"https://example.org/root\",\"source\":\"Source\",\"acronym\":\"X\",\"name\":\"Root\",\"maxDepth\":0}",
+        "{\"uri\":\"https://example.org/term\",\"source\":\"X\",\"type\":\"OntologyClass\",\"label\":\"Term\",\"prefLabel\":\"Term\"}",
+        "{\"uri\":\"https://example.org/set\",\"vsCollection\":\"X\",\"name\":\"Set\"}"};
+    for (int i = 0; i < kinds.length; i++) {
+      JsonNode template = dataCiteTemplate();
+      ObjectNode constraints = firstConstraints(template);
+      constraints.remove(java.util.List.of(kinds));
+      ObjectNode entry = (ObjectNode) mapper.readTree(entries[i]);
+      constraints.putArray(kinds[i]).add(entry);
+      entry.putObject("links").put("landingPage", "https://example.org/page")
+          .put("icon", "https://example.org/icon.svg");
+      assertValidationStatus(validate(template), "true");
+      ((ObjectNode) entry.get("links")).put("versionScope", "current");
+      assertValidationStatus(validate(template), "false");
+      entry.putObject("links").put("landingPage", "javascript:alert(1)");
+      assertValidationStatus(validate(template), "false");
+    }
+  }
+
+  private ObjectNode firstConstraints(JsonNode node) {
+    if (node.isObject() && node.has("ontologies") && !node.get("ontologies").isEmpty())
+      return (ObjectNode) node;
+    for (JsonNode child : node) {
+      ObjectNode found = firstConstraints(child);
+      if (found != null) return found;
+    }
+    return null;
+  }
+
   @Test public void pinnedVersionConstraintPassesValidation() {
     JsonNode template = dataCiteTemplate();
     assertValidationStatus(validate(template), "true"); // baseline: the fixture validates

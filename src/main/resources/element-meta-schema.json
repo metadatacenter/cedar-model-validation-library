@@ -2662,6 +2662,9 @@
           "type": "string",
           "minLength": 1
         },
+        "links": {
+          "$ref": "#/definitions/valueConstraintsLinksFieldContent"
+        },
         "version": {
           "$ref": "#/definitions/valueConstraintsVersionFieldContent"
         },
@@ -2704,6 +2707,24 @@
         }
       ]
     },
+    "valueConstraintsLinksFieldContent": {
+      "description": "Optional public navigation links for any controlled-term constraint. Version remains on the constraint.",
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "landingPage": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://[^/?#@\\s\\\\]+(?:[/?#][^\\s\\\\]*)?$"
+        },
+        "icon": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https?://[^/?#@\\s\\\\]+(?:[/?#][^\\s\\\\]*)?$"
+        }
+      },
+      "additionalProperties": false
+    },
     "valueConstraintsValueSetsFieldItemContent": {
       "description": "Schema that describes each entry in the 'valueSets' field array in a '_valueConstraints' field",
       "type": "object",
@@ -2737,6 +2758,9 @@
         "sourceSystem": {
           "type": "string",
           "minLength": 1
+        },
+        "links": {
+          "$ref": "#/definitions/valueConstraintsLinksFieldContent"
         },
         "version": {
           "$ref": "#/definitions/valueConstraintsVersionFieldContent"
@@ -2778,6 +2802,9 @@
         "sourceSystem": {
           "type": "string",
           "minLength": 1
+        },
+        "links": {
+          "$ref": "#/definitions/valueConstraintsLinksFieldContent"
         },
         "version": {
           "$ref": "#/definitions/valueConstraintsVersionFieldContent"
@@ -2826,6 +2853,9 @@
         "sourceSystem": {
           "type": "string",
           "minLength": 1
+        },
+        "links": {
+          "$ref": "#/definitions/valueConstraintsLinksFieldContent"
         },
         "version": {
           "$ref": "#/definitions/valueConstraintsVersionFieldContent"
