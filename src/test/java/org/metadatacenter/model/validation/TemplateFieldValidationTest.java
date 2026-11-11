@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Disabled;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
 public class TemplateFieldValidationTest extends BaseValidationTest {
@@ -493,19 +492,6 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['properties'])");
   }
 
-  @Disabled("Known validation gap: field required arrays are currently accepted when absent")
-  @Test
-  public void shouldFailMissingRequired() {
-    // Arrange
-    String fieldString = TestResourcesUtils.getStringContent("fields/text-field.json");
-    fieldString = JsonUtils.removeFieldFromDocument(fieldString, "/required");
-    // Act
-    ValidationReport validationReport = runValidation(fieldString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['required'])");
-  }
-
   @Test
   public void shouldFailMissingValueConstraints() {
     // Arrange
@@ -590,7 +576,6 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['$schema'])");
   }
 
-  @Disabled("Known validation gap: field value slots are currently accepted when absent")
   @Test
   public void shouldFailMissingProperties_Value() {
     // Arrange

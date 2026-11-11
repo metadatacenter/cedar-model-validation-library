@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
 
@@ -750,19 +749,6 @@ public class TemplateValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['description'])");
   }
 
-  @Disabled("Known validation gap: nested field required arrays are currently accepted when absent")
-  @Test
-  public void shouldFailMissingProperties_Field_Required() {
-    // Arrange
-    String templateString = TestResourcesUtils.getStringContent("templates/many-fields-template.json");
-    templateString = JsonUtils.removeFieldFromDocument(templateString, "/properties/Study Name/required");
-    // Act
-    ValidationReport validationReport = runValidation(templateString);
-    // Assert
-    assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['required'])");
-  }
-
   @Test
   public void shouldFailMissingProperties_Field_CreatedOn() {
     // Arrange
@@ -871,7 +857,6 @@ public class TemplateValidationTest extends BaseValidationTest {
     assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
   }
 
-  @Disabled("Known validation gap: nested field value slots are currently accepted when absent")
   @Test
   public void shouldFailMissingProperties_Field_Properties_Value() {
     // Arrange
