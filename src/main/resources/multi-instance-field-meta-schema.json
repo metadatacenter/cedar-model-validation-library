@@ -533,7 +533,7 @@
       ]
     },
     "literalFieldPropertiesContent": {
-      "description": "Meta-schema that specifies the schema of a 'properties' field in a literal-valued template field",
+      "description": "Meta-schema that specifies the schema of a 'properties' field in a literal-valued template field. A literal field holds its value in '@value'. A controlled-term text field, which this meta-schema also judges, holds it in '@id'. A field that declares neither can never hold a value, so it must declare one of them.",
       "type": "object",
       "properties": {
         "@type": {
@@ -557,6 +557,18 @@
       },
       "required": [
         "@type"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "@value"
+          ]
+        },
+        {
+          "required": [
+            "@id"
+          ]
+        }
       ],
       "additionalProperties": false
     },
