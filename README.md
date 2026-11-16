@@ -70,7 +70,7 @@ Below are some command-line examples validate templates, elements, fields, and i
 
     mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/empty-template.json"
     mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/single-field-template.json"
-    mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/multi-field-template.json"
+    mvn exec:java@validate-template -Dexec.args="./src/test/resources/templates/many-fields-template.json"
     mvn exec:java@validate-element -Dexec.args="./src/test/resources/elements/empty-element.json"
     mvn exec:java@validate-element -Dexec.args="./src/test/resources/elements/many-fields-element.json"
     mvn exec:java@validate-field -Dexec.args="./src/test/resources/fields/text-field.json"
@@ -84,9 +84,9 @@ Below are some examples to validate using Python <tt>jsonschema</tt> implementat
     cd scripts
     ./validate-template.sh ../src/test/resources/templates/empty-template.json
     ./validate-template.sh ../src/test/resources/templates/single-field-template.json
-    ./validate-template.sh ../src/test/resources/templates/multi-field-template.json
+    ./validate-template.sh ../src/test/resources/templates/many-fields-template.json
     ./validate-element.sh ../src/test/resources/elements/empty-element.json
-    ./validate-element.sh ../src/test/resources/elements/multi-field-element.json
+    ./validate-element.sh ../src/test/resources/elements/many-fields-element.json
     ./validate-field.sh ../src/test/resources/fields/text-field.json
     ./validate-field.sh ../src/test/resources/fields/constrained-text-field.json
     
