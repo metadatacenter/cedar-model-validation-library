@@ -75,7 +75,8 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     String instanceString = TestResourcesUtils.getStringContent("instances/instance-with-annotations.jsonld");
     ValidationReport validationReport = runValidation(instanceString, allowingAnnotationsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "An annotation's @value must be a string");
+    assertValidationMessage(validationReport, "An annotation's @value must be a string", "/_annotations/aaa/@value");
+    assertValidationMessage(validationReport, "An annotation's @value must be a string", "/_annotations/bbb/@value");
   }
 
   @Test
@@ -92,7 +93,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
         jsonObjectMapper.readTree(allowingAnnotationsTemplate));
 
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "An annotation's @id must be an absolute IRI");
+    assertValidationMessage(validationReport, "An annotation's @id must be an absolute IRI", "/_annotations/ddd/@id");
   }
 
   @Test
@@ -105,7 +106,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
         jsonObjectMapper.readTree(multipleElementItemsTemplate));
 
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "@type must be an absolute IRI");
+    assertValidationMessage(validationReport, "@type must be an absolute IRI", "/Participant/0/@type");
   }
 
   @Test
@@ -139,7 +140,8 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
         jsonObjectMapper.readTree(multipleElementItemsTemplate));
 
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "Element occurrence @id must be an absolute IRI or null");
+    assertValidationMessage(validationReport, "Element occurrence @id must be an absolute IRI or null",
+        "/Participant/0/@id");
   }
 
   @Test
@@ -152,7 +154,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
         jsonObjectMapper.readTree(multipleElementItemsTemplate));
 
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "Not a real calendar date and time");
+    assertValidationMessage(validationReport, "Not a real calendar date and time", "/pav:createdOn");
   }
 
   @Test
@@ -165,7 +167,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
         jsonObjectMapper.readTree(multipleElementItemsTemplate));
 
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "Not a real calendar date and time");
+    assertValidationMessage(validationReport, "Not a real calendar date and time", "/pav:lastUpdatedOn");
   }
 
   @Test
@@ -205,7 +207,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
 
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport,
-        "Attribute-value name '@context' is reserved for instance metadata");
+        "Attribute-value name '@context' is reserved for instance metadata", "/Additional Information/@context");
   }
 
   @Test
@@ -219,7 +221,8 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
 
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport,
-        "Attribute-value name 'Name' collides with a template child in the same object");
+        "Attribute-value name 'Name' collides with a template child in the same object",
+        "/Additional Information/Name");
   }
 
   @Test
@@ -233,7 +236,8 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
 
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport,
-        "Attribute-value name 'Key1' occurs more than once in field 'Additional Information'");
+        "Attribute-value name 'Key1' occurs more than once in field 'Additional Information'",
+        "/Additional Information/Key1");
   }
 
   @Test
@@ -270,7 +274,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
         jsonObjectMapper.readTree(attributeValueTemplate));
 
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "Attribute-value names must not be blank");
+    assertValidationMessage(validationReport, "Attribute-value names must not be blank", "/Additional Information/   ");
   }
 
   @Test
@@ -279,7 +283,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/@context");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@context'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@context'])", "/");
   }
 
   @Test
@@ -288,7 +292,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/@id");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@id'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@id'])", "/");
   }
 
   @Test
@@ -297,7 +301,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/schema:name");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['schema:name'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:name'])", "/");
   }
 
   @Test
@@ -306,7 +310,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/schema:description");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['schema:description'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:description'])", "/");
   }
 
   @Test
@@ -315,7 +319,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/pav:createdOn");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])", "/");
   }
 
   @Test
@@ -324,7 +328,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/pav:createdBy");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])", "/");
   }
 
   @Test
@@ -333,7 +337,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/pav:lastUpdatedOn");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])", "/");
   }
 
   @Test
@@ -342,7 +346,7 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/oslc:modifiedBy");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])", "/");
   }
 
   @Test
@@ -351,6 +355,6 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     instanceString = JsonUtils.removeFieldFromDocument(instanceString, "/Study Name");
     ValidationReport validationReport = runValidation(instanceString, manyFieldsTemplate);
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['Study Name'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['Study Name'])", "/");
   }
 }

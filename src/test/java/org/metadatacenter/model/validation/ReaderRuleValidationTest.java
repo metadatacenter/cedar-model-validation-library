@@ -52,7 +52,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     JsonNode template = rename(resource("templates/attribute-value-template.json"), "Name", key);
     ValidationReport report = validator.validateTemplate(template);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "Child key '" + key + "' is reserved for instance metadata");
+    assertValidationMessage(report, "Child key '" + key + "' is reserved for instance metadata", "/properties/" + key);
   }
 
   @ParameterizedTest
@@ -62,7 +62,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ValidationReport report = validator.validateTemplate(template);
     assertValidationStatus(report, "false");
     assertValidationMessage(report, "Attribute-value field key '" + key
-        + "' is reserved for the YAML metadata of its parent");
+        + "' is reserved for the YAML metadata of its parent", "/properties/" + key);
   }
 
   @Test
@@ -79,7 +79,8 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ((ObjectNode) template.path("properties").path("Additional Information")).put("minItems", minimum);
     ValidationReport report = validator.validateTemplate(template);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "An attribute-value field's minItems must be 0");
+    assertValidationMessage(report, "An attribute-value field's minItems must be 0",
+        "/properties/Additional Information/minItems");
   }
 
   @Test
@@ -88,7 +89,8 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ((ObjectNode) element.path("properties").path("Additional Information")).put("minItems", 1);
     ValidationReport report = validator.validateTemplateElement(element);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "An attribute-value field's minItems must be 0");
+    assertValidationMessage(report, "An attribute-value field's minItems must be 0",
+        "/properties/Additional Information/minItems");
   }
 
   @Test
@@ -98,7 +100,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     field.put("minItems", 1);
     ValidationReport report = validator.validateTemplateField(field);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "An attribute-value field's minItems must be 0");
+    assertValidationMessage(report, "An attribute-value field's minItems must be 0", "/minItems");
   }
 
   @Test
@@ -117,7 +119,8 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ValidationReport report = validator.validateTemplateInstance(instance,
         resource("templates/attribute-value-template.json"));
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "Attribute-value name '" + name + "' is reserved for instance metadata");
+    assertValidationMessage(report, "Attribute-value name '" + name + "' is reserved for instance metadata",
+        "/Additional Information/" + name);
   }
 
   @Test
@@ -128,7 +131,8 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ((ArrayNode) instance.get("Additional Information")).removeAll().add("@context");
     ValidationReport report = validator.validateElementInstance(instance, schema);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "Attribute-value name '@context' is reserved for instance metadata");
+    assertValidationMessage(report, "Attribute-value name '@context' is reserved for instance metadata",
+        "/Additional Information/@context");
   }
 
   @ParameterizedTest
@@ -139,7 +143,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ((ObjectNode) field.get("_valueConstraints")).put("defaultValue", value);
     ValidationReport report = validator.validateTemplateField(field);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "A link field's default value must be an IRI");
+    assertValidationMessage(report, "A link field's default value must be an IRI", "/_valueConstraints/defaultValue");
   }
 
   @ParameterizedTest
@@ -158,7 +162,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     template.put("@id", value);
     ValidationReport report = validator.validateTemplate(template);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "@id must be an absolute IRI");
+    assertValidationMessage(report, "@id must be an absolute IRI", "/@id");
   }
 
   @Test
@@ -176,7 +180,8 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ((ObjectNode) field.get("_valueConstraints").get("branches").get(0)).put("uri", value);
     ValidationReport report = validator.validateTemplateField(field);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "A branches constraint's uri must be an absolute IRI");
+    assertValidationMessage(report, "A branches constraint's uri must be an absolute IRI",
+        "/_valueConstraints/branches/0/uri");
   }
 
   @Test
@@ -186,7 +191,8 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ((ObjectNode) field.get("_valueConstraints").get("actions").get(0)).put("sourceUri", "template");
     assertValidationStatus(validator.validateTemplateField(field), "true");
     ((ObjectNode) field.get("_valueConstraints").get("actions").get(0)).put("termUri", "relative/path");
-    assertValidationMessage(validator.validateTemplateField(field), "An action's termUri must be an absolute IRI");
+    assertValidationMessage(validator.validateTemplateField(field), "An action's termUri must be an absolute IRI",
+        "/_valueConstraints/actions/0/termUri");
   }
 
   @ParameterizedTest
@@ -197,7 +203,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ValidationReport report = validator.validateTemplateInstance(instance,
         resource("templates/attribute-value-template.json"));
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "schema:isBasedOn must be an absolute IRI");
+    assertValidationMessage(report, "schema:isBasedOn must be an absolute IRI", "/schema:isBasedOn");
   }
 
   @Test
@@ -205,7 +211,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     JsonNode template = rename(resource("templates/attribute-value-template.json"), "Name", " ");
     ValidationReport report = validator.validateTemplate(template);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "Child keys must not be blank");
+    assertValidationMessage(report, "Child keys must not be blank", "/properties/ ");
   }
 
   @ParameterizedTest
@@ -222,7 +228,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     template.put("pav:version", "0.0.0");
     ValidationReport report = validator.validateTemplate(template);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "pav:version must not be 0.0.0");
+    assertValidationMessage(report, "pav:version must not be 0.0.0", "/pav:version");
   }
 
   @ParameterizedTest
@@ -232,7 +238,7 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     template.put("pav:version", version);
     ValidationReport report = validator.validateTemplate(template);
     assertValidationStatus(report, "false");
-    assertValidationMessage(report, "Each part of pav:version must fit an int");
+    assertValidationMessage(report, "Each part of pav:version must fit an int", "/pav:version");
   }
 
   @Test

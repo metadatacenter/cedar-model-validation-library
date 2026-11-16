@@ -47,7 +47,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
 
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "/type: does not have a value in the enumeration ['object']");
+    assertValidationMessage(validationReport, "/type: does not have a value in the enumeration ['object']", "/type");
   }
 
   @Test
@@ -369,7 +369,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@context'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@context'])", "/");
   }
 
   @Test
@@ -381,7 +381,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@id'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@id'])", "/");
   }
 
   @Test
@@ -393,7 +393,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@type'])", "/");
   }
 
   @Test
@@ -405,7 +405,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['type'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['type'])", "/");
   }
 
   @Test
@@ -417,7 +417,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['title'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['title'])", "/");
   }
 
   @Test
@@ -429,7 +429,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['description'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['description'])", "/");
   }
 
   @Test
@@ -441,7 +441,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['_ui'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['_ui'])", "/");
   }
 
   @Test
@@ -453,7 +453,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['schema:name'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:name'])", "/");
   }
 
   @Test
@@ -465,7 +465,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['schema:description'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:description'])", "/");
   }
 
   @Test
@@ -477,7 +477,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['inputType'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['inputType'])", "/_ui");
   }
 
   @Test
@@ -489,7 +489,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['properties'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['properties'])", "/");
   }
 
   @Test
@@ -501,7 +501,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['_valueConstraints'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['_valueConstraints'])", "/");
   }
 
   @Test
@@ -513,7 +513,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])", "/");
   }
 
   @Test
@@ -525,7 +525,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])", "/");
   }
 
   @Test
@@ -537,7 +537,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])", "/");
   }
 
   @Test
@@ -549,7 +549,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])", "/");
   }
 
   @Test
@@ -561,7 +561,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['additionalProperties'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['additionalProperties'])", "/");
   }
 
   @Test
@@ -573,7 +573,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['$schema'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['$schema'])", "/");
   }
 
   @Test
@@ -585,7 +585,7 @@ public class TemplateFieldValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(fieldString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@value'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@value'])", "/properties");
   }
   // The boolean field was removed from the model, and with it the only shapes that ever needed a
   // null or bare-boolean defaultValue, a nullEnabled flag, or a labels map. A literal field's
