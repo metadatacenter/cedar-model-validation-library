@@ -3,10 +3,13 @@ package org.metadatacenter.model.validation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TemplateInstanceValidationTest extends BaseValidationTest {
   private static ObjectMapper jsonObjectMapper = new ObjectMapper();
@@ -231,6 +234,30 @@ public class TemplateInstanceValidationTest extends BaseValidationTest {
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport,
         "Attribute-value name 'Key1' occurs more than once in field 'Additional Information'");
+  }
+
+  @Test
+  public void shouldFailAttributeValueNameUsedByTwoFields() throws Exception {
+    // Attribute-value names share the object's namespace, so a name may belong to one attribute-value
+    // field only: two fields claiming Key1 would both own the instance's Key1 value.
+    ObjectNode template = (ObjectNode) jsonObjectMapper.readTree(attributeValueTemplate);
+    ObjectNode properties = (ObjectNode) template.get("properties");
+    properties.set("More Information", properties.get("Additional Information").deepCopy());
+    ((ObjectNode) template.at("/properties/@context/properties")).putObject("More Information")
+        .putArray("enum").add("https://example.org/properties/more-information");
+    ((ArrayNode) template.at("/_ui/order")).add("More Information");
+    ((ObjectNode) template.at("/_ui/propertyLabels")).put("More Information", "More Information");
+    assertValidationStatus(modelValidator.validateTemplate(template), "true");
+    ObjectNode instance = (ObjectNode) jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("instances/attribute-value-instance.jsonld"));
+    instance.putArray("More Information").add("Key1");
+
+    ValidationReport validationReport = modelValidator.validateTemplateInstance(instance, template);
+
+    assertValidationStatus(validationReport, "false");
+    assertEquals(1, validationReport.getErrors().size(), printReason(validationReport));
+    assertValidationMessage(validationReport,
+        "Attribute-value name 'Key1' is also used by field 'Additional Information'", "/More Information/Key1");
   }
 
   @Test
