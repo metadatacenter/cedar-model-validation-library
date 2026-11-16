@@ -878,7 +878,8 @@ public class TemplateValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(templateString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['properties'])", "/");
+    assertValidationMessage(validationReport, "object has missing required properties (['properties'])",
+        "/properties/Study Name");
   }
 
   @Test
