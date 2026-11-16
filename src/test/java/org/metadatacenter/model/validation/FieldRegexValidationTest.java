@@ -11,6 +11,7 @@ import org.metadatacenter.model.validation.report.CedarValidationReport;
 import org.metadatacenter.model.validation.report.ErrorItem;
 import org.metadatacenter.model.validation.report.WarningItem;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,22 +61,38 @@ class FieldRegexValidationTest extends BaseValidationTest {
     assertEquals(originalInstance, instance);
   }
 
+  /**
+   * The shared regex contract, run through the two calls production makes: the template's configuration
+   * check and the check of one answer. The TypeScript library reads the same corpus.
+   */
   @Test void normativeRegexCorpus() throws Exception {
     try (var input = getClass().getResourceAsStream("/concordance/regex-policy.json")) {
       for (var row : MAPPER.readTree(input).get("cases")) {
-        var schema = MAPPER.createObjectNode();
-        schema.putObject("_valueConstraints").put("regex", row.get("pattern").asText());
-        var report = CedarValidationReport.newEmptyReport();
-        if (row.get("value").isNull()) FieldRegexValidation.validateSchema(schema, "", report);
-        else {
-          var instance = MAPPER.createObjectNode().put("@value", row.get("value").asText());
-          FieldRegexValidation.validateInstance(instance, schema, "", report);
-        }
+        String id = row.get("id").asText();
         String expected = row.get("expected").asText();
-        assertEquals(expected.equals("match") || expected.equals("valid"), report.getErrors().isEmpty(),
-            row.get("id").asText() + ": " + report);
-        if (expected.equals("invalid")) assertTrue(report.getErrors().stream()
-            .anyMatch(error -> error.getMessage().contains("invalid regular expression")));
+        var field = MAPPER.createObjectNode();
+        field.putObject("_ui").put("inputType", "textfield");
+        field.putObject("_valueConstraints").put("regex", row.get("pattern").asText());
+
+        var configuration = FieldValuePolicy.validateConfiguration(field, "");
+        if (expected.equals("invalid")) {
+          assertEquals(List.of(new ValidationFinding("templateConstraint", ValidationFinding.Category.STRUCTURAL,
+              "/_valueConstraints/regex", "The template contains an invalid regular expression.")), configuration, id);
+        } else {
+          assertEquals(List.of(), configuration, id);
+        }
+        if (row.get("value").isNull()) continue;
+
+        var answer = FieldValuePolicy.validate(row.get("value").asText(), field, "/answer/@value", false);
+        switch (expected) {
+          case "match" -> assertEquals(List.of(), answer, id);
+          case "mismatch" -> assertEquals(List.of(new ValidationFinding("regex", ValidationFinding.Category.CONSTRAINT,
+              "/answer/@value", "Does not match " + row.get("pattern").asText() + ".")), answer, id);
+          case "invalid" -> assertEquals(List.of(new ValidationFinding("templateConstraint",
+              ValidationFinding.Category.STRUCTURAL, "/answer/@value",
+              "The template contains an invalid regular expression.")), answer, id);
+          default -> fail(id + ": an answer row expects " + expected);
+        }
       }
     }
   }
@@ -130,15 +147,15 @@ class FieldRegexValidationTest extends BaseValidationTest {
 
   @Test void escapesPathsAndIgnoresUndeclaredData() throws Exception {
     JsonNode schema = MAPPER.readTree("""
-        {"properties":{"a/b~c":{"_ui":{},"_valueConstraints":{"regex":"[A-Z]+"}}}}
+        {"properties":{"a/b~c":{"_ui":{"inputType":"textfield"},"_valueConstraints":{"regex":"[A-Z]+"}}}}
         """);
     JsonNode instance = MAPPER.readTree("""
         {"a/b~c":{"@value":"bad"},"unmodeled":{"_valueConstraints":{"regex":"["},"@value":"kept"}}
         """);
-    var report = CedarValidationReport.newEmptyReport();
-    FieldRegexValidation.validateInstance(instance, schema, "", report);
-    assertEquals(1, report.getErrors().size());
-    assertEquals("/a~1b~0c/@value", report.getErrors().iterator().next().getLocation());
+    var report = CedarValidationReport.newInstanceReport();
+    FieldValueValidation.validateInstance(instance, schema, "", report);
+    assertEquals(List.of(new ValidationFinding("regex", ValidationFinding.Category.CONSTRAINT, "/a~1b~0c/@value",
+        "Does not match [A-Z]+.")), List.copyOf(report.getFindings()), report.toString());
   }
 
   @Test void invalidPatternsGiveActionableReportsInsteadOfCrashingOrDisablingValidation() throws Exception {

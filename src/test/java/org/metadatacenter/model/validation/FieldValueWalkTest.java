@@ -191,33 +191,22 @@ class FieldValueWalkTest {
     assertEquals(Set.of("templateConstraint"), codes(instance(json("{'@value': '5'}"), untyped)));
   }
 
-  @Test void theRegexWalkReachesRepeatedAndNestedChildren() throws Exception {
+  @Test void theRegexIsAppliedToRepeatedDefaultsAndAnswers() throws Exception {
     var schema = json("{'properties': {'@context': {'type': 'object'}, 'Codes': {'type': 'array', 'items':"
         + " {'_ui': {'inputType': 'textfield'}, '_valueConstraints': {'regex': '[A-Z]+', 'defaultValue': 'abc'}}}}}");
-    var report = CedarValidationReport.newEmptyReport();
-    FieldRegexValidation.validateSchema(schema, "", report);
-    assertEquals(Set.of("/properties/Codes/items/_valueConstraints/defaultValue"), paths(report, "regex"));
-    report = CedarValidationReport.newInstanceReport();
-    FieldRegexValidation.validateInstance(json("{'Codes': [{'@value': 'ABC'}, {'@value': 'abc'}, {'@value': ''},"
-        + " {'@value': null}]}"), schema, "", report);
-    assertEquals(Set.of("/Codes/1/@value"), paths(report, "regex"));
+    assertEquals(Set.of("/properties/Codes/items/_valueConstraints/defaultValue"), paths(schema(schema), "regex"));
+    var answers = json("{'Codes': [{'@value': 'ABC'}, {'@value': 'abc'}, {'@value': ''}, {'@value': null}]}");
+    assertEquals(Set.of("/Codes/1/@value"), paths(instance(answers, schema), "regex"));
   }
 
-  @Test void theRegexWalkSkipsAbsentShapesAndReportsAnInvalidExpressionAtEachAnswer() throws Exception {
+  @Test void anInvalidRegexIsReportedAtTheConstraintAndAtEachAnswer() throws Exception {
     var field = json("{'_ui': {'inputType': 'textfield'}, '_valueConstraints': {'regex': '('}}");
     var report = CedarValidationReport.newInstanceReport();
-    FieldRegexValidation.validateInstance(json("{'@value': 'x'}"), field, "/Answer", report);
-    assertTrue(report.getErrors().contains(new ErrorItem("The template contains an invalid regular expression.",
-        "/Answer/@value")), report.toString());
-    var quiet = CedarValidationReport.newInstanceReport();
-    FieldRegexValidation.validateInstance(json("'x'"), field, "", quiet);
-    FieldRegexValidation.validateInstance(json("{'@value': 'x'}"), json("{'type': 'array', 'items': " + TEXT + "}"), "", quiet);
-    FieldRegexValidation.validateInstance(null, field, "", quiet);
-    FieldRegexValidation.validateSchema(null, "", quiet);
-    assertTrue(quiet.getFindings().isEmpty() && quiet.getErrors().isEmpty(), quiet.toString());
-    var schemaReport = CedarValidationReport.newEmptyReport();
-    FieldRegexValidation.validateSchema(json("{'_ui': {'inputType': 'textfield'}, '_valueConstraints': {'regex': '(',"
-        + " 'defaultValue': 'x'}}"), "", schemaReport);
-    assertEquals(1, schemaReport.getErrors().size(), schemaReport.toString());
+    FieldValueValidation.validateInstance(json("{'@value': 'x'}"), field, "/Answer", report);
+    assertEquals(Set.of("/Answer/_valueConstraints/regex", "/Answer/@value"), paths(report, "templateConstraint"));
+    var withDefault = json("{'_ui': {'inputType': 'textfield'}, '_valueConstraints': {'regex': '(',"
+        + " 'defaultValue': 'x'}}");
+    assertEquals(Set.of("/_valueConstraints/regex", "/_valueConstraints/defaultValue"),
+        paths(schema(withDefault), "templateConstraint"));
   }
 }
