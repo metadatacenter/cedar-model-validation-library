@@ -89,6 +89,23 @@ class InstanceValidationContractTest {
     instance.remove("Topic");
     assertFalse(validator.validateTemplateInstance(instance, template).canSave());
   }
+  @Test void anOccurrenceShortfallIsACompletenessFindingAndSaveable() throws Exception {
+    // An instance holding fewer occurrences than minItems is incomplete, not malformed: the runbook's save
+    // policy lets it be stored, and the TypeScript library is held to the same verdict.
+    var template = resource("templates/multiple-field-items-template.json");
+    var instance = resource("instances/multiple-field-items-instance.jsonld");
+    int held = instance.withArray("/Topic").size();
+    template.withObject("/properties/Topic").put("minItems", held + 1);
+    var report = new CedarValidator().validateTemplateInstance(instance, template);
+    assertTrue(report.canSave(), report.toString());
+    assertFalse(report.isValid(), report.toString());
+    assertTrue(report.getErrors().isEmpty(), report.toString());
+    assertEquals(1, report.getFindings().size(), report.toString());
+    var finding = report.getFindings().iterator().next();
+    assertEquals("minItems", finding.code());
+    assertEquals(ValidationFinding.Category.COMPLETENESS, finding.category());
+    assertEquals("/Topic", finding.path());
+  }
   @Test void semanticSuccessDoesNotEraseAnUnavailableIndependentCheck() {
     var report = CedarValidationReport.newInstanceReport();
     report.addFinding(new ValidationFinding("regexEvaluation", ValidationFinding.Category.VERIFICATION,

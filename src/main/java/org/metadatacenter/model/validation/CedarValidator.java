@@ -381,14 +381,13 @@ public class CedarValidator implements ModelValidator {
           if ((keyword.equals("minItems") || keyword.equals("maxItems"))
               && FieldValueValidation.isChild(position) && position.path("items").isObject()) {
             code = keyword;
-            category = keyword.equals("minItems") ? ValidationFinding.Category.COMPLETENESS
-                : ValidationFinding.Category.CONSTRAINT;
+            category = ValidationPolicy.category(code);
           } else if (message.getInstanceLocation().toString().endsWith("/@value")) {
             JsonNode owner = schemaAtInstancePath(schema, message.getInstanceLocation().toString()
                 .substring(0, message.getInstanceLocation().toString().length() - 7));
             if (FieldValueValidation.isChild(owner) && Set.of("minLength", "maxLength", "pattern", "enum").contains(keyword)) {
               code = keyword.equals("pattern") ? "regex" : keyword.equals("enum") ? "choiceMembership" : keyword;
-              category = ValidationFinding.Category.CONSTRAINT;
+              category = ValidationPolicy.category(code);
             }
           }
           report.addFinding(new ValidationFinding(code, category, path, item.getMessage()),
