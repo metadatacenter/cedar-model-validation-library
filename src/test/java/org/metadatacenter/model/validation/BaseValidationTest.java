@@ -25,6 +25,14 @@ public abstract class BaseValidationTest {
     assertThat(printReason(validationReport), errorMessages.contains(expectedValue));
   }
 
+  /** Asserts that one error carries both the message and the location, as an editor receives them. */
+  protected static void assertValidationMessage(ValidationReport validationReport, String expectedMessage,
+      String expectedLocation) {
+    boolean found = validationReport.getErrors().stream()
+        .anyMatch(error -> expectedMessage.equals(error.getMessage()) && expectedLocation.equals(error.getLocation()));
+    assertThat(printReason(validationReport), found);
+  }
+
   protected static String printReason(ValidationReport validationReport) {
     return "The model validator is returning a different validation report.\n(application/json): " + validationReport
         .toString();

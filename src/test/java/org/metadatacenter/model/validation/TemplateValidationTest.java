@@ -189,16 +189,25 @@ public class TemplateValidationTest extends BaseValidationTest {
   }
 
   @Test
-  public void shouldFailAFieldNamingControlledTermAsItsInputType() {
+  public void shouldFailAFieldNamingControlledTermAsItsInputType() throws Exception {
     // A controlled term is not an input type. It is a text field whose value is an IRI — properties
     // of @id, rdfs:label and @type — carrying an ontology, value set, class or branch constraint,
     // which is how cedar-artifact-library recognises one and renders it as controlled-term-field.
     // The IRI enum listed it beside genuine input types, and only a retired editor path wrote it;
     // four production templates were unreadable as a result.
-    String templateString = TestResourcesUtils.getStringContent("templates/single-field-template.json")
-        .replace("\"inputType\": \"textfield\"", "\"inputType\": \"controlled-term\"");
-    ValidationReport validationReport = runValidation(templateString);
+    // The field renamed here is IRI-shaped (properties of @id, rdfs:label and @type), so only the
+    // IRI input-type enum can refuse it. A literal-shaped field is refused by its value slot alone,
+    // whatever that enum lists.
+    JsonNode template = jsonObjectMapper.readTree(
+        TestResourcesUtils.getStringContent("templates/ADVANCETemplate.json"));
+    String field = "/properties/Monitoring Scheme Identification/properties/Online locator";
+    assertValidationStatus(modelValidator.validateTemplate(template), "true");
+    ((ObjectNode) template.at(field).path("_ui")).put("inputType", "controlled-term");
+    ValidationReport validationReport = modelValidator.validateTemplate(template);
     assertValidationStatus(validationReport, "false");
+    assertValidationMessage(validationReport,
+        "'Online locator' is not a field or element: its _ui.inputType 'controlled-term' is not an input type.",
+        field + "/_ui/inputType");
   }
 
   @Test
