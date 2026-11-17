@@ -6,9 +6,13 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.jupiter.api.Test;
 import org.metadatacenter.model.validation.report.ValidationReport;
+
+import java.util.stream.Stream;
 
 /**
  * Rules the artifact library's readers hold, which the validator holds too.
@@ -16,8 +20,8 @@ import org.metadatacenter.model.validation.report.ValidationReport;
  * <p>The validator gates what the server stores, and a reader opens what was stored. Where only the
  * reader held a rule, the server stored artifacts that nothing could open afterwards: a child keyed
  * as a JSON-LD keyword or an object internal, an attribute-value field keyed as YAML metadata of its
- * parent, a link default that is not an IRI, a static field whose version is not one, and an
- * attribute-value field whose minimum is above 0. An identifier outside a field's value is an
+ * parent, a link default that is not an IRI, a static field whose version is not one or whose
+ * identifier or alternative labels are not text, and an attribute-value field whose minimum is above 0. An identifier outside a field's value is an
  * absolute IRI with no space separator, a version has no leading zero and is not 0.0.0, and a child
  * key has a visible character.
  */
@@ -254,5 +258,37 @@ public class ReaderRuleValidationTest extends BaseValidationTest {
     ObjectNode field = (ObjectNode) resource("fields/section-break.json");
     field.put("pav:version", version);
     assertValidationStatus(validator.validateTemplateField(field), "false");
+  }
+
+  /** A static field's identifier or alternative labels, as JSON, and whether the validator accepts the field. */
+  static Stream<Arguments> staticFieldText() {
+    return Stream.of(
+        Arguments.of("schema:identifier", "\"S-1\"", "true"),
+        Arguments.of("schema:identifier", "3", "false"),
+        Arguments.of("schema:identifier", "3.5", "false"),
+        Arguments.of("schema:identifier", "true", "false"),
+        Arguments.of("skos:altLabel", "[]", "true"),
+        Arguments.of("skos:altLabel", "[\"Part one\", \"Opening\"]", "true"),
+        Arguments.of("skos:altLabel", "3", "false"),
+        Arguments.of("skos:altLabel", "[3]", "false"),
+        Arguments.of("skos:altLabel", "[\"Part one\", 3]", "false"));
+  }
+
+  @ParameterizedTest(name = "{0} = {1}")
+  @MethodSource("staticFieldText")
+  public void shouldHoldAStandaloneStaticFieldsIdentifierAndAlternativeLabelsToText(String key, String json,
+      String valid) throws Exception {
+    ObjectNode field = (ObjectNode) resource("fields/section-break.json");
+    field.set(key, MAPPER.readTree(json));
+    assertValidationStatus(validator.validateTemplateField(field), valid);
+  }
+
+  @ParameterizedTest(name = "{0} = {1}")
+  @MethodSource("staticFieldText")
+  public void shouldHoldANestedStaticFieldsIdentifierAndAlternativeLabelsToText(String key, String json,
+      String valid) throws Exception {
+    ObjectNode template = (ObjectNode) resource("templates/static-field-template.json");
+    ((ObjectNode) template.get("properties").get("About Study Form")).set(key, MAPPER.readTree(json));
+    assertValidationStatus(validator.validateTemplate(template), valid);
   }
 }
