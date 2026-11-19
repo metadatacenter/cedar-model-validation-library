@@ -6,8 +6,6 @@ import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
-import org.metadatacenter.model.validation.report.CedarValidationReport;
-import org.metadatacenter.model.validation.report.ErrorItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -119,95 +117,5 @@ final class FieldRegexValidation {
         }
       }
     }
-  }
-
-  static void validateSchema(JsonNode schema, String path, CedarValidationReport report) {
-    try (Expressions expressions = new Expressions()) {
-      validateSchema(schema, path, report, expressions);
-    }
-  }
-
-  private static void validateSchema(JsonNode schema, String path, CedarValidationReport report,
-      Expressions expressions) {
-    if (schema == null || !schema.isObject()) return;
-    if (schema.path("items").isObject()) {
-      validateSchema(schema.get("items"), path + "/items", report, expressions);
-      return;
-    }
-    String regex = schema.path("_valueConstraints").path("regex").asText("");
-    if (!regex.isEmpty()) {
-      if (expressions.compile(regex) == null) {
-        report.addError(new ErrorItem("The template contains an invalid regular expression.",
-            path + "/_valueConstraints/regex"));
-      }
-    }
-    JsonNode defaultValue = schema.path("_valueConstraints").path("defaultValue");
-    if (!regex.isEmpty() && defaultValue.isTextual() && !defaultValue.textValue().isEmpty()) {
-      Scriptable expression = expressions.compile(regex);
-      if (expression != null) {
-        try {
-          if (!expressions.matches(expression, defaultValue.textValue()))
-            report.addFinding(new ValidationFinding("regex", ValidationFinding.Category.CONSTRAINT,
-                path + "/_valueConstraints/defaultValue", "Does not match " + regex + "."));
-        } catch (RegexWorkLimit exceeded) {
-          report.addError(new ErrorItem("The regular expression exceeds the validation work limit; "
-              + "ask the template author to simplify it.", path + "/_valueConstraints/defaultValue"));
-        }
-      }
-    }
-    schema.path("properties").fields().forEachRemaining(child -> {
-      if (isChild(child.getValue()))
-        validateSchema(child.getValue(), path + "/properties/" + escape(child.getKey()), report, expressions);
-    });
-  }
-
-  static void validateInstance(JsonNode instance, JsonNode schema, String path, CedarValidationReport report) {
-    try (Expressions expressions = new Expressions()) {
-      validateInstance(instance, schema, path, report, expressions);
-    }
-  }
-
-  private static void validateInstance(JsonNode instance, JsonNode schema, String path,
-      CedarValidationReport report, Expressions expressions) {
-    if (schema == null || !schema.isObject() || instance == null) return;
-    if (schema.path("items").isObject()) {
-      if (instance.isArray()) {
-        for (int i = 0; i < instance.size(); i++)
-          validateInstance(instance.get(i), schema.get("items"), path + "/" + i, report, expressions);
-      }
-      return; // JSON Schema owns incorrect shapes.
-    }
-    if (!instance.isObject()) return;
-    String regex = schema.path("_valueConstraints").path("regex").asText("");
-    if (!regex.isEmpty()) {
-      Scriptable expression = expressions.compile(regex);
-      JsonNode value = instance.path("@value");
-      if (expression == null) {
-        report.addError(new ErrorItem("The template contains an invalid regular expression.", path + "/@value"));
-      } else if (value.isTextual() && !value.textValue().isEmpty()) {
-        // Missing/null/empty answers remain saveable; required-value warnings are separate.
-        try {
-          if (!expressions.matches(expression, value.textValue()))
-            report.addFinding(new ValidationFinding("regex", ValidationFinding.Category.CONSTRAINT,
-                path + "/@value", "Does not match " + regex + "."));
-        } catch (RegexWorkLimit exceeded) {
-          report.addError(new ErrorItem("The regular expression exceeds the validation work limit; "
-              + "ask the template author to simplify it.", path + "/@value"));
-        }
-      }
-    }
-    schema.path("properties").fields().forEachRemaining(child -> {
-      if (isChild(child.getValue()))
-        validateInstance(instance.get(child.getKey()), child.getValue(), path + "/" + escape(child.getKey()),
-            report, expressions);
-    });
-  }
-
-  private static boolean isChild(JsonNode schema) {
-    return schema.path("_ui").isObject() || schema.path("items").path("_ui").isObject();
-  }
-
-  private static String escape(String key) {
-    return key.replace("~", "~0").replace("/", "~1");
   }
 }

@@ -59,7 +59,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
 
     assertValidationStatus(validationReport, "false");
     assertValidationMessage(validationReport,
-        "Checkbox, attribute-value, and multiple-choice list fields must be declared as arrays");
+        "Checkbox, attribute-value, and multiple-choice list fields must be declared as arrays",
+        "/properties/Title/type");
   }
 
   @Test
@@ -91,7 +92,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@context'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@context'])", "/");
   }
 
   @Test
@@ -103,7 +104,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@id'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@id'])", "/");
   }
 
   @Test
@@ -115,7 +116,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@type'])", "/");
   }
 
   @Test
@@ -127,7 +128,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['type'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['type'])", "/");
   }
 
   @Test
@@ -139,7 +140,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['title'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['title'])", "/");
   }
 
   @Test
@@ -151,7 +152,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['description'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['description'])", "/");
   }
 
   @Test
@@ -163,7 +164,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['_ui'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['_ui'])", "/");
   }
 
   @Test
@@ -175,7 +176,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['schema:name'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:name'])", "/");
   }
 
   @Test
@@ -187,7 +188,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['schema:description'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['schema:description'])", "/");
   }
 
   @Test
@@ -199,7 +200,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['order'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['order'])", "/_ui");
   }
 
   @Test
@@ -211,7 +212,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['propertyLabels'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['propertyLabels'])", "/_ui");
   }
 
   @Test
@@ -223,7 +224,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['properties'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['properties'])", "/");
   }
 
   @Test
@@ -235,7 +236,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['required'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['required'])", "/");
   }
 
   @Test
@@ -247,7 +248,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])", "/");
   }
 
   @Test
@@ -259,7 +260,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])", "/");
   }
 
   @Test
@@ -271,7 +272,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])", "/");
   }
 
   @Test
@@ -283,7 +284,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])", "/");
   }
 
   @Test
@@ -306,7 +307,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['$schema'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['$schema'])", "/");
   }
 
   @Test
@@ -318,7 +319,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@context'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@context'])", "/properties");
   }
 
   @Test
@@ -330,7 +331,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@id'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@id'])", "/properties");
   }
 
   @Test
@@ -342,7 +343,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@type'])", "/properties");
   }
 
   @Test
@@ -354,7 +355,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "'First Name' is not a field or element: it has no @type.");
+    assertValidationMessage(validationReport, "'First Name' is not a field or element: it has no @type.",
+        "/properties/First Name");
   }
 
   @Test
@@ -366,7 +368,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@context'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@context'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -378,7 +381,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['type'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['type'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -390,7 +394,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['title'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['title'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -402,7 +407,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['description'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['description'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -414,7 +420,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdOn'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -426,7 +433,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:createdBy'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -438,7 +446,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['pav:lastUpdatedOn'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -450,7 +459,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['oslc:modifiedBy'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -462,7 +472,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['additionalProperties'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['additionalProperties'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -474,7 +485,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@id'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@id'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -486,7 +498,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['$schema'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['$schema'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -498,7 +511,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['properties'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['properties'])",
+        "/properties/First Name");
   }
 
   @Test
@@ -510,7 +524,8 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@type'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@type'])",
+        "/properties/First Name/properties");
   }
 
   @Test
@@ -522,6 +537,7 @@ public class TemplateElementValidationTest extends BaseValidationTest {
     ValidationReport validationReport = runValidation(elementString);
     // Assert
     assertValidationStatus(validationReport, "false");
-    assertValidationMessage(validationReport, "object has missing required properties (['@value'])");
+    assertValidationMessage(validationReport, "object has missing required properties (['@value'])",
+        "/properties/First Name/properties");
   }
 }

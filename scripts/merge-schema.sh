@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 # Takes all JSON schema files specified in the schema YAML file and merge them all
 # into a single schema file.
